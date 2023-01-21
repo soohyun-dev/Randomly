@@ -5,6 +5,7 @@
 export const MakeNums = (number) => {
   const nums = Array.from({ length: number }, (_, i) => i + 1);
   console.log(shuffleArray(nums));
+  return shuffleArray(nums);
 };
 
 /**
@@ -14,3 +15,5 @@ export const MakeNums = (number) => {
 function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
+
+export default MakeNums;
