@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from "react";
-import MakeNums from "../Utils/MakeNums";
+import MakeNums, { getQuestionNums } from "../Utils/MakeNums";
 import styled from "styled-components";
 import { fireStore } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -12,25 +12,37 @@ const MainContainer = styled.div`
 
 const Main = () => {
   const [users, setUsers] = useState([]);
-  const [number, setNumber] = useState(0);
+  const [questions, setQuestions] = useState([]);
   const [result, setResult] = useState([]);
   const [bool, setBool] = useState(false);
-  const member = ["ㅇㅇ"];
   const uniqueId = useId();
 
   const userInfo = collection(fireStore, "member");
-  console.log(userInfo, 1);
-
+  const questionInfo = collection(fireStore, "question");
   const makeArray = (e) => {
     e.preventDefault();
-    setResult(MakeNums(number));
+    setResult(getQuestionNums(5, 20));
     setBool(true);
   };
 
-  const getResult = (user) => {
-    const cnt = +(result.length / member.length);
-    for (let i = 0; i < cnt; i++) return <h3>{result.join(" ")}</h3>;
-  };
+  console.log(questions);
+
+  const showQuestion = result.map((v, idx) => (
+    <div>
+      질문
+      {result[idx].map((v) => (
+        <h3>{questions[0][v]}</h3>
+      ))}
+      <hr />
+    </div>
+  ));
+
+  const showUsers = users.map((value, idx) => (
+    <div key={uniqueId}>
+      <h3>Name: {value.name}</h3>
+      {showQuestion[idx]}
+    </div>
+  ));
 
   useEffect(() => {
     // 비동기로 데이터 받을준비
@@ -40,26 +52,23 @@ const Main = () => {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
+    const getQuestions = async () => {
+      // getDocs로 컬렉션안에 데이터 가져오기
+      const data = await getDocs(questionInfo);
+      setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
     getUsers();
-  }, []);
-
-  console.log(users);
-
-  const showUsers = users.map((value) => (
-    <div key={uniqueId}>
-      <h1>Name: {value.name}</h1>
-    </div>
-  ));
+    getQuestions();
+  }, [result]);
 
   return (
     <>
       <div>
         <MainContainer>
-          <input onChange={(e) => setNumber(e.target.value)} />
+          {/* <input onChange={(e) => setNumber(e.target.value)} /> */}
           <button onClick={makeArray}>생성</button>
-          {member.forEach((user) => {
-            return getResult(user);
-          })}
+          {bool ? result.join(", ") : ""}
           {showUsers}
         </MainContainer>
       </div>
