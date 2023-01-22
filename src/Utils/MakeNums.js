@@ -16,7 +16,6 @@ export const getQuestionNums = (member, question) => {
       }
     });
   }
-  console.log(result);
   return result;
 };
 
