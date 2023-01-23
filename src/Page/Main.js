@@ -85,12 +85,43 @@ const OpenButton = styled.button`
 const QuestionText = styled.p`
   font-size: 23px;
   font-weight: 600;
-  margin: 40px 40px;
+  margin: 40px 0px;
   padding: 10px 20px;
   cursor: pointer;
   color: ${(props) => (props.color ? "blue" : "black")};
+`;
+
+const ShowBtn = styled.button`
+  width: 80px;
+  padding: 8px 0;
+  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: ${(props) => (props.color ? "#ef5350" : "#66bb6a")};
+  color: white;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   &:hover {
     opacity: 70%;
+  }
+`;
+
+const CorrectBtn = styled.button`
+  width: 3em;
+  padding: 4px 0;
+  margin-left: 1em;
+  border-radius: 10px;
+  border: none;
+  background-color: ${(props) => (props.color ? "#ff8a80" : "#64b5f6")};
+  color: white;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    opacity: 80%;
   }
 `;
 
@@ -101,14 +132,15 @@ const Main = () => {
   const [open, setOpen] = useState(false);
   const [bool, setBool] = useState(false);
   const [correctCnt, setCorrectCnt] = useState([]);
+  const [show, setShow] = useState([]);
   const uniqueId = useId();
-
   const userInfo = collection(fireStore, "member");
   const questionInfo = collection(fireStore, "question");
 
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
    * 버튼을 누를 때마다 랜덤의 번호들이 생성되어 팀원들에게 부여된다.
+   *
    * @param {e} 질문 분배 버튼 이벤트
    */
   const makeArray = (e) => {
@@ -120,12 +152,16 @@ const Main = () => {
     setCorrectCnt(
       Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
     );
+    setShow(
+      Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
+    );
     setBool(true);
   };
 
   /**
    * 버튼을 누르면 해당하는 유저의 질문 목록이 열린다.
    * 열린상태에서 누르면 닫힌다.
+   *
    * @param {Number} 질문을 열거나 닫을 팀원의 index
    */
   const openHandler = (idx) => {
@@ -134,9 +170,17 @@ const Main = () => {
     setOpen(change);
   };
 
+  const showHandler = (idx) => {
+    let change = [...show];
+    change[idx] = !change[idx];
+    console.log(show);
+    setShow(change);
+  };
+
   /**
    * 텍스트를 누르면 맞았다는 표시로 color가 변경되며, 맞은 갯수가 카운트된다.
    * 맞은 표시의 텍스트를 누르면 취소된다.
+   *
    * @param {Number} 맞은 표시를 할 질문의 index
    */
   const correctHandler = (idx) => {
@@ -147,6 +191,7 @@ const Main = () => {
 
   /**
    * 맞은 질문의 갯수를 세주는 함수.
+   *
    * @param {Number} 맞은 갯수를 카운트할 팀원의 index
    */
   const checkCorrect = (member) => {
@@ -160,27 +205,46 @@ const Main = () => {
     return correct;
   };
 
-  /**
-   * 질문 목록을 보여주는 함수
-   */
-  const showQuestion = result.map((v, i) => (
+  const showQuestion = result.map((_, i) => (
     <div>
-      {result[i].map((v, idx) => (
-        <QuestionText
-          color={correctCnt[v]}
-          onClick={(e) => {
-            correctHandler(v);
-          }}
-        >
-          {idx + 1}. {questions[0][v]}
-        </QuestionText>
-      ))}
+      {result[i].map((v, idx) =>
+        show[idx] ? (
+          <QuestionText color={correctCnt[v]}>
+            <ShowBtn
+              color={show[idx]}
+              onClick={(e) => {
+                showHandler(idx);
+              }}
+            >
+              질문 가리기
+            </ShowBtn>
+            {idx + 1}. {questions[0][v]}
+            <CorrectBtn
+              color={correctCnt[v]}
+              onClick={(e) => {
+                correctHandler(v);
+              }}
+            >
+              {correctCnt[v] ? "취소" : "맞음"}
+            </CorrectBtn>
+          </QuestionText>
+        ) : (
+          <QuestionText color={correctCnt[v]}>
+            <ShowBtn
+              color={show[idx]}
+              onClick={(e) => {
+                showHandler(idx);
+              }}
+            >
+              질문 보기
+            </ShowBtn>
+            {idx + 1}.
+          </QuestionText>
+        )
+      )}
     </div>
   ));
 
-  /**
-   * 유저 정보를 보여주는 함수
-   */
   const showUsers = users.map((value, idx) => (
     <UserContainer key={uniqueId}>
       <NameContainer>
@@ -203,12 +267,11 @@ const Main = () => {
   ));
 
   useEffect(() => {
-    // * 유저 정보를 불러옴.
     const getUsers = async () => {
       const data = await getDocs(userInfo);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    // * 질문 목록을 불러옴.
+
     const getQuestions = async () => {
       const data = await getDocs(questionInfo);
       setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -221,7 +284,6 @@ const Main = () => {
     <>
       <div>
         <MainContainer>
-          {/* <input onChange={(e) => setNumber(e.target.value)} /> */}
           <div>
             <MakeQuestionNums color={bool} onClick={makeArray}>
               {bool ? "질문 분배 완료" : "질문 분배 시작"}
