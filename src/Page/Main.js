@@ -83,10 +83,10 @@ const OpenButton = styled.button`
 `;
 
 const QuestionText = styled.p`
-  font-size: 26px;
+  font-size: 23px;
   font-weight: 600;
   margin: 40px 40px;
-  padding: 13px 20px;
+  padding: 10px 20px;
   cursor: pointer;
   color: ${(props) => (props.color ? "blue" : "black")};
   &:hover {
@@ -105,6 +105,12 @@ const Main = () => {
 
   const userInfo = collection(fireStore, "member");
   const questionInfo = collection(fireStore, "question");
+
+  /**
+   * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
+   * 버튼을 누를 때마다 랜덤의 번호들이 생성되어 팀원들에게 부여된다.
+   * @param {e} 질문 분배 버튼 이벤트
+   */
   const makeArray = (e) => {
     e.preventDefault();
     setResult(
@@ -117,18 +123,32 @@ const Main = () => {
     setBool(true);
   };
 
+  /**
+   * 버튼을 누르면 해당하는 유저의 질문 목록이 열린다.
+   * 열린상태에서 누르면 닫힌다.
+   * @param {Number} 질문을 열거나 닫을 팀원의 index
+   */
   const openHandler = (idx) => {
     let change = [...open];
     change[idx] = !change[idx];
     setOpen(change);
   };
 
+  /**
+   * 텍스트를 누르면 맞았다는 표시로 color가 변경되며, 맞은 갯수가 카운트된다.
+   * 맞은 표시의 텍스트를 누르면 취소된다.
+   * @param {Number} 맞은 표시를 할 질문의 index
+   */
   const correctHandler = (idx) => {
     let change = [...correctCnt];
     change[idx] = !change[idx];
     setCorrectCnt(change);
   };
 
+  /**
+   * 맞은 질문의 갯수를 세주는 함수.
+   * @param {Number} 맞은 갯수를 카운트할 팀원의 index
+   */
   const checkCorrect = (member) => {
     if (result.length === 0) return 0;
     let correct = 0;
@@ -140,6 +160,9 @@ const Main = () => {
     return correct;
   };
 
+  /**
+   * 질문 목록을 보여주는 함수
+   */
   const showQuestion = result.map((v, i) => (
     <div>
       {result[i].map((v, idx) => (
@@ -155,6 +178,9 @@ const Main = () => {
     </div>
   ));
 
+  /**
+   * 유저 정보를 보여주는 함수
+   */
   const showUsers = users.map((value, idx) => (
     <UserContainer key={uniqueId}>
       <NameContainer>
@@ -177,19 +203,16 @@ const Main = () => {
   ));
 
   useEffect(() => {
-    // 비동기로 데이터 받을준비
+    // * 유저 정보를 불러옴.
     const getUsers = async () => {
-      // getDocs로 컬렉션안에 데이터 가져오기
       const data = await getDocs(userInfo);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
+    // * 질문 목록을 불러옴.
     const getQuestions = async () => {
-      // getDocs로 컬렉션안에 데이터 가져오기
       const data = await getDocs(questionInfo);
       setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
     getUsers();
     getQuestions();
   }, [result]);
