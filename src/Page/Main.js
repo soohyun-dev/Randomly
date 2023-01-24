@@ -6,7 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 
 const MainContainer = styled.div`
   position: absolute;
-  left: 32%;
+  left: 25%;
   top: 20%;
 `;
 
@@ -14,9 +14,10 @@ const MakeQuestionNums = styled.button`
   cursor: pointer;
   width: 180px;
   height: 50px;
-  margin: 0 0 2em 10em;
-  color: ${(props) => (props.color ? "#5c8aff" : "black")};
-  border: solid 3px ${(props) => (props.color ? "#5c8aff" : "black")};
+  margin: 0 0 2em 14em;
+  color: white;
+  background-color: ${(props) => (props.color ? "#5c8aff" : "#8bc34a")};
+  border: none;
   border-radius: 10px;
   font-size: 22px;
   font-weight: 500;
@@ -27,12 +28,13 @@ const MakeQuestionNums = styled.button`
 `;
 
 const GuideToggle = styled.p`
-  margin-left: 13.5em;
+  margin-left: 15em;
+  font-weight: 600;
 `;
 
 const UserContainer = styled.div`
   background-color: #eaeaea;
-  width: 40em;
+  width: 50em;
   border-radius: 10px;
 `;
 
@@ -55,14 +57,18 @@ const MemberName = styled.label`
   border-radius: 10px;
 `;
 
+const QuestionBlock = styled.div`
+  display: inline-block;
+`;
+
 const CorrectText = styled.label`
-  margin-left: 12em;
+  margin-left: 20em;
   font-size: 22px;
   font-weight: 600;
 `;
 
 const ButtonContainer = styled.div`
-  margin-left: 16em;
+  margin-left: 21em;
   justify-items: center;
 `;
 
@@ -71,8 +77,9 @@ const OpenButton = styled.button`
   width: 120px;
   height: 40px;
   margin: 20px 0;
-  color: ${(props) => (props.color ? "red" : "#5c8aff")};
-  border: solid 2px ${(props) => (props.color ? "red" : "#5c8aff")};
+  color: white;
+  background-color: ${(props) => (props.color ? "red" : "#5c8aff")};
+  border: none;
   border-radius: 10px;
   font-size: 17px;
   fint-weight: 600;
@@ -133,6 +140,7 @@ const Main = () => {
   const [bool, setBool] = useState(false);
   const [correctCnt, setCorrectCnt] = useState([]);
   const [show, setShow] = useState([]);
+  const [toggleQuestion, setToggleQuestion] = useState([]);
   const uniqueId = useId();
   const userInfo = collection(fireStore, "member");
   const questionInfo = collection(fireStore, "question");
@@ -152,7 +160,8 @@ const Main = () => {
     setCorrectCnt(
       Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
     );
-    setShow(
+    setShow(Array.from({ length: users.length }, () => false));
+    setToggleQuestion(
       Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
     );
     setBool(true);
@@ -173,10 +182,14 @@ const Main = () => {
   const showHandler = (idx) => {
     let change = [...show];
     change[idx] = !change[idx];
-    console.log(show);
     setShow(change);
   };
 
+  const toggleHandler = (idx) => {
+    let change = [...toggleQuestion];
+    change[idx] = !change[idx];
+    setToggleQuestion(change);
+  };
   /**
    * 텍스트를 누르면 맞았다는 표시로 color가 변경되며, 맞은 갯수가 카운트된다.
    * 맞은 표시의 텍스트를 누르면 취소된다.
@@ -208,37 +221,45 @@ const Main = () => {
   const showQuestion = result.map((_, i) => (
     <div>
       {result[i].map((v, idx) =>
-        show[idx] ? (
+        toggleQuestion[result[i][idx]] ? (
           <QuestionText color={correctCnt[v]}>
-            <ShowBtn
-              color={show[idx]}
-              onClick={(e) => {
-                showHandler(idx);
-              }}
-            >
-              질문 가리기
-            </ShowBtn>
-            {idx + 1}. {questions[0][v]}
-            <CorrectBtn
-              color={correctCnt[v]}
-              onClick={(e) => {
-                correctHandler(v);
-              }}
-            >
-              {correctCnt[v] ? "취소" : "맞음"}
-            </CorrectBtn>
+            <QuestionBlock>
+              <ShowBtn
+                color={toggleQuestion[result[i][idx]]}
+                onClick={(e) => {
+                  toggleHandler(result[i][idx]);
+                }}
+              >
+                질문 가리기
+              </ShowBtn>
+            </QuestionBlock>
+            <QuestionBlock>
+              {idx + 1}. {questions[0][v]}
+            </QuestionBlock>
+            <QuestionBlock>
+              <CorrectBtn
+                color={correctCnt[v]}
+                onClick={(e) => {
+                  correctHandler(v);
+                }}
+              >
+                {correctCnt[v] ? "취소" : "맞음"}
+              </CorrectBtn>
+            </QuestionBlock>
           </QuestionText>
         ) : (
           <QuestionText color={correctCnt[v]}>
-            <ShowBtn
-              color={show[idx]}
-              onClick={(e) => {
-                showHandler(idx);
-              }}
-            >
-              질문 보기
-            </ShowBtn>
-            {idx + 1}.
+            <QuestionBlock>
+              <ShowBtn
+                color={toggleQuestion[result[i][idx]]}
+                onClick={(e) => {
+                  toggleHandler(result[i][idx]);
+                }}
+              >
+                질문 보기
+              </ShowBtn>
+            </QuestionBlock>
+            <QuestionBlock>{idx + 1}.</QuestionBlock>
           </QuestionText>
         )
       )}
@@ -288,7 +309,13 @@ const Main = () => {
             <MakeQuestionNums color={bool} onClick={makeArray}>
               {bool ? "질문 분배 완료" : "질문 분배 시작"}
             </MakeQuestionNums>
-            {bool ? <GuideToggle>하단의 질문을 확인해주세요.</GuideToggle> : ""}
+            {bool ? (
+              <GuideToggle>
+                질문 분배가 완료되었습니다. 질문을 확인해주세요.
+              </GuideToggle>
+            ) : (
+              ""
+            )}
           </div>
           {showUsers}
         </MainContainer>

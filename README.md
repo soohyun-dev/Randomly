@@ -19,3 +19,12 @@
 
 - React
 - CSS in JS (Styled-Components)
+- firebase
+
+<br>
+
+## 개발 기록
+
+[📜Issue](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
+
+<br>
