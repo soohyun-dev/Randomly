@@ -1,145 +1,16 @@
 import { useEffect, useId, useState } from "react";
 import { getQuestionNums } from "../Utils/MakeNums";
-import styled from "styled-components";
 import { fireStore } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-
-const MainContainer = styled.div`
-  position: absolute;
-  left: 25%;
-  top: 20%;
-`;
-
-const MakeQuestionNums = styled.button`
-  cursor: pointer;
-  width: 180px;
-  height: 50px;
-  margin: 0 0 2em 14em;
-  color: white;
-  background-color: ${(props) => (props.color ? "#5c8aff" : "#8bc34a")};
-  border: none;
-  border-radius: 10px;
-  font-size: 22px;
-  font-weight: 500;
-  font-family: "Nanum Gothic", sans-serif;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const GuideToggle = styled.p`
-  margin-left: 15em;
-  font-weight: 600;
-`;
-
-const UserContainer = styled.div`
-  background-color: #eaeaea;
-  width: 50em;
-  border-radius: 10px;
-`;
-
-const NameContainer = styled.div`
-  margin: 40px 0;
-  padding: 30px 40px;
-`;
-
-const MemberTitle = styled.label`
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-const MemberName = styled.label`
-  font-size: 22px;
-  font-weight: 600;
-  background-color: #651fff;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 10px;
-`;
-
-const QuestionBlock = styled.div`
-  display: inline-block;
-`;
-
-const CorrectText = styled.label`
-  margin-left: 20em;
-  font-size: 22px;
-  font-weight: 600;
-`;
-
-const ButtonContainer = styled.div`
-  margin-left: 21em;
-  justify-items: center;
-`;
-
-const OpenButton = styled.button`
-  cursor: pointer;
-  width: 120px;
-  height: 40px;
-  margin: 20px 0;
-  color: white;
-  background-color: ${(props) => (props.color ? "red" : "#5c8aff")};
-  border: none;
-  border-radius: 10px;
-  font-size: 17px;
-  fint-weight: 600;
-  font-family: "Nanum Gothic", sans-serif;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const QuestionText = styled.p`
-  font-size: 23px;
-  font-weight: 600;
-  margin: 40px 0px;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: ${(props) => (props.color ? "blue" : "black")};
-`;
-
-const ShowBtn = styled.button`
-  width: 80px;
-  padding: 8px 0;
-  margin-right: 20px;
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  background-color: ${(props) => (props.color ? "#ef5350" : "#66bb6a")};
-  color: white;
-  font-family: "Nanum Gothic", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const CorrectBtn = styled.button`
-  width: 3em;
-  padding: 4px 0;
-  margin-left: 1em;
-  border-radius: 10px;
-  border: none;
-  background-color: ${(props) => (props.color ? "#ff8a80" : "#64b5f6")};
-  color: white;
-  font-family: "Nanum Gothic", sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  &:hover {
-    opacity: 80%;
-  }
-`;
+import styled from "styled-components";
 
 const Main = () => {
+  const [open, setOpen] = useState(false);
+  const [bool, setBool] = useState(false);
   const [users, setUsers] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [result, setResult] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [bool, setBool] = useState(false);
   const [correctCnt, setCorrectCnt] = useState([]);
-  const [show, setShow] = useState([]);
   const [toggleQuestion, setToggleQuestion] = useState([]);
   const uniqueId = useId();
   const userInfo = collection(fireStore, "member");
@@ -160,7 +31,6 @@ const Main = () => {
     setCorrectCnt(
       Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
     );
-    setShow(Array.from({ length: users.length }, () => false));
     setToggleQuestion(
       Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
     );
@@ -179,12 +49,11 @@ const Main = () => {
     setOpen(change);
   };
 
-  const showHandler = (idx) => {
-    let change = [...show];
-    change[idx] = !change[idx];
-    setShow(change);
-  };
-
+  /**
+   * 각 질문을 보이게하거나 안보이게 할 수 있다.
+   *
+   * @param {Number} toggle할 질문의 index
+   */
   const toggleHandler = (idx) => {
     let change = [...toggleQuestion];
     change[idx] = !change[idx];
@@ -325,3 +194,131 @@ const Main = () => {
 };
 
 export default Main;
+
+const MainContainer = styled.div`
+  position: absolute;
+  left: 25%;
+  top: 20%;
+`;
+
+const MakeQuestionNums = styled.button`
+  cursor: pointer;
+  width: 180px;
+  height: 50px;
+  margin: 0 0 2em 14em;
+  color: white;
+  background-color: ${(props) => (props.color ? "#009688" : "#8bc34a")};
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: "Nanum Gothic", sans-serif;
+  &:hover {
+    opacity: 70%;
+  }
+`;
+
+const GuideToggle = styled.p`
+  margin-left: 14em;
+  font-weight: 600;
+`;
+
+const UserContainer = styled.div`
+  background-color: #eaeaea;
+  width: 50em;
+  border-radius: 10px;
+`;
+
+const NameContainer = styled.div`
+  margin: 40px 0;
+  padding: 30px 40px;
+`;
+
+const MemberTitle = styled.label`
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const MemberName = styled.label`
+  font-size: 22px;
+  font-weight: 600;
+  background-color: #651fff;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 10px;
+`;
+
+const QuestionBlock = styled.div`
+  display: inline-block;
+`;
+
+const CorrectText = styled.label`
+  margin-left: 20em;
+  font-size: 22px;
+  font-weight: 600;
+`;
+
+const ButtonContainer = styled.div`
+  margin-left: 21em;
+  justify-items: center;
+`;
+
+const OpenButton = styled.button`
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  margin: 20px 0;
+  color: white;
+  background-color: ${(props) => (props.color ? "red" : "#5c8aff")};
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  fint-weight: 600;
+  font-family: "Nanum Gothic", sans-serif;
+  &:hover {
+    opacity: 70%;
+  }
+`;
+
+const QuestionText = styled.p`
+  font-size: 23px;
+  font-weight: 600;
+  margin: 40px 0px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: ${(props) => (props.color ? "blue" : "black")};
+`;
+
+const ShowBtn = styled.button`
+  width: 80px;
+  padding: 8px 0;
+  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: ${(props) => (props.color ? "#ef5350" : "#66bb6a")};
+  color: white;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover {
+    opacity: 70%;
+  }
+`;
+
+const CorrectBtn = styled.button`
+  width: 3em;
+  padding: 4px 0;
+  margin-left: 1em;
+  border-radius: 10px;
+  border: none;
+  background-color: ${(props) => (props.color ? "#ff8a80" : "#64b5f6")};
+  color: white;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    opacity: 80%;
+  }
+`;

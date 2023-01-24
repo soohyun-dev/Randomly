@@ -23,6 +23,10 @@
 
 <br>
 
+| React                                                                                                           | Styled Components                                                                                               | Firebase                                                                                                        |     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --- |
+| ![image](https://user-images.githubusercontent.com/81623931/214251396-cfc402d0-7913-4bba-8684-036007cab92d.png) | ![image](https://user-images.githubusercontent.com/81623931/214252351-43963dc8-b21b-43c1-b511-bbaf8cdbb6b9.png) | ![image](https://user-images.githubusercontent.com/81623931/214251466-778569a2-fc98-430a-a097-c16836fd599a.png) |     |
+
 ## 개발 기록
 
 [📜Issue](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
