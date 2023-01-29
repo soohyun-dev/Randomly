@@ -3,6 +3,7 @@ import { fireStore } from "./firebase";
 import GlobalStyle from "./GlobalStyle";
 import Main from "./Page/Main";
 import ManageQuestion from "./Page/ManageQuestion";
+import PlayInterview from "./Page/PlayInterview";
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Main />}></Route>
+        <Route path="/PlayInterview" element={<PlayInterview />}></Route>
         <Route path="/ManageQuestion" element={<ManageQuestion />}></Route>
         {/*<div className="App">{fireStore._databaseId.projectId}</div>*/}
       </Routes>

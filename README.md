@@ -41,6 +41,24 @@
 
 <br>
 
+## 패키지 구조
+
+📦src
+┣ 📂Components
+┃ ┗ 📜Nav.jsx
+┣ 📂Constant
+┣ 📂Page
+┃ ┣ 📜Main.jsx
+┃ ┗ 📜ManageQuestion.jsx
+┣ 📂Utils
+┃ ┗ 📜MakeNums.jsx
+┣ 📜App.jsx
+┣ 📜firebase.jsx
+┣ 📜GlobalStyle.jsx
+┗ 📜index.js
+
+<br>
+
 ## 개발 기록
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)

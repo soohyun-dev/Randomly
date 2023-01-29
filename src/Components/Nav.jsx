@@ -6,7 +6,8 @@ const TopHeader = styled.header`
   padding: 25px;
   font-weight: bold;
   font-size: 28px;
-  color: white;
+  color: black;
+  background-color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
 `;
 
@@ -19,8 +20,13 @@ const Middle = styled.div`
 `;
 
 const Menu = styled.div`
+  display: flex;
   width: 15%;
   font-size: 16px;
+`;
+
+const MenuText = styled.p`
+  padding: 0 1em;
 `;
 
 export default function Nav() {
@@ -34,8 +40,11 @@ export default function Nav() {
         </Logo>
         <Middle></Middle>
         <Menu>
+          <Link to="/PlayInterview" style={{ textDecoration: "none" }}>
+            <MenuText>인터뷰</MenuText>
+          </Link>
           <Link to="/ManageQuestion" style={{ textDecoration: "none" }}>
-            질문 관리
+            <MenuText>질문 관리</MenuText>
           </Link>
         </Menu>
       </TopHeader>
