@@ -57,14 +57,16 @@ export default function ManageQuestion() {
       </div>
       <div>
         <table border="1">
-          <th>테이블</th>
-          <th>만들기</th>
-          <th></th>
+          <th>No.</th>
+          <th>질문</th>
+          <th>수정하기</th>
+          <th>삭제하기</th>
           {show
-            ? Object.keys(questions.current).map((v) => (
+            ? Object.keys(questions.current).map((v, idx) => (
                 <QuestionTable
                   question={questions.current[~~v].question}
                   id={questions.current[~~v].id}
+                  idx={idx}
                 />
               ))
             : ""}
