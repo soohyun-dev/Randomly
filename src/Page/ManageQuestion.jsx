@@ -19,6 +19,7 @@ export default function ManageQuestion() {
       id: doc.id,
     }));
     setShow(true);
+    console.log(questions.current);
   };
 
   /**
@@ -60,10 +61,10 @@ export default function ManageQuestion() {
           <th>만들기</th>
           <th></th>
           {show
-            ? Object.keys(questions.current).map((v, idx) => (
+            ? Object.keys(questions.current).map((v) => (
                 <QuestionTable
                   question={questions.current[~~v].question}
-                  idx={idx}
+                  id={questions.current[~~v].id}
                 />
               ))
             : ""}
