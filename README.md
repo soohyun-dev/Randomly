@@ -43,19 +43,19 @@
 
 ## 패키지 구조
 
-📦src
-┣ 📂Components
-┃ ┗ 📜Nav.jsx
-┣ 📂Constant
-┣ 📂Page
-┃ ┣ 📜Main.jsx
-┃ ┗ 📜ManageQuestion.jsx
-┣ 📂Utils
-┃ ┗ 📜MakeNums.jsx
-┣ 📜App.jsx
-┣ 📜firebase.jsx
-┣ 📜GlobalStyle.jsx
-┗ 📜index.js
+📦src<br>
+┣ 📂Components<br>
+┃ ┗ 📜Nav.jsx<br>
+┣ 📂Constant<br>
+┣ 📂Page<br>
+┃ ┣ 📜Main.jsx<br>
+┃ ┗ 📜ManageQuestion.jsx<br>
+┣ 📂Utils<br>
+┃ ┗ 📜MakeNums.jsx<br>
+┣ 📜App.jsx<br>
+┣ 📜firebase.jsx<br>
+┣ 📜GlobalStyle.jsx<br>
+┗ 📜index.js<br>
 
 <br>
 
@@ -63,6 +63,6 @@
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
 
-[⚔️ 트러블 슈팅]
+[⚔️ 트러블 슈팅](https://github.com/soohyun-dev/Randomly/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
 
 <br>
