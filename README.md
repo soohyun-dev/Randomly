@@ -45,4 +45,6 @@
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
 
+[⚔️ 트러블 슈팅]
+
 <br>

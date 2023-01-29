@@ -4,7 +4,7 @@ import GlobalStyle from "./GlobalStyle";
 import Main from "./Page/Main";
 import ManageQuestion from "./Page/ManageQuestion";
 
-const App = () => {
+export default function App() {
   return (
     <>
       <GlobalStyle />
@@ -15,6 +15,4 @@ const App = () => {
       </Routes>
     </>
   );
-};
-
-export default App;
+}

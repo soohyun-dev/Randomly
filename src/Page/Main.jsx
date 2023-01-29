@@ -1,12 +1,12 @@
 import { useEffect, useId, useState } from "react";
-import { getQuestionNums } from "../Utils/MakeNums";
+import getQuestionNums from "../Utils/MakeNums";
 import { fireStore } from "../firebase";
 import { addDoc, collection, getDoc, getDocs, doc } from "firebase/firestore";
 import styled from "styled-components";
 import { async } from "@firebase/util";
 import Nav from "../Components/Nav";
 
-const Main = () => {
+export default function Main() {
   const [open, setOpen] = useState(false);
   const [bool, setBool] = useState(false);
   const [users, setUsers] = useState([]);
@@ -220,9 +220,7 @@ const Main = () => {
       </div>
     </>
   );
-};
-
-export default Main;
+}
 
 const MainContainer = styled.div`
   position: absolute;

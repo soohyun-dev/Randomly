@@ -6,7 +6,7 @@ const TopHeader = styled.header`
   padding: 25px;
   font-weight: bold;
   font-size: 28px;
-  color: #304ffe;
+  color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
 `;
 
@@ -23,7 +23,7 @@ const Menu = styled.div`
   font-size: 16px;
 `;
 
-const Nav = () => {
+export default function Nav() {
   return (
     <>
       <TopHeader>
@@ -41,6 +41,4 @@ const Nav = () => {
       </TopHeader>
     </>
   );
-};
-
-export default Nav;
+}
