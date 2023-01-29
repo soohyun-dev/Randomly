@@ -11,13 +11,12 @@ export default function PlayInterview() {
   const [bool, setBool] = useState(false);
   const [users, setUsers] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const [newQuestion, setNewQuestion] = useState("");
   const [result, setResult] = useState([]);
   const [correctCnt, setCorrectCnt] = useState([]);
   const [toggleQuestion, setToggleQuestion] = useState([]);
   const uniqueId = useId();
   const userInfo = collection(fireStore, "member");
-  const questionInfo = collection(fireStore, "question");
+  const questionInfo = collection(fireStore, "questions");
 
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
@@ -28,15 +27,13 @@ export default function PlayInterview() {
   const makeArray = (e) => {
     e.preventDefault();
     alert("질문 분배가 완료되었습니다!");
-    setResult(
-      getQuestionNums(users.length, Object.keys(questions[0]).length - 1)
-    );
+    setResult(getQuestionNums(users.length, Object.keys(questions).length));
     setOpen(Array.from({ length: users.length }, () => false));
     setCorrectCnt(
-      Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
+      Array.from({ length: Object.keys(questions).length - 1 }, () => false)
     );
     setToggleQuestion(
-      Array.from({ length: Object.keys(questions[0]).length - 1 }, () => false)
+      Array.from({ length: Object.keys(questions).length - 1 }, () => false)
     );
     setBool(true);
   };
@@ -108,7 +105,7 @@ export default function PlayInterview() {
               </ShowBtn>
             </QuestionBlock>
             <QuestionBlock>
-              {idx + 1}. {questions[0][v]}
+              {idx + 1}. {questions[v].question}
             </QuestionBlock>
             <QuestionBlock>
               <CorrectBtn
@@ -161,32 +158,23 @@ export default function PlayInterview() {
     </UserContainer>
   ));
 
-  /**
-   * 질문 추가
-   *
-   * @param {Number}
-   */
-  const addQuestion = async () => {
-    const idx = Object.keys(questions).length;
-    const newData = {};
-    newData[idx] = newQuestion;
-    await addDoc(questionInfo, newData);
+  const getQuestions = async () => {
+    const data = await getDocs(questionInfo);
+    setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-  console.log(questions);
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(userInfo);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
-    const getQuestions = async () => {
-      const data = await getDocs(questionInfo);
-      setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
     getUsers();
     getQuestions();
   }, [result]);
+
+  console.log(questions);
+  console.log(result);
 
   return (
     <>
@@ -204,16 +192,6 @@ export default function PlayInterview() {
             ) : (
               ""
             )}
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="추가할 질문을 입력해주세요."
-              onChange={(e) => {
-                setNewQuestion(e.target.value);
-              }}
-            />
-            <button onClick={addQuestion}>질문 추가</button>
           </div>
           {showUsers}
         </MainContainer>
