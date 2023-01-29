@@ -1,14 +1,17 @@
 import { useEffect, useId, useState } from "react";
 import { getQuestionNums } from "../Utils/MakeNums";
 import { fireStore } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDoc, getDocs, doc } from "firebase/firestore";
 import styled from "styled-components";
+import { async } from "@firebase/util";
+import Nav from "../Components/Nav";
 
 const Main = () => {
   const [open, setOpen] = useState(false);
   const [bool, setBool] = useState(false);
   const [users, setUsers] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [newQuestion, setNewQuestion] = useState("");
   const [result, setResult] = useState([]);
   const [correctCnt, setCorrectCnt] = useState([]);
   const [toggleQuestion, setToggleQuestion] = useState([]);
@@ -24,6 +27,7 @@ const Main = () => {
    */
   const makeArray = (e) => {
     e.preventDefault();
+    alert("질문 분배가 완료되었습니다!");
     setResult(
       getQuestionNums(users.length, Object.keys(questions[0]).length - 1)
     );
@@ -44,6 +48,7 @@ const Main = () => {
    * @param {Number} 질문을 열거나 닫을 팀원의 index
    */
   const openHandler = (idx) => {
+    console.log(open);
     let change = [...open];
     change[idx] = !change[idx];
     setOpen(change);
@@ -156,6 +161,19 @@ const Main = () => {
     </UserContainer>
   ));
 
+  /**
+   * 질문 추가
+   *
+   * @param {Number}
+   */
+  const addQuestion = async () => {
+    const idx = Object.keys(questions).length;
+    const newData = {};
+    newData[idx] = newQuestion;
+    await addDoc(questionInfo, newData);
+  };
+
+  console.log(questions);
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(userInfo);
@@ -172,6 +190,7 @@ const Main = () => {
 
   return (
     <>
+      <Nav />
       <div>
         <MainContainer>
           <div>
@@ -185,6 +204,16 @@ const Main = () => {
             ) : (
               ""
             )}
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="추가할 질문을 입력해주세요."
+              onChange={(e) => {
+                setNewQuestion(e.target.value);
+              }}
+            />
+            <button onClick={addQuestion}>질문 추가</button>
           </div>
           {showUsers}
         </MainContainer>

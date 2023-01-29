@@ -2,8 +2,20 @@
 
 ## 🧑‍💻 프로젝트 소개
 
+내가 필요해서 만들어 사용하는 프로젝트 😋
+
+<br>
+
 - 질문 랜덤 뽑기 프로젝트
 
+<img src="https://user-images.githubusercontent.com/81623931/214259719-a4087bad-b6fb-4060-85c9-3fefcebcca4e.png" width="700" height="500"/>
+  
+  <br>
+  
+ ## ⏰ 개발 기간
+ 
+ - 2023년 1월 18일 ~ (지속적인 업데이트 중)
+  
   <br>
 
 ## 🎰 기능 소개
@@ -19,7 +31,7 @@
 
 - React
 - CSS in JS (Styled-Components)
-- firebase
+- Firebase
 
 <br>
 
@@ -31,6 +43,6 @@
 
 ## 개발 기록
 
-[📜Issue](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
+[📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
 
 <br>
