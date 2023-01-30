@@ -163,12 +163,12 @@ export default function PlayInterview() {
     setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(userInfo);
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
+  const getUsers = async () => {
+    const data = await getDocs(userInfo);
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
 
+  useEffect(() => {
     getUsers();
     getQuestions();
   }, [result]);

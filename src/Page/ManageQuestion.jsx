@@ -12,20 +12,47 @@ import Nav from "../Components/Nav";
 import QuestionTable from "../Components/Interview/QuestionTable";
 import { useRef } from "react";
 
+const QuestionListContainer = styled.div`
+  text-align: center;
+  margin: 5em 0;
+`;
+
+const UserListContainer = styled.div`
+  text-align: center;
+`;
+
+const AddBtn = styled.button`
+  cursor: pointer;
+`;
+
 export default function ManageQuestion() {
   const [show, setShow] = useState(false);
   const [newQuestion, setNewQuestion] = useState("");
+  const [newUser, setNewUser] = useState("");
   const questions = useRef([]);
+  const users = useRef([]);
   const questionInfo = collection(fireStore, "questions");
+  const userInfo = collection(fireStore, "member");
 
   const getQuestions = async () => {
-    const data = await getDocs(query(questionInfo, orderBy("time", "asc")));
-    questions.current = data.docs.map((doc) => ({
+    const questionData = await getDocs(
+      query(questionInfo, orderBy("time", "asc"))
+    );
+    questions.current = questionData.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
     setShow(true);
-    console.log(questions.current);
+  };
+
+  const getUsers = async () => {
+    const userData = await getDocs(query(userInfo, orderBy("time", "asc")));
+    users.current = userData.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setShow(true);
+    console.log(users.current);
   };
 
   /**
@@ -45,43 +72,96 @@ export default function ManageQuestion() {
     window.location.reload();
   };
 
+  /**
+   * 질문 추가
+   *
+   * @param {Number}
+   */
+  const addUser = async () => {
+    const idx = Object.keys(users.current).length;
+    const newData = {};
+    newData["idx"] = idx;
+    newData["user"] = newUser;
+    newData["time"] = new Date();
+    await addDoc(userInfo, newData);
+    alert("질문이 추가되었습니다.");
+    getUsers();
+    window.location.reload();
+  };
+
   useEffect(() => {
     getQuestions();
-  }, [questions]);
+    getUsers();
+  }, [questions, users]);
 
   return (
     <>
       <Nav />
-      <div>
-        <p>질문관리</p>
-        <div>
-          <input
-            type="text"
-            placeholder="추가할 질문을 입력해주세요."
-            onChange={(e) => {
-              setNewQuestion(e.target.value);
-            }}
-          />
-          <button onClick={addQuestion}>질문 추가</button>
+      <QuestionListContainer>
+        <div style={{ display: "inline-block" }}>
+          <p>질문 관리</p>
+          <div>
+            <input
+              type="text"
+              placeholder="추가할 질문을 입력해주세요."
+              onChange={(e) => {
+                setNewQuestion(e.target.value);
+              }}
+            />
+            <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
+          </div>
+          <div>
+            <table border="1">
+              <th>No.</th>
+              <th>질문</th>
+              <th>수정하기</th>
+              <th>삭제하기</th>
+              {show
+                ? Object.keys(questions.current).map((v, idx) => (
+                    <QuestionTable
+                      question={questions.current[~~v].question}
+                      id={questions.current[~~v].id}
+                      idx={idx}
+                    />
+                  ))
+                : ""}
+            </table>
+          </div>
         </div>
-        <div>
-          <table border="1">
-            <th>No.</th>
-            <th>질문</th>
-            <th>수정하기</th>
-            <th>삭제하기</th>
-            {show
-              ? Object.keys(questions.current).map((v, idx) => (
-                  <QuestionTable
-                    question={questions.current[~~v].question}
-                    id={questions.current[~~v].id}
-                    idx={idx}
-                  />
-                ))
-              : ""}
-          </table>
+      </QuestionListContainer>
+
+      <UserListContainer>
+        <div style={{ display: "inline-block" }}>
+          <p>유저 관리</p>
+          <div>
+            <input
+              type="text"
+              placeholder="추가할 유저를 입력해주세요."
+              onChange={(e) => {
+                setNewUser(e.target.value);
+              }}
+            />
+            <AddBtn onClick={addUser}>유저 추가</AddBtn>
+          </div>
+          <div>
+            <table border="1">
+              <th>No.</th>
+              <th>유저</th>
+              <th>수정하기</th>
+              <th>삭제하기</th>
+              {show
+                ? Object.keys(users.current).map((v, idx) => (
+                    <QuestionTable
+                      question={users.current[~~v].user}
+                      id={users.current[~~v].id}
+                      idx={idx}
+                    />
+                  ))
+                : ""}
+            </table>
+          </div>
         </div>
-      </div>
+      </UserListContainer>
     </>
   );
 }
