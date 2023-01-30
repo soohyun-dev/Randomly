@@ -1,10 +1,11 @@
 import { useEffect, useId, useState } from "react";
-import getQuestionNums from "../Utils/MakeNums";
-import { fireStore } from "../firebase";
+import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
+import { fireStore } from "../../firebase";
 import { addDoc, collection, getDoc, getDocs, doc } from "firebase/firestore";
 import styled from "styled-components";
 import { async } from "@firebase/util";
-import Nav from "../Components/Nav";
+import Nav from "../../Components/Nav";
+import { useRef } from "react";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function PlayInterview() {
   const [result, setResult] = useState([]);
   const [correctCnt, setCorrectCnt] = useState([]);
   const [toggleQuestion, setToggleQuestion] = useState([]);
+  const [orderMember, setOrderMember] = useState([]);
   const uniqueId = useId();
   const userInfo = collection(fireStore, "member");
   const questionInfo = collection(fireStore, "questions");
@@ -45,7 +47,9 @@ export default function PlayInterview() {
    * @param {Number} 질문을 열거나 닫을 팀원의 index
    */
   const openHandler = (idx) => {
-    console.log(open);
+    if (!bool) {
+      alert("질문 분배를 해주세요!");
+    }
     let change = [...open];
     change[idx] = !change[idx];
     setOpen(change);
@@ -141,7 +145,9 @@ export default function PlayInterview() {
     <UserContainer key={uniqueId}>
       <NameContainer>
         <MemberTitle>팀원명: </MemberTitle>
-        <MemberName>{value.name}</MemberName>
+        <MemberName>
+          {orderMember.length === 0 ? value.user : users[orderMember[idx]].user}
+        </MemberName>
         <CorrectText>맞은 갯수: {checkCorrect(idx)} 개</CorrectText>
       </NameContainer>
       <ButtonContainer>
@@ -168,13 +174,18 @@ export default function PlayInterview() {
     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
+  const shuffleName = () => {
+    setOrderMember(MakeNums(Object.keys(users).length));
+  };
+
   useEffect(() => {
     getUsers();
     getQuestions();
-  }, [result]);
+  }, [result, orderMember]);
 
   console.log(questions);
-  console.log(result);
+  console.log(users);
+  console.log(orderMember);
 
   return (
     <>
@@ -182,9 +193,15 @@ export default function PlayInterview() {
       <div>
         <MainContainer>
           <div>
-            <MakeQuestionNums color={bool} onClick={makeArray}>
-              {bool ? "질문 분배 완료" : "질문 분배 시작"}
-            </MakeQuestionNums>
+            <div>
+              <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
+            </div>
+            <div>
+              {" "}
+              <MakeQuestionNums color={bool} onClick={makeArray}>
+                {bool ? "질문 분배 완료" : "질문 분배 시작"}
+              </MakeQuestionNums>
+            </div>
             {bool ? (
               <GuideToggle>
                 질문 분배가 완료되었습니다. 질문을 확인해주세요.
@@ -204,6 +221,23 @@ const MainContainer = styled.div`
   position: absolute;
   left: 25%;
   top: 20%;
+`;
+
+const ShuffleName = styled.button`
+  cursor: pointer;
+  width: 180px;
+  height: 50px;
+  margin: 0 0 2em 14em;
+  color: #00695c;
+  background-color: #69f0ae;
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: "Nanum Gothic", sans-serif;
+  &:hover {
+    opacity: 70%;
+  }
 `;
 
 const MakeQuestionNums = styled.button`

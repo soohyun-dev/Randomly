@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fireStore } from "../firebase";
+import { fireStore } from "../../firebase";
 import {
   addDoc,
   collection,
@@ -8,10 +8,10 @@ import {
   orderBy,
 } from "firebase/firestore";
 import styled from "styled-components";
-import Nav from "../Components/Nav";
-import QuestionTable from "../Components/Interview/QuestionTable";
+import Nav from "../../Components/Nav";
+import QuestionTable from "../../Components/Interview/QuestionTable";
 import { useRef } from "react";
-import UserTable from "../Components/Interview/UserTable";
+import UserTable from "../../Components/Interview/UserTable";
 
 const QuestionListContainer = styled.div`
   text-align: center;
@@ -20,6 +20,7 @@ const QuestionListContainer = styled.div`
 
 const UserListContainer = styled.div`
   text-align: center;
+  margin: 5em 0;
 `;
 
 const AddBtn = styled.button`
@@ -68,7 +69,6 @@ export default function ManageQuestion() {
     newData["question"] = newQuestion;
     newData["time"] = new Date();
     await addDoc(questionInfo, newData);
-    alert("질문이 추가되었습니다.");
     getQuestions();
     window.location.reload();
   };

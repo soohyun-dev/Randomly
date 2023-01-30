@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { fireStore } from "./firebase";
 import GlobalStyle from "./GlobalStyle";
 import Main from "./Page/Main";
-import ManageQuestion from "./Page/ManageQuestion";
-import PlayInterview from "./Page/PlayInterview";
+import ManageQuestion from "./Page/Manage/ManageQuestion";
+import PlayInterview from "./Page/Play/PlayInterview";
 
 export default function App() {
   return (

@@ -41,10 +41,10 @@ export default function Nav() {
         <Middle></Middle>
         <Menu>
           <Link to="/PlayInterview" style={{ textDecoration: "none" }}>
-            <MenuText>인터뷰</MenuText>
+            <MenuText>인터뷰 하기</MenuText>
           </Link>
           <Link to="/ManageQuestion" style={{ textDecoration: "none" }}>
-            <MenuText>질문 관리</MenuText>
+            <MenuText>관리</MenuText>
           </Link>
         </Menu>
       </TopHeader>
