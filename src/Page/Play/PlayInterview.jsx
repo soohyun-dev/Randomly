@@ -206,7 +206,7 @@ export default function PlayInterview() {
             <div>
               {" "}
               <MakeQuestionNums color={bool} onClick={makeArray}>
-                {bool ? "질문 분배 완료" : "질문 분배 시작"}
+                {bool ? "질문 재분배" : "질문 분배 시작"}
               </MakeQuestionNums>
             </div>
             {bool ? (
@@ -214,7 +214,9 @@ export default function PlayInterview() {
                 질문 분배가 완료되었습니다. 질문을 확인해주세요.
               </GuideToggle>
             ) : (
-              ""
+              <GuideToggle>
+                질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을 분배해주세요!
+              </GuideToggle>
             )}
           </OrderContainer>
           {showUsers}

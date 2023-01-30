@@ -8,7 +8,19 @@
 
 - 질문 랜덤 뽑기 프로젝트
 
-<img src="https://user-images.githubusercontent.com/81623931/214259719-a4087bad-b6fb-4060-85c9-3fefcebcca4e.png" width="700" height="500"/>
+<img src="https://user-images.githubusercontent.com/81623931/215483253-a0a2688c-4616-4f88-8666-d42e5861e639.png" width="700" height="500"/>
+
+<br>
+
+- 질문 리스트 CRUD
+
+<img src="https://user-images.githubusercontent.com/81623931/215483253-a0a2688c-4616-4f88-8666-d42e5861e639.png" width="700" height="500"/>
+
+<br>
+
+- 유저 리스트 CRUD
+
+<img src="https://user-images.githubusercontent.com/81623931/215483253-a0a2688c-4616-4f88-8666-d42e5861e639.png" width="700" height="500"/>
   
   <br>
   
@@ -32,6 +44,14 @@
 - 스터디에 활용할 질문을 질문 리스트에 등록할 수 있다.
 - 질문 리스트에 등록된 질문을 수정할 수 있다.
 - 질문 리스트에 등록된 질문을 삭제할 수 있다.
+
+<br>
+
+### 3. 유저 생성, 수정, 삭제 기능
+
+- 스터디에 참여할 유저를 등록할 수 있다.
+- 유저 리스트에 등록된 유저 이름을 수정할 수 있다.
+- 유저 리스트에 등록된 유저를 삭제할 수 있다.
 
 <br>
 
