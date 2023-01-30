@@ -11,6 +11,7 @@ import styled from "styled-components";
 import Nav from "../Components/Nav";
 import QuestionTable from "../Components/Interview/QuestionTable";
 import { useRef } from "react";
+import UserTable from "../Components/Interview/UserTable";
 
 const QuestionListContainer = styled.div`
   text-align: center;
@@ -84,7 +85,7 @@ export default function ManageQuestion() {
     newData["user"] = newUser;
     newData["time"] = new Date();
     await addDoc(userInfo, newData);
-    alert("질문이 추가되었습니다.");
+    alert("유저가 추가되었습니다.");
     getUsers();
     window.location.reload();
   };
@@ -151,8 +152,8 @@ export default function ManageQuestion() {
               <th>삭제하기</th>
               {show
                 ? Object.keys(users.current).map((v, idx) => (
-                    <QuestionTable
-                      question={users.current[~~v].user}
+                    <UserTable
+                      user={users.current[~~v].user}
                       id={users.current[~~v].id}
                       idx={idx}
                     />
