@@ -1,11 +1,10 @@
 import { useEffect, useId, useState } from "react";
 import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
 import { fireStore } from "../../firebase";
-import { addDoc, collection, getDoc, getDocs, doc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import styled from "styled-components";
-import { async } from "@firebase/util";
 import Nav from "../../Components/Nav";
-import { useRef } from "react";
+import StopWatch from "../../Components/StopWatch/Stopwatch";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState(false);
@@ -121,6 +120,7 @@ export default function PlayInterview() {
                 {correctCnt[v] ? "취소" : "맞음"}
               </CorrectBtn>
             </QuestionBlock>
+            <StopWatch />
           </QuestionText>
         ) : (
           <QuestionText color={correctCnt[v]}>
@@ -144,11 +144,18 @@ export default function PlayInterview() {
   const showUsers = users.map((value, idx) => (
     <UserContainer key={uniqueId}>
       <NameContainer>
-        <MemberTitle>팀원명: </MemberTitle>
-        <MemberName>
-          {orderMember.length === 0 ? value.user : users[orderMember[idx]].user}
-        </MemberName>
-        <CorrectText>맞은 갯수: {checkCorrect(idx)} 개</CorrectText>
+        <UpperLeft>
+          <MemberTitle>팀원명: </MemberTitle>
+          <MemberName>
+            {orderMember.length === 0
+              ? value.user
+              : users[orderMember[idx]].user}
+          </MemberName>
+        </UpperLeft>
+        <UpperMiddle></UpperMiddle>
+        <UpperRight>
+          <CorrectText> 맞은 갯수: {checkCorrect(idx)} 개</CorrectText>
+        </UpperRight>
       </NameContainer>
       <ButtonContainer>
         <OpenButton
@@ -192,7 +199,7 @@ export default function PlayInterview() {
       <Nav />
       <div>
         <MainContainer>
-          <div>
+          <OrderContainer>
             <div>
               <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
             </div>
@@ -209,7 +216,7 @@ export default function PlayInterview() {
             ) : (
               ""
             )}
-          </div>
+          </OrderContainer>
           {showUsers}
         </MainContainer>
       </div>
@@ -219,7 +226,7 @@ export default function PlayInterview() {
 
 const MainContainer = styled.div`
   position: absolute;
-  left: 25%;
+  left: 9%;
   top: 20%;
 `;
 
@@ -227,7 +234,7 @@ const ShuffleName = styled.button`
   cursor: pointer;
   width: 180px;
   height: 50px;
-  margin: 0 0 2em 14em;
+  margin-bottom: 2em;
   color: #00695c;
   background-color: #69f0ae;
   border: none;
@@ -240,11 +247,15 @@ const ShuffleName = styled.button`
   }
 `;
 
+const OrderContainer = styled.div`
+  text-align: center;
+`;
+
 const MakeQuestionNums = styled.button`
   cursor: pointer;
   width: 180px;
   height: 50px;
-  margin: 0 0 2em 14em;
+  margin-bottom: 2em;
   color: white;
   background-color: ${(props) => (props.color ? "#009688" : "#8bc34a")};
   border: none;
@@ -258,17 +269,30 @@ const MakeQuestionNums = styled.button`
 `;
 
 const GuideToggle = styled.p`
-  margin-left: 14em;
   font-weight: 600;
+`;
+
+const UpperLeft = styled.div`
+  width: 20%;
+`;
+
+const UpperMiddle = styled.div`
+  width: 60%;
+`;
+
+const UpperRight = styled.div`
+  width: 20%;
 `;
 
 const UserContainer = styled.div`
   background-color: #eaeaea;
-  width: 50em;
+  width: 80em;
   border-radius: 10px;
 `;
 
 const NameContainer = styled.div`
+  width: 100%;
+  display: flex;
   margin: 40px 0;
   padding: 30px 40px;
 `;
@@ -289,17 +313,17 @@ const MemberName = styled.label`
 
 const QuestionBlock = styled.div`
   display: inline-block;
+  line-height: 35px;
 `;
 
 const CorrectText = styled.label`
-  margin-left: 20em;
   font-size: 22px;
   font-weight: 600;
 `;
 
 const ButtonContainer = styled.div`
-  margin-left: 21em;
-  justify-items: center;
+  width: 100%;
+  text-align: center;
 `;
 
 const OpenButton = styled.button`
@@ -308,7 +332,7 @@ const OpenButton = styled.button`
   height: 40px;
   margin: 20px 0;
   color: white;
-  background-color: ${(props) => (props.color ? "red" : "#5c8aff")};
+  background-color: ${(props) => (props.color ? "#00695c" : "#5c8aff")};
   border: none;
   border-radius: 10px;
   font-size: 17px;
@@ -320,12 +344,13 @@ const OpenButton = styled.button`
 `;
 
 const QuestionText = styled.p`
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 600;
-  margin: 40px 0px;
+  margin: 40px 15px;
   padding: 10px 20px;
   cursor: pointer;
   color: ${(props) => (props.color ? "blue" : "black")};
+  display: flex;
 `;
 
 const ShowBtn = styled.button`

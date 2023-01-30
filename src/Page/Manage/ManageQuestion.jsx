@@ -131,6 +131,8 @@ export default function ManageQuestion() {
         </div>
       </QuestionListContainer>
 
+      <hr />
+
       <UserListContainer>
         <div style={{ display: "inline-block" }}>
           <p>유저 관리</p>
