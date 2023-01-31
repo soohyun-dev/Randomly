@@ -61,7 +61,7 @@ export default function Nav() {
           </div>
           <div>
             <Link
-              to="/ManageQuestion"
+              to="/Manage"
               style={{ textDecoration: "none", color: "black" }}
             >
               <MenuText> MANAGE</MenuText>

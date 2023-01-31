@@ -56,7 +56,7 @@ export default function QuestionTable({ question, id, idx }) {
         <Td>
           {updateBtnToggle ? (
             <div>
-              <button
+              <Btn
                 onClick={() => {
                   alert("수정 완료되었습니다.");
                   updateQuestion(id);
@@ -65,15 +65,15 @@ export default function QuestionTable({ question, id, idx }) {
                 }}
               >
                 수정 완료
-              </button>
-              <button
+              </Btn>
+              <Btn
                 onClick={() => {
                   setUpdate(!update);
                   setUpdateBtnToggle(!updateBtnToggle);
                 }}
               >
                 수정 취소
-              </button>
+              </Btn>
             </div>
           ) : (
             <Btn
