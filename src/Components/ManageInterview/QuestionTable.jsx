@@ -42,7 +42,7 @@ export default function QuestionTable({ question, id, idx }) {
   return (
     <>
       <Tr>
-        <Td>{idx}</Td>
+        <Td>{idx + 1}</Td>
         <Td>
           {update ? (
             <QuestionInput

@@ -42,7 +42,7 @@ export default function UserTable({ user, id, idx }) {
   return (
     <>
       <Tr>
-        <Td>{idx}</Td>
+        <Td>{idx + 1}</Td>
         <UserTd>
           {update ? (
             <UserInput
