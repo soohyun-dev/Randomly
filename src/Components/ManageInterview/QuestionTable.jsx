@@ -64,7 +64,7 @@ export default function QuestionTable({ question, id, idx }) {
                   setUpdateBtnToggle(!updateBtnToggle);
                 }}
               >
-                수정 완료
+                완료
               </Btn>
               <Btn
                 onClick={() => {
@@ -72,18 +72,18 @@ export default function QuestionTable({ question, id, idx }) {
                   setUpdateBtnToggle(!updateBtnToggle);
                 }}
               >
-                수정 취소
+                취소
               </Btn>
             </div>
           ) : (
-            <Btn
+            <UpdateBtn
               onClick={() => {
                 setUpdate(!update);
                 setUpdateBtnToggle(!updateBtnToggle);
               }}
             >
               수정
-            </Btn>
+            </UpdateBtn>
           )}
         </Td>
         <TdNoRight>
@@ -126,6 +126,20 @@ const QuestionInput = styled.input`
 
 const Btn = styled.button`
   width: 4em;
+  height: 2.5em;
+  font-size: 14px;
+  font-weight: 550;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #424242;
+  &:hover {
+    opacity: 80%;
+  }
+`;
+
+const UpdateBtn = styled.button`
+  width: 7.6em;
   height: 2.5em;
   font-size: 14px;
   font-weight: 550;

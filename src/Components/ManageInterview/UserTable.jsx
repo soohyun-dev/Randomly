@@ -76,14 +76,14 @@ export default function UserTable({ user, id, idx }) {
               </Btn>
             </div>
           ) : (
-            <Btn
+            <UpdateBtn
               onClick={() => {
                 setUpdate(!update);
                 setUpdateBtnToggle(!updateBtnToggle);
               }}
             >
               수정
-            </Btn>
+            </UpdateBtn>
           )}
         </Td>
         <TdNoRight>
@@ -132,6 +132,21 @@ const UserInput = styled.input`
 
 const Btn = styled.button`
   width: 6em;
+  height: 2.5em;
+  font-size: 14px;
+  font-weight: 550;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #424242;
+  &:hover {
+    opacity: 80%;
+  }
+  margin-right: 1em;
+`;
+
+const UpdateBtn = styled.button`
+  width: 12.5em;
   height: 2.5em;
   font-size: 14px;
   font-weight: 550;

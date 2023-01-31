@@ -52,6 +52,11 @@ export default function Nav() {
         <Middle></Middle>
         <Menu>
           <div>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <MenuText>HOME</MenuText>
+            </Link>
+          </div>
+          <div>
             <Link
               to="/PlayInterview"
               style={{ textDecoration: "none", color: "black" }}
