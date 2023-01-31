@@ -5,6 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import StopWatch from "../../Components/StopWatch/Stopwatch";
+import Footer from "../../Components/Footer";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState(false);
@@ -158,6 +159,7 @@ export default function PlayInterview() {
         </UpperRight>
       </NameContainer>
       <ButtonContainer>
+        {bool ? "" : <NoticeText>질문 분배를 해주세요😋</NoticeText>}
         <OpenButton
           color={open[idx]}
           onClick={(e) => {
@@ -197,7 +199,7 @@ export default function PlayInterview() {
   return (
     <>
       <Nav />
-      <div>
+      <section style={{ textAlign: "center" }}>
         <MainContainer>
           <OrderContainer>
             <div>
@@ -221,15 +223,14 @@ export default function PlayInterview() {
           </OrderContainer>
           {showUsers}
         </MainContainer>
-      </div>
+      </section>
+      <Footer />
     </>
   );
 }
 
 const MainContainer = styled.div`
-  position: absolute;
-  left: 9%;
-  top: 20%;
+  margin: 7em 7em;
 `;
 
 const ShuffleName = styled.button`
@@ -272,6 +273,7 @@ const MakeQuestionNums = styled.button`
 
 const GuideToggle = styled.p`
   font-weight: 600;
+  margin: 2em 0 5em 0;
 `;
 
 const UpperLeft = styled.div`
@@ -279,11 +281,11 @@ const UpperLeft = styled.div`
 `;
 
 const UpperMiddle = styled.div`
-  width: 60%;
+  width: 55%;
 `;
 
 const UpperRight = styled.div`
-  width: 20%;
+  width: 25%;
 `;
 
 const UserContainer = styled.div`
@@ -326,6 +328,11 @@ const CorrectText = styled.label`
 const ButtonContainer = styled.div`
   width: 100%;
   text-align: center;
+`;
+
+const NoticeText = styled.p`
+  font-weight: 600;
+  margin: 2em 0;
 `;
 
 const OpenButton = styled.button`

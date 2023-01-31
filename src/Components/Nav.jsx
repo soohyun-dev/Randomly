@@ -9,14 +9,15 @@ const TopHeader = styled.header`
   color: black;
   background-color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+  text-align: center;
 `;
 
 const Logo = styled.div`
-  width: 10%;
+  width: 15%;
 `;
 
 const Middle = styled.div`
-  width: 75%;
+  width: 70%;
 `;
 
 const Menu = styled.div`

@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     background-color: #b2ebf2;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
 `;
 

@@ -9,9 +9,9 @@ import {
 } from "firebase/firestore";
 import styled from "styled-components";
 import Nav from "../../Components/Nav";
-import QuestionTable from "../../Components/Interview/QuestionTable";
+import QuestionTable from "../../Components/ManageInterview/QuestionTable";
 import { useRef } from "react";
-import UserTable from "../../Components/Interview/UserTable";
+import UserTable from "../../Components/ManageInterview/UserTable";
 
 const QuestionListContainer = styled.div`
   text-align: center;

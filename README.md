@@ -2,25 +2,25 @@
 
 ## 🧑‍💻 프로젝트 소개
 
-내가 필요해서 만들어 사용하는 프로젝트 😋
+내가 필요해서 만들어 사용하는 개인프로젝트 😋
 
 <br>
 
 - 질문 랜덤 뽑기 프로젝트
 
-<img src="https://user-images.githubusercontent.com/81623931/215483253-a0a2688c-4616-4f88-8666-d42e5861e639.png" width="700" height="400"/>
+<img src="https://user-images.githubusercontent.com/81623931/215483253-a0a2688c-4616-4f88-8666-d42e5861e639.png" width="700" height="450"/>
 
 <br>
 
 - 질문 리스트 CRUD
 
-<img src="https://user-images.githubusercontent.com/81623931/215483432-5b27e0c3-dec1-4773-866f-7a31fd7b5ab1.png" width="700" height="500"/>
+<img src="https://user-images.githubusercontent.com/81623931/215483432-5b27e0c3-dec1-4773-866f-7a31fd7b5ab1.png" width="700" height="400"/>
 
 <br>
 
 - 유저 리스트 CRUD
 
-<img src="https://user-images.githubusercontent.com/81623931/215483473-a5a3f606-d508-4e09-8610-1f191eb1b646.png" width="700" height="500"/>
+<img src="https://user-images.githubusercontent.com/81623931/215483473-a5a3f606-d508-4e09-8610-1f191eb1b646.png" width="500" height="300"/>
   
   <br>
   
@@ -73,11 +73,19 @@
 
 📦src<br>
 ┣ 📂Components<br>
+┃ ┣ 📂ManageInterview<br>
+┃ ┃ ┣ 📜QuestionTable.jsx<br>
+┃ ┃ ┗ 📜UserTable.jsx<br>
+┃ ┣ 📂StopWatch<br>
+┃ ┃ ┗ 📜Stopwatch.jsx<br>
 ┃ ┗ 📜Nav.jsx<br>
 ┣ 📂Constant<br>
 ┣ 📂Page<br>
-┃ ┣ 📜Main.jsx<br>
-┃ ┗ 📜ManageQuestion.jsx<br>
+┃ ┣ 📂Manage<br>
+┃ ┃ ┗ 📜ManageQuestion.jsx<br>
+┃ ┣ 📂Play<br>
+┃ ┃ ┗ 📜PlayInterview.jsx<br>
+┃ ┗ 📜Main.jsx<br>
 ┣ 📂Utils<br>
 ┃ ┗ 📜MakeNums.jsx<br>
 ┣ 📜App.jsx<br>
