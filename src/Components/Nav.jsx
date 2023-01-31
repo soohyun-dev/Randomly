@@ -4,30 +4,40 @@ import styled from "styled-components";
 const TopHeader = styled.header`
   display: flex;
   padding: 25px;
-  font-weight: bold;
   font-size: 28px;
   color: black;
   background-color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
   text-align: center;
+  align-items: center;
+  &:visited {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const Logo = styled.div`
-  width: 15%;
+  font-weight: bold;
+  width: 30%;
 `;
 
 const Middle = styled.div`
-  width: 70%;
+  width: 50%;
 `;
 
 const Menu = styled.div`
   display: flex;
-  width: 15%;
+  width: 30%;
   font-size: 16px;
 `;
 
 const MenuText = styled.p`
-  padding: 0 1em;
+  font-weight: 500;
+  padding: 0 1.5em;
+  &:hover {
+    font-weight: bold;
+    transition: 0.8s;
+  }
 `;
 
 export default function Nav() {
@@ -35,18 +45,28 @@ export default function Nav() {
     <>
       <TopHeader>
         <Logo>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             Randomly
           </Link>
         </Logo>
         <Middle></Middle>
         <Menu>
-          <Link to="/PlayInterview" style={{ textDecoration: "none" }}>
-            <MenuText>인터뷰 하기</MenuText>
-          </Link>
-          <Link to="/ManageQuestion" style={{ textDecoration: "none" }}>
-            <MenuText>관리</MenuText>
-          </Link>
+          <div>
+            <Link
+              to="/PlayInterview"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText>INTERVIEW</MenuText>
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/ManageQuestion"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText> MANAGE</MenuText>
+            </Link>
+          </div>
         </Menu>
       </TopHeader>
     </>

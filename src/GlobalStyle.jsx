@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    background-color: #b2ebf2;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
 `;

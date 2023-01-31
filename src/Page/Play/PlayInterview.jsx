@@ -200,6 +200,13 @@ export default function PlayInterview() {
     <>
       <Nav />
       <section style={{ textAlign: "center" }}>
+        <Title>INTERVIEW</Title>
+        <PageGuide>
+          팀원끼리 서로 랜덤의 질문을 배정받고 인터뷰 연습을 하는 공간입니다.
+        </PageGuide>
+        <PageGuide>하단의 버튼을 눌러 시작하세요. </PageGuide>
+      </section>
+      <section style={{ textAlign: "center" }}>
         <MainContainer>
           <OrderContainer>
             <div>
@@ -229,6 +236,15 @@ export default function PlayInterview() {
   );
 }
 
+const Title = styled.h1`
+  font-size: 48px;
+  margin: 3em 0 2em 0;
+`;
+
+const PageGuide = styled.p`
+  font-size: 17px;
+`;
+
 const MainContainer = styled.div`
   margin: 7em 7em;
 `;
@@ -237,16 +253,15 @@ const ShuffleName = styled.button`
   cursor: pointer;
   width: 180px;
   height: 50px;
-  margin-bottom: 2em;
-  color: #00695c;
-  background-color: #69f0ae;
+  margin-bottom: 1em;
+  color: #ffff;
+  background-color: #03a9f4;
   border: none;
   border-radius: 10px;
-  font-size: 22px;
-  font-weight: 500;
-  font-family: "Nanum Gothic", sans-serif;
+  font-size: 20px;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   &:hover {
-    opacity: 70%;
+    opacity: 80%;
   }
 `;
 
@@ -260,19 +275,17 @@ const MakeQuestionNums = styled.button`
   height: 50px;
   margin-bottom: 2em;
   color: white;
-  background-color: ${(props) => (props.color ? "#009688" : "#8bc34a")};
+  background-color: ${(props) => (props.color ? "#009688" : "#448aff")};
   border: none;
   border-radius: 10px;
-  font-size: 22px;
-  font-weight: 500;
-  font-family: "Nanum Gothic", sans-serif;
+  font-size: 20px;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   &:hover {
     opacity: 70%;
   }
 `;
 
 const GuideToggle = styled.p`
-  font-weight: 600;
   margin: 2em 0 5em 0;
 `;
 
@@ -289,7 +302,7 @@ const UpperRight = styled.div`
 `;
 
 const UserContainer = styled.div`
-  background-color: #eaeaea;
+  background-color: #f5f5f5;
   width: 80em;
   border-radius: 10px;
 `;
@@ -346,7 +359,7 @@ const OpenButton = styled.button`
   border-radius: 10px;
   font-size: 17px;
   fint-weight: 600;
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   &:hover {
     opacity: 70%;
   }

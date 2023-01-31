@@ -14,13 +14,13 @@
 
 - 질문 리스트 CRUD
 
-<img src="https://user-images.githubusercontent.com/81623931/215483432-5b27e0c3-dec1-4773-866f-7a31fd7b5ab1.png" width="700" height="400"/>
+<img src="https://user-images.githubusercontent.com/81623931/215483432-5b27e0c3-dec1-4773-866f-7a31fd7b5ab1.png" width="700" height="300"/>
 
 <br>
 
 - 유저 리스트 CRUD
 
-<img src="https://user-images.githubusercontent.com/81623931/215483473-a5a3f606-d508-4e09-8610-1f191eb1b646.png" width="500" height="300"/>
+<img src="https://user-images.githubusercontent.com/81623931/215483473-a5a3f606-d508-4e09-8610-1f191eb1b646.png" width="500" height="200"/>
   
   <br>
   
@@ -60,6 +60,11 @@
 - React
 - CSS in JS (Styled-Components)
 - Firebase
+  <br>
+
+#### 🔤 Font
+
+- [Spoqa Han Sans Neo](https://spoqa.github.io/spoqa-han-sans/ko-KR/#intro)
 
 <br>
 

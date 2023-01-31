@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const FooterStyle = styled.section`
   text-align: center;
-  font-weight: 550;
   margin-top: 10em;
-  padding: 5em 0 10em 0;
-  background-color: #001064;
+  padding: 10em 0 5em 0;
+  border-top: 1px solid #eeeeee;
 `;
 
 const FooterText = styled.p`
-  color: #757575;
+  font-size: 14px;
+  color: gray;
 `;
 
 export default function Footer() {

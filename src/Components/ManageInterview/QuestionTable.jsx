@@ -1,6 +1,7 @@
 import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState } from "react";
+import styled from "styled-components";
 
 export default function QuestionTable({ question, id, idx }) {
   const [newQuestion, setNewQuestion] = useState(question);
@@ -40,19 +41,19 @@ export default function QuestionTable({ question, id, idx }) {
 
   return (
     <>
-      <tr>
-        <td>{idx}</td>
-        <td>
+      <Tr>
+        <Td>{idx}</Td>
+        <Td>
           {update ? (
-            <input
+            <QuestionInput
               value={newQuestion}
               onChange={(e) => setNewQuestion(e.target.value)}
             />
           ) : (
             question
           )}
-        </td>
-        <td>
+        </Td>
+        <Td>
           {updateBtnToggle ? (
             <div>
               <button
@@ -75,26 +76,64 @@ export default function QuestionTable({ question, id, idx }) {
               </button>
             </div>
           ) : (
-            <button
+            <Btn
               onClick={() => {
                 setUpdate(!update);
                 setUpdateBtnToggle(!updateBtnToggle);
               }}
             >
               수정
-            </button>
+            </Btn>
           )}
-        </td>
-        <td>
-          <button
+        </Td>
+        <TdNoRight>
+          <Btn
             onClick={() => {
               checkDelete(id);
             }}
           >
             삭제
-          </button>
-        </td>
-      </tr>
+          </Btn>
+        </TdNoRight>
+      </Tr>
     </>
   );
 }
+
+const Tr = styled.tr`
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+`;
+
+const Td = styled.td`
+  padding: 1.5em 0;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+`;
+
+const TdNoRight = styled.td`
+  padding: 1.5em 0;
+  border-bottom: 1px solid #e0e0e0;
+`;
+
+const QuestionInput = styled.input`
+  width: 40em;
+  height: 3em;
+  padding-left: 1em;
+  border: 2px solid #eeeeee;
+  border-radius: 10px;
+`;
+
+const Btn = styled.button`
+  width: 4em;
+  height: 2.5em;
+  font-size: 14px;
+  font-weight: 550;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #424242;
+  &:hover {
+    opacity: 80%;
+  }
+`;
