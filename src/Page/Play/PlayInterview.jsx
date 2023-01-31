@@ -146,7 +146,7 @@ export default function PlayInterview() {
     <UserContainer key={uniqueId}>
       <NameContainer>
         <UpperLeft>
-          <MemberTitle>팀원명: </MemberTitle>
+          <MemberTitle>팀원명 : </MemberTitle>
           <MemberName>
             {orderMember.length === 0
               ? value.user
@@ -159,15 +159,18 @@ export default function PlayInterview() {
         </UpperRight>
       </NameContainer>
       <ButtonContainer>
-        {bool ? "" : <NoticeText>질문 분배를 해주세요😋</NoticeText>}
-        <OpenButton
-          color={open[idx]}
-          onClick={(e) => {
-            openHandler(idx);
-          }}
-        >
-          {open[idx] ? "질문 닫기" : "질문 열기"}
-        </OpenButton>
+        {bool ? (
+          <OpenButton
+            color={open[idx]}
+            onClick={(e) => {
+              openHandler(idx);
+            }}
+          >
+            {open[idx] ? "질문 닫기" : "질문 열기"}
+          </OpenButton>
+        ) : (
+          <NoticeText>질문 분배를 해주세요😋</NoticeText>
+        )}
       </ButtonContainer>
       {open[idx] ? showQuestion[idx] : ""}
     </UserContainer>
@@ -243,6 +246,10 @@ const Title = styled.h1`
 
 const PageGuide = styled.p`
   font-size: 17px;
+  //   &:hover {
+  //     font-size: 24px;
+  //     transition: 0.8s;
+  //   }
 `;
 
 const MainContainer = styled.div`
@@ -321,10 +328,9 @@ const MemberTitle = styled.label`
 
 const MemberName = styled.label`
   font-size: 22px;
-  font-weight: 600;
   background-color: #651fff;
   color: white;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 10px;
 `;
 
@@ -344,8 +350,8 @@ const ButtonContainer = styled.div`
 `;
 
 const NoticeText = styled.p`
-  font-weight: 600;
   margin: 2em 0;
+  padding: 3em 0;
 `;
 
 const OpenButton = styled.button`
@@ -384,7 +390,7 @@ const ShowBtn = styled.button`
   border: none;
   background-color: ${(props) => (props.color ? "#ef5350" : "#66bb6a")};
   color: white;
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 14px;
   font-weight: 600;
   &:hover {
@@ -400,7 +406,7 @@ const CorrectBtn = styled.button`
   border: none;
   background-color: ${(props) => (props.color ? "#ff8a80" : "#64b5f6")};
   color: white;
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;

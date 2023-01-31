@@ -6,30 +6,14 @@
 
 <br>
 
-- 질문 랜덤 뽑기 프로젝트
-
-<img src="https://user-images.githubusercontent.com/81623931/215723339-c5df4423-7865-4439-a9f5-dfbfb24ed1df.png" width="800" height="400"/>
-<br>
-<img src="https://user-images.githubusercontent.com/81623931/215723636-c77ee672-1b01-4bc6-9a87-bd5a3ec2193c.png" width="800" height="400"/>
+[📝프로젝트 진행과정](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
 
 <br>
 
-- 질문 리스트 CRUD
+## ⏰ 개발 기간
 
-<img src="https://user-images.githubusercontent.com/81623931/215723831-aa423f4f-9bf7-4628-9cab-fce04a777a90.png" width="700" height="400"/>
+- 2023년 1월 18일 ~ (지속적인 업데이트 중)
 
-<br>
-
-- 유저 리스트 CRUD
-
-<img src="https://user-images.githubusercontent.com/81623931/215723987-e1956a7b-d4aa-4fbf-8aa5-0bdc584ccf84.png" width="700" height="400"/>
-
-  <br>
-  
- ## ⏰ 개발 기간
- 
- - 2023년 1월 18일 ~ (지속적인 업데이트 중)
-  
   <br>
 
 ## 🎰 기능 소개
@@ -38,6 +22,10 @@
 
 - 면접 질문을 랜덤으로 각 팀원들에게 골고루 분배해주는 기능
 - 각 팀원은 자신에게 부여된 질문을 확인할 수 있다.
+  <br>
+
+<img src="https://user-images.githubusercontent.com/81623931/215723339-c5df4423-7865-4439-a9f5-dfbfb24ed1df.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/81623931/215723636-c77ee672-1b01-4bc6-9a87-bd5a3ec2193c.png" width="800" height="400"/>
 
 <br>
 
@@ -46,6 +34,9 @@
 - 스터디에 활용할 질문을 질문 리스트에 등록할 수 있다.
 - 질문 리스트에 등록된 질문을 수정할 수 있다.
 - 질문 리스트에 등록된 질문을 삭제할 수 있다.
+  <br>
+
+<img src="https://user-images.githubusercontent.com/81623931/215789486-34a0d541-d882-42c9-b7f1-918e1ceb5b44.png" width="800" height="400"/>
 
 <br>
 
@@ -54,6 +45,9 @@
 - 스터디에 참여할 유저를 등록할 수 있다.
 - 유저 리스트에 등록된 유저 이름을 수정할 수 있다.
 - 유저 리스트에 등록된 유저를 삭제할 수 있다.
+  <br>
+
+<img src="https://user-images.githubusercontent.com/81623931/215723987-e1956a7b-d4aa-4fbf-8aa5-0bdc584ccf84.png" width="800" height="400"/>
 
 <br>
 
@@ -62,6 +56,7 @@
 - React
 - CSS in JS (Styled-Components)
 - Firebase
+  <br>
   <br>
 
 #### 🔤 Font

@@ -1,34 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 
-const StopWatchContainer = styled.div`
-  margin-left: 1em;
-  display: flex;
-`;
-
-const Timer = styled.div`
-  font-size: 20px;
-  line-height: 35px;
-  color: #4caf50;
-  margin-right: 1em;
-`;
-
-const TimerBtn = styled.button`
-  cursor: pointer;
-  width: 4em;
-  margin: 0 0.2em;
-  color: white;
-  border: none;
-  background-color: ${(props) => (props.color ? "red" : "#bdbdbd")};
-  border-radius: 10px;
-  font-size: 15px;
-  fint-weight: 600;
-  font-family: "Nanum Gothic", sans-serif;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
 export default function StopWatch() {
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
@@ -84,3 +56,31 @@ export default function StopWatch() {
     </>
   );
 }
+
+const StopWatchContainer = styled.div`
+  margin-left: 1em;
+  display: flex;
+`;
+
+const Timer = styled.div`
+  font-size: 20px;
+  line-height: 35px;
+  color: #4caf50;
+  margin-right: 1em;
+`;
+
+const TimerBtn = styled.button`
+  cursor: pointer;
+  width: 4em;
+  margin: 0 0.2em;
+  color: white;
+  border: none;
+  background-color: ${(props) => (props.color ? "red" : "#bdbdbd")};
+  border-radius: 10px;
+  font-size: 15px;
+  fint-weight: 600;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  &:hover {
+    opacity: 70%;
+  }
+`;

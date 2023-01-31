@@ -111,13 +111,13 @@ const Table = styled.table`
 `;
 
 const Th = styled.th`
-  padding: 2em 0;
+  padding: 1em 0;
   border-bottom: 1px solid #e0e0e0;
   border-right: 1px solid #e0e0e0;
 `;
 
 const ThNoRight = styled.th`
-  padding: 2em 0;
+  padding: 1em 0;
   border-bottom: 1px solid #e0e0e0;
 `;
 

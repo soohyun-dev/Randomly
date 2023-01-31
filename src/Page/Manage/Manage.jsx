@@ -8,10 +8,11 @@ import Footer from "../../Components/Footer";
 export default function Manage() {
   const MiniTitle = styled.label`
     padding: 0 0.5em;
-    font-size: 36px;
+    font-size: 24px;
     cursor: pointer;
     color: ${(props) => (props.target === page ? "black" : "#e0e0e0")};
     text-decoration: ${(props) => (props.target === page ? "underline" : "")};
+    text-underline-position: under;
     &:hover {
       opacity: 80%;
     }

@@ -1,6 +1,44 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+export default function Nav() {
+  return (
+    <>
+      <TopHeader>
+        <Logo>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            Randomly
+          </Link>
+        </Logo>
+        <Middle></Middle>
+        <Menu>
+          <div>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <MenuText>HOME</MenuText>
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/PlayInterview"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText>INTERVIEW</MenuText>
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/Manage"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText> MANAGE</MenuText>
+            </Link>
+          </div>
+        </Menu>
+      </TopHeader>
+    </>
+  );
+}
+
 const TopHeader = styled.header`
   display: flex;
   padding: 25px;
@@ -39,41 +77,3 @@ const MenuText = styled.p`
     transition: 0.8s;
   }
 `;
-
-export default function Nav() {
-  return (
-    <>
-      <TopHeader>
-        <Logo>
-          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-            Randomly
-          </Link>
-        </Logo>
-        <Middle></Middle>
-        <Menu>
-          <div>
-            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <MenuText>HOME</MenuText>
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/PlayInterview"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <MenuText>INTERVIEW</MenuText>
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/Manage"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <MenuText> MANAGE</MenuText>
-            </Link>
-          </div>
-        </Menu>
-      </TopHeader>
-    </>
-  );
-}
