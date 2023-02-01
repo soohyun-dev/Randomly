@@ -2,8 +2,10 @@ import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import ManageQuestion from "../../Components/ManageInterview/ManageQuestion";
 import ManageUser from "../../Components/ManageInterview/MangageUser";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../../Components/Footer";
+import { collection, getDocs } from "firebase/firestore";
+import { fireStore } from "../../firebase";
 
 export default function Manage() {
   const MiniTitle = styled.label`
@@ -20,19 +22,32 @@ export default function Manage() {
   const [page, setPage] = useState("question");
   const [password, setPassword] = useState("");
   const [access, setAccess] = useState(false);
-  const ManagerPassword = process.env.REACT_APP_PASSWORD;
+  const pwd = useRef([]);
+
+  const pwdInfo = collection(fireStore, "password");
+
+  const getPwd = async () => {
+    const pwdData = await getDocs(pwdInfo);
+    pwd.current = pwdData.docs.map((doc) => ({
+      ...doc.data(),
+    }));
+  };
 
   const changeView = (value) => {
     setPage(value);
   };
   const accessPage = () => {
-    if (password === ManagerPassword) {
+    if (password === pwd.current[0].pwd) {
       setAccess(true);
       alert("인증되었습니다.");
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
   };
+
+  useEffect(() => {
+    getPwd();
+  });
 
   return (
     <>
