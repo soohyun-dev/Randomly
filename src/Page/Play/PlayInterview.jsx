@@ -230,8 +230,8 @@ export default function PlayInterview() {
                 질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을 분배해주세요!
               </GuideToggle>
             )}
+            <USER>{showUsers}</USER>
           </OrderContainer>
-          {showUsers}
         </MainContainer>
       </section>
       <Footer />
@@ -306,6 +306,10 @@ const UpperMiddle = styled.div`
 
 const UpperRight = styled.div`
   width: 25%;
+`;
+
+const USER = styled.div`
+  display: inline-block;
 `;
 
 const UserContainer = styled.div`

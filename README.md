@@ -18,11 +18,12 @@
 
 ## 🎰 기능 소개
 
+<br>
+
 ### 1. 질문 랜덤 분배
 
 - 면접 질문을 랜덤으로 각 팀원들에게 골고루 분배해주는 기능
 - 각 팀원은 자신에게 부여된 질문을 확인할 수 있다.
-  <br>
 
 <img src="https://user-images.githubusercontent.com/81623931/215723339-c5df4423-7865-4439-a9f5-dfbfb24ed1df.png" width="800" height="400"/>
 <img src="https://user-images.githubusercontent.com/81623931/215723636-c77ee672-1b01-4bc6-9a87-bd5a3ec2193c.png" width="800" height="400"/>
@@ -34,7 +35,6 @@
 - 스터디에 활용할 질문을 질문 리스트에 등록할 수 있다.
 - 질문 리스트에 등록된 질문을 수정할 수 있다.
 - 질문 리스트에 등록된 질문을 삭제할 수 있다.
-  <br>
 
 <img src="https://user-images.githubusercontent.com/81623931/215789486-34a0d541-d882-42c9-b7f1-918e1ceb5b44.png" width="800" height="400"/>
 
@@ -45,9 +45,8 @@
 - 스터디에 참여할 유저를 등록할 수 있다.
 - 유저 리스트에 등록된 유저 이름을 수정할 수 있다.
 - 유저 리스트에 등록된 유저를 삭제할 수 있다.
-  <br>
 
-<img src="https://user-images.githubusercontent.com/81623931/215723987-e1956a7b-d4aa-4fbf-8aa5-0bdc584ccf84.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/81623931/215791138-e9c0a19b-797c-445d-929c-8c174f9a9f6e.png" width="800" height="400"/>
 
 <br>
 
