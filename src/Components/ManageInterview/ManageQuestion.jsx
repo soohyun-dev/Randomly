@@ -41,8 +41,9 @@ export default function ManageQuestion() {
     newData["question"] = newQuestion;
     newData["time"] = new Date();
     await addDoc(questionInfo, newData);
+    setNewQuestion("");
     getQuestions();
-    window.location.reload();
+    alert("질문이 추가되었습니다.");
   };
 
   /**
@@ -68,9 +69,13 @@ export default function ManageQuestion() {
     }
   };
 
+  const onChange = (e) => {
+    setNewQuestion(e.target.value);
+  };
+
   useEffect(() => {
     getQuestions();
-  }, [questions]);
+  }, [newQuestion]);
 
   return (
     <>
@@ -79,10 +84,9 @@ export default function ManageQuestion() {
           <div>
             <QuestionInput
               type="text"
+              value={newQuestion}
               placeholder="추가할 질문을 입력해주세요."
-              onChange={(e) => {
-                setNewQuestion(e.target.value);
-              }}
+              onChange={onChange}
             />
             <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
           </div>

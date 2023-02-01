@@ -23,7 +23,6 @@ export default function Manage() {
   const [password, setPassword] = useState("");
   const [access, setAccess] = useState(false);
   const pwd = useRef([]);
-
   const pwdInfo = collection(fireStore, "password");
 
   const getPwd = async () => {
