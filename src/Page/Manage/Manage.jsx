@@ -17,11 +17,21 @@ export default function Manage() {
       opacity: 80%;
     }
   `;
-
   const [page, setPage] = useState("question");
+  const [password, setPassword] = useState("");
+  const [access, setAccess] = useState(false);
+  const ManagerPassword = process.env.REACT_APP_PASSWORD;
 
   const changeView = (value) => {
     setPage(value);
+  };
+  const accessPage = () => {
+    if (password === ManagerPassword) {
+      setAccess(true);
+      alert("인증되었습니다.");
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+    }
   };
 
   return (
@@ -51,8 +61,21 @@ export default function Manage() {
           </MiniTitle>
         </div>
       </section>
-
-      {page === "question" ? <ManageQuestion /> : <ManageUser />}
+      {access ? (
+        ""
+      ) : (
+        <PasswordSection>
+          <PasswordTitle>관리자 비밀번호</PasswordTitle>
+          <PasswordInput
+            placeholder="관리자 비밀번호 입력"
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+          <PasswordBtn onClick={accessPage}>인증</PasswordBtn>
+        </PasswordSection>
+      )}
+      {page === "question"
+        ? access && <ManageQuestion />
+        : access && <ManageUser />}
       <Footer />
     </>
   );
@@ -66,4 +89,35 @@ const TitleSection = styled.section`
 const Title = styled.h1`
   font-size: 48px;
   margin: 3em 0 2em 0;
+`;
+
+const PasswordSection = styled.section`
+  text-align: center;
+  margin: 5em 0;
+`;
+
+const PasswordTitle = styled.label`
+  margin: 0 1em;
+`;
+
+const PasswordInput = styled.input`
+  width: 13em;
+  height: 2em;
+  border-radius: 5px;
+  border: 0.5px solid;
+  padding-left: 10px;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+`;
+
+const PasswordBtn = styled.button`
+  width: 5em;
+  height: 2.5em;
+  border: none;
+  border-radius: 10px;
+  margin: 0 1em;
+  cursor: pointer;
+  &:hover {
+    opacity: 70%;
+  }
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
 `;

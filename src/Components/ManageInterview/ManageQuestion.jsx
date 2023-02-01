@@ -33,7 +33,6 @@ export default function ManageQuestion() {
   /**
    * 질문 추가
    *
-   * @param {Number}
    */
   const addQuestion = async () => {
     const idx = Object.keys(questions.current).length;
@@ -46,6 +45,10 @@ export default function ManageQuestion() {
     window.location.reload();
   };
 
+  /**
+   * 전체 질문 삭제
+   *
+   */
   const deleteAll = () => {
     const deleteAllQuestion = () => {
       Object.keys(questions.current).map((v) => {
