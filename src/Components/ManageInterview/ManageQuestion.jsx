@@ -6,12 +6,12 @@ import {
   getDocs,
   query,
   orderBy,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 import styled from "styled-components";
-import Nav from "../../Components/Nav";
 import QuestionTable from "../../Components/ManageInterview/QuestionTable";
 import { useRef } from "react";
-import UserTable from "../../Components/ManageInterview/UserTable";
 
 export default function ManageQuestion() {
   const [show, setShow] = useState(false);
@@ -44,6 +44,25 @@ export default function ManageQuestion() {
     await addDoc(questionInfo, newData);
     getQuestions();
     window.location.reload();
+  };
+
+  const deleteAll = () => {
+    const deleteAllQuestion = () => {
+      Object.keys(questions.current).map((v) => {
+        const deleteQuestion = async (id) => {
+          const questionDoc = doc(fireStore, "questions", id);
+          await deleteDoc(questionDoc);
+        };
+        deleteQuestion(questions.current[~~v].id);
+      });
+    };
+
+    if (window.confirm("등록된 질문들을 모두 삭제하십니까?")) {
+      if (window.confirm("정말 삭제하십니까? 다시 한번 선택해주세요.")) {
+        deleteAllQuestion();
+        alert("모든 질문들이 삭제되었습니다. 새로고침 해주세요.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -86,6 +105,9 @@ export default function ManageQuestion() {
             </Table>
           </div>
         </div>
+        <DelelteAllSection>
+          <DeleteAllBtn onClick={deleteAll}>전체삭제</DeleteAllBtn>
+        </DelelteAllSection>
       </QuestionListContainer>
     </>
   );
@@ -133,5 +155,26 @@ const AddBtn = styled.button`
   color: #424242;
   &:hover {
     opacity: 80%;
+  }
+`;
+
+const DelelteAllSection = styled.section`
+  margin: 7em 0;
+`;
+
+const DeleteAllBtn = styled.button`
+  width: 140px;
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  color: white;
+  font-size: 24px;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  cursor: pointer;
+  &:hover {
+    opacity: 70%;
+    background-color: red;
+    transition: 0.5s;
   }
 `;
