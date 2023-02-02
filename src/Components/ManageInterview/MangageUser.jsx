@@ -40,13 +40,13 @@ export default function ManageUser() {
     newData["time"] = new Date();
     await addDoc(userInfo, newData);
     alert("유저가 추가되었습니다.");
+    setNewUser("");
     getUsers();
-    window.location.reload();
   };
 
   useEffect(() => {
     getUsers();
-  }, [users]);
+  }, [users, newUser]);
 
   return (
     <>
@@ -54,6 +54,7 @@ export default function ManageUser() {
         <div>
           <div>
             <UserInput
+              value={newUser}
               type="text"
               placeholder="추가할 유저를 입력해주세요."
               onChange={(e) => {

@@ -2,6 +2,7 @@ import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState } from "react";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export default function UserTable({ user, id, idx }) {
   const [newUser, setNewUser] = useState(user);
@@ -18,7 +19,6 @@ export default function UserTable({ user, id, idx }) {
     const questionDoc = doc(fireStore, "member", id);
     const newContent = { user: newUser };
     await updateDoc(questionDoc, newContent);
-    window.location.reload();
   };
 
   /**
@@ -27,11 +27,9 @@ export default function UserTable({ user, id, idx }) {
    * @param {Number} 삭제할 유저의 id값
    */
   const checkDelete = (id) => {
-    console.log(id);
     const deleteQuestion = async (id) => {
       const questionDoc = doc(fireStore, "member", id);
       await deleteDoc(questionDoc);
-      window.location.reload();
     };
     if (window.confirm("정말 삭제합니까?")) {
       deleteQuestion(id);
