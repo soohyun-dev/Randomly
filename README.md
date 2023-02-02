@@ -8,11 +8,13 @@
 
 ## 🏠 배포주소
 
-[Randomly](randomly.pages.dev/)
+주소 : [Randomly](randomly.pages.dev/)
 
 <br>
 
-[📝프로젝트 진행과정](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
+## 프로젝트 진행과정
+
+프로젝트 진행과정 : [📝 진행과정기록](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
 
 <br>
 
@@ -23,6 +25,10 @@
   <br>
 
 ## 🎰 기능 소개
+
+<br>
+
+개발 완성 및 예정 기능 목록 : [기능 목록](https://github.com/soohyun-dev/Randomly/wiki/%EB%A7%8C%EB%93%A0-%EA%B8%B0%EB%8A%A5-%EB%AA%A9%EB%A1%9D)
 
 <br>
 

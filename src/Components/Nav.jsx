@@ -30,7 +30,15 @@ export default function Nav() {
               to="/Manage"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <MenuText> MANAGE</MenuText>
+              <MenuText>MANAGE</MenuText>
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/Login"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText>Login</MenuText>
             </Link>
           </div>
         </Menu>
