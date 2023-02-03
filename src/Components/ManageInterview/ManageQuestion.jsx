@@ -13,7 +13,7 @@ import styled from "styled-components";
 import QuestionTable from "../../Components/ManageInterview/QuestionTable";
 import { useRef } from "react";
 
-export default function ManageQuestion() {
+export default function ManageQuestion({ idx }) {
   const [show, setShow] = useState(false);
   const [newQuestion, setNewQuestion] = useState("");
   const questions = useRef([]);

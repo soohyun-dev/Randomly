@@ -26,7 +26,6 @@ export default function getQuestionNums(member, question) {
  */
 export function MakeNums(number) {
   const nums = Array.from({ length: number }, (_, i) => i);
-  console.log(shuffleArray(nums));
   return shuffleArray(nums);
 }
 

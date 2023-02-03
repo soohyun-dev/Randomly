@@ -195,10 +195,6 @@ export default function PlayInterview() {
     getQuestions();
   }, [result, orderMember]);
 
-  console.log(questions);
-  console.log(users);
-  console.log(orderMember);
-
   return (
     <>
       <Nav />

@@ -7,7 +7,6 @@ export default function QuestionTable({ question, id, idx }) {
   const [newQuestion, setNewQuestion] = useState(question);
   const [update, setUpdate] = useState(false);
   const [updateBtnToggle, setUpdateBtnToggle] = useState(false);
-
   /**
    * 질문 수정
    *
