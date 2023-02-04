@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "../../Components/Footer";
 import { collection, getDocs } from "firebase/firestore";
 import { fireStore } from "../../firebase";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
 export default function Manage() {
   const MiniTitle = styled.label`
@@ -43,6 +45,8 @@ export default function Manage() {
       alert("비밀번호가 틀렸습니다.");
     }
   };
+  const user = useSelector(selectUser);
+  console.log("유저", user);
 
   useEffect(() => {
     getPwd();
@@ -75,7 +79,7 @@ export default function Manage() {
           </MiniTitle>
         </div>
       </section>
-      {access ? (
+      {user !== null ? (
         ""
       ) : (
         <PasswordSection>
@@ -88,8 +92,8 @@ export default function Manage() {
         </PasswordSection>
       )}
       {page === "question"
-        ? access && <ManageQuestion />
-        : access && <ManageUser />}
+        ? user !== null && <ManageQuestion />
+        : user !== null && <ManageUser />}
       <Footer />
     </>
   );

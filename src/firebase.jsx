@@ -16,6 +16,7 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 
 const fireStore = getFirestore(firebase);
+
 const auth = getAuth(firebase);
 
 export { fireStore, auth };

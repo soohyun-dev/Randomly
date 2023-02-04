@@ -1,47 +1,38 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useState } from "react";
 import styled from "styled-components";
 import Footer from "../../Components/Footer";
 import Nav from "../../Components/Nav";
+import { userSlice, selectUser } from "../../features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import LoginBox from "../../Components/Login/LoginBox";
 import { auth } from "../../firebase";
 
 export default function LoginPage() {
-  const [userData, setUserData] = useState(null);
-  /**
-   * Google 로그인 설정
-   */
-
-  function handleGoogleLogin() {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setUserData(data.user);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  console.log("유저", user);
   function LoginsignOut() {
     auth.signOut();
+    dispatch(userSlice.actions.logout(user));
   }
+
   return (
     <>
       <Nav />
-      <LoginSection>
-        <TitleSection>
-          {" "}
-          <LoginTitle>LOGIN</LoginTitle>
-        </TitleSection>
+      {user ? (
+        <div>
+          <p>로그인 성공</p>
+          <button onClick={LoginsignOut}>로그아웃</button>
+        </div>
+      ) : (
+        <LoginSection>
+          <TitleSection>
+            {" "}
+            <LoginTitle>LOGIN</LoginTitle>
+          </TitleSection>
 
-        <LoginContainer>
-          <LoginDiv>
-            <button onClick={handleGoogleLogin}>Google Login</button>
-            <button onClick={LoginsignOut}>로그아웃</button>
-          </LoginDiv>
-        </LoginContainer>
-      </LoginSection>
+          <LoginBox />
+        </LoginSection>
+      )}
       <Footer />
     </>
   );
@@ -59,17 +50,4 @@ const LoginTitle = styled.h1`
 
 const LoginSection = styled.section`
   text-align: center;
-`;
-
-const LoginContainer = styled.div`
-  display: inline-block;
-  margin: 1em 0;
-  width: 20em;
-  height: 25em;
-  border: 1px solid;
-  border-radius: 10px;
-`;
-
-const LoginDiv = styled.div`
-  margin: 5em 0;
 `;
