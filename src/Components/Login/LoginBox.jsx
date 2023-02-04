@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { userSlice } from "../../features/userSlice";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
+import { persistReducer } from "redux-persist";
+import storageSession from "redux-persist/lib/storage/session";
 
 export default function LoginBox() {
   const [userData, setUserData] = useState(null);
@@ -29,16 +31,11 @@ export default function LoginBox() {
       });
   }
 
-  function LoginsignOut() {
-    auth.signOut();
-  }
-
   return (
     <>
       <LoginContainer>
         <LoginDiv>
           <button onClick={handleGoogleLogin}>Google Login</button>
-          <button onClick={LoginsignOut}>로그아웃</button>
         </LoginDiv>
       </LoginContainer>
     </>

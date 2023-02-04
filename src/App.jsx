@@ -15,7 +15,6 @@ export default function App() {
         <Route path="/PlayInterview" element={<PlayInterview />}></Route>
         <Route path="/Manage" element={<Manage />}></Route>
         <Route path="/Login" element={<LoginPage />}></Route>
-        {/*<div className="App">{fireStore._databaseId.projectId}</div>*/}
       </Routes>
     </>
   );

@@ -1,28 +1,36 @@
 import styled from "styled-components";
 import Footer from "../../Components/Footer";
 import Nav from "../../Components/Nav";
-import { userSlice, selectUser } from "../../features/userSlice";
+import {
+  userSlice,
+  selectUser,
+  selectUserEmail,
+} from "../../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LoginBox from "../../Components/Login/LoginBox";
-import { auth } from "../../firebase";
+import { persistor } from "../..";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log("유저", user);
-  function LoginsignOut() {
-    auth.signOut();
-    dispatch(userSlice.actions.logout(user));
-  }
+  const email = useSelector(selectUserEmail);
+
+  const purge = async () => {
+    window.location.reload();
+    await persistor.purge(); // persistStore의 데이터 전부 날림
+  };
 
   return (
     <>
       <Nav />
       {user ? (
-        <div>
-          <p>로그인 성공</p>
-          <button onClick={LoginsignOut}>로그아웃</button>
-        </div>
+        <Welcome>
+          <div>
+            <p>{user}님 환영합니다!!</p>
+
+            <button onClick={async () => purge()}>로그아웃</button>
+          </div>
+        </Welcome>
       ) : (
         <LoginSection>
           <TitleSection>
@@ -50,4 +58,9 @@ const LoginTitle = styled.h1`
 
 const LoginSection = styled.section`
   text-align: center;
+`;
+
+const Welcome = styled.section`
+  text-align: center;
+  margin: 10em 0;
 `;

@@ -46,7 +46,6 @@ export default function Manage() {
     }
   };
   const user = useSelector(selectUser);
-  console.log("유저", user);
 
   useEffect(() => {
     getPwd();
