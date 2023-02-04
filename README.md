@@ -75,6 +75,7 @@
 
 - React
 - Redux
+- TypeScript
 - CSS in JS (Styled-Components)
 - Firebase
 - CloudFlare
@@ -87,11 +88,11 @@
 
 <br>
 
-| React                                                                                                           | Redux                                                                                                           | Styled Components                                                                                               |     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --- |
-| ![image](https://user-images.githubusercontent.com/81623931/214251396-cfc402d0-7913-4bba-8684-036007cab92d.png) | ![image](https://user-images.githubusercontent.com/81623931/216749862-25a1fcc9-95da-45e3-9354-181d62dce499.png) | ![image](https://user-images.githubusercontent.com/81623931/214252351-43963dc8-b21b-43c1-b511-bbaf8cdbb6b9.png) |     |
+| React                                                                                                           | Redux                                                                                                           | TypeScript                                                                                                      | Styled Components                                                                                               |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![image](https://user-images.githubusercontent.com/81623931/214251396-cfc402d0-7913-4bba-8684-036007cab92d.png) | ![image](https://user-images.githubusercontent.com/81623931/216749862-25a1fcc9-95da-45e3-9354-181d62dce499.png) | ![image](https://user-images.githubusercontent.com/81623931/216770547-84dcd46b-981e-46c3-bff3-f9c3031f9463.png) | ![image](https://user-images.githubusercontent.com/81623931/214252351-43963dc8-b21b-43c1-b511-bbaf8cdbb6b9.png) |
 | Firebase                                                                                                        | CloudFlare                                                                                                      |                                                                                                                 |
-| ![image](https://user-images.githubusercontent.com/81623931/214251466-778569a2-fc98-430a-a097-c16836fd599a.png) | ![image](https://user-images.githubusercontent.com/81623931/216211689-5cb26001-f950-4ad5-86da-5db788a3e641.png) |                                                                                                                 |     |
+| ![image](https://user-images.githubusercontent.com/81623931/214251466-778569a2-fc98-430a-a097-c16836fd599a.png) | ![image](https://user-images.githubusercontent.com/81623931/216211689-5cb26001-f950-4ad5-86da-5db788a3e641.png) |                                                                                                                 |                                                                                                                 |
 
 <br>
 
@@ -100,34 +101,38 @@
 📦src<br>
 ┣ 📂Components<br>
 ┃ ┣ 📂Login<br>
-┃ ┃ ┗ 📜LoginBox.jsx<br>
+┃ ┃ ┗ 📜LoginBox.tsx<br>
 ┃ ┣ 📂ManageInterview<br>
-┃ ┃ ┣ 📜ManageQuestion.jsx<br>
-┃ ┃ ┣ 📜MangageUser.jsx<br>
-┃ ┃ ┣ 📜QuestionTable.jsx<br>
-┃ ┃ ┗ 📜UserTable.jsx<br>
+┃ ┃ ┣ 📜ManageQuestion.tsx<br>
+┃ ┃ ┣ 📜MangageUser.tsx<br>
+┃ ┃ ┣ 📜QuestionTable.tsx<br>
+┃ ┃ ┣ 📜types.ts<br>
+┃ ┃ ┗ 📜UserTable.tsx<br>
 ┃ ┣ 📂StopWatch<br>
-┃ ┃ ┗ 📜Stopwatch.jsx<br>
-┃ ┣ 📜Footer.jsx<br>
-┃ ┗ 📜Nav.jsx<br>
+┃ ┃ ┗ 📜Stopwatch.tsx<br>
+┃ ┣ 📜Footer.tsx<br>
+┃ ┗ 📜Nav.tsx<br>
 ┣ 📂features<br>
 ┃ ┗ 📜userSlice.js<br>
 ┣ 📂Page<br>
 ┃ ┣ 📂Login<br>
-┃ ┃ ┗ 📜login.jsx<br>
+┃ ┃ ┗ 📜login.tsx<br>
 ┃ ┣ 📂Manage<br>
-┃ ┃ ┗ 📜Manage.jsx<br>
+┃ ┃ ┗ 📜Manage.tsx<br>
+┃ ┣ 📂MyPage<br>
+┃ ┃ ┗ 📜Mypage.tsx<br>
 ┃ ┣ 📂Play<br>
-┃ ┃ ┗ 📜PlayInterview.jsx<br>
-┃ ┗ 📜Main.jsx<br>
+┃ ┃ ┣ 📜PlayInterview.tsx<br>
+┃ ┃ ┗ 📜types.ts<br>
+┃ ┗ 📜Main.tsx<br>
 ┣ 📂store<br>
 ┃ ┗ 📜store.js<br>
 ┣ 📂Utils<br>
-┃ ┗ 📜MakeNums.jsx<br>
-┣ 📜App.jsx<br>
-┣ 📜firebase.jsx<br>
-┣ 📜GlobalStyle.jsx<br>
-┗ 📜index.js<br>
+┃ ┗ 📜MakeNums.tsx<br>
+┣ 📜App.tsx<br>
+┣ 📜firebase.tsx<br>
+┣ 📜GlobalStyle.tsx<br>
+┗ 📜index.tsx<br>
 
 <br>
 
