@@ -1,16 +1,12 @@
 import styled from "styled-components";
 import Footer from "../../Components/Footer";
 import Nav from "../../Components/Nav";
-import {
-  userSlice,
-  selectUser,
-  selectUserEmail,
-} from "../../features/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { selectUser, selectUserEmail } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 import LoginBox from "../../Components/Login/LoginBox";
 import { persistor } from "../..";
 
-export default function LoginPage() {
+export default function LoginPage(): JSX.Element {
   const user = useSelector(selectUser);
   const email = useSelector(selectUserEmail);
 

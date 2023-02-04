@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import React, { MouseEventHandler, useEffect, useId, useState } from "react";
 import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
 import { fireStore } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -6,27 +6,29 @@ import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import StopWatch from "../../Components/StopWatch/Stopwatch";
 import Footer from "../../Components/Footer";
+import { QuestionInfo, UserInfo } from "./types";
 
 export default function PlayInterview() {
-  const [open, setOpen] = useState(false);
-  const [bool, setBool] = useState(false);
-  const [users, setUsers] = useState([]);
-  const [questions, setQuestions] = useState([]);
-  const [result, setResult] = useState([]);
-  const [correctCnt, setCorrectCnt] = useState([]);
-  const [toggleQuestion, setToggleQuestion] = useState([]);
-  const [orderMember, setOrderMember] = useState([]);
+  const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
+  const [bool, setBool] = useState<boolean>(false);
+  const [users, setUsers] = useState<UserInfo[]>([]);
+  const [questions, setQuestions] = useState<QuestionInfo[]>([]);
+  const [result, setResult] = useState<Array<Array<number>>>([]);
+  const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([]);
+  const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([]);
+  const [orderMember, setOrderMember] = useState<Array<number>>([]);
   const uniqueId = useId();
   const userInfo = collection(fireStore, "member");
   const questionInfo = collection(fireStore, "questions");
 
+  console.log(open);
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
    * 버튼을 누를 때마다 랜덤의 번호들이 생성되어 팀원들에게 부여된다.
    *
    * @param {e} 질문 분배 버튼 이벤트
    */
-  const makeArray = (e) => {
+  const makeArray = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("질문 분배가 완료되었습니다!");
     setResult(getQuestionNums(users.length, Object.keys(questions).length));
@@ -46,7 +48,7 @@ export default function PlayInterview() {
    *
    * @param {Number} 질문을 열거나 닫을 팀원의 index
    */
-  const openHandler = (idx) => {
+  const openHandler = (idx: number) => {
     if (!bool) {
       alert("질문 분배를 해주세요!");
     }
@@ -60,7 +62,7 @@ export default function PlayInterview() {
    *
    * @param {Number} toggle할 질문의 index
    */
-  const toggleHandler = (idx) => {
+  const toggleHandler = (idx: number) => {
     let change = [...toggleQuestion];
     change[idx] = !change[idx];
     setToggleQuestion(change);
@@ -71,7 +73,7 @@ export default function PlayInterview() {
    *
    * @param {Number} 맞은 표시를 할 질문의 index
    */
-  const correctHandler = (idx) => {
+  const correctHandler = (idx: number) => {
     let change = [...correctCnt];
     change[idx] = !change[idx];
     setCorrectCnt(change);
@@ -82,7 +84,7 @@ export default function PlayInterview() {
    *
    * @param {Number} 맞은 갯수를 카운트할 팀원의 index
    */
-  const checkCorrect = (member) => {
+  const checkCorrect = (member: number) => {
     if (result.length === 0) return 0;
     let correct = 0;
     result[member].forEach((q) => {
@@ -95,7 +97,7 @@ export default function PlayInterview() {
 
   const showQuestion = result.map((_, i) => (
     <div>
-      {result[i].map((v, idx) =>
+      {result[i].map((v: number, idx: number) =>
         toggleQuestion[result[i][idx]] ? (
           <QuestionText color={correctCnt[v]}>
             <QuestionBlock>
@@ -142,7 +144,7 @@ export default function PlayInterview() {
     </div>
   ));
 
-  const showUsers = users.map((value, idx) => (
+  const showUsers = users.map((value: UserInfo, idx: number) => (
     <UserContainer key={uniqueId}>
       <NameContainer>
         <UpperLeft>
@@ -212,7 +214,6 @@ export default function PlayInterview() {
               <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
             </div>
             <div>
-              {" "}
               <MakeQuestionNums color={bool} onClick={makeArray}>
                 {bool ? "질문 재분배" : "질문 분배 시작"}
               </MakeQuestionNums>
@@ -272,13 +273,16 @@ const OrderContainer = styled.div`
   text-align: center;
 `;
 
-const MakeQuestionNums = styled.button`
+const MakeQuestionNums = styled.button<{
+  color: any;
+  onClick: any;
+}>`
   cursor: pointer;
   width: 180px;
   height: 50px;
   margin-bottom: 2em;
   color: white;
-  background-color: ${(props) => (props.color ? "#009688" : "#448aff")};
+  background-color: ${({ color }) => (color ? "#009688" : "#448aff")};
   border: none;
   border-radius: 10px;
   font-size: 20px;
@@ -354,13 +358,13 @@ const NoticeText = styled.p`
   padding: 3em 0;
 `;
 
-const OpenButton = styled.button`
+const OpenButton = styled.button<{ color: any }>`
   cursor: pointer;
   width: 120px;
   height: 40px;
   margin: 20px 0;
   color: white;
-  background-color: ${(props) => (props.color ? "#00695c" : "#5c8aff")};
+  background-color: ${({ color }) => (color ? "#00695c" : "#5c8aff")};
   border: none;
   border-radius: 10px;
   font-size: 17px;
@@ -371,7 +375,7 @@ const OpenButton = styled.button`
   }
 `;
 
-const QuestionText = styled.p`
+const QuestionText = styled.p<{ color: any }>`
   font-size: 21px;
   font-weight: 600;
   margin: 40px 15px;
@@ -381,7 +385,7 @@ const QuestionText = styled.p`
   display: flex;
 `;
 
-const ShowBtn = styled.button`
+const ShowBtn = styled.button<{ color: any }>`
   width: 80px;
   padding: 8px 0;
   margin-right: 20px;
@@ -398,7 +402,7 @@ const ShowBtn = styled.button`
   }
 `;
 
-const CorrectBtn = styled.button`
+const CorrectBtn = styled.button<{ color: any }>`
   width: 3em;
   padding: 4px 0;
   margin-left: 1em;

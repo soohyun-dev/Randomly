@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { fireStore } from "./firebase";
 import GlobalStyle from "./GlobalStyle";
 import LoginPage from "./Page/Login/login";
 import Main from "./Page/Main";
@@ -7,7 +6,7 @@ import Manage from "./Page/Manage/Manage";
 import Mypage from "./Page/MyPage/Mypage";
 import PlayInterview from "./Page/Play/PlayInterview";
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <>
       <GlobalStyle />

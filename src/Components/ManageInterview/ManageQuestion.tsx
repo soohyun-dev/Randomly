@@ -10,13 +10,14 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import styled from "styled-components";
-import QuestionTable from "../../Components/ManageInterview/QuestionTable";
+import QuestionTable from "./QuestionTable";
 import { useRef } from "react";
+import { ManageQuestionInfo } from "./types";
 
-export default function ManageQuestion({ idx }) {
-  const [show, setShow] = useState(false);
-  const [newQuestion, setNewQuestion] = useState("");
-  const questions = useRef([]);
+export default function ManageQuestion() {
+  const [show, setShow] = useState<boolean>(false);
+  const [newQuestion, setNewQuestion] = useState<string>("");
+  const questions = useRef<ManageQuestionInfo[]>([]);
   const questionInfo = collection(fireStore, "questions");
 
   const getQuestions = async () => {
@@ -91,7 +92,7 @@ export default function ManageQuestion({ idx }) {
             <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
           </div>
           <div style={{ display: "inline-block" }}>
-            <Table border="1">
+            <Table>
               <thead>
                 <tr>
                   <Th>No.</Th>

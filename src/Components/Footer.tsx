@@ -6,7 +6,7 @@ export default function Footer() {
       <FooterStyle>
         <FooterText>@ Copyright by bmy1320. All right reversed.</FooterText>
         <div>
-          <i class="fa fa-github"></i>
+          <i className="fa fa-github"></i>
         </div>
       </FooterStyle>
     </>

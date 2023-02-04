@@ -4,11 +4,9 @@ import styled from "styled-components";
 import { userSlice } from "../../features/userSlice";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
-import { persistReducer } from "redux-persist";
-import storageSession from "redux-persist/lib/storage/session";
 
 export default function LoginBox() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<Object | null>(null);
   const dispatch = useDispatch();
 
   /**

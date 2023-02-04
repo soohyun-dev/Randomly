@@ -2,7 +2,6 @@ import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState } from "react";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 export default function UserTable({ user, id, idx }) {
   const [newUser, setNewUser] = useState(user);

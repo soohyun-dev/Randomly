@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 
 export default function Manage() {
-  const MiniTitle = styled.label`
+  const MiniTitle = styled.label<{ target?: any }>`
     padding: 0 0.5em;
     font-size: 24px;
     cursor: pointer;
@@ -21,11 +21,12 @@ export default function Manage() {
       opacity: 80%;
     }
   `;
-  const [page, setPage] = useState("question");
-  const [password, setPassword] = useState("");
-  const [access, setAccess] = useState(false);
-  const pwd = useRef([]);
+  const [page, setPage] = useState<string>("question");
+  const [password, setPassword] = useState<string>("");
+  const [access, setAccess] = useState<boolean>(false);
+  const pwd = useRef<Object>([]);
   const pwdInfo = collection(fireStore, "password");
+  console.log(pwd);
 
   const getPwd = async () => {
     const pwdData = await getDocs(pwdInfo);

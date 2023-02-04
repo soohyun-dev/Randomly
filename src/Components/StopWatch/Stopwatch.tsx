@@ -1,13 +1,18 @@
 import { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 
+interface TimeInfo {
+  color?: any;
+  onClick?: () => void;
+}
+
 export default function StopWatch() {
-  const [min, setMin] = useState(0);
-  const [sec, setSec] = useState(0);
-  const [isRun, setIsRun] = useState(false);
-  const [btnColor, setbtnColor] = useState(false);
-  const time = useRef(0);
-  const timerId = useRef(null);
+  const [min, setMin] = useState<number>(0);
+  const [sec, setSec] = useState<number>(0);
+  const [isRun, setIsRun] = useState<boolean>(false);
+  const [btnColor, setbtnColor] = useState<boolean>(false);
+  const time = useRef<number>(0);
+  const timerId = useRef<any>(null);
 
   const checkIsRun = () => {
     setIsRun(!isRun);
@@ -24,8 +29,8 @@ export default function StopWatch() {
 
   useEffect(() => {
     if (isRun) {
-      timerId.current = setInterval(() => {
-        setMin(parseInt(time.current / 60));
+      timerId.current = window.setInterval(() => {
+        setMin(~~(time.current / 60));
         setSec(time.current % 60);
         time.current += 1;
       }, 1000);
@@ -69,13 +74,13 @@ const Timer = styled.div`
   margin-right: 1em;
 `;
 
-const TimerBtn = styled.button`
+const TimerBtn = styled.button<TimeInfo>`
   cursor: pointer;
   width: 4em;
   margin: 0 0.2em;
   color: white;
   border: none;
-  background-color: ${(props) => (props.color ? "red" : "#bdbdbd")};
+  background-color: ${({ color }) => (color ? "red" : "#bdbdbd")};
   border-radius: 10px;
   font-size: 15px;
   fint-weight: 600;

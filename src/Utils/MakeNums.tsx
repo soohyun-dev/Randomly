@@ -4,10 +4,10 @@
  * @param {Number} 팀원 숫자
  * @returns 각 팀원에게 할당할 질문 번호들이 담긴 2차원 배열
  */
-export default function getQuestionNums(member, question) {
-  const numArr = MakeNums(question);
-  const result = Array.from({ length: member }, () => []);
-  let cnt = ~~(question / member) + (question % member === 0 ? 0 : 1);
+export default function getQuestionNums(member: number, question: number) {
+  const numArr: number[] = MakeNums(question);
+  const result: Array<number[]> = Array.from({ length: member }, () => []);
+  let cnt: number = ~~(question / member) + (question % member === 0 ? 0 : 1);
 
   for (let i = 0; i < cnt; i++) {
     result.forEach((_, i) => {
@@ -24,8 +24,8 @@ export default function getQuestionNums(member, question) {
  * @param {Number} 입력된 질문 갯수
  * @returns shuffle된 배열
  */
-export function MakeNums(number) {
-  const nums = Array.from({ length: number }, (_, i) => i);
+export function MakeNums(number: number): number[] {
+  const nums: number[] = Array.from({ length: number }, (_, i) => i);
   return shuffleArray(nums);
 }
 
@@ -34,6 +34,6 @@ export function MakeNums(number) {
  * @param {Array} 생성된 배열 순차적인 배열
  * @returns 입력된 배열 shuffle한 배열
  */
-const shuffleArray = (array) => {
+const shuffleArray = (array: number[]): number[] => {
   return array.sort(() => Math.random() - 0.5);
 };

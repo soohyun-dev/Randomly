@@ -9,12 +9,13 @@ import {
 } from "firebase/firestore";
 import styled from "styled-components";
 import { useRef } from "react";
-import UserTable from "../../Components/ManageInterview/UserTable";
+import UserTable from "./UserTable";
+import { ManageUserInfo } from "./types";
 
 export default function ManageUser() {
-  const [show, setShow] = useState(false);
-  const [newUser, setNewUser] = useState("");
-  const users = useRef([]);
+  const [show, setShow] = useState<boolean>(false);
+  const [newUser, setNewUser] = useState<string>("");
+  const users = useRef<ManageUserInfo[]>([]);
   const userInfo = collection(fireStore, "member");
 
   const getUsers = async () => {
@@ -24,7 +25,6 @@ export default function ManageUser() {
       id: doc.id,
     }));
     setShow(true);
-    console.log(users.current);
   };
 
   /**
@@ -64,7 +64,7 @@ export default function ManageUser() {
             <AddBtn onClick={addUser}>참여자 추가</AddBtn>
           </div>
           <div style={{ display: "inline-block" }}>
-            <Table border="1">
+            <Table>
               <thead>
                 <tr>
                   <Th>No.</Th>
