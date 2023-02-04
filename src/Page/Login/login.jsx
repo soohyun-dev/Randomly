@@ -11,13 +11,12 @@ import LoginBox from "../../Components/Login/LoginBox";
 import { persistor } from "../..";
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const email = useSelector(selectUserEmail);
 
   const purge = async () => {
     window.location.reload();
-    await persistor.purge(); // persistStore의 데이터 전부 날림
+    await persistor.purge();
   };
 
   return (
