@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { selectUser } from "../features/userSlice";
 
 export default function Nav() {
+  const user = useSelector(selectUser);
   return (
     <>
       <TopHeader>
@@ -34,12 +37,21 @@ export default function Nav() {
             </Link>
           </div>
           <div>
-            <Link
-              to="/Login"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <MenuText>Login</MenuText>
-            </Link>
+            {user === null ? (
+              <Link
+                to="/LOGIN"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <MenuText>Login</MenuText>
+              </Link>
+            ) : (
+              <Link
+                to="/Mypage"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <MenuText>MYPAGE</MenuText>
+              </Link>
+            )}
           </div>
         </Menu>
       </TopHeader>
