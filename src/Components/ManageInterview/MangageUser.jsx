@@ -56,19 +56,19 @@ export default function ManageUser() {
             <UserInput
               value={newUser}
               type="text"
-              placeholder="추가할 유저를 입력해주세요."
+              placeholder="추가할 참여자를 입력해주세요."
               onChange={(e) => {
                 setNewUser(e.target.value);
               }}
             />
-            <AddBtn onClick={addUser}>유저 추가</AddBtn>
+            <AddBtn onClick={addUser}>참여자 추가</AddBtn>
           </div>
           <div style={{ display: "inline-block" }}>
             <Table border="1">
               <thead>
                 <tr>
                   <Th>No.</Th>
-                  <Th>유저</Th>
+                  <Th>참여자</Th>
                   <Th>수정하기</Th>
                   <ThNoRight>삭제하기</ThNoRight>
                 </tr>
@@ -105,7 +105,7 @@ const UserListContainer = styled.div`
 `;
 
 const AddBtn = styled.button`
-  width: 6em;
+  width: 7em;
   height: 3em;
   margin: 0 1em;
   font-size: 14px;

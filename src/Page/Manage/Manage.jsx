@@ -74,7 +74,7 @@ export default function Manage() {
               changeView("user");
             }}
           >
-            유저 관리
+            참여자 관리
           </MiniTitle>
         </div>
       </section>
