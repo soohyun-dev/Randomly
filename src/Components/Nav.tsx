@@ -88,12 +88,12 @@ const Logo = styled.div`
 `;
 
 const Middle = styled.div`
-  width: 10%;
+  width: 5%;
 `;
 
 const Menu = styled.div`
   display: flex;
-  width: 65%;
+  width: 70%;
   font-size: 16px;
 `;
 

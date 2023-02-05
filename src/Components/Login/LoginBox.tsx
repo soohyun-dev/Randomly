@@ -4,10 +4,12 @@ import styled from "styled-components";
 import { userSlice } from "../../features/userSlice";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginBox() {
   const [userData, setUserData] = useState<Object | null>(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   /**
    * Google 로그인 설정
@@ -23,6 +25,7 @@ export default function LoginBox() {
             email: data.user.email,
           })
         );
+        navigate("/Mypage");
       })
       .catch((err) => {
         console.log(err);

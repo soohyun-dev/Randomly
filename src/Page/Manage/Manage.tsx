@@ -8,6 +8,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { fireStore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
+import { redirect } from "react-router-dom";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -26,7 +27,6 @@ export default function Manage() {
   const [access, setAccess] = useState<boolean>(false);
   const pwd = useRef<Object>([]);
   const pwdInfo = collection(fireStore, "password");
-  console.log(pwd);
 
   const getPwd = async () => {
     const pwdData = await getDocs(pwdInfo);
@@ -50,7 +50,7 @@ export default function Manage() {
 
   useEffect(() => {
     getPwd();
-  });
+  }, [access]);
 
   return (
     <>
@@ -83,12 +83,12 @@ export default function Manage() {
         ""
       ) : (
         <PasswordSection>
-          <PasswordTitle>관리자 비밀번호</PasswordTitle>
-          <PasswordInput
+          <PasswordTitle>로그인 해주세요😋</PasswordTitle>
+          {/* <PasswordInput
             placeholder="관리자 비밀번호 입력"
             onChange={(e) => setPassword(e.currentTarget.value)}
           />
-          <PasswordBtn onClick={accessPage}>인증</PasswordBtn>
+          <PasswordBtn onClick={accessPage}>인증</PasswordBtn> */}
         </PasswordSection>
       )}
       {page === "question"

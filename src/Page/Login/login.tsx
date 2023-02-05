@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import Footer from "../../Components/Footer";
 import Nav from "../../Components/Nav";
-import { selectUser, selectUserEmail } from "../../features/userSlice";
+import {
+  userSlice,
+  selectUser,
+  selectUserEmail,
+} from "../../features/userSlice";
 import { useSelector } from "react-redux";
 import LoginBox from "../../Components/Login/LoginBox";
 import { persistor } from "../..";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage(): JSX.Element {
   const user = useSelector(selectUser);
   const email = useSelector(selectUserEmail);
+  const dispatch = useDispatch();
 
   const purge = async () => {
     window.location.reload();
     await persistor.purge();
+    dispatch(userSlice.actions.logout());
   };
 
   return (
