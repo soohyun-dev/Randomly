@@ -1,6 +1,6 @@
 import Footer from "Components/Footer";
 import Nav from "Components/Nav";
-import Announcement from "Components/Q&A/Announcement";
+import Notice from "Components/Q&A/Notice";
 import styled from "styled-components";
 
 export default function QAPage() {
@@ -14,9 +14,8 @@ export default function QAPage() {
           <CatagoryButton>남길 말</CatagoryButton>
         </CatagoryDiv>
         <PostListDiv>
-          <Announcement />
+          <Notice />
         </PostListDiv>
-        <RightDiv></RightDiv>
       </QASection>
       <Footer />
     </>
@@ -29,7 +28,7 @@ const QASection = styled.section`
 `;
 
 const CatagoryDiv = styled.div`
-  width: 30%;
+  width: 15%;
   display: inline-block;
 `;
 
@@ -51,11 +50,6 @@ const CatagoryButton = styled.button`
 
 const PostListDiv = styled.div`
   vertical-align: top;
-  width: 40%;
-  display: inline-block;
-`;
-
-const RightDiv = styled.div`
-  width: 20%;
+  width: 80%;
   display: inline-block;
 `;

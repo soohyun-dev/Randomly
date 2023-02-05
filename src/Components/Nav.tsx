@@ -10,7 +10,7 @@ export default function Nav() {
       <TopHeader>
         <Logo>
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-            Randomly
+            <LogoImg src="https://user-images.githubusercontent.com/81623931/216827383-470908e4-f188-4711-b716-4677076e67c2.png" />
           </Link>
         </Logo>
         <Middle></Middle>
@@ -66,6 +66,11 @@ export default function Nav() {
     </>
   );
 }
+
+const LogoImg = styled.img`
+  width: 5.3em;
+  height: 1.5em;
+`;
 
 const TopHeader = styled.header`
   display: flex;
