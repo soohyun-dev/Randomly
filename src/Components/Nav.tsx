@@ -37,6 +37,14 @@ export default function Nav() {
             </Link>
           </div>
           <div>
+            <Link
+              to="/QAPage"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText>Q&A</MenuText>
+            </Link>
+          </div>
+          <div>
             {user === null ? (
               <Link
                 to="/LOGIN"
@@ -76,16 +84,16 @@ const TopHeader = styled.header`
 
 const Logo = styled.div`
   font-weight: bold;
-  width: 30%;
+  width: 25%;
 `;
 
 const Middle = styled.div`
-  width: 50%;
+  width: 10%;
 `;
 
 const Menu = styled.div`
   display: flex;
-  width: 30%;
+  width: 65%;
   font-size: 16px;
 `;
 

@@ -1,3 +1,4 @@
+import QAPage from "Page/Q&A/QAPage";
 import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
 import LoginPage from "./Page/Login/login";
@@ -16,6 +17,7 @@ export default function App(): JSX.Element {
         <Route path="/Manage" element={<Manage />}></Route>
         <Route path="/Login" element={<LoginPage />}></Route>
         <Route path="/Mypage" element={<Mypage />}></Route>
+        <Route path="/QAPage" element={<QAPage />}></Route>
       </Routes>
     </>
   );
