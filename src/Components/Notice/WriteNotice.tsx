@@ -14,7 +14,6 @@ export default function WriteNotice() {
 
   const addNotice = async () => {
     if (window.confirm("글작성을 완료하시겠습니까?")) {
-      const idx = localStorage.getItem("noticeLength");
       const time = new Date();
       let month = String(time.getMonth() + 1);
       let day = String(time.getDate());
@@ -25,9 +24,6 @@ export default function WriteNotice() {
         day = "0" + day;
       }
       const newData = {};
-      if (idx !== null) {
-        newData["order"] = Number(idx) + 1;
-      }
       newData["title"] = title;
       newData["content"] = content;
       newData["time"] = time;

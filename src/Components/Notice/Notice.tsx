@@ -22,13 +22,6 @@ export default function Notice() {
     setShow(true);
   };
 
-  const storeInfo = () => {
-    localStorage.setItem(
-      "noticeLength",
-      JSON.parse(String(Object.keys(notice.current).length))
-    );
-  };
-
   useEffect(() => {
     getNotice();
   }, [show]);
@@ -40,7 +33,7 @@ export default function Notice() {
         {user === "Ysh" ? (
           <div style={{ textAlign: "right" }}>
             <Link to="/WriteNotice">
-              <button onClick={storeInfo}>글쓰기</button>
+              <button>글쓰기</button>
             </Link>
           </div>
         ) : (
@@ -51,12 +44,12 @@ export default function Notice() {
         {show
           ? Object.keys(notice.current)
               .reverse()
-              .map((idx) => (
+              .map((v, idx) => (
                 <NoticePosting
-                  order={notice.current[idx].order}
-                  title={notice.current[idx].title}
-                  date={notice.current[idx].date}
-                  content={notice.current[idx].content}
+                  order={notice.current.length - idx}
+                  title={notice.current[v].title}
+                  date={notice.current[v].date}
+                  content={notice.current[v].content}
                 />
               ))
           : ""}
