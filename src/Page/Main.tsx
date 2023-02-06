@@ -8,22 +8,29 @@ export default function Main() {
     <>
       <Nav />
       <TitleSection>
-        <div>
-          <Title>Randomly란?</Title>
-        </div>
-        <TitleContentDiv>
-          <TitleContent>
-            Randomly는 기술면접 스터디를 위한 도움 자료로 탄생하였습니다.
-          </TitleContent>
-          <TitleContent>
-            랜덤으로 제공되는 질문 방식을 따와 만들어진 이름입니다.
-          </TitleContent>
-        </TitleContentDiv>
+        <TopDiv>
+          <div>
+            <Title>Randomly란?</Title>
+          </div>
+          <TitleContentDiv>
+            <Fade duration={2000} direction={"left"}>
+              <TitleContent>
+                Randomly는 기술면접 스터디를 위한 도움 자료로 탄생하였습니다.
+              </TitleContent>
+              <TitleContent>
+                랜덤으로 제공되는 질문 방식을 따와 만들어진 이름입니다.
+              </TitleContent>
+            </Fade>
+          </TitleContentDiv>
+        </TopDiv>
         <Fade duration={2000} direction={"right"}>
           <ImgContentBoxDiv>
             <ImgContentBox>
               <ImgBox>
-                <Img src="https://user-images.githubusercontent.com/81623931/216882813-8b704008-7bca-430a-b8d4-79701e771342.png" />
+                <Img
+                  src="https://user-images.githubusercontent.com/81623931/216882813-8b704008-7bca-430a-b8d4-79701e771342.png"
+                  style={{ padding: "2em 0 3em 0" }}
+                />
               </ImgBox>
               <ContentBox>
                 <ContentBoxTitleLogoFirst>🛠️</ContentBoxTitleLogoFirst>
@@ -66,20 +73,41 @@ export default function Main() {
 }
 
 const TitleSection = styled.section`
-  margin: 10em 10em;
+  margin: 15em 10em 10em 10em;
   text-align: left;
 `;
 
+const TopDiv = styled.div`
+color: black;
+margin-bottom: 18em;
+  ::before{
+    content: "";
+    background: url("https://user-images.githubusercontent.com/81623931/216887726-da970003-fdb4-4c58-ac30-bd096af0b7ce.png");
+    background-size: cover;
+    margin: 6.3em 0;
+    width: 100%;
+    height: 35em;
+    opacity: 0.4;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+`;
+
 const Title = styled.p`
+  position: relative;
   font-size: 48px;
   font-weight: 600;
 `;
 
 const TitleContentDiv = styled.div`
+  position: relative;
   margin: 3em 0;
 `;
 
 const TitleContent = styled.p`
+  position: relative;
   font-size: 24px;
   font-weight: 500;
 `;
@@ -88,6 +116,7 @@ const Img = styled.img`
   margin: 5em 0;
   width: 100%;
   border-radius: 10px;
+  box-shadow: 5px 5px 3px #f5f5f5;
 `;
 
 const ImgContentBoxDiv = styled.div`
