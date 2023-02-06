@@ -1,4 +1,5 @@
 import Footer from "Components/Footer";
+import Memo from "Components/Memo/Memo";
 import Nav from "Components/Nav";
 import Notice from "Components/Notice/Notice";
 import QA from "Components/Q&A/QA";
@@ -7,6 +8,20 @@ import styled from "styled-components";
 
 export default function QAPage() {
   const [nowPage, setNowPage] = useState("공지사항");
+  const Catagory = ["공지사항", "Q&A", "남길말"];
+
+  const changeBtnColor = (target) => {
+    Catagory.map((v) => {
+      const items = document.getElementById(v);
+      if (items !== null) {
+        if (v === target) {
+          items.style.backgroundColor = "#bdbdbd";
+        } else {
+          items.style.backgroundColor = "#f5f5f5";
+        }
+      }
+    });
+  };
 
   const showComponent = () => {
     switch (nowPage) {
@@ -14,6 +29,8 @@ export default function QAPage() {
         return <Notice />;
       case "Q&A":
         return <QA />;
+      case "남길말":
+        return <Memo />;
     }
   };
 
@@ -22,13 +39,31 @@ export default function QAPage() {
       <Nav />
       <QASection>
         <CatagoryDiv>
-          <CatagoryButton onClick={(e) => setNowPage("공지사항")}>
+          <CatagoryButton
+            id="공지사항"
+            onClick={(e) => {
+              setNowPage("공지사항");
+              changeBtnColor("공지사항");
+            }}
+          >
             공지사항
           </CatagoryButton>
-          <CatagoryButton onClick={(e) => setNowPage("Q&A")}>
+          <CatagoryButton
+            id="Q&A"
+            onClick={(e) => {
+              setNowPage("Q&A");
+              changeBtnColor("Q&A");
+            }}
+          >
             Q&A
           </CatagoryButton>
-          <CatagoryButton onClick={(e) => setNowPage("남길말")}>
+          <CatagoryButton
+            id="남길말"
+            onClick={(e) => {
+              setNowPage("남길말");
+              changeBtnColor("남길말");
+            }}
+          >
             남길 말
           </CatagoryButton>
         </CatagoryDiv>
@@ -60,8 +95,7 @@ const CatagoryButton = styled.button`
   cursor: pointer;
   &:hover {
     font-weight: 600;
-    opacity: 70%;
-    transition: 0.3s;
+    opacity: 90%;
   }
 `;
 
