@@ -3,18 +3,18 @@ import Memo from "Components/Memo/Memo";
 import Nav from "Components/Nav";
 import Notice from "Components/Notice/Notice";
 import QA from "Components/Q&A/QA";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export default function QAPage() {
   const [nowPage, setNowPage] = useState("공지사항");
   const Catagory = ["공지사항", "Q&A", "남길말"];
 
-  const changeBtnColor = (target) => {
+  const changeBtnColor = () => {
     Catagory.map((v) => {
       const items = document.getElementById(v);
       if (items !== null) {
-        if (v === target) {
+        if (v === nowPage) {
           items.style.backgroundColor = "#bdbdbd";
         } else {
           items.style.backgroundColor = "#f5f5f5";
@@ -34,6 +34,10 @@ export default function QAPage() {
     }
   };
 
+  useEffect(() => {
+    changeBtnColor();
+  }, [nowPage]);
+
   return (
     <>
       <Nav />
@@ -43,7 +47,6 @@ export default function QAPage() {
             id="공지사항"
             onClick={(e) => {
               setNowPage("공지사항");
-              changeBtnColor("공지사항");
             }}
           >
             공지사항
@@ -52,7 +55,6 @@ export default function QAPage() {
             id="Q&A"
             onClick={(e) => {
               setNowPage("Q&A");
-              changeBtnColor("Q&A");
             }}
           >
             Q&A
@@ -61,7 +63,6 @@ export default function QAPage() {
             id="남길말"
             onClick={(e) => {
               setNowPage("남길말");
-              changeBtnColor("남길말");
             }}
           >
             남길 말
