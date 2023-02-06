@@ -1,21 +1,38 @@
 import Footer from "Components/Footer";
 import Nav from "Components/Nav";
-import Notice from "Components/Q&A/Notice";
+import Notice from "Components/Notice/Notice";
+import QA from "Components/Q&A/QA";
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function QAPage() {
+  const [nowPage, setNowPage] = useState("공지사항");
+
+  const showComponent = () => {
+    switch (nowPage) {
+      case "공지사항":
+        return <Notice />;
+      case "Q&A":
+        return <QA />;
+    }
+  };
+
   return (
     <>
       <Nav />
       <QASection>
         <CatagoryDiv>
-          <CatagoryButton>공지사항</CatagoryButton>
-          <CatagoryButton>Q&A</CatagoryButton>
-          <CatagoryButton>남길 말</CatagoryButton>
+          <CatagoryButton onClick={(e) => setNowPage("공지사항")}>
+            공지사항
+          </CatagoryButton>
+          <CatagoryButton onClick={(e) => setNowPage("Q&A")}>
+            Q&A
+          </CatagoryButton>
+          <CatagoryButton onClick={(e) => setNowPage("남길말")}>
+            남길 말
+          </CatagoryButton>
         </CatagoryDiv>
-        <PostListDiv>
-          <Notice />
-        </PostListDiv>
+        <PostListDiv>{showComponent()}</PostListDiv>
       </QASection>
       <Footer />
     </>
