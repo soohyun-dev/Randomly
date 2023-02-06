@@ -66,6 +66,26 @@ export default function Main() {
             </ImgContentBox>
           </ImgContentBoxDiv>
         </Fade>
+
+        <Fade duration={2000} direction={"right"}>
+          <ImgContentBoxDiv>
+            <ImgContentBox>
+              <ImgBox>
+                <Img src="https://user-images.githubusercontent.com/81623931/216986610-a369f5cc-c434-4887-a432-91567d2561df.png" />
+              </ImgBox>
+              <ContentBox>
+                <ContentBoxTitleLogo>🌏</ContentBoxTitleLogo>
+                <ContentBoxTitle>Goal</ContentBoxTitle>
+                <ContentBoxText>
+                  2023년 가입자 100명의 목표를 가지고 있습니다.
+                </ContentBoxText>
+                <ContentBoxText>
+                  작은 시작은 원대한 꿈의 발판입니다.
+                </ContentBoxText>
+              </ContentBox>
+            </ImgContentBox>
+          </ImgContentBoxDiv>
+        </Fade>
       </TitleSection>
       <Footer />
     </>
@@ -120,7 +140,7 @@ const Img = styled.img`
 `;
 
 const ImgContentBoxDiv = styled.div`
-  margin: 5em 0 3em 0;
+  margin: 3em 0 3em 0;
   display: inline-block;
 `;
 

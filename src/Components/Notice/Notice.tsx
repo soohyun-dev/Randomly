@@ -14,7 +14,9 @@ export default function Notice() {
   const noticeInfo = collection(fireStore, "notice");
   const user = useSelector(selectUser);
   const getNotice = async () => {
-    const noticeData = await getDocs(query(noticeInfo, orderBy("time", "asc")));
+    const noticeData = await getDocs(
+      query(noticeInfo, orderBy("time", "desc"))
+    );
     notice.current = noticeData.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
@@ -42,16 +44,14 @@ export default function Notice() {
       </div>
       <PostingList>
         {show
-          ? Object.keys(notice.current)
-              .reverse()
-              .map((v, idx) => (
-                <NoticePosting
-                  order={notice.current.length - idx}
-                  title={notice.current[v].title}
-                  date={notice.current[v].date}
-                  content={notice.current[v].content}
-                />
-              ))
+          ? Object.keys(notice.current).map((v, idx) => (
+              <NoticePosting
+                order={notice.current.length - idx}
+                title={notice.current[v].title}
+                date={notice.current[v].date}
+                content={notice.current[v].content}
+              />
+            ))
           : ""}
       </PostingList>
     </>
