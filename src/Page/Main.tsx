@@ -108,7 +108,7 @@ const TitleContentDiv = styled.div`
 
 const TitleContent = styled.p`
   position: relative;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
 `;
 
@@ -155,5 +155,6 @@ const ContentBoxTitle = styled.p`
 `;
 
 const ContentBoxText = styled.p`
-  font-size: 24px;
+  font-size: 20px;
+  color: #777;
 `;
