@@ -16,6 +16,14 @@ export default function WriteNotice() {
     if (window.confirm("글작성을 완료하시겠습니까?")) {
       const idx = localStorage.getItem("noticeLength");
       const time = new Date();
+      let month = String(time.getMonth() + 1);
+      let day = String(time.getDate());
+      if (month.length === 1) {
+        month = "0" + month;
+      }
+      if (day.length === 1) {
+        day = "0" + day;
+      }
       const newData = {};
       if (idx !== null) {
         newData["order"] = Number(idx) + 1;
@@ -23,9 +31,7 @@ export default function WriteNotice() {
       newData["title"] = title;
       newData["content"] = content;
       newData["time"] = time;
-      newData["date"] = `${time.getFullYear()}.${
-        time.getMonth() + 1
-      }.${time.getDate()}`;
+      newData["date"] = `${time.getFullYear()}.${month}.${day}`;
       await addDoc(noticeInfo, newData);
       alert("글 작성이 완료되었습니다.");
       navigate("/QAPage");
