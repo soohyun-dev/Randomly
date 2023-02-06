@@ -86,10 +86,10 @@ margin-bottom: 18em;
     background-size: cover;
     margin: 6.3em 0;
     width: 100%;
-    height: 35em;
+    height: 44em;
     opacity: 0.4;
     position: absolute;
-    top: 0px;
+    top: -11%;
     left: 0px;
     right: 0px;
     bottom: 0px;
@@ -120,7 +120,7 @@ const Img = styled.img`
 `;
 
 const ImgContentBoxDiv = styled.div`
-  margin: 7em 0 3em 0;
+  margin: 5em 0 3em 0;
   display: inline-block;
 `;
 

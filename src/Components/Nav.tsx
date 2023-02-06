@@ -73,6 +73,8 @@ const LogoImg = styled.img`
 `;
 
 const TopHeader = styled.header`
+  z-index: 1000;
+  position: relative;
   display: flex;
   padding: 25px;
   font-size: 28px;
