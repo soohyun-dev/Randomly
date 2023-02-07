@@ -8,7 +8,7 @@
 
 ## 🏠 배포주소
 
-주소 : [Randomly](www.randomly.pages.dev)
+주소 : [Randomly](http://randomly.pages.dev)
 
 <br>
 
@@ -76,6 +76,12 @@
 <br>
 
 #### 공지사항
+
+<br>
+
+<img src="https://user-images.githubusercontent.com/81623931/217126904-63f59cc3-1a21-4185-baa8-9a3930524eae.png" width="800" height="400"/>
+
+<br>
 
 - 해당 페이지에서 본 서비스의 공지사항 글을 확인할 수 있다.
 - 공지사항 글은 관리자로 지정된 유저만 글을 올리고 수정하고 삭제할 수 있다.
