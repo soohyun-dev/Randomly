@@ -64,6 +64,7 @@ const PostingDiv = styled.div`
 const TitleDiv = styled.div`
   margin: 1em 0;
   text-align: left;
+  font-size: 24px;
 `;
 
 const DateDiv = styled.div`
@@ -76,12 +77,14 @@ const DateText = styled.label`
 `;
 
 const DivLine = styled.hr`
-background: #777
-height: 1em;
+  background: #f5f5f5;
+  height: 0.1em;
+  border: 0;
 `;
 
 const WriteText = styled.label`
   margin: 0em 2em;
+  color: #777;
 `;
 
 const ContentDiv = styled.div`
