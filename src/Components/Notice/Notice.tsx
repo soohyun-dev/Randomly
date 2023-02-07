@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { fireStore } from "../../firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import styled from "styled-components";
-import NoticePosting from "./NoticePosting";
+import NoticeList from "./NoticeList";
 import { NoticeInfo } from "./types";
 import { useSelector } from "react-redux";
 import { selectUser } from "features/userSlice";
@@ -45,7 +45,7 @@ export default function Notice() {
       <PostingList>
         {show
           ? Object.keys(notice.current).map((v, idx) => (
-              <NoticePosting
+              <NoticeList
                 order={notice.current.length - idx}
                 title={notice.current[v].title}
                 date={notice.current[v].date}

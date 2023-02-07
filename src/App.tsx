@@ -1,4 +1,5 @@
 import WriteNotice from "Components/Notice/WriteNotice";
+import NoticePosting from "Page/Notice/NoticePosting";
 import QAPage from "Page/Q&A/QAPage";
 import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
@@ -20,6 +21,7 @@ export default function App(): JSX.Element {
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/QAPage" element={<QAPage />}></Route>
         <Route path="/WriteNotice" element={<WriteNotice />}></Route>
+        <Route path="/NoticePosting/:order" element={<NoticePosting />}></Route>
       </Routes>
     </>
   );

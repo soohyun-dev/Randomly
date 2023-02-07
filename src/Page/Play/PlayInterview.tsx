@@ -190,6 +190,7 @@ export default function PlayInterview() {
 
   const shuffleName = () => {
     setOrderMember(MakeNums(Object.keys(users).length));
+    alert("순서 변경이 완료되었습니다!");
   };
 
   useEffect(() => {

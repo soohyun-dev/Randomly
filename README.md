@@ -79,7 +79,7 @@
 
 <br>
 
-<img src="https://user-images.githubusercontent.com/81623931/217126904-63f59cc3-1a21-4185-baa8-9a3930524eae.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/81623931/217126904-63f59cc3-1a21-4185-baa8-9a3930524eae.png" width="800" height="500"/>
 
 <br>
 
