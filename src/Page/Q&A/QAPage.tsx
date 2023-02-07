@@ -41,34 +41,38 @@ export default function QAPage() {
   return (
     <>
       <Nav />
+
       <QASection>
-        <CatagoryDiv>
-          <CatagoryButton
-            id="공지사항"
-            onClick={(e) => {
-              setNowPage("공지사항");
-            }}
-          >
-            공지사항
-          </CatagoryButton>
-          <CatagoryButton
-            id="Q&A"
-            onClick={(e) => {
-              setNowPage("Q&A");
-            }}
-          >
-            Q&A
-          </CatagoryButton>
-          <CatagoryButton
-            id="남길말"
-            onClick={(e) => {
-              setNowPage("남길말");
-            }}
-          >
-            남길 말
-          </CatagoryButton>
-        </CatagoryDiv>
-        <PostListDiv>{showComponent()}</PostListDiv>
+        <div>
+          <CatagoryDiv>
+            <CatagoryButton
+              id="공지사항"
+              onClick={(e) => {
+                setNowPage("공지사항");
+              }}
+            >
+              공지사항
+            </CatagoryButton>
+            <CatagoryButton
+              id="Q&A"
+              onClick={(e) => {
+                setNowPage("Q&A");
+              }}
+            >
+              Q&A
+            </CatagoryButton>
+            <CatagoryButton
+              id="남길말"
+              onClick={(e) => {
+                setNowPage("남길말");
+              }}
+            >
+              남길 말
+            </CatagoryButton>
+          </CatagoryDiv>
+
+          <PostListDiv>{showComponent()}</PostListDiv>
+        </div>
       </QASection>
       <Footer />
     </>
@@ -76,12 +80,12 @@ export default function QAPage() {
 }
 
 const QASection = styled.section`
-  text-align: center;
+  text-align: left;
   margin: 7em 0;
 `;
 
 const CatagoryDiv = styled.div`
-  width: 15%;
+  width: 20%;
   display: inline-block;
 `;
 
@@ -101,7 +105,8 @@ const CatagoryButton = styled.button`
 `;
 
 const PostListDiv = styled.div`
+  text-align: center;
   vertical-align: top;
-  width: 80%;
+  width: 60%;
   display: inline-block;
 `;
