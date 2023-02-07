@@ -56,9 +56,7 @@ export default function Main() {
               <ContentBox>
                 <ContentBoxTitleLogo>♾️</ContentBoxTitleLogo>
                 <ContentBoxTitle>Infinite Development</ContentBoxTitle>
-                <ContentBoxText>
-                  Randomly는 이에 멈추지 않습니다.
-                </ContentBoxText>
+                <ContentBoxText>이에 멈추지 않습니다.</ContentBoxText>
                 <ContentBoxText>
                   꾸준한 개발로 무한하게 발전해 나아갑니다.
                 </ContentBoxText>

@@ -8,7 +8,7 @@
 
 ## 🏠 배포주소
 
-주소 : [Randomly](randomly.pages.dev/)
+주소 : [Randomly](www.randomly.pages.dev)
 
 <br>
 
