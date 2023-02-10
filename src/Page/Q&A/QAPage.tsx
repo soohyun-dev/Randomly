@@ -53,7 +53,8 @@ export default function QAPage() {
             >
               공지사항
             </CatagoryButton>
-            <CatagoryButton
+
+            {/* <CatagoryButton
               id="Q&A"
               onClick={(e) => {
                 setNowPage("Q&A");
@@ -68,9 +69,8 @@ export default function QAPage() {
               }}
             >
               남길 말
-            </CatagoryButton>
+            </CatagoryButton> */}
           </CatagoryDiv>
-
           <PostListDiv>{showComponent()}</PostListDiv>
         </div>
       </QASection>

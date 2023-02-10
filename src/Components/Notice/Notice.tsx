@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { fireStore } from "../../firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import styled from "styled-components";
-import NoticeList from "./NoticeList";
 import { NoticeInfo } from "./types";
 import { useSelector } from "react-redux";
 import { selectUser } from "features/userSlice";
 import { Link } from "react-router-dom";
+import NoticeList from "./NoticeList";
 
 export default function Notice() {
   const [show, setShow] = useState(false);
@@ -43,20 +43,21 @@ export default function Notice() {
         )}
       </div>
       <PostingList>
-        {show
-          ? Object.keys(notice.current).map((v, idx) => (
-              <NoticeList
-                order={notice.current.length - idx}
-                title={notice.current[v].title}
-                date={notice.current[v].date}
-                content={notice.current[v].content}
-              />
-            ))
-          : ""}
+        {Object.keys(notice.current).map((v, idx) => (
+          <NoticeList
+            order={notice.current.length - idx}
+            title={notice.current[v].title}
+            date={notice.current[v].date}
+            content={notice.current[v].content}
+          />
+        ))}
       </PostingList>
     </>
   );
 }
+const Sample = styled.p`
+  font-size: 59px;
+`;
 
 const Title = styled.h1`
   font-size: 44px;

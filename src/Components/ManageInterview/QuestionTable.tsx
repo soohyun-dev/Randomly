@@ -112,7 +112,7 @@ const Td = styled.td`
 
 const QustionTd = styled.td`
   text-align: left;
-  padding: 1.5em 0 1.5em 2em;
+  padding: 1.5em 0 1.5em 1.5em;
   border-bottom: 1px solid #e0e0e0;
   border-right: 1px solid #e0e0e0;
 `;

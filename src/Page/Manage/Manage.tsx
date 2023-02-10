@@ -2,13 +2,10 @@ import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import ManageQuestion from "../../Components/ManageInterview/ManageQuestion";
 import ManageUser from "../../Components/ManageInterview/MangageUser";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../Components/Footer";
-import { collection, getDocs } from "firebase/firestore";
-import { fireStore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
-import { redirect } from "react-router-dom";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -23,34 +20,14 @@ export default function Manage() {
     }
   `;
   const [page, setPage] = useState<string>("question");
-  const [password, setPassword] = useState<string>("");
-  const [access, setAccess] = useState<boolean>(false);
-  const pwd = useRef<Object>([]);
-  const pwdInfo = collection(fireStore, "password");
-
-  const getPwd = async () => {
-    const pwdData = await getDocs(pwdInfo);
-    pwd.current = pwdData.docs.map((doc) => ({
-      ...doc.data(),
-    }));
-  };
 
   const changeView = (value) => {
     setPage(value);
   };
-  const accessPage = () => {
-    if (password === pwd.current[0].pwd) {
-      setAccess(true);
-      alert("인증되었습니다.");
-    } else {
-      alert("비밀번호가 틀렸습니다.");
-    }
-  };
+
   const user = useSelector(selectUser);
 
-  useEffect(() => {
-    getPwd();
-  }, [access]);
+  useEffect(() => {});
 
   return (
     <>
@@ -84,11 +61,6 @@ export default function Manage() {
       ) : (
         <PasswordSection>
           <PasswordTitle>로그인 해주세요😋</PasswordTitle>
-          {/* <PasswordInput
-            placeholder="관리자 비밀번호 입력"
-            onChange={(e) => setPassword(e.currentTarget.value)}
-          />
-          <PasswordBtn onClick={accessPage}>인증</PasswordBtn> */}
         </PasswordSection>
       )}
       {page === "question"

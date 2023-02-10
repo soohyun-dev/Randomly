@@ -28,16 +28,30 @@ export default function Mypage() {
     <>
       <Nav />
       <MypageSection>
-        <div>
-          <h1>{user} 님의 페이지</h1>
-        </div>
-        <div>
+        <MyPageBox>
+          <div>
+            <Title>
+              <MyPageTitle>{user} 님의 페이지</MyPageTitle>
+              <Logout onClick={async () => purge()}>로그아웃</Logout>
+            </Title>
+            <hr />
+          </div>
+
           <UserInfoDiv>
-            <p>유저 이름: {user}</p>
-            <p>이메일: {email}</p>
+            <InfoDiv>
+              <div>
+                <InfoLabel>유저이름</InfoLabel>
+              </div>
+              <label>{user}</label>
+            </InfoDiv>
+            <InfoDiv>
+              <div>
+                <InfoLabel>이메일</InfoLabel>
+              </div>
+              <label>{email}</label>
+            </InfoDiv>
           </UserInfoDiv>
-        </div>
-        <button onClick={async () => purge()}>로그아웃</button>
+        </MyPageBox>
       </MypageSection>
       <Footer />
     </>
@@ -49,6 +63,42 @@ const MypageSection = styled.section`
   margin: 7em 0;
 `;
 
+const MyPageBox = styled.div`
+  display: inline-block;
+  text-align: left;
+  width: 80%;
+`;
+
+const Title = styled.div`
+  display: flex;
+  margin: 0.5em 0;
+`;
+
+const MyPageTitle = styled.p`
+  font-size: 24px;
+  font-weight: 600;
+  margin-right: 2em;
+`;
+
+const Logout = styled.button`
+  background-color: #ef9a9a;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  &:hover {
+    opacity: 70%;
+  }
+`;
+
 const UserInfoDiv = styled.div`
   margin: 5em 0;
+`;
+
+const InfoDiv = styled.div`
+  margin: 1em 0;
+`;
+
+const InfoLabel = styled.label`
+  font-weight: 600;
 `;

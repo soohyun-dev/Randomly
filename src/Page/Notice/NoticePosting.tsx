@@ -2,7 +2,6 @@ import Footer from "Components/Footer";
 import Nav from "Components/Nav";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { Posting } from "./types";
 
 export default function NoticePosting() {
   const location = useLocation();
@@ -59,7 +58,7 @@ const PostingSection = styled.section`
 
 const PostingDiv = styled.div`
   display: inline-block;
-  width: 70%;
+  width: 60%;
 `;
 const TitleDiv = styled.div`
   margin: 1em 0;
