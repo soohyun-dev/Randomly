@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { fireStore } from "../../firebase";
 import { QAInfo } from "./types";
 import QAList from "./QAList";
+import { Link } from "react-router-dom";
 
 export default function QA() {
   const [show, setShow] = useState<boolean>(false);
@@ -11,7 +12,7 @@ export default function QA() {
   const QAInfo = collection(fireStore, "QA");
 
   const getQA = async () => {
-    const QAData = await getDocs(QAInfo);
+    const QAData = await getDocs(query(QAInfo, orderBy("time", "desc")));
     QA.current = QAData.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
@@ -26,11 +27,13 @@ export default function QA() {
   }, [show]);
   return (
     <>
-      <div>
+      <TitleDiv>
         <Title>Q&A</Title>
-      </div>
+      </TitleDiv>
       <WriteBox>
-        <WriteBtn>글쓰기</WriteBtn>
+        <Link to="/WriteQA">
+          <WriteBtn>글쓰기</WriteBtn>
+        </Link>
       </WriteBox>
       <QAListBox>
         {Object.keys(QA.current).map((v, idx) => (
@@ -39,7 +42,7 @@ export default function QA() {
             title={QA.current[v].title}
             date={QA.current[v].date}
             content={QA.current[v].content}
-            user={QA.current[v].user}
+            qaWriter={QA.current[v].qaWriter}
           />
         ))}
       </QAListBox>
@@ -54,9 +57,12 @@ const Title = styled.h1`
 const QAListBox = styled.section`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5em 2em;
+  gap: 5em 4em;
   margin: 5em 0;
+`;
+
+const TitleDiv = styled.div`
+  width: 90%;
 `;
 
 const WriteBox = styled.div`

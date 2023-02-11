@@ -89,25 +89,3 @@ const PasswordSection = styled.section`
 const PasswordTitle = styled.label`
   margin: 0 1em;
 `;
-
-const PasswordInput = styled.input`
-  width: 13em;
-  height: 2em;
-  border-radius: 5px;
-  border: 0.5px solid;
-  padding-left: 10px;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-`;
-
-const PasswordBtn = styled.button`
-  width: 5em;
-  height: 2.5em;
-  border: none;
-  border-radius: 10px;
-  margin: 0 1em;
-  cursor: pointer;
-  &:hover {
-    opacity: 70%;
-  }
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-`;

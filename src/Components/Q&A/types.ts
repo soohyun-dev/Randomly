@@ -4,5 +4,5 @@ export interface QAInfo {
   title?: string;
   date?: string;
   content?: string;
-  user?: string;
+  qaWriter?: string;
 }

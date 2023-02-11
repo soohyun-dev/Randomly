@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 export default function QAPosting() {
   const location = useLocation();
-  const { title, date, content, user, idx } = location.state;
+  const { title, date, content, qaWriter, idx } = location.state;
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function QAPosting() {
           </TitleDiv>
           <WriterDiv>
             <DateText>{date}</DateText>
-            <WriterText>{user}</WriterText>
+            <WriterText>{qaWriter}</WriterText>
           </WriterDiv>
           <DivLine />
           <ContentDiv>

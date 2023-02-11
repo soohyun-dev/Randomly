@@ -58,7 +58,6 @@ const PostingDiv = styled.div`
 `;
 const TitleDiv = styled.div`
   margin: 1em 0;
-
   font-size: 24px;
 `;
 

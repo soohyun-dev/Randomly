@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function QAList({ order, title, date, content, user }) {
-  console.log(order, title, date, content, user);
+export default function QAList({ order, title, date, content, qaWriter }) {
+  console.log(order, title, date, content, qaWriter);
   return (
     <>
       <Link
@@ -11,7 +11,7 @@ export default function QAList({ order, title, date, content, user }) {
           title: title,
           date: date,
           content: content,
-          user: user,
+          qaWriter: qaWriter,
           idx: order,
         }}
         style={{ textDecoration: "none", color: "black" }}
@@ -22,8 +22,8 @@ export default function QAList({ order, title, date, content, user }) {
           </TitleBox>
           <ContentBox>{content}</ContentBox>
           <WriterBox>
-            <p>{user}</p>
-            <p>{date}</p>
+            <WriteText>{qaWriter}</WriteText>
+            <WriteText>{date}</WriteText>
           </WriterBox>
         </PostingBox>
       </Link>
@@ -66,4 +66,8 @@ const ContentBox = styled.div`
 const WriterBox = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const WriteText = styled.p`
+  color: #777;
 `;

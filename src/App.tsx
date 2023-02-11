@@ -1,4 +1,4 @@
-import WriteNotice from "Components/Notice/WriteNotice";
+import WriteNotice from "Page/Notice/WriteNotice";
 import NoticePosting from "Page/Notice/NoticePosting";
 import QAPage from "Page/Q&A/QAPage";
 import QAPosting from "Page/Q&A/QAPosting";
@@ -9,6 +9,7 @@ import Main from "./Page/Main";
 import Manage from "./Page/Manage/Manage";
 import Mypage from "./Page/MyPage/Mypage";
 import PlayInterview from "./Page/Play/PlayInterview";
+import WriteQA from "Page/Q&A/WriteQA";
 
 export default function App(): JSX.Element {
   return (
@@ -22,6 +23,7 @@ export default function App(): JSX.Element {
         <Route path="/Mypage" element={<Mypage />}></Route>
         <Route path="/QAPage" element={<QAPage />}></Route>
         <Route path="/WriteNotice" element={<WriteNotice />}></Route>
+        <Route path="/WriteQA" element={<WriteQA />}></Route>
         <Route path="/NoticePosting/:order" element={<NoticePosting />}></Route>
         <Route path="/QAposting/:order" element={<QAPosting />}></Route>
       </Routes>

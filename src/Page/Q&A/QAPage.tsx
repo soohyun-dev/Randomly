@@ -107,6 +107,6 @@ const CatagoryButton = styled.button`
 const PostListDiv = styled.div`
   text-align: center;
   vertical-align: top;
-  width: 65%;
+  width: 70%;
   display: inline-block;
 `;
