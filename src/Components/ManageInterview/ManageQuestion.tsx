@@ -31,6 +31,11 @@ export default function ManageQuestion() {
     setShow(true);
   };
 
+  const getQ = async () => {
+    const questionData = await getDocs(questionInfo);
+    console.log(questionData);
+  };
+  getQ();
   /**
    * 질문 추가
    *

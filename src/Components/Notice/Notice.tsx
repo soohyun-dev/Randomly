@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef, Suspense } from "react";
 import { fireStore } from "../../firebase";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  collectionGroup,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import styled from "styled-components";
 import { NoticeInfo } from "./types";
 import { useSelector } from "react-redux";
@@ -9,9 +16,19 @@ import { Link } from "react-router-dom";
 import NoticeList from "./NoticeList";
 
 export default function Notice() {
+  const comment = query(collectionGroup(fireStore, "day"));
+  const getComment = async () => {
+    const querySnapshot = await getDocs(comment);
+    querySnapshot.forEach((doc) => {
+      console.log(2, doc.id, " => ", doc.data());
+    });
+  };
+
   const [show, setShow] = useState(false);
   const notice = useRef<NoticeInfo[]>([]);
   const noticeInfo = collection(fireStore, "notice");
+  const commentInfo = collectionGroup(fireStore, "comment");
+  console.log(commentInfo);
   const user = useSelector(selectUser);
   const getNotice = async () => {
     const noticeData = await getDocs(
@@ -25,6 +42,7 @@ export default function Notice() {
   };
 
   useEffect(() => {
+    getComment();
     getNotice();
   }, [show]);
 
