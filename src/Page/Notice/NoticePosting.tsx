@@ -5,12 +5,7 @@ import styled from "styled-components";
 
 export default function NoticePosting() {
   const location = useLocation();
-  const [title, date, content] = [
-    location.state.title,
-    location.state.date,
-    location.state.content,
-  ];
-
+  const { title, date, content } = location.state;
   return (
     <>
       <Nav />
@@ -58,17 +53,17 @@ const PostingSection = styled.section`
 
 const PostingDiv = styled.div`
   display: inline-block;
+  text-align: left;
   width: 60%;
 `;
 const TitleDiv = styled.div`
   margin: 1em 0;
-  text-align: left;
+
   font-size: 24px;
 `;
 
 const DateDiv = styled.div`
   margin: 2em 0;
-  text-align: left;
 `;
 
 const DateText = styled.label`
@@ -88,7 +83,6 @@ const WriteText = styled.label`
 
 const ContentDiv = styled.div`
   margin: 3em 0;
-  text-align: left;
   min-height: 30em;
 `;
 

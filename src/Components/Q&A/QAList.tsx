@@ -1,16 +1,32 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function QAList({ order, title, date, content, user }) {
   console.log(order, title, date, content, user);
   return (
     <>
-      <PostingBox>
-        <TitleBox>
-          <p>{title}</p>
-        </TitleBox>
-        <ContentBox>{content}</ContentBox>
-        <div>{date}</div>
-      </PostingBox>
+      <Link
+        to={`/QAPosting/${order}`}
+        state={{
+          title: title,
+          date: date,
+          content: content,
+          user: user,
+          idx: order,
+        }}
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <PostingBox>
+          <TitleBox>
+            <p>{title}</p>
+          </TitleBox>
+          <ContentBox>{content}</ContentBox>
+          <WriterBox>
+            <p>{user}</p>
+            <p>{date}</p>
+          </WriterBox>
+        </PostingBox>
+      </Link>
     </>
   );
 }
@@ -44,6 +60,10 @@ const TitleBox = styled.div`
 
 const ContentBox = styled.div`
   align-content: center;
-  height: 5em;
-  gap: 2em 0;
+  height: 4em;
+`;
+
+const WriterBox = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

@@ -29,6 +29,9 @@ export default function QA() {
       <div>
         <Title>Q&A</Title>
       </div>
+      <WriteBox>
+        <WriteBtn>글쓰기</WriteBtn>
+      </WriteBox>
       <QAListBox>
         {Object.keys(QA.current).map((v, idx) => (
           <QAList
@@ -54,4 +57,22 @@ const QAListBox = styled.section`
   justify-content: space-between;
   gap: 5em 2em;
   margin: 5em 0;
+`;
+
+const WriteBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const WriteBtn = styled.button`
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  width: 5em;
+  height: 2.5em;
+  border-radius: 10px;
+  border: none;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  &:hover {
+    opacity: 70%;
+  }
 `;
