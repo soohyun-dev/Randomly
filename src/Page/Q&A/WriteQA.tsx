@@ -30,7 +30,7 @@ export default function WriteQA() {
       const newData = {};
       newData["title"] = title;
       newData["content"] = content;
-      newData["time"] = time;
+      newData["time"] = time.toJSON();
       newData["date"] = `${time.getFullYear()}.${month}.${day}`;
       newData["qaWriter"] = qaWriter;
       let docId = "";

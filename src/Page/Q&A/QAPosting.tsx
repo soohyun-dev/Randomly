@@ -3,6 +3,7 @@ import Nav from "Components/Nav";
 import WriteComment from "Components/Q&A/WriteComment";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import QAComment from "../../Components/Q&A/QAComment";
 
 export default function QAPosting() {
   const location = useLocation();
@@ -27,6 +28,7 @@ export default function QAPosting() {
           <DivLine />
         </PostingDiv>
         <WriteComment id={id} />
+        <QAComment id={id} />
       </PostingSection>
       <Footer />
     </>

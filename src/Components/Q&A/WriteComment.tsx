@@ -21,7 +21,7 @@ export default function WriteComment({ id }) {
     }
     const newData = {};
     newData["content"] = comment;
-    newData["time"] = time;
+    newData["time"] = time.toJSON();
     newData["date"] = `${time.getFullYear()}.${month}.${day}`;
     newData["commentWriter"] = user;
     await addDoc(QAInfo, newData);
