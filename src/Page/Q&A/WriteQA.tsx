@@ -1,7 +1,7 @@
 import Footer from "Components/Footer";
 import Nav from "Components/Nav";
 import { fireStore } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, collectionGroup } from "firebase/firestore";
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ export default function WriteQA() {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const QAInfo = collection(fireStore, "QA");
+  console.log(QAInfo);
   const navigate = useNavigate();
   const qaWriter = useSelector(selectUser);
 
@@ -32,11 +33,20 @@ export default function WriteQA() {
       newData["time"] = time;
       newData["date"] = `${time.getFullYear()}.${month}.${day}`;
       newData["qaWriter"] = qaWriter;
-      await addDoc(QAInfo, newData);
+      let docId = "";
+      await addDoc(QAInfo, newData).then((doc) => {
+        docId = doc.id;
+      });
+      await addDoc(collection(fireStore, `QA/${docId}/comment`), {});
       alert("글 작성이 완료되었습니다.");
       navigate("/QAPage");
     }
   };
+
+  //   const addComment = async ()=> {
+  //     const QAInfo = collection(fireStore, "QA");
+  //     await addDoc(,)
+  //   }
 
   return (
     <>

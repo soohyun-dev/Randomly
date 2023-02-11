@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function QAList({ order, title, date, content, qaWriter }) {
+export default function QAList({ id, order, title, date, content, qaWriter }) {
   console.log(order, title, date, content, qaWriter);
   return (
     <>
       <Link
         to={`/QAPosting/${order}`}
         state={{
+          id: id,
           title: title,
           date: date,
           content: content,

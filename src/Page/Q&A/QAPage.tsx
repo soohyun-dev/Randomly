@@ -62,14 +62,14 @@ export default function QAPage() {
             >
               Q&A
             </CatagoryButton>
-            <CatagoryButton
+            {/* <CatagoryButton
               id="남길말"
               onClick={(e) => {
                 setNowPage("남길말");
               }}
             >
               남길 말
-            </CatagoryButton>
+            </CatagoryButton> */}
           </CatagoryDiv>
           <PostListDiv>{showComponent()}</PostListDiv>
         </div>

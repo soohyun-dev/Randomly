@@ -20,7 +20,7 @@ export default function QA() {
     setShow(true);
   };
 
-  console.log(QA);
+  console.log(QA.current);
 
   useEffect(() => {
     getQA();
@@ -38,6 +38,7 @@ export default function QA() {
       <QAListBox>
         {Object.keys(QA.current).map((v, idx) => (
           <QAList
+            id={QA.current[v].id}
             order={QA.current.length - idx}
             title={QA.current[v].title}
             date={QA.current[v].date}

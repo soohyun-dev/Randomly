@@ -1,12 +1,13 @@
 import Footer from "Components/Footer";
 import Nav from "Components/Nav";
+import WriteComment from "Components/Q&A/WriteComment";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export default function QAPosting() {
   const location = useLocation();
-  const { title, date, content, qaWriter, idx } = location.state;
-
+  const { id, title, date, content, qaWriter, idx } = location.state;
+  console.log(id);
   return (
     <>
       <Nav />
@@ -25,6 +26,7 @@ export default function QAPosting() {
           </ContentDiv>
           <DivLine />
         </PostingDiv>
+        <WriteComment id={id} />
       </PostingSection>
       <Footer />
     </>
