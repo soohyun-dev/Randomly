@@ -17,7 +17,7 @@ export default function NoticeList({ order, title, date, content }) {
             <p>{title}</p>
           </TitleDiv>
           <DateDiv>
-            <p>{date}</p>
+            <p>{date.slice(0, 10)}</p>
           </DateDiv>
         </PostingBox>
       </Link>
@@ -56,4 +56,5 @@ const TitleDiv = styled.div`
 
 const DateDiv = styled.div`
   width: 30%;
+  color: #777;
 `;

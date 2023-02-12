@@ -5,11 +5,14 @@ import { fireStore } from "../../firebase";
 import { QAInfo } from "./types";
 import QAList from "./QAList";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "features/userSlice";
 
 export default function QA() {
   const [show, setShow] = useState<boolean>(false);
   const QA = useRef<QAInfo[]>([]);
   const QAInfo = collection(fireStore, "QA");
+  const user = useSelector(selectUser);
 
   const getQA = async () => {
     const QAData = await getDocs(query(QAInfo, orderBy("time", "desc")));
@@ -31,9 +34,14 @@ export default function QA() {
         <Title>Q&A</Title>
       </TitleDiv>
       <WriteBox>
-        <Link to="/WriteQA">
-          <WriteBtn>글쓰기</WriteBtn>
-        </Link>
+        {/* 로그인 유저 구분*/}
+        {user === null ? (
+          ""
+        ) : (
+          <Link to="/WriteQA">
+            <WriteBtn>글쓰기</WriteBtn>
+          </Link>
+        )}
       </WriteBox>
       <QAListBox>
         {Object.keys(QA.current).map((v, idx) => (

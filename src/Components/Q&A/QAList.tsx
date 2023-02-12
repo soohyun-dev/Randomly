@@ -24,7 +24,7 @@ export default function QAList({ id, order, title, date, content, qaWriter }) {
           <ContentBox>{content}</ContentBox>
           <WriterBox>
             <WriteText>{qaWriter}</WriteText>
-            <WriteText>{date}</WriteText>
+            <WriteText>{date.slice(0, 10)}</WriteText>
           </WriterBox>
         </PostingBox>
       </Link>

@@ -1,6 +1,8 @@
 import Footer from "Components/Footer";
 import Nav from "Components/Nav";
 import WriteComment from "Components/Q&A/WriteComment";
+import { selectUser } from "features/userSlice";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import QAComment from "../../Components/Q&A/QAComment";
@@ -8,7 +10,8 @@ import QAComment from "../../Components/Q&A/QAComment";
 export default function QAPosting() {
   const location = useLocation();
   const { id, title, date, content, qaWriter, idx } = location.state;
-  console.log(id);
+  const user = useSelector(selectUser);
+
   return (
     <>
       <Nav />
@@ -27,7 +30,7 @@ export default function QAPosting() {
           </ContentDiv>
           <DivLine />
         </PostingDiv>
-        <WriteComment id={id} />
+        {user === null ? "" : <WriteComment id={id} />}
         <QAComment id={id} />
       </PostingSection>
       <Footer />
