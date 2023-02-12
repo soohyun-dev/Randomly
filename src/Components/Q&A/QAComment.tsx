@@ -44,5 +44,5 @@ export default function QAComment({ id }) {
 
 const CommentSection = styled.section`
   display: inline-block;
-  width: 50%;
+  width: 60%;
 `;

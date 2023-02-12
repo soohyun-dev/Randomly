@@ -62,6 +62,7 @@ const TitleBox = styled.div`
 const ContentBox = styled.div`
   align-content: center;
   height: 4em;
+  color: #777;
 `;
 
 const WriterBox = styled.div`

@@ -1,20 +1,17 @@
 import styled from "styled-components";
 
 export default function Comment({ id, commentWriter, content, date, time }) {
-  const writeTime = time.slice(11, 19);
-
   return (
     <>
       <CommentBox>
         <div>
           <p>{content}</p>
         </div>
-        <div>
+        <WriterBox>
           <p>{commentWriter}</p>
-        </div>
+        </WriterBox>
         <TimeBox>
           <DateText>{date} </DateText>
-          <p>{writeTime}</p>
         </TimeBox>
       </CommentBox>
     </>
@@ -23,13 +20,17 @@ export default function Comment({ id, commentWriter, content, date, time }) {
 
 const CommentBox = styled.div`
   display: grid;
-  grid-template-columns: 6fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr 1fr;
   margin: 3em 0;
+`;
+
+const WriterBox = styled.div`
+  font-size: 13px;
 `;
 
 const TimeBox = styled.div`
   display: flex;
-  font-size: 14px;
+  font-size: 12px;
   color: #777;
   line-height: 24px;
 `;

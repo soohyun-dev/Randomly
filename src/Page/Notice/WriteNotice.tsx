@@ -5,6 +5,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { getDateTime } from "Utils/getTime";
 
 export default function WriteNotice() {
   const [title, setTitle] = useState<string>("");
@@ -14,20 +15,11 @@ export default function WriteNotice() {
 
   const addNotice = async () => {
     if (window.confirm("글작성을 완료하시겠습니까?")) {
-      const time = new Date();
-      let month = String(time.getMonth() + 1);
-      let day = String(time.getDate());
-      if (month.length === 1) {
-        month = "0" + month;
-      }
-      if (day.length === 1) {
-        day = "0" + day;
-      }
       const newData = {};
       newData["title"] = title;
       newData["content"] = content;
-      newData["time"] = time;
-      newData["date"] = `${time.getFullYear()}.${month}.${day}`;
+      newData["time"] = new Date();
+      newData["date"] = getDateTime();
       await addDoc(noticeInfo, newData);
       alert("글 작성이 완료되었습니다.");
       navigate("/QAPage");

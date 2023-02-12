@@ -3,6 +3,7 @@ import { fireStore } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { getDateTime } from "Utils/getTime";
 
 export default function WriteComment({ id }) {
   const [comment, setComment] = useState<string>("");
@@ -10,19 +11,10 @@ export default function WriteComment({ id }) {
   const QAInfo = collection(fireStore, `QA/${id}/comment`);
 
   const submitComment = async () => {
-    const time = new Date();
-    let month = String(time.getMonth() + 1);
-    let day = String(time.getDate());
-    if (month.length === 1) {
-      month = "0" + month;
-    }
-    if (day.length === 1) {
-      day = "0" + day;
-    }
     const newData = {};
     newData["content"] = comment;
-    newData["time"] = time.toJSON();
-    newData["date"] = `${time.getFullYear()}.${month}.${day}`;
+    newData["time"] = new Date();
+    newData["date"] = getDateTime();
     newData["commentWriter"] = user;
     await addDoc(QAInfo, newData);
     alert("댓글 작성이 완료되었습니다.");

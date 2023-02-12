@@ -1,12 +1,13 @@
 import Footer from "Components/Footer";
 import Nav from "Components/Nav";
 import { fireStore } from "../../firebase";
-import { addDoc, collection, collectionGroup } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "features/userSlice";
+import { getDateTime } from "Utils/getTime";
 
 export default function WriteQA() {
   const [title, setTitle] = useState<string>("");
@@ -18,20 +19,11 @@ export default function WriteQA() {
 
   const addQA = async () => {
     if (window.confirm("글작성을 완료하시겠습니까?")) {
-      const time = new Date();
-      let month = String(time.getMonth() + 1);
-      let day = String(time.getDate());
-      if (month.length === 1) {
-        month = "0" + month;
-      }
-      if (day.length === 1) {
-        day = "0" + day;
-      }
       const newData = {};
       newData["title"] = title;
       newData["content"] = content;
-      newData["time"] = time.toJSON();
-      newData["date"] = `${time.getFullYear()}.${month}.${day}`;
+      newData["time"] = new Date();
+      newData["date"] = getDateTime();
       newData["qaWriter"] = qaWriter;
       let docId = "";
       await addDoc(QAInfo, newData).then((doc) => {
