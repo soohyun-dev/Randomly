@@ -1,10 +1,19 @@
+import { persistor } from "index";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { selectUser } from "../features/userSlice";
 
 export default function Nav() {
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
+
+  const purge = async () => {
+    await persistor.purge();
+    await alert("로그아웃 되었습니다.");
+    await navigate("/");
+    await window.location.reload();
+  };
   return (
     <>
       <TopHeader>
@@ -13,7 +22,6 @@ export default function Nav() {
             <LogoImg src="https://user-images.githubusercontent.com/81623931/216827383-470908e4-f188-4711-b716-4677076e67c2.png" />
           </Link>
         </Logo>
-        <Middle></Middle>
         <Menu>
           <div>
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -46,12 +54,7 @@ export default function Nav() {
           </div>
           <div>
             {user === null ? (
-              <Link
-                to="/LOGIN"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <MenuText>Login</MenuText>
-              </Link>
+              ""
             ) : (
               <Link
                 to="/Mypage"
@@ -62,6 +65,18 @@ export default function Nav() {
             )}
           </div>
         </Menu>
+        <Option>
+          {user === null ? (
+            <Link
+              to="/LOGIN"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuText>Login</MenuText>
+            </Link>
+          ) : (
+            <Logout onClick={async () => purge()}>Logout</Logout>
+          )}
+        </Option>
       </TopHeader>
     </>
   );
@@ -75,7 +90,8 @@ const LogoImg = styled.img`
 const TopHeader = styled.header`
   z-index: 1000;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
   padding: 25px;
   font-size: 28px;
   color: black;
@@ -91,16 +107,11 @@ const TopHeader = styled.header`
 
 const Logo = styled.div`
   font-weight: bold;
-  width: 25%;
-`;
-
-const Middle = styled.div`
-  width: 5%;
 `;
 
 const Menu = styled.div`
   display: flex;
-  width: 70%;
+  justify-content: center;
   font-size: 16px;
 `;
 
@@ -110,5 +121,21 @@ const MenuText = styled.p`
   &:hover {
     font-weight: bold;
     transition: 0.8s;
+  }
+`;
+
+const Option = styled.div`
+  font-size: 16px;
+`;
+
+const Logout = styled.button`
+  background-color: #ef9a9a;
+  padding: 0.5em 0.5em;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  &:hover {
+    opacity: 70%;
   }
 `;

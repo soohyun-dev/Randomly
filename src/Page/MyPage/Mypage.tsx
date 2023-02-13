@@ -13,14 +13,15 @@ export default function Mypage() {
   const navigate = useNavigate();
 
   const purge = async () => {
-    window.location.reload();
     await persistor.purge();
+    await alert("로그아웃 되었습니다.");
+    await navigate("/");
+    await window.location.reload();
   };
 
   if (user === null && email === null) {
     navigate("/");
   }
-  console.log(user, email);
 
   useEffect(() => {}, [user, email]);
 

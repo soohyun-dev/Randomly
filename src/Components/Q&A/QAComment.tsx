@@ -20,7 +20,6 @@ export default function QAComment({ id }) {
     }));
     setShow(true);
   };
-  console.log(commentInfo);
 
   useEffect(() => {
     getQAComment();
