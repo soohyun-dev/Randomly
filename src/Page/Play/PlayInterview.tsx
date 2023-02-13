@@ -7,6 +7,9 @@ import Nav from "../../Components/Nav";
 import StopWatch from "../../Components/StopWatch/Stopwatch";
 import Footer from "../../Components/Footer";
 import { QuestionInfo, UserInfo } from "./types";
+import { selectUser } from "features/userSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
@@ -20,6 +23,7 @@ export default function PlayInterview() {
   const uniqueId = useId();
   const userInfo = collection(fireStore, "member");
   const questionInfo = collection(fireStore, "questions");
+  const user = useSelector(selectUser);
 
   console.log(open);
   /**
@@ -206,30 +210,46 @@ export default function PlayInterview() {
         <PageGuide>
           팀원끼리 서로 랜덤의 질문을 배정받고 인터뷰 연습을 하는 공간입니다.
         </PageGuide>
-        <PageGuide>하단의 버튼을 눌러 시작하세요. </PageGuide>
+        {user === null ? (
+          ""
+        ) : (
+          <PageGuide>하단의 버튼을 눌러 시작하세요. </PageGuide>
+        )}
       </section>
       <section style={{ textAlign: "center" }}>
         <MainContainer>
-          <OrderContainer>
-            <div>
-              <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
-            </div>
-            <div>
-              <MakeQuestionNums color={bool} onClick={makeArray}>
-                {bool ? "질문 재분배" : "질문 분배 시작"}
-              </MakeQuestionNums>
-            </div>
-            {bool ? (
-              <GuideToggle>
-                질문 분배가 완료되었습니다. 질문을 확인해주세요.
-              </GuideToggle>
-            ) : (
-              <GuideToggle>
-                질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을 분배해주세요!
-              </GuideToggle>
-            )}
-            <USER>{showUsers}</USER>
-          </OrderContainer>
+          {user === null ? (
+            <ManageAccessSection>
+              <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
+              <Link
+                to="/Login"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <LinkLoginBtn>로그인하러 가기 ➡️</LinkLoginBtn>
+              </Link>
+            </ManageAccessSection>
+          ) : (
+            <OrderContainer>
+              <div>
+                <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
+              </div>
+              <div>
+                <MakeQuestionNums color={bool} onClick={makeArray}>
+                  {bool ? "질문 재분배" : "질문 분배 시작"}
+                </MakeQuestionNums>
+              </div>
+              {bool ? (
+                <GuideToggle>
+                  질문 분배가 완료되었습니다. 질문을 확인해주세요.
+                </GuideToggle>
+              ) : (
+                <GuideToggle>
+                  질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을 분배해주세요!
+                </GuideToggle>
+              )}
+              <USER>{user === null ? "" : showUsers}</USER>
+            </OrderContainer>
+          )}
         </MainContainer>
       </section>
       <Footer />
@@ -295,6 +315,29 @@ const MakeQuestionNums = styled.button<{
 
 const GuideToggle = styled.p`
   margin: 2em 0 5em 0;
+`;
+
+const ManageAccessSection = styled.section`
+  display: felx;
+  justify-content: center;
+  margin: 5em 0;
+`;
+
+const ManageAccessTitle = styled.label`
+  margin: 0 1em;
+  font-size: 24px;
+`;
+
+const LinkLoginBtn = styled.p`
+  height: 3em;
+  margin: 4em 0;
+  line-height: 3em;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  &:hover {
+    opacity: 70%;
+  }
 `;
 
 const UpperLeft = styled.div`
