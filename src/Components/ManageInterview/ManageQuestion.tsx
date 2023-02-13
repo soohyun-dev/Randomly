@@ -19,6 +19,7 @@ export default function ManageQuestion() {
   const [newQuestion, setNewQuestion] = useState<string>("");
   const questions = useRef<ManageQuestionInfo[]>([]);
   const questionInfo = collection(fireStore, "questions");
+  console.log(questions);
 
   const getQuestions = async () => {
     const questionData = await getDocs(

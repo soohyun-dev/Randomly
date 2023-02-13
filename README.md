@@ -14,7 +14,9 @@
 
 ## 프로젝트 진행과정
 
-프로젝트 진행과정 : [📝 진행과정기록](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
+- [📝 진행과정 기록 1](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
+- [📝 진행과정 기록 2](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
+- [📝 진행과정 기록 3](https://bmy1320.tistory.com/entry/dd)
 
 <br>
 

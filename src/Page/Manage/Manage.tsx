@@ -2,10 +2,20 @@ import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import ManageQuestion from "../../Components/ManageInterview/ManageQuestion";
 import ManageUser from "../../Components/ManageInterview/MangageUser";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../../Components/Footer";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { fireStore } from "../../firebase";
+import { ManageQuestionInfo } from "./types";
+import { getDateTime } from "Utils/getTime";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -19,15 +29,47 @@ export default function Manage() {
       opacity: 80%;
     }
   `;
+  const [show, setShow] = useState<boolean>(false);
   const [page, setPage] = useState<string>("question");
+  const [nowPackage, setNowPackage] = useState("");
+  const packages = useRef<ManageQuestionInfo[]>([]);
+  const user = useSelector(selectUser);
+  const packageInfo = collection(fireStore, `users/${user}/packages`);
+  const getQuestions = async () => {
+    const packageData = await getDocs(
+      query(packageInfo, orderBy("time", "asc"))
+    );
+    packages.current = packageData.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setShow(true);
+  };
+  console.log(nowPackage);
 
   const changeView = (value) => {
     setPage(value);
   };
+  const plusPackage = async () => {
+    if (window.confirm("새로운 폴더를 추가하시겠습니까?")) {
+      alert("추가되었습니다!");
+      const idx = getDateTime();
+      await addDoc(packageInfo, {
+        idx: idx,
+        time: new Date(),
+        questions: [{ idx: 0, question: "", time: new Date() }],
+        member: [{ time: new Date() }],
+      });
 
-  const user = useSelector(selectUser);
+      await window.location.reload();
+    }
+  };
 
-  useEffect(() => {});
+  console.log(packages.current);
+
+  useEffect(() => {
+    getQuestions();
+  });
 
   return (
     <>
@@ -55,7 +97,25 @@ export default function Manage() {
             참여자 관리
           </MiniTitle>
         </div>
+        <div>
+          <PlusBtn onClick={() => plusPackage()}>질문 폴더 추가</PlusBtn>
+        </div>
       </section>
+      <PackageSection>
+        <PackageDiv>
+          {!show
+            ? ""
+            : Object.keys(packages.current).map((v, idx) => (
+                <PackageBox
+                  onClick={() => {
+                    setNowPackage(v);
+                  }}
+                >
+                  {packages.current[v].idx}
+                </PackageBox>
+              ))}
+        </PackageDiv>
+      </PackageSection>
       {user !== null ? (
         ""
       ) : (
@@ -88,4 +148,44 @@ const PasswordSection = styled.section`
 
 const PasswordTitle = styled.label`
   margin: 0 1em;
+`;
+
+const PlusBtn = styled.button`
+  width: 10em;
+  height: 3em;
+  margin: 6em 0 3em 0;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  &:hover {
+    opacity: 70%;
+  }
+`;
+
+const PackageSection = styled.section`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const PackageDiv = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const PackageBox = styled.div`
+  width: 15em;
+  height: 10em;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  margin: 2em 1em;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
 `;
