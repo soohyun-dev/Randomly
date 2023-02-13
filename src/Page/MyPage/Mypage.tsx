@@ -19,12 +19,6 @@ export default function Mypage() {
     await window.location.reload();
   };
 
-  if (user === null && email === null) {
-    navigate("/");
-  }
-
-  useEffect(() => {}, [user, email]);
-
   return (
     <>
       <Nav />

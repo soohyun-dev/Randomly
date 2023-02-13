@@ -36,7 +36,10 @@ export default function LoginBox() {
     <>
       <LoginContainer>
         <LoginDiv>
-          <button onClick={handleGoogleLogin}>Google Login</button>
+          <LoginBtn onClick={handleGoogleLogin}>
+            <GoogleImg src="https://user-images.githubusercontent.com/81623931/218374119-9690e410-d19f-4e34-b811-48457aa2b7a2.png" />
+            구글 아이디로 로그인하기
+          </LoginBtn>
         </LoginDiv>
       </LoginContainer>
     </>
@@ -48,10 +51,28 @@ const LoginContainer = styled.div`
   margin: 1em 0;
   width: 20em;
   height: 25em;
-  border: 1px solid;
   border-radius: 10px;
 `;
 
 const LoginDiv = styled.div`
   margin: 5em 0;
+`;
+
+const LoginBtn = styled.button`
+  width: 17em;
+  height: 3.2em;
+  line-height: 3em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  &:hover {
+    opacity: 70%;
+  }
+`;
+
+const GoogleImg = styled.img`
+  width: 1.7em;
+  vertical-align: middle;
+  margin-right: 1em;
 `;

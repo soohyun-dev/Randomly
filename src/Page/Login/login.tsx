@@ -36,7 +36,6 @@ export default function LoginPage(): JSX.Element {
       ) : (
         <LoginSection>
           <TitleSection>
-            {" "}
             <LoginTitle>LOGIN</LoginTitle>
           </TitleSection>
 
@@ -49,7 +48,7 @@ export default function LoginPage(): JSX.Element {
 }
 
 const TitleSection = styled.section`
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   text-align: center;
 `;
 
