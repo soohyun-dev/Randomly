@@ -31,10 +31,11 @@ export default function Manage() {
   `;
   const [show, setShow] = useState<boolean>(false);
   const [page, setPage] = useState<string>("question");
-  const [nowPackage, setNowPackage] = useState("");
+  const [nowPackage, setNowPackage] = useState("0");
   const packages = useRef<ManageQuestionInfo[]>([]);
   const user = useSelector(selectUser);
   const packageInfo = collection(fireStore, `users/${user}/packages`);
+
   const getQuestions = async () => {
     const packageData = await getDocs(
       query(packageInfo, orderBy("time", "asc"))
@@ -45,7 +46,7 @@ export default function Manage() {
     }));
     setShow(true);
   };
-  console.log(nowPackage);
+  console.log(packages.current);
 
   const changeView = (value) => {
     setPage(value);
@@ -56,8 +57,9 @@ export default function Manage() {
       const idx = getDateTime();
       await addDoc(packageInfo, {
         idx: idx,
+        title: `새폴더`,
         time: new Date(),
-        questions: [{ idx: 0, question: "", time: new Date() }],
+        questions: [],
         member: [{ time: new Date() }],
       });
 
@@ -65,11 +67,9 @@ export default function Manage() {
     }
   };
 
-  console.log(packages.current);
-
   useEffect(() => {
     getQuestions();
-  });
+  }, [nowPackage]);
 
   return (
     <>
@@ -116,15 +116,26 @@ export default function Manage() {
               ))}
         </PackageDiv>
       </PackageSection>
+      <PackageTitleDiv>
+        <PackageTitleText>
+          {show && packages.current[nowPackage].title}
+        </PackageTitleText>
+      </PackageTitleDiv>
       {user !== null ? (
         ""
       ) : (
-        <PasswordSection>
-          <PasswordTitle>로그인 해주세요😋</PasswordTitle>
-        </PasswordSection>
+        <ManageAccessSection>
+          <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
+        </ManageAccessSection>
       )}
       {page === "question"
-        ? user !== null && <ManageQuestion />
+        ? user !== null &&
+          show && (
+            <ManageQuestion
+              packageId={packages.current[nowPackage].id}
+              nowPackage={nowPackage}
+            />
+          )
         : user !== null && <ManageUser />}
       <Footer />
     </>
@@ -141,12 +152,12 @@ const Title = styled.h1`
   margin: 3em 0 2em 0;
 `;
 
-const PasswordSection = styled.section`
+const ManageAccessSection = styled.section`
   text-align: center;
   margin: 5em 0;
 `;
 
-const PasswordTitle = styled.label`
+const ManageAccessTitle = styled.label`
   margin: 0 1em;
 `;
 
@@ -167,6 +178,16 @@ const PackageSection = styled.section`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+`;
+
+const PackageTitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 5em 0;
+`;
+
+const PackageTitleText = styled.p`
+  font-size: 24px;
 `;
 
 const PackageDiv = styled.div`

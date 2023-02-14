@@ -8,48 +8,53 @@ import {
   orderBy,
   doc,
   deleteDoc,
+  updateDoc,
+  arrayUnion,
+  setDoc,
 } from "firebase/firestore";
 import styled from "styled-components";
 import QuestionTable from "./QuestionTable";
 import { useRef } from "react";
-import { ManageQuestionInfo } from "./types";
+import { PackageInfo } from "./types";
+import { selectUser } from "features/userSlice";
+import { useSelector } from "react-redux";
 
-export default function ManageQuestion() {
+export default function ManageQuestion({ packageId, nowPackage }) {
   const [show, setShow] = useState<boolean>(false);
   const [newQuestion, setNewQuestion] = useState<string>("");
-  const questions = useRef<ManageQuestionInfo[]>([]);
-  const questionInfo = collection(fireStore, "questions");
-  console.log(questions);
+  const user = useSelector(selectUser);
+  const packages = useRef<PackageInfo[]>([]);
+  const packageInfo = collection(fireStore, `users/${user}/packages`);
 
   const getQuestions = async () => {
-    const questionData = await getDocs(
-      query(questionInfo, orderBy("time", "asc"))
+    const packageData = await getDocs(
+      query(packageInfo, orderBy("time", "asc"))
     );
-    questions.current = questionData.docs.map((doc) => ({
+    packages.current = packageData.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
     setShow(true);
   };
 
-  const getQ = async () => {
-    const questionData = await getDocs(questionInfo);
-    console.log(questionData);
-  };
-  getQ();
   /**
    * 질문 추가
    *
    */
+
   const addQuestion = async () => {
-    const idx = Object.keys(questions.current).length;
+    const questionDoc = doc(fireStore, `users/${user}/packages`, packageId);
+    const idx = packages.current[nowPackage].questions.length;
     const newData = {};
     newData["idx"] = idx;
     newData["question"] = newQuestion;
     newData["time"] = new Date();
-    await addDoc(questionInfo, newData);
+    const AllData = [...packages.current[nowPackage].questions];
+    AllData[idx] = newData;
+    await updateDoc(questionDoc, {
+      questions: arrayUnion(...AllData),
+    });
     setNewQuestion("");
-    getQuestions();
     alert("질문이 추가되었습니다.");
   };
 
@@ -59,12 +64,12 @@ export default function ManageQuestion() {
    */
   const deleteAll = () => {
     const deleteAllQuestion = () => {
-      Object.keys(questions.current).map((v) => {
+      Object.keys(packages.current).map((v) => {
         const deleteQuestion = async (id) => {
           const questionDoc = doc(fireStore, "questions", id);
           await deleteDoc(questionDoc);
         };
-        deleteQuestion(questions.current[~~v].id);
+        deleteQuestion(packages.current[~~v].id);
       });
     };
 
@@ -76,13 +81,9 @@ export default function ManageQuestion() {
     }
   };
 
-  const onChange = (e) => {
-    setNewQuestion(e.target.value);
-  };
-
   useEffect(() => {
     getQuestions();
-  }, [newQuestion]);
+  }, [newQuestion, packages]);
 
   return (
     <>
@@ -93,7 +94,7 @@ export default function ManageQuestion() {
               type="text"
               value={newQuestion}
               placeholder="추가할 질문을 입력해주세요."
-              onChange={onChange}
+              onChange={(e) => setNewQuestion(e.target.value)}
             />
             <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
           </div>
@@ -108,12 +109,8 @@ export default function ManageQuestion() {
                 </tr>
               </thead>
               {show
-                ? Object.keys(questions.current).map((v, idx) => (
-                    <QuestionTable
-                      question={questions.current[~~v].question}
-                      id={questions.current[~~v].id}
-                      idx={idx}
-                    />
+                ? packages.current[nowPackage].questions.map((target, idx) => (
+                    <QuestionTable question={target.question} idx={idx} />
                   ))
                 : ""}
             </Table>

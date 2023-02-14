@@ -3,10 +3,11 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function QuestionTable({ question, id, idx }) {
+export default function QuestionTable({ question, idx }) {
   const [newQuestion, setNewQuestion] = useState(question);
   const [update, setUpdate] = useState(false);
   const [updateBtnToggle, setUpdateBtnToggle] = useState(false);
+  console.log(question);
   /**
    * 질문 수정
    *
@@ -26,7 +27,6 @@ export default function QuestionTable({ question, id, idx }) {
    * @param {Number} 삭제할 질문의 id값
    */
   const checkDelete = (id) => {
-    console.log(id);
     const deleteQuestion = async (id) => {
       const questionDoc = doc(fireStore, "questions", id);
       await deleteDoc(questionDoc);
@@ -58,7 +58,7 @@ export default function QuestionTable({ question, id, idx }) {
               <Btn
                 onClick={() => {
                   alert("수정 완료되었습니다.");
-                  updateQuestion(id);
+                  updateQuestion(idx);
                   setUpdate(!update);
                   setUpdateBtnToggle(!updateBtnToggle);
                 }}
@@ -88,7 +88,7 @@ export default function QuestionTable({ question, id, idx }) {
         <TdNoRight>
           <Btn
             onClick={() => {
-              checkDelete(id);
+              checkDelete(idx);
             }}
           >
             삭제
