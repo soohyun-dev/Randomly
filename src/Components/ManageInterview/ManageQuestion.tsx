@@ -85,6 +85,8 @@ export default function ManageQuestion({ packageId, nowPackage }) {
     setNow(nowPackage);
   }, [newQuestion, packageId, nowPackage, now]);
 
+  console.log(packageId, questions.current);
+
   return (
     <>
       <QuestionListContainer>
@@ -110,6 +112,7 @@ export default function ManageQuestion({ packageId, nowPackage }) {
               </thead>
               {Object.keys(questions.current).map((v, idx) => (
                 <QuestionTable
+                  packageId={packageId}
                   question={questions.current[~~v].question}
                   id={questions.current[~~v].id}
                   idx={idx}

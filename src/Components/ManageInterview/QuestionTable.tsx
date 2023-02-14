@@ -2,12 +2,15 @@ import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { selectUser } from "features/userSlice";
 
-export default function QuestionTable({ question, id, idx }) {
+export default function QuestionTable({ packageId, question, id, idx }) {
   const [newQuestion, setNewQuestion] = useState(question);
   const [update, setUpdate] = useState(false);
   const [updateBtnToggle, setUpdateBtnToggle] = useState(false);
-
+  const user = useSelector(selectUser);
+  console.log(id);
   /**
    * 질문 수정
    *
@@ -15,7 +18,11 @@ export default function QuestionTable({ question, id, idx }) {
    */
 
   const updateQuestion = async (id) => {
-    const questionDoc = doc(fireStore, "questions", id);
+    const questionDoc = doc(
+      fireStore,
+      `users/${user}/packages/${packageId}/questions`,
+      id
+    );
     const newContent = { question: newQuestion };
     await updateDoc(questionDoc, newContent);
     window.location.reload();
@@ -28,7 +35,11 @@ export default function QuestionTable({ question, id, idx }) {
    */
   const checkDelete = (id) => {
     const deleteQuestion = async (id) => {
-      const questionDoc = doc(fireStore, "questions", id);
+      const questionDoc = doc(
+        fireStore,
+        `users/${user}/packages/${packageId}/questions`,
+        id
+      );
       await deleteDoc(questionDoc);
       window.location.reload();
     };
@@ -60,7 +71,7 @@ export default function QuestionTable({ question, id, idx }) {
               <Btn
                 onClick={() => {
                   alert("수정 완료되었습니다.");
-                  updateQuestion(idx);
+                  updateQuestion(id);
                   setUpdate(!update);
                   setUpdateBtnToggle(!updateBtnToggle);
                 }}
@@ -90,7 +101,7 @@ export default function QuestionTable({ question, id, idx }) {
         <TdNoRight>
           <Btn
             onClick={() => {
-              checkDelete(idx);
+              checkDelete(id);
             }}
           >
             삭제
