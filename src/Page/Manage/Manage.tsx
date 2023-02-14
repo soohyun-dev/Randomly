@@ -46,7 +46,6 @@ export default function Manage() {
     }));
     setShow(true);
   };
-  console.log(packages.current);
 
   const changeView = (value) => {
     setPage(value);
@@ -59,8 +58,6 @@ export default function Manage() {
         idx: idx,
         title: `새폴더`,
         time: new Date(),
-        questions: [],
-        member: [{ time: new Date() }],
       });
 
       await window.location.reload();
@@ -69,7 +66,7 @@ export default function Manage() {
 
   useEffect(() => {
     getQuestions();
-  }, [nowPackage]);
+  }, [nowPackage, packages]);
 
   return (
     <>
@@ -103,22 +100,22 @@ export default function Manage() {
       </section>
       <PackageSection>
         <PackageDiv>
-          {!show
-            ? ""
-            : Object.keys(packages.current).map((v, idx) => (
-                <PackageBox
-                  onClick={() => {
-                    setNowPackage(v);
-                  }}
-                >
-                  {packages.current[v].idx}
-                </PackageBox>
-              ))}
+          {Object.keys(packages.current).map((v, idx) => (
+            <PackageBox
+              onClick={() => {
+                setNowPackage(v);
+              }}
+            >
+              {packages.current[v].idx}
+            </PackageBox>
+          ))}
         </PackageDiv>
       </PackageSection>
       <PackageTitleDiv>
         <PackageTitleText>
-          {show && packages.current[nowPackage].title}
+          {show &&
+            packages.current.length > 0 &&
+            packages.current[nowPackage].title}
         </PackageTitleText>
       </PackageTitleDiv>
       {user !== null ? (
@@ -130,7 +127,8 @@ export default function Manage() {
       )}
       {page === "question"
         ? user !== null &&
-          show && (
+          show &&
+          packages.current.length > 0 && (
             <ManageQuestion
               packageId={packages.current[nowPackage].id}
               nowPackage={nowPackage}

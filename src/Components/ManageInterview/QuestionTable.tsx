@@ -1,13 +1,13 @@
 import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-export default function QuestionTable({ question, idx }) {
+export default function QuestionTable({ question, id, idx }) {
   const [newQuestion, setNewQuestion] = useState(question);
   const [update, setUpdate] = useState(false);
   const [updateBtnToggle, setUpdateBtnToggle] = useState(false);
-  console.log(question);
+
   /**
    * 질문 수정
    *
@@ -37,6 +37,8 @@ export default function QuestionTable({ question, idx }) {
       alert("삭제되었습니다.");
     }
   };
+
+  useEffect(() => {}, [question]);
 
   return (
     <>

@@ -15,26 +15,30 @@ import {
 import styled from "styled-components";
 import QuestionTable from "./QuestionTable";
 import { useRef } from "react";
-import { PackageInfo } from "./types";
 import { selectUser } from "features/userSlice";
 import { useSelector } from "react-redux";
+import { QuestionInfo } from "Page/Play/types";
 
 export default function ManageQuestion({ packageId, nowPackage }) {
   const [show, setShow] = useState<boolean>(false);
   const [newQuestion, setNewQuestion] = useState<string>("");
   const user = useSelector(selectUser);
-  const packages = useRef<PackageInfo[]>([]);
-  const packageInfo = collection(fireStore, `users/${user}/packages`);
+  const [now, setNow] = useState(nowPackage);
+  const questions = useRef<QuestionInfo[]>([]);
+  const questionsInfo = collection(
+    fireStore,
+    `users/${user}/packages/${packageId}/questions`
+  );
 
   const getQuestions = async () => {
-    const packageData = await getDocs(
-      query(packageInfo, orderBy("time", "asc"))
+    const questionData = await getDocs(
+      query(questionsInfo, orderBy("time", "asc"))
     );
-    packages.current = packageData.docs.map((doc) => ({
+    questions.current = questionData.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
-    setShow(true);
+    setShow(!show);
   };
 
   /**
@@ -43,47 +47,43 @@ export default function ManageQuestion({ packageId, nowPackage }) {
    */
 
   const addQuestion = async () => {
-    const questionDoc = doc(fireStore, `users/${user}/packages`, packageId);
-    const idx = packages.current[nowPackage].questions.length;
+    const idx = Object.keys(questions.current).length;
     const newData = {};
     newData["idx"] = idx;
     newData["question"] = newQuestion;
     newData["time"] = new Date();
-    const AllData = [...packages.current[nowPackage].questions];
-    AllData[idx] = newData;
-    await updateDoc(questionDoc, {
-      questions: arrayUnion(...AllData),
-    });
+    await addDoc(questionsInfo, newData);
     setNewQuestion("");
     alert("질문이 추가되었습니다.");
   };
 
-  /**
-   * 전체 질문 삭제
-   *
-   */
-  const deleteAll = () => {
-    const deleteAllQuestion = () => {
-      Object.keys(packages.current).map((v) => {
-        const deleteQuestion = async (id) => {
-          const questionDoc = doc(fireStore, "questions", id);
-          await deleteDoc(questionDoc);
-        };
-        deleteQuestion(packages.current[~~v].id);
-      });
-    };
+  //   /**
+  //    * 전체 질문 삭제
+  //    *
+  //    */
+  //   const deleteAll = () => {
+  //     const deleteAllQuestion = () => {
+  //       Object.keys(packages.current).map((v) => {
+  //         const deleteQuestion = async (id) => {
+  //           const questionDoc = doc(fireStore, "questions", id);
+  //           await deleteDoc(questionDoc);
+  //         };
+  //         deleteQuestion(packages.current[~~v].id);
+  //       });
+  //     };
 
-    if (window.confirm("등록된 질문들을 모두 삭제하십니까?")) {
-      if (window.confirm("정말 삭제하십니까? 다시 한번 선택해주세요.")) {
-        deleteAllQuestion();
-        alert("모든 질문들이 삭제되었습니다. 새로고침 해주세요.");
-      }
-    }
-  };
+  //     if (window.confirm("등록된 질문들을 모두 삭제하십니까?")) {
+  //       if (window.confirm("정말 삭제하십니까? 다시 한번 선택해주세요.")) {
+  //         deleteAllQuestion();
+  //         alert("모든 질문들이 삭제되었습니다. 새로고침 해주세요.");
+  //       }
+  //     }
+  //   };
 
   useEffect(() => {
     getQuestions();
-  }, [newQuestion, packages]);
+    setNow(nowPackage);
+  }, [newQuestion, packageId, nowPackage, now]);
 
   return (
     <>
@@ -108,16 +108,18 @@ export default function ManageQuestion({ packageId, nowPackage }) {
                   <ThNoRight>삭제하기</ThNoRight>
                 </tr>
               </thead>
-              {show
-                ? packages.current[nowPackage].questions.map((target, idx) => (
-                    <QuestionTable question={target.question} idx={idx} />
-                  ))
-                : ""}
+              {Object.keys(questions.current).map((v, idx) => (
+                <QuestionTable
+                  question={questions.current[~~v].question}
+                  id={questions.current[~~v].id}
+                  idx={idx}
+                />
+              ))}
             </Table>
           </div>
         </div>
         <DelelteAllSection>
-          <DeleteAllBtn onClick={deleteAll}>전체삭제</DeleteAllBtn>
+          {/* <DeleteAllBtn onClick={deleteAll}>전체삭제</DeleteAllBtn> */}
         </DelelteAllSection>
       </QuestionListContainer>
     </>
