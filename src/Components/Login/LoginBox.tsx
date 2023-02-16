@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import styled from "styled-components";
-import { userSlice } from "../../features/userSlice";
+import { userSlice } from "../../Features/userSlice";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

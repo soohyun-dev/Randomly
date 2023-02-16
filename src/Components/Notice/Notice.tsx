@@ -11,7 +11,7 @@ import {
 import styled from "styled-components";
 import { NoticeInfo } from "./types";
 import { useSelector } from "react-redux";
-import { selectUser } from "features/userSlice";
+import { selectUser } from "Features/userSlice";
 import { Link } from "react-router-dom";
 import NoticeList from "./NoticeList";
 

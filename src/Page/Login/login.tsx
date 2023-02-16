@@ -5,7 +5,7 @@ import {
   userSlice,
   selectUser,
   selectUserEmail,
-} from "../../features/userSlice";
+} from "../../Features/userSlice";
 import { useSelector } from "react-redux";
 import LoginBox from "../../Components/Login/LoginBox";
 import { persistor } from "../..";

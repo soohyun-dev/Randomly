@@ -6,7 +6,7 @@ import { QAInfo } from "./types";
 import QAList from "./QAList";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser } from "features/userSlice";
+import { selectUser } from "Features/userSlice";
 
 export default function QA() {
   const [show, setShow] = useState<boolean>(false);
@@ -22,8 +22,6 @@ export default function QA() {
     }));
     setShow(true);
   };
-
-  console.log(QA.current);
 
   useEffect(() => {
     getQA();
