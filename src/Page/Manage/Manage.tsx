@@ -14,7 +14,7 @@ import {
   query,
 } from "firebase/firestore";
 import { fireStore } from "../../firebase";
-import { ManageQuestionInfo } from "./types";
+import { ManagePackageInfo } from "./types";
 import { getDateTime } from "Utils/getTime";
 
 export default function Manage() {
@@ -32,11 +32,11 @@ export default function Manage() {
   const [show, setShow] = useState<boolean>(false);
   const [page, setPage] = useState<string>("question");
   const [nowPackage, setNowPackage] = useState("0");
-  const packages = useRef<ManageQuestionInfo[]>([]);
+  const packages = useRef<ManagePackageInfo[]>([]);
   const user = useSelector(selectUser);
   const packageInfo = collection(fireStore, `users/${user}/packages`);
 
-  const getQuestions = async () => {
+  const getPackages = async () => {
     const packageData = await getDocs(
       query(packageInfo, orderBy("time", "asc"))
     );
@@ -65,7 +65,7 @@ export default function Manage() {
   };
 
   useEffect(() => {
-    getQuestions();
+    getPackages();
   }, [nowPackage, packages]);
 
   return (

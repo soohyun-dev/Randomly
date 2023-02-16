@@ -2,7 +2,7 @@ export interface UserInfo {
   id?: string;
   idx?: number;
   time?: Object;
-  user?: string;
+  member?: string;
 }
 
 export interface QuestionInfo {

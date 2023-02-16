@@ -1,7 +1,7 @@
-import React, { MouseEventHandler, useEffect, useId, useState } from "react";
+import React, { useRef, useEffect, useId, useState } from "react";
 import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
 import { fireStore } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import StopWatch from "../../Components/StopWatch/Stopwatch";
@@ -10,6 +10,7 @@ import { QuestionInfo, UserInfo } from "./types";
 import { selectUser } from "Features/userSlice";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ManagePackageInfo } from "../Manage/types";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
@@ -20,12 +21,24 @@ export default function PlayInterview() {
   const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([]);
   const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([]);
   const [orderMember, setOrderMember] = useState<Array<number>>([]);
+  const [nowPackage, setNowPackage] = useState<string>("0");
+  const [show, setShow] = useState<boolean>(false);
+  const packages = useRef<ManagePackageInfo[]>([]);
+  const [packageId, setPackageId] = useState<string>("");
   const uniqueId = useId();
-  const userInfo = collection(fireStore, "member");
-  const questionInfo = collection(fireStore, "questions");
-  const user = useSelector(selectUser);
 
-  console.log(open);
+  const user = useSelector(selectUser);
+  const packageInfo = collection(fireStore, `users/${user}/packages`);
+  const userInfo =
+    packageId === ""
+      ? collection(fireStore, `users/${user}/packages`)
+      : collection(fireStore, `users/${user}/packages/${packageId}/members`);
+
+  const questionInfo =
+    packageId === ""
+      ? collection(fireStore, `users/${user}/questions`)
+      : collection(fireStore, `users/${user}/packages/${packageId}/questions`);
+
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
    * 버튼을 누를 때마다 랜덤의 번호들이 생성되어 팀원들에게 부여된다.
@@ -99,6 +112,33 @@ export default function PlayInterview() {
     return correct;
   };
 
+  const getPackages = async () => {
+    const packageData = await getDocs(
+      query(packageInfo, orderBy("time", "asc"))
+    );
+    packages.current = packageData.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setShow(true);
+    setPackageId(packages.current[nowPackage].id);
+  };
+
+  const getQuestions = async () => {
+    const data = await getDocs(questionInfo);
+    setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  const getUsers = async () => {
+    const data = await getDocs(userInfo);
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  const shuffleName = () => {
+    setOrderMember(MakeNums(Object.keys(users).length));
+    alert("순서 변경이 완료되었습니다!");
+  };
+
   const showQuestion = result.map((_, i) => (
     <div>
       {result[i].map((v: number, idx: number) =>
@@ -155,8 +195,8 @@ export default function PlayInterview() {
           <MemberTitle>팀원명 : </MemberTitle>
           <MemberName>
             {orderMember.length === 0
-              ? value.user
-              : users[orderMember[idx]].user}
+              ? value.member
+              : users[orderMember[idx]].member}
           </MemberName>
         </UpperLeft>
         <UpperMiddle></UpperMiddle>
@@ -182,25 +222,13 @@ export default function PlayInterview() {
     </UserContainer>
   ));
 
-  const getQuestions = async () => {
-    const data = await getDocs(questionInfo);
-    setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-
-  const getUsers = async () => {
-    const data = await getDocs(userInfo);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-
-  const shuffleName = () => {
-    setOrderMember(MakeNums(Object.keys(users).length));
-    alert("순서 변경이 완료되었습니다!");
-  };
-
   useEffect(() => {
+    getPackages();
     getUsers();
     getQuestions();
-  }, [result, orderMember]);
+
+    setNowPackage(nowPackage);
+  }, [result, orderMember, nowPackage, packages, packageId]);
 
   return (
     <>
@@ -213,9 +241,31 @@ export default function PlayInterview() {
         {user === null ? (
           ""
         ) : (
-          <PageGuide>하단의 버튼을 눌러 시작하세요. </PageGuide>
+          <PageGuide>인터뷰를 할 폴더를 골라주세요. </PageGuide>
         )}
       </section>
+      <PackageSection>
+        <PackageDiv>
+          {Object.keys(packages.current).map((v, idx) => (
+            <PackageBox
+              onClick={() => {
+                setNowPackage(v);
+              }}
+            >
+              <PackageTitle>{packages.current[v].title}</PackageTitle>
+              <PackageDate>{packages.current[v].idx.slice(0, 10)}</PackageDate>
+            </PackageBox>
+          ))}
+        </PackageDiv>
+      </PackageSection>
+      <PackageTitleDiv>
+        <PackageTitleText>
+          {show &&
+            packages.current.length > 0 &&
+            packages.current[nowPackage].title}
+        </PackageTitleText>
+      </PackageTitleDiv>
+
       <section style={{ textAlign: "center" }}>
         <MainContainer>
           {user === null ? (
@@ -264,6 +314,7 @@ const Title = styled.h1`
 
 const PageGuide = styled.p`
   font-size: 17px;
+  padding: 1em 0;
   //   &:hover {
   //     font-size: 24px;
   //     transition: 0.8s;
@@ -461,4 +512,53 @@ const CorrectBtn = styled.button<{ color: any }>`
   &:hover {
     opacity: 80%;
   }
+`;
+
+const PackageSection = styled.section`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const PackageTitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 5em 0;
+`;
+
+const PackageTitleText = styled.p`
+  font-size: 24px;
+`;
+
+const PackageDiv = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const PackageBox = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15em;
+  height: 10em;
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  margin: 2em 1em;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+`;
+
+const PackageTitle = styled.div`
+  font-size: 20px;
+  margin: 1em 0;
+`;
+const PackageDate = styled.div`
+  color: #777;
 `;
