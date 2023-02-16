@@ -106,7 +106,8 @@ export default function Manage() {
                 setNowPackage(v);
               }}
             >
-              {packages.current[v].idx}
+              <PackageTitle>{packages.current[v].title}</PackageTitle>
+              <PackageDate>{packages.current[v].idx.slice(0, 10)}</PackageDate>
             </PackageBox>
           ))}
         </PackageDiv>
@@ -134,7 +135,12 @@ export default function Manage() {
               nowPackage={nowPackage}
             />
           )
-        : user !== null && <ManageUser />}
+        : user !== null && (
+            <ManageUser
+              packageId={packages.current[nowPackage].id}
+              nowPackage={nowPackage}
+            />
+          )}
       <Footer />
     </>
   );
@@ -196,6 +202,10 @@ const PackageDiv = styled.div`
 `;
 
 const PackageBox = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 15em;
   height: 10em;
   border: none;
@@ -207,4 +217,12 @@ const PackageBox = styled.div`
     box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
   }
+`;
+
+const PackageTitle = styled.div`
+  font-size: 20px;
+  margin: 1em 0;
+`;
+const PackageDate = styled.div`
+  color: #777;
 `;

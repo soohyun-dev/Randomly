@@ -6,11 +6,6 @@ import {
   getDocs,
   query,
   orderBy,
-  doc,
-  deleteDoc,
-  updateDoc,
-  arrayUnion,
-  setDoc,
 } from "firebase/firestore";
 import styled from "styled-components";
 import QuestionTable from "./QuestionTable";
@@ -22,6 +17,8 @@ import { QuestionInfo } from "Page/Play/types";
 export default function ManageQuestion({ packageId, nowPackage }) {
   const [show, setShow] = useState<boolean>(false);
   const [newQuestion, setNewQuestion] = useState<string>("");
+  const [preAddQuestion, setPreAddQuestions] = useState<string>("");
+  const [preAddIdx, setPreAddIdx] = useState<number>();
   const user = useSelector(selectUser);
   const [now, setNow] = useState(nowPackage);
   const questions = useRef<QuestionInfo[]>([]);
@@ -53,6 +50,8 @@ export default function ManageQuestion({ packageId, nowPackage }) {
     newData["question"] = newQuestion;
     newData["time"] = new Date();
     await addDoc(questionsInfo, newData);
+    setPreAddQuestions(newQuestion);
+    setPreAddIdx(idx + 1);
     setNewQuestion("");
     alert("질문이 추가되었습니다.");
   };
@@ -85,8 +84,6 @@ export default function ManageQuestion({ packageId, nowPackage }) {
     setNow(nowPackage);
   }, [newQuestion, packageId, nowPackage, now]);
 
-  console.log(packageId, questions.current);
-
   return (
     <>
       <QuestionListContainer>
@@ -99,6 +96,13 @@ export default function ManageQuestion({ packageId, nowPackage }) {
               onChange={(e) => setNewQuestion(e.target.value)}
             />
             <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
+            {preAddQuestion === "" ? (
+              ""
+            ) : (
+              <PreAddText>
+                이전 추가 질문 : {preAddIdx}. {preAddQuestion}
+              </PreAddText>
+            )}
           </div>
           <div style={{ display: "inline-block" }}>
             <Table>
@@ -140,7 +144,7 @@ const QuestionInput = styled.input`
   padding-left: 1em;
   border: 2px solid #eeeeee;
   border-radius: 10px;
-  margin: 2em 0 5em 5em;
+  margin: 2em 0 2em 5em;
 `;
 
 const Table = styled.table`
@@ -193,4 +197,10 @@ const DeleteAllBtn = styled.button`
     background-color: red;
     transition: 0.5s;
   }
+`;
+
+const PreAddText = styled.p`
+  margin-bottom: 5em;
+  color: #777;
+  font-size: 14px;
 `;

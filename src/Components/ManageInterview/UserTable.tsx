@@ -1,12 +1,16 @@
 import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { selectUser } from "features/userSlice";
+import { useSelector } from "react-redux";
 
-export default function UserTable({ user, id, idx }) {
-  const [newUser, setNewUser] = useState(user);
-  const [update, setUpdate] = useState(false);
-  const [updateBtnToggle, setUpdateBtnToggle] = useState(false);
+export default function UserTable({ packageId, member, id, idx }) {
+  const [newMember, setNewMember] = useState<string>(member);
+  const [update, setUpdate] = useState<boolean>(false);
+  const [change, getChange] = useState<boolean>(false);
+  const [updateBtnToggle, setUpdateBtnToggle] = useState<boolean>(false);
+  const user = useSelector(selectUser);
 
   /**
    * 유저 이름 수정
@@ -15,9 +19,14 @@ export default function UserTable({ user, id, idx }) {
    */
 
   const updateQuestion = async (id) => {
-    const questionDoc = doc(fireStore, "member", id);
-    const newContent = { user: newUser };
+    const questionDoc = doc(
+      fireStore,
+      `users/${user}/packages/${packageId}/members`,
+      id
+    );
+    const newContent = { member: newMember };
     await updateDoc(questionDoc, newContent);
+    await getChange(!change);
   };
 
   /**
@@ -27,14 +36,21 @@ export default function UserTable({ user, id, idx }) {
    */
   const checkDelete = (id) => {
     const deleteQuestion = async (id) => {
-      const questionDoc = doc(fireStore, "member", id);
-      await deleteDoc(questionDoc);
+      const memberDoc = doc(
+        fireStore,
+        `users/${user}/packages/${packageId}/members`,
+        id
+      );
+      await deleteDoc(memberDoc);
     };
     if (window.confirm("정말 삭제합니까?")) {
       deleteQuestion(id);
       alert("삭제되었습니다.");
+      getChange(!change);
     }
   };
+
+  useEffect(() => {}, [change]);
 
   return (
     <>
@@ -43,11 +59,11 @@ export default function UserTable({ user, id, idx }) {
         <UserTd>
           {update ? (
             <UserInput
-              value={newUser}
-              onChange={(e) => setNewUser(e.target.value)}
+              value={newMember}
+              onChange={(e) => setNewMember(e.target.value)}
             />
           ) : (
-            user
+            member
           )}
         </UserTd>
         <Td>

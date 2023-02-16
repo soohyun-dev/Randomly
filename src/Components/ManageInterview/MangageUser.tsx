@@ -11,12 +11,19 @@ import styled from "styled-components";
 import { useRef } from "react";
 import UserTable from "./UserTable";
 import { ManageUserInfo } from "./types";
+import { selectUser } from "features/userSlice";
+import { useSelector } from "react-redux";
 
-export default function ManageUser() {
+export default function ManageUser({ packageId, nowPackage }) {
   const [show, setShow] = useState<boolean>(false);
-  const [newUser, setNewUser] = useState<string>("");
+  const [newMember, setNewMember] = useState<string>("");
+  const [now, setNow] = useState(nowPackage);
   const users = useRef<ManageUserInfo[]>([]);
-  const userInfo = collection(fireStore, "member");
+  const user = useSelector(selectUser);
+  const userInfo = collection(
+    fireStore,
+    `users/${user}/packages/${packageId}/members`
+  );
 
   const getUsers = async () => {
     const userData = await getDocs(query(userInfo, orderBy("time", "asc")));
@@ -24,7 +31,7 @@ export default function ManageUser() {
       ...doc.data(),
       id: doc.id,
     }));
-    setShow(true);
+    setShow(!show);
   };
 
   /**
@@ -36,17 +43,18 @@ export default function ManageUser() {
     const idx = Object.keys(users.current).length;
     const newData = {};
     newData["idx"] = idx;
-    newData["user"] = newUser;
+    newData["member"] = newMember;
     newData["time"] = new Date();
     await addDoc(userInfo, newData);
     alert("유저가 추가되었습니다.");
-    setNewUser("");
+    setNewMember("");
     getUsers();
   };
 
   useEffect(() => {
     getUsers();
-  }, [users, newUser]);
+    setNow(nowPackage);
+  }, [newMember, packageId, nowPackage, now]);
 
   return (
     <>
@@ -54,11 +62,11 @@ export default function ManageUser() {
         <div>
           <div>
             <UserInput
-              value={newUser}
+              value={newMember}
               type="text"
               placeholder="추가할 참여자를 입력해주세요."
               onChange={(e) => {
-                setNewUser(e.target.value);
+                setNewMember(e.target.value);
               }}
             />
             <AddBtn onClick={addUser}>참여자 추가</AddBtn>
@@ -73,15 +81,14 @@ export default function ManageUser() {
                   <ThNoRight>삭제하기</ThNoRight>
                 </tr>
               </thead>
-              {show
-                ? Object.keys(users.current).map((v, idx) => (
-                    <UserTable
-                      user={users.current[~~v].user}
-                      id={users.current[~~v].id}
-                      idx={idx}
-                    />
-                  ))
-                : ""}
+              {Object.keys(users.current).map((v, idx) => (
+                <UserTable
+                  packageId={packageId}
+                  member={users.current[~~v].member}
+                  id={users.current[~~v].id}
+                  idx={idx}
+                />
+              ))}
             </Table>
           </div>
         </div>

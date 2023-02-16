@@ -10,7 +10,7 @@ export default function QuestionTable({ packageId, question, id, idx }) {
   const [update, setUpdate] = useState(false);
   const [updateBtnToggle, setUpdateBtnToggle] = useState(false);
   const user = useSelector(selectUser);
-  console.log(id);
+
   /**
    * 질문 수정
    *
@@ -48,8 +48,6 @@ export default function QuestionTable({ packageId, question, id, idx }) {
       alert("삭제되었습니다.");
     }
   };
-
-  useEffect(() => {}, [question]);
 
   return (
     <>
