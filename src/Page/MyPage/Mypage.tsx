@@ -5,7 +5,6 @@ import { persistor } from "../..";
 import Footer from "../../Components/Footer";
 import Nav from "../../Components/Nav";
 import { selectUser, selectUserEmail } from "../../Features/userSlice";
-import { useEffect } from "react";
 
 export default function Mypage() {
   const user = useSelector(selectUser);
