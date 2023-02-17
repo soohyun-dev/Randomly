@@ -123,6 +123,7 @@ export default function PlayInterview() {
     setOpen([]);
     setCorrectCnt([]);
     setToggleQuestion([]);
+    setOrderMember([]);
     setBool(false);
   };
 
