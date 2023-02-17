@@ -94,9 +94,11 @@ export default function Manage() {
             참여자 관리
           </MiniTitle>
         </div>
-        <div>
-          <PlusBtn onClick={() => plusPackage()}>질문 폴더 추가</PlusBtn>
-        </div>
+        {user !== null && (
+          <div>
+            <PlusBtn onClick={() => plusPackage()}>질문 폴더 추가</PlusBtn>
+          </div>
+        )}
       </section>
       <PackageSection>
         <PackageDiv>
