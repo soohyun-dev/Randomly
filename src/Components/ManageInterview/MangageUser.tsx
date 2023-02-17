@@ -51,12 +51,6 @@ export default function ManageUser({ packageId, nowPackage }) {
     getUsers();
   };
 
-  const enterSubmit = (e) => {
-    if (e.key === "Enter") {
-      addUser();
-    }
-  };
-
   useEffect(() => {
     getUsers();
     setNow(nowPackage);
@@ -74,7 +68,6 @@ export default function ManageUser({ packageId, nowPackage }) {
               onChange={(e) => {
                 setNewMember(e.target.value);
               }}
-              onKeyDown={enterSubmit}
             />
             <AddBtn onClick={addUser}>참여자 추가</AddBtn>
           </div>

@@ -56,12 +56,6 @@ export default function ManageQuestion({ packageId, nowPackage }) {
     alert("질문이 추가되었습니다.");
   };
 
-  const enterSubmit = (e) => {
-    if (e.key === "Enter") {
-      addQuestion();
-    }
-  };
-
   //   /**
   //    * 전체 질문 삭제
   //    *
@@ -100,7 +94,6 @@ export default function ManageQuestion({ packageId, nowPackage }) {
               value={newQuestion}
               placeholder="추가할 질문을 입력해주세요."
               onChange={(e) => setNewQuestion(e.target.value)}
-              onKeyDown={enterSubmit}
             />
             <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
             {preAddQuestion === "" ? (
