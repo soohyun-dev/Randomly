@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useId, useState } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useId,
+  useState,
+  useLayoutEffect,
+} from "react";
 import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
 import { fireStore } from "../../firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
@@ -45,8 +51,7 @@ export default function PlayInterview() {
    *
    * @param {e} 질문 분배 버튼 이벤트
    */
-  const makeArray = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const makeArray = () => {
     alert("질문 분배가 완료되었습니다!");
     setResult(getQuestionNums(users.length, Object.keys(questions).length));
     setOpen(Array.from({ length: users.length }, () => false));
@@ -110,6 +115,15 @@ export default function PlayInterview() {
       }
     });
     return correct;
+  };
+
+  const changePackage = (now) => {
+    setNowPackage(now);
+    setResult([]);
+    setOpen([]);
+    setCorrectCnt([]);
+    setToggleQuestion([]);
+    setBool(false);
   };
 
   const getPackages = async () => {
@@ -223,11 +237,12 @@ export default function PlayInterview() {
   ));
 
   useEffect(() => {
-    getPackages();
-    getUsers();
-    getQuestions();
-
-    setNowPackage(nowPackage);
+    if (user !== null) {
+      getPackages();
+      getUsers();
+      getQuestions();
+      setNowPackage(nowPackage);
+    }
   }, [result, orderMember, nowPackage, packages, packageId]);
 
   return (
@@ -249,7 +264,7 @@ export default function PlayInterview() {
           {Object.keys(packages.current).map((v, idx) => (
             <PackageBox
               onClick={() => {
-                setNowPackage(v);
+                changePackage(v);
               }}
             >
               <PackageTitle>{packages.current[v].title}</PackageTitle>
