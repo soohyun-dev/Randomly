@@ -6,7 +6,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 import { getDateTime } from "Utils/getTime";
 
 export default function WriteQA() {

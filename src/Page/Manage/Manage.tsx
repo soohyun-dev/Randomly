@@ -5,7 +5,7 @@ import ManageUser from "../../Components/ManageInterview/MangageUser";
 import { useEffect, useRef, useState } from "react";
 import Footer from "../../Components/Footer";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../Features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import {
   addDoc,
   collection,

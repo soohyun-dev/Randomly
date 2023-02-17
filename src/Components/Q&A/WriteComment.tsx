@@ -1,4 +1,4 @@
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 import { fireStore } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";

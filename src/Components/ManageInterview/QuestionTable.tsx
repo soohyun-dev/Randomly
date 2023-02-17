@@ -3,7 +3,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 
 export default function QuestionTable({ packageId, question, id, idx }) {
   const [newQuestion, setNewQuestion] = useState(question);

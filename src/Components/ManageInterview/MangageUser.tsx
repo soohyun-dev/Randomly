@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { useRef } from "react";
 import UserTable from "./UserTable";
 import { ManageUserInfo } from "./types";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 import { useSelector } from "react-redux";
 
 export default function ManageUser({ packageId, nowPackage }) {

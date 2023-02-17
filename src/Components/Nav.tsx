@@ -2,7 +2,7 @@ import { persistor } from "index";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { selectUser } from "../Features/userSlice";
+import { selectUser } from "../features/userSlice";
 
 export default function Nav() {
   const user = useSelector(selectUser);

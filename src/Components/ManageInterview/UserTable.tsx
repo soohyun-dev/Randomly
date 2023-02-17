@@ -2,7 +2,7 @@ import { fireStore } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 import { useSelector } from "react-redux";
 
 export default function UserTable({ packageId, member, id, idx }) {

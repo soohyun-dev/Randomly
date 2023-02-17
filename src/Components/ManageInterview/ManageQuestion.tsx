@@ -10,7 +10,7 @@ import {
 import styled from "styled-components";
 import QuestionTable from "./QuestionTable";
 import { useRef } from "react";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 import { useSelector } from "react-redux";
 import { QuestionInfo } from "Page/Play/types";
 

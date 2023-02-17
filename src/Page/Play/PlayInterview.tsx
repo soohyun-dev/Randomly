@@ -13,7 +13,7 @@ import Nav from "../../Components/Nav";
 import StopWatch from "../../Components/StopWatch/Stopwatch";
 import Footer from "../../Components/Footer";
 import { QuestionInfo, UserInfo } from "./types";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ManagePackageInfo } from "../Manage/types";

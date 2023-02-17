@@ -1,4 +1,4 @@
-import userReducer from "../Features/userSlice";
+import userReducer from "../features/userSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "redux";

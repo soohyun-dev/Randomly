@@ -6,7 +6,7 @@ import { QAInfo } from "./types";
 import QAList from "./QAList";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser } from "Features/userSlice";
+import { selectUser } from "features/userSlice";
 
 export default function QA() {
   const [show, setShow] = useState<boolean>(false);
