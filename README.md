@@ -17,8 +17,8 @@
 - [📝 진행과정 기록 1](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
 - [📝 진행과정 기록 2](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
 - [📝 진행과정 기록 3](https://bmy1320.tistory.com/entry/dd)
-
-<br>
+- [📝 진행과정 기록 4](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230217)
+  <br>
 
 ## ⏰ 개발 기간
 
@@ -126,41 +126,67 @@
 
 ## 패키지 구조
 
-📦src<br>
-┣ 📂Components<br>
-┃ ┣ 📂Login<br>
-┃ ┃ ┗ 📜LoginBox.tsx<br>
-┃ ┣ 📂ManageInterview<br>
-┃ ┃ ┣ 📜ManageQuestion.tsx<br>
-┃ ┃ ┣ 📜MangageUser.tsx<br>
-┃ ┃ ┣ 📜QuestionTable.tsx<br>
-┃ ┃ ┣ 📜types.ts<br>
-┃ ┃ ┗ 📜UserTable.tsx<br>
-┃ ┣ 📂StopWatch<br>
-┃ ┃ ┗ 📜Stopwatch.tsx<br>
-┃ ┣ 📜Footer.tsx<br>
-┃ ┗ 📜Nav.tsx<br>
-┣ 📂features<br>
-┃ ┗ 📜userSlice.js<br>
-┣ 📂Page<br>
-┃ ┣ 📂Login<br>
-┃ ┃ ┗ 📜login.tsx<br>
-┃ ┣ 📂Manage<br>
-┃ ┃ ┗ 📜Manage.tsx<br>
-┃ ┣ 📂MyPage<br>
-┃ ┃ ┗ 📜Mypage.tsx<br>
-┃ ┣ 📂Play<br>
-┃ ┃ ┣ 📜PlayInterview.tsx<br>
-┃ ┃ ┗ 📜types.ts<br>
-┃ ┗ 📜Main.tsx<br>
-┣ 📂store<br>
-┃ ┗ 📜store.js<br>
-┣ 📂Utils<br>
-┃ ┗ 📜MakeNums.tsx<br>
-┣ 📜App.tsx<br>
-┣ 📜firebase.tsx<br>
-┣ 📜GlobalStyle.tsx<br>
-┗ 📜index.tsx<br>
+<pre>
+📦src
+ ┣ 📂Components
+ ┃ ┣ 📂Login
+ ┃ ┃ ┗ 📜LoginBox.tsx
+ ┃ ┣ 📂ManageInterview
+ ┃ ┃ ┣ 📜ManageQuestion.tsx
+ ┃ ┃ ┣ 📜MangageUser.tsx
+ ┃ ┃ ┣ 📜QuestionTable.tsx
+ ┃ ┃ ┣ 📜types.ts
+ ┃ ┃ ┗ 📜UserTable.tsx
+ ┃ ┣ 📂Memo
+ ┃ ┃ ┗ 📜Memo.tsx
+ ┃ ┣ 📂Notice
+ ┃ ┃ ┣ 📜Notice.tsx
+ ┃ ┃ ┣ 📜NoticeList.tsx
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂Q&A
+ ┃ ┃ ┣ 📜Comment.tsx
+ ┃ ┃ ┣ 📜QA.tsx
+ ┃ ┃ ┣ 📜QAComment.tsx
+ ┃ ┃ ┣ 📜QAList.tsx
+ ┃ ┃ ┣ 📜types.ts
+ ┃ ┃ ┗ 📜WriteComment.tsx
+ ┃ ┣ 📂StopWatch
+ ┃ ┃ ┗ 📜Stopwatch.tsx
+ ┃ ┣ 📜Footer.tsx
+ ┃ ┗ 📜Nav.tsx
+ ┣ 📂features
+ ┃ ┗ 📜userSlice.js
+ ┣ 📂Hooks
+ ┣ 📂Page
+ ┃ ┣ 📂Login
+ ┃ ┃ ┗ 📜login.tsx
+ ┃ ┣ 📂Manage
+ ┃ ┃ ┣ 📜Manage.tsx
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂MyPage
+ ┃ ┃ ┗ 📜Mypage.tsx
+ ┃ ┣ 📂Notice
+ ┃ ┃ ┣ 📜NoticePosting.tsx
+ ┃ ┃ ┣ 📜types.ts
+ ┃ ┃ ┗ 📜WriteNotice.tsx
+ ┃ ┣ 📂Play
+ ┃ ┃ ┣ 📜PlayInterview.tsx
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂Q&A
+ ┃ ┃ ┣ 📜QAPage.tsx
+ ┃ ┃ ┣ 📜QAPosting.tsx
+ ┃ ┃ ┗ 📜WriteQA.tsx
+ ┃ ┗ 📜Main.tsx
+ ┣ 📂store
+ ┃ ┗ 📜store.js
+ ┣ 📂Utils
+ ┃ ┣ 📜getTime.tsx
+ ┃ ┗ 📜MakeNums.tsx
+ ┣ 📜App.tsx
+ ┣ 📜firebase.tsx
+ ┣ 📜GlobalStyle.tsx
+ ┗ 📜index.tsx
+</pre>
 
 <br>
 
@@ -168,6 +194,10 @@
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
 
-[⚔️ 트러블 슈팅](https://github.com/soohyun-dev/Randomly/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
+<br>
+
+## Wiki
+
+[wiki에 개발의 전반적인 기록을 담았습니다.](https://github.com/soohyun-dev/Randomly/wiki)
 
 <br>
