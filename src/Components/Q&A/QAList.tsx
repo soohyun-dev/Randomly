@@ -40,7 +40,7 @@ const PostingBox = styled.div`
   width: 16em;
   height: 10em;
   padding: 0 1em;
-  background-color: #f5f5f5;
+  background-color: var(--QA-PostingBox);
   border-radius: 10px;
   border: none;
   cursor: pointer;

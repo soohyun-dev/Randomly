@@ -29,7 +29,7 @@ const PostingBox = styled.div`
   display: flex;
   margin: 3em 2em;
   color: black;
-  background-color: #f5f5f5;
+  background-color: var(--Notice-PostingBox);
   width: 50em;
   height: 4em;
   border-radius: 15px;

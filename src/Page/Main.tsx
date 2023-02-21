@@ -128,6 +128,7 @@ const TitleContent = styled.p`
   position: relative;
   font-size: 26px;
   font-weight: 500;
+  color: var(--gray-text);
 `;
 
 const Img = styled.img`

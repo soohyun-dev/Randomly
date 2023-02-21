@@ -11,8 +11,9 @@ import styled from "styled-components";
 import QuestionTable from "./QuestionTable";
 import { useRef } from "react";
 import { selectUser } from "features/userSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { QuestionInfo } from "Page/Play/types";
+import { questionsSlice, selectQuestions } from "features/questionsSlice";
 
 export default function ManageQuestion({ packageId, nowPackage }) {
   const [show, setShow] = useState<boolean>(false);
@@ -26,6 +27,8 @@ export default function ManageQuestion({ packageId, nowPackage }) {
     fireStore,
     `users/${user}/packages/${packageId}/questions`
   );
+  const dispatch = useDispatch();
+  const question = useSelector(selectQuestions);
 
   const getQuestions = async () => {
     const questionData = await getDocs(
@@ -36,7 +39,18 @@ export default function ManageQuestion({ packageId, nowPackage }) {
       id: doc.id,
     }));
     setShow(!show);
+
+    dispatch(
+      questionsSlice.actions.setQuestion({
+        Questions: questionData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      })
+    );
   };
+
+  console.log(1, question);
 
   /**
    * 질문 추가

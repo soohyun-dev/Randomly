@@ -424,7 +424,7 @@ const USER = styled.div`
 `;
 
 const UserContainer = styled.div`
-  background-color: #f5f5f5;
+  background-color: var(--containter-box);
   width: 80em;
   border-radius: 10px;
 `;

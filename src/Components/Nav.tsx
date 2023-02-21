@@ -36,7 +36,8 @@ export default function Nav() {
       <TopHeader>
         <Logo>
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-            <LogoImg src="https://user-images.githubusercontent.com/81623931/216827383-470908e4-f188-4711-b716-4677076e67c2.png" />
+            {/* <LogoImg src="https://user-images.githubusercontent.com/81623931/216827383-470908e4-f188-4711-b716-4677076e67c2.png" /> */}
+            <LogoText>Randomly</LogoText>
           </Link>
         </Logo>
         <Menu>
@@ -94,9 +95,21 @@ export default function Nav() {
             <Logout onClick={async () => purge()}>Logout</Logout>
           )}
         </Option>
-        <div>
-          <p onClick={ChangeDarkMode}>다크모드</p>
-        </div>
+        <ThemeDiv onClick={ChangeDarkMode}>
+          {darkMode ? (
+            <img
+              src="https://user-images.githubusercontent.com/81623931/220241975-7eb1ba2c-fa5a-4baa-9d0f-72bd3f514183.png"
+              width="40"
+              height="40"
+            />
+          ) : (
+            <img
+              src="https://user-images.githubusercontent.com/81623931/220242243-82ad3074-2919-46a2-8b86-2e234511564a.png"
+              width="40"
+              height="40"
+            />
+          )}
+        </ThemeDiv>
       </TopHeader>
     </>
   );
@@ -111,11 +124,11 @@ const TopHeader = styled.header`
   z-index: 1000;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 2fr 0.5fr 0.5fr;
-  padding: 15px;
+  grid-template-columns: 1fr 2.2fr 0.5fr 0.3fr;
+  padding: 15px 15px 10px 15px;
   font-size: 28px;
   color: black;
-  background-color: white;
+  background-color: var(--navbar-box);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
   text-align: center;
   align-items: center;
@@ -127,6 +140,10 @@ const TopHeader = styled.header`
 
 const Logo = styled.div`
   font-weight: bold;
+`;
+
+const LogoText = styled.p`
+  color: var(--logo-text);
 `;
 
 const Menu = styled.div`
@@ -158,4 +175,8 @@ const Logout = styled.button`
   &:hover {
     opacity: 70%;
   }
+`;
+
+const ThemeDiv = styled.div`
+  cursor: pointer;
 `;

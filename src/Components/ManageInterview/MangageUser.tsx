@@ -12,7 +12,8 @@ import { useRef } from "react";
 import UserTable from "./UserTable";
 import { ManageUserInfo } from "./types";
 import { selectUser } from "features/userSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { memberSlice, selectMember } from "features/memberSlice";
 
 export default function ManageUser({ packageId, nowPackage }) {
   const [show, setShow] = useState<boolean>(false);
@@ -20,6 +21,8 @@ export default function ManageUser({ packageId, nowPackage }) {
   const [now, setNow] = useState(nowPackage);
   const users = useRef<ManageUserInfo[]>([]);
   const user = useSelector(selectUser);
+  const member = useSelector(selectMember);
+  const dispatch = useDispatch();
   const userInfo = collection(
     fireStore,
     `users/${user}/packages/${packageId}/members`
@@ -32,7 +35,17 @@ export default function ManageUser({ packageId, nowPackage }) {
       id: doc.id,
     }));
     setShow(!show);
+    dispatch(
+      memberSlice.actions.setMember({
+        members: userData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      })
+    );
   };
+
+  console.log(member);
 
   /**
    * 유저 추가

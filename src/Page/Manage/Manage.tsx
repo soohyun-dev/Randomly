@@ -4,7 +4,7 @@ import ManageQuestion from "../../Components/ManageInterview/ManageQuestion";
 import ManageUser from "../../Components/ManageInterview/MangageUser";
 import { useEffect, useRef, useState } from "react";
 import Footer from "../../Components/Footer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 import {
   addDoc,
@@ -16,6 +16,7 @@ import {
 import { fireStore } from "../../firebase";
 import { ManagePackageInfo } from "./types";
 import { getDateTime } from "Utils/getTime";
+import { folderSlice, selectFolder } from "features/folderSlice";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -33,7 +34,9 @@ export default function Manage() {
   const [page, setPage] = useState<string>("question");
   const [nowPackage, setNowPackage] = useState("0");
   const packages = useRef<ManagePackageInfo[]>([]);
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const folders = useSelector(selectFolder);
   const packageInfo = collection(fireStore, `users/${user}/packages`);
 
   const getPackages = async () => {
@@ -44,12 +47,22 @@ export default function Manage() {
       ...doc.data(),
       id: doc.id,
     }));
+
+    dispatch(
+      folderSlice.actions.setFolder({
+        folders: packageData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      })
+    );
     setShow(true);
   };
 
   const changeView = (value) => {
     setPage(value);
   };
+
   const plusPackage = async () => {
     if (window.confirm("새로운 폴더를 추가하시겠습니까?")) {
       alert("추가되었습니다!");
