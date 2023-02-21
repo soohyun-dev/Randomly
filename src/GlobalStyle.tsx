@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    background-color: ${({ theme }) => (theme ? "#2D3436;" : "white")}
+    color: #bdc1c6;
   }
 
   button{

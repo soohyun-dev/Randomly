@@ -1,12 +1,15 @@
+import { selectTheme, themeSlice } from "features/themeSlice";
 import { persistor } from "index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { selectUser } from "../features/userSlice";
 
 export default function Nav() {
   const user = useSelector(selectUser);
+  const darkMode = useSelector(selectTheme);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const purge = async () => {
     await persistor.purge();
@@ -14,6 +17,20 @@ export default function Nav() {
     await navigate("/");
     await window.location.reload();
   };
+
+  /**
+   * 🌛 다크모드
+   */
+  const ChangeDarkMode = () => {
+    dispatch(
+      themeSlice.actions.setTheme({
+        theme: !darkMode,
+      })
+    );
+  };
+
+  console.log(darkMode);
+
   return (
     <>
       <TopHeader>
@@ -77,6 +94,9 @@ export default function Nav() {
             <Logout onClick={async () => purge()}>Logout</Logout>
           )}
         </Option>
+        <div>
+          <p onClick={ChangeDarkMode}>다크모드</p>
+        </div>
       </TopHeader>
     </>
   );
@@ -91,8 +111,8 @@ const TopHeader = styled.header`
   z-index: 1000;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  padding: 25px;
+  grid-template-columns: 1fr 2fr 0.5fr 0.5fr;
+  padding: 15px;
   font-size: 28px;
   color: black;
   background-color: white;

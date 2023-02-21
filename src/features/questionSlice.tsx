@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const questionsSlice = createSlice({
+export const questionSlice = createSlice({
   name: "question",
   initialState: {
     questions: null,
@@ -12,8 +12,8 @@ export const questionsSlice = createSlice({
   },
 });
 
-export const { getQuestion } = questionsSlice.actions;
+export const { getQuestion } = questionSlice.actions;
 
 export const selectQuestions = (state) => state.questions.questions;
 
-export default questionsSlice.reducer;
+export default questionSlice.reducer;

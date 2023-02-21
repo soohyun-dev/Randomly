@@ -10,11 +10,15 @@ import Manage from "./Page/Manage/Manage";
 import Mypage from "./Page/MyPage/Mypage";
 import PlayInterview from "./Page/Play/PlayInterview";
 import WriteQA from "Page/Q&A/WriteQA";
+import { useSelector } from "react-redux";
+import { selectTheme } from "features/themeSlice";
 
 export default function App(): JSX.Element {
+  const theme = useSelector(selectTheme);
+
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle theme={theme} />
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/PlayInterview" element={<PlayInterview />}></Route>
