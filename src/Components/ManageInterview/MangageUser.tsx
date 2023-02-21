@@ -14,18 +14,19 @@ import { ManageUserInfo } from "./types";
 import { selectUser } from "features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memberSlice, selectMember } from "features/memberSlice";
+import { chooseFolder, chooseId } from "features/folderSlice";
 
-export default function ManageUser({ packageId, nowPackage }) {
-  const [show, setShow] = useState<boolean>(false);
+export default function ManageUser() {
   const [newMember, setNewMember] = useState<string>("");
-  const [now, setNow] = useState(nowPackage);
   const users = useRef<ManageUserInfo[]>([]);
   const user = useSelector(selectUser);
   const member = useSelector(selectMember);
+  const now = useSelector(chooseFolder);
   const dispatch = useDispatch();
+  const folderId = useSelector(chooseId);
   const userInfo = collection(
     fireStore,
-    `users/${user}/packages/${packageId}/members`
+    `users/${user}/packages/${folderId}/members`
   );
 
   const getUsers = async () => {
@@ -34,7 +35,7 @@ export default function ManageUser({ packageId, nowPackage }) {
       ...doc.data(),
       id: doc.id,
     }));
-    setShow(!show);
+
     dispatch(
       memberSlice.actions.setMember({
         members: userData.docs.map((doc) => ({
@@ -72,8 +73,7 @@ export default function ManageUser({ packageId, nowPackage }) {
 
   useEffect(() => {
     getUsers();
-    setNow(nowPackage);
-  }, [newMember, packageId, nowPackage, now]);
+  }, [newMember, folderId, now]);
 
   return (
     <>
@@ -103,7 +103,6 @@ export default function ManageUser({ packageId, nowPackage }) {
               </thead>
               {Object.keys(users.current).map((v, idx) => (
                 <UserTable
-                  packageId={packageId}
                   member={users.current[~~v].member}
                   id={users.current[~~v].id}
                   idx={idx}

@@ -17,6 +17,7 @@ import { fireStore } from "../../firebase";
 import { ManagePackageInfo } from "./types";
 import { getDateTime } from "Utils/getTime";
 import { folderSlice, selectFolder } from "features/folderSlice";
+import questionsSlice from "features/questionsSlice";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -78,6 +79,11 @@ export default function Manage() {
   };
 
   useEffect(() => {
+    dispatch(
+      folderSlice.actions.choose({
+        id: folders[nowPackage].id,
+      })
+    );
     getPackages();
   }, [nowPackage, packages]);
 
@@ -119,6 +125,11 @@ export default function Manage() {
             <PackageBox
               onClick={() => {
                 setNowPackage(v);
+                dispatch(
+                  folderSlice.actions.choose({
+                    choose: v,
+                  })
+                );
               }}
             >
               <PackageTitle>{packages.current[v].title}</PackageTitle>
@@ -144,18 +155,8 @@ export default function Manage() {
       {page === "question"
         ? user !== null &&
           show &&
-          packages.current.length > 0 && (
-            <ManageQuestion
-              packageId={packages.current[nowPackage].id}
-              nowPackage={nowPackage}
-            />
-          )
-        : user !== null && (
-            <ManageUser
-              packageId={packages.current[nowPackage].id}
-              nowPackage={nowPackage}
-            />
-          )}
+          packages.current.length > 0 && <ManageQuestion />
+        : user !== null && <ManageUser />}
       <Footer />
     </>
   );

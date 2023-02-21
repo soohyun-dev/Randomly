@@ -14,21 +14,22 @@ import { selectUser } from "features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { QuestionInfo } from "Page/Play/types";
 import { questionsSlice, selectQuestions } from "features/questionsSlice";
+import { chooseFolder, chooseId } from "features/folderSlice";
 
-export default function ManageQuestion({ packageId, nowPackage }) {
-  const [show, setShow] = useState<boolean>(false);
+export default function ManageQuestion() {
   const [newQuestion, setNewQuestion] = useState<string>("");
   const [preAddQuestion, setPreAddQuestions] = useState<string>("");
   const [preAddIdx, setPreAddIdx] = useState<number>();
   const user = useSelector(selectUser);
-  const [now, setNow] = useState(nowPackage);
   const questions = useRef<QuestionInfo[]>([]);
+  const folderId = useSelector(chooseId);
   const questionsInfo = collection(
     fireStore,
-    `users/${user}/packages/${packageId}/questions`
+    `users/${user}/packages/${folderId}/questions`
   );
   const dispatch = useDispatch();
   const question = useSelector(selectQuestions);
+  const now = useSelector(chooseFolder);
 
   const getQuestions = async () => {
     const questionData = await getDocs(
@@ -38,7 +39,6 @@ export default function ManageQuestion({ packageId, nowPackage }) {
       ...doc.data(),
       id: doc.id,
     }));
-    setShow(!show);
 
     dispatch(
       questionsSlice.actions.setQuestion({
@@ -101,8 +101,8 @@ export default function ManageQuestion({ packageId, nowPackage }) {
 
   useEffect(() => {
     getQuestions();
-    setNow(nowPackage);
-  }, [newQuestion, packageId, nowPackage, now]);
+    // setNow(nowPackage);
+  }, [newQuestion, folderId, now]);
 
   return (
     <>
@@ -135,11 +135,10 @@ export default function ManageQuestion({ packageId, nowPackage }) {
                   <ThNoRight>삭제하기</ThNoRight>
                 </tr>
               </thead>
-              {Object.keys(questions.current).map((v, idx) => (
+              {Object.keys(question).map((v, idx) => (
                 <QuestionTable
-                  packageId={packageId}
-                  question={questions.current[~~v].question}
-                  id={questions.current[~~v].id}
+                  question={question[~~v].question}
+                  id={question[~~v].id}
                   idx={idx}
                 />
               ))}

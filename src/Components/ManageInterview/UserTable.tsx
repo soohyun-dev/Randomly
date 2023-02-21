@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { selectUser } from "features/userSlice";
 import { useSelector } from "react-redux";
+import { chooseId } from "features/folderSlice";
 
-export default function UserTable({ packageId, member, id, idx }) {
+export default function UserTable({ member, id, idx }) {
   const [newMember, setNewMember] = useState<string>(member);
   const [update, setUpdate] = useState<boolean>(false);
   const [change, getChange] = useState<boolean>(false);
   const [updateBtnToggle, setUpdateBtnToggle] = useState<boolean>(false);
   const user = useSelector(selectUser);
+  const folderId = useSelector(chooseId);
 
   /**
    * 유저 이름 수정
@@ -21,7 +23,7 @@ export default function UserTable({ packageId, member, id, idx }) {
   const updateQuestion = async (id) => {
     const questionDoc = doc(
       fireStore,
-      `users/${user}/packages/${packageId}/members`,
+      `users/${user}/packages/${folderId}/members`,
       id
     );
     const newContent = { member: newMember };
@@ -38,7 +40,7 @@ export default function UserTable({ packageId, member, id, idx }) {
     const deleteQuestion = async (id) => {
       const memberDoc = doc(
         fireStore,
-        `users/${user}/packages/${packageId}/members`,
+        `users/${user}/packages/${folderId}/members`,
         id
       );
       await deleteDoc(memberDoc);
