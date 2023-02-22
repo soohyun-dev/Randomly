@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useEffect,
-  useId,
-  useState,
-  useLayoutEffect,
-} from "react";
+import { useEffect, useId, useState } from "react";
 import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
 import { fireStore } from "../../firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
@@ -14,9 +8,14 @@ import StopWatch from "../../Components/StopWatch/Stopwatch";
 import Footer from "../../Components/Footer";
 import { QuestionInfo, UserInfo } from "./types";
 import { selectUser } from "features/userSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ManagePackageInfo } from "../Manage/types";
+import {
+  folderSlice,
+  chooseFolder,
+  chooseId,
+  selectFolder,
+} from "features/folderSlice";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
@@ -28,22 +27,23 @@ export default function PlayInterview() {
   const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([]);
   const [orderMember, setOrderMember] = useState<Array<number>>([]);
   const [nowPackage, setNowPackage] = useState<string>("0");
-  const [show, setShow] = useState<boolean>(false);
-  const packages = useRef<ManagePackageInfo[]>([]);
-  const [packageId, setPackageId] = useState<string>("");
   const uniqueId = useId();
 
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const folders = useSelector(selectFolder);
+  const folderId = useSelector(chooseId);
+  const now = useSelector(chooseFolder);
   const packageInfo = collection(fireStore, `users/${user}/packages`);
   const userInfo =
-    packageId === ""
+    folderId === ""
       ? collection(fireStore, `users/${user}/packages`)
-      : collection(fireStore, `users/${user}/packages/${packageId}/members`);
+      : collection(fireStore, `users/${user}/packages/${folderId}/members`);
 
   const questionInfo =
-    packageId === ""
+    folderId === ""
       ? collection(fireStore, `users/${user}/questions`)
-      : collection(fireStore, `users/${user}/packages/${packageId}/questions`);
+      : collection(fireStore, `users/${user}/packages/${folderId}/questions`);
 
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
@@ -131,12 +131,15 @@ export default function PlayInterview() {
     const packageData = await getDocs(
       query(packageInfo, orderBy("time", "asc"))
     );
-    packages.current = packageData.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setShow(true);
-    setPackageId(packages.current[nowPackage].id);
+
+    dispatch(
+      folderSlice.actions.setFolder({
+        folders: packageData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      })
+    );
   };
 
   const getQuestions = async () => {
@@ -244,7 +247,7 @@ export default function PlayInterview() {
       getQuestions();
       setNowPackage(nowPackage);
     }
-  }, [result, orderMember, nowPackage, packages, packageId]);
+  }, [result, orderMember, nowPackage, folderId]);
 
   return (
     <>
@@ -262,23 +265,27 @@ export default function PlayInterview() {
       </section>
       <PackageSection>
         <PackageDiv>
-          {Object.keys(packages.current).map((v, idx) => (
+          {Object.keys(folders).map((v, idx) => (
             <PackageBox
               onClick={() => {
                 changePackage(v);
+                dispatch(
+                  folderSlice.actions.choose({
+                    choose: v,
+                    id: folders[v].id,
+                  })
+                );
               }}
             >
-              <PackageTitle>{packages.current[v].title}</PackageTitle>
-              <PackageDate>{packages.current[v].idx.slice(0, 10)}</PackageDate>
+              <PackageTitle>{folders[v].title}</PackageTitle>
+              <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
             </PackageBox>
           ))}
         </PackageDiv>
       </PackageSection>
       <PackageTitleDiv>
         <PackageTitleText>
-          {show &&
-            packages.current.length > 0 &&
-            packages.current[nowPackage].title}
+          {folders.length > 0 && folders[nowPackage].title}
         </PackageTitleText>
       </PackageTitleDiv>
 
@@ -479,7 +486,7 @@ const OpenButton = styled.button<{ color: any }>`
   border: none;
   border-radius: 10px;
   font-size: 17px;
-  fint-weight: 600;
+  font-weight: 600;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   &:hover {
     opacity: 70%;

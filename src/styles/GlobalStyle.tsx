@@ -7,8 +7,8 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-    background-color: ${({ theme }) => (theme ? "#2D3436;" : "white")}
-    color: #bdc1c6;
+    background-color: ${({ theme }) => (theme ? "#2D3436;" : "white")};
+    color: ${({ theme }) => (theme ? "#bdc1c6" : "black")};
   }
 
   button{
@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --navbar-box: ${({ theme }) => (theme ? "#757575" : "white")};
-    --logo-text: ${({ theme }) => (theme ? "#bdc1c6" : "#5C8AFF")};
+    --logo-text: ${({ theme }) => (theme ? "#black" : "#5C8AFF")};
     --gray-text: ${({ theme }) => (theme ? "#bdc1c6" : "black")};
     --containter-box: ${({ theme }) => (theme ? "#37474f" : "#f5f5f5")};
     --div-line: ${({ theme }) => (theme ? "#757575" : "#eeeeee")};

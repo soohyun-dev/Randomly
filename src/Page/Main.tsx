@@ -96,9 +96,9 @@ const TitleSection = styled.section`
 `;
 
 const TopDiv = styled.div`
-color: black;
-margin-bottom: 18em;
-  ::before{
+  color: black;
+  margin-bottom: 18em;
+  ::before {
     content: "";
     background: url("https://user-images.githubusercontent.com/81623931/216887726-da970003-fdb4-4c58-ac30-bd096af0b7ce.png");
     background-size: cover;
@@ -111,6 +111,7 @@ margin-bottom: 18em;
     left: 0px;
     right: 0px;
     bottom: 0px;
+  }
 `;
 
 const Title = styled.p`

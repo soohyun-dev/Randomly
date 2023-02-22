@@ -17,7 +17,6 @@ import { fireStore } from "../../firebase";
 import { ManagePackageInfo } from "./types";
 import { getDateTime } from "Utils/getTime";
 import { folderSlice, selectFolder } from "features/folderSlice";
-import questionsSlice from "features/questionsSlice";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -79,12 +78,12 @@ export default function Manage() {
   };
 
   useEffect(() => {
+    getPackages();
     dispatch(
       folderSlice.actions.choose({
         id: folders[nowPackage].id,
       })
     );
-    getPackages();
   }, [nowPackage, packages]);
 
   return (

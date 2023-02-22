@@ -101,7 +101,6 @@ export default function ManageQuestion() {
 
   useEffect(() => {
     getQuestions();
-    // setNow(nowPackage);
   }, [newQuestion, folderId, now]);
 
   return (
