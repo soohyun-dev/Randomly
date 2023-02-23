@@ -16,6 +16,7 @@ import {
   chooseId,
   selectFolder,
 } from "features/folderSlice";
+import ShowQuestion from "Components/Play/question/ShowQuestion";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
@@ -24,7 +25,6 @@ export default function PlayInterview() {
   const [questions, setQuestions] = useState<QuestionInfo[]>([]);
   const [result, setResult] = useState<Array<Array<number>>>([]);
   const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([]);
-  const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([]);
   const [orderMember, setOrderMember] = useState<Array<number>>([]);
   const [nowPackage, setNowPackage] = useState<string>("0");
   const uniqueId = useId();
@@ -58,9 +58,9 @@ export default function PlayInterview() {
     setCorrectCnt(
       Array.from({ length: Object.keys(questions).length - 1 }, () => false)
     );
-    setToggleQuestion(
-      Array.from({ length: Object.keys(questions).length - 1 }, () => false)
-    );
+    // setToggleQuestion(
+    //   Array.from({ length: Object.keys(questions).length - 1 }, () => false)
+    // );
     setBool(true);
   };
 
@@ -77,28 +77,6 @@ export default function PlayInterview() {
     let change = [...open];
     change[idx] = !change[idx];
     setOpen(change);
-  };
-
-  /**
-   * 각 질문을 보이게하거나 안보이게 할 수 있다.
-   *
-   * @param {Number} toggle할 질문의 index
-   */
-  const toggleHandler = (idx: number) => {
-    let change = [...toggleQuestion];
-    change[idx] = !change[idx];
-    setToggleQuestion(change);
-  };
-  /**
-   * 텍스트를 누르면 맞았다는 표시로 color가 변경되며, 맞은 갯수가 카운트된다.
-   * 맞은 표시의 텍스트를 누르면 취소된다.
-   *
-   * @param {Number} 맞은 표시를 할 질문의 index
-   */
-  const correctHandler = (idx: number) => {
-    let change = [...correctCnt];
-    change[idx] = !change[idx];
-    setCorrectCnt(change);
   };
 
   /**
@@ -122,7 +100,7 @@ export default function PlayInterview() {
     setResult([]);
     setOpen([]);
     setCorrectCnt([]);
-    setToggleQuestion([]);
+    // setToggleQuestion([]);
     setOrderMember([]);
     setBool(false);
   };
@@ -157,55 +135,6 @@ export default function PlayInterview() {
     alert("순서 변경이 완료되었습니다!");
   };
 
-  const showQuestion = result.map((_, i) => (
-    <div>
-      {result[i].map((v: number, idx: number) =>
-        toggleQuestion[result[i][idx]] ? (
-          <QuestionText color={correctCnt[v]}>
-            <QuestionBlock>
-              <ShowBtn
-                color={toggleQuestion[result[i][idx]]}
-                onClick={(e) => {
-                  toggleHandler(result[i][idx]);
-                }}
-              >
-                질문 가리기
-              </ShowBtn>
-            </QuestionBlock>
-            <QuestionBlock>
-              {idx + 1}. {questions[v].question}
-            </QuestionBlock>
-            <QuestionBlock>
-              <CorrectBtn
-                color={correctCnt[v]}
-                onClick={(e) => {
-                  correctHandler(v);
-                }}
-              >
-                {correctCnt[v] ? "취소" : "맞음"}
-              </CorrectBtn>
-            </QuestionBlock>
-            <StopWatch />
-          </QuestionText>
-        ) : (
-          <QuestionText color={correctCnt[v]}>
-            <QuestionBlock>
-              <ShowBtn
-                color={toggleQuestion[result[i][idx]]}
-                onClick={(e) => {
-                  toggleHandler(result[i][idx]);
-                }}
-              >
-                질문 보기
-              </ShowBtn>
-            </QuestionBlock>
-            <QuestionBlock>{idx + 1}.</QuestionBlock>
-          </QuestionText>
-        )
-      )}
-    </div>
-  ));
-
   const showUsers = users.map((value: UserInfo, idx: number) => (
     <UserContainer key={uniqueId}>
       <NameContainer>
@@ -236,7 +165,9 @@ export default function PlayInterview() {
           <NoticeText>질문 분배를 해주세요😋</NoticeText>
         )}
       </ButtonContainer>
-      {open[idx] ? showQuestion[idx] : ""}
+      {open[idx]
+        ? result.map((_, i) => <ShowQuestion result={result} i={i} />)
+        : ""}
     </UserContainer>
   ));
 
@@ -456,11 +387,6 @@ const MemberName = styled.label`
   border-radius: 10px;
 `;
 
-const QuestionBlock = styled.div`
-  display: inline-block;
-  line-height: 35px;
-`;
-
 const CorrectText = styled.label`
   font-size: 22px;
   font-weight: 600;
@@ -490,50 +416,6 @@ const OpenButton = styled.button<{ color: any }>`
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   &:hover {
     opacity: 70%;
-  }
-`;
-
-const QuestionText = styled.p<{ color: any }>`
-  font-size: 21px;
-  font-weight: 600;
-  margin: 40px 15px;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: ${(props) => (props.color ? "blue" : "black")};
-  display: flex;
-`;
-
-const ShowBtn = styled.button<{ color: any }>`
-  width: 80px;
-  padding: 8px 0;
-  margin-right: 20px;
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  background-color: ${(props) => (props.color ? "#ef5350" : "#66bb6a")};
-  color: white;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  font-size: 14px;
-  font-weight: 600;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const CorrectBtn = styled.button<{ color: any }>`
-  width: 3em;
-  padding: 4px 0;
-  margin-left: 1em;
-  border-radius: 10px;
-  border: none;
-  background-color: ${(props) => (props.color ? "#ff8a80" : "#64b5f6")};
-  color: white;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  &:hover {
-    opacity: 80%;
   }
 `;
 
