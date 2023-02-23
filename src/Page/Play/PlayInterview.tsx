@@ -4,7 +4,6 @@ import { fireStore } from "../../firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import styled from "styled-components";
 import Nav from "../../Components/Nav";
-import StopWatch from "../../Components/StopWatch/Stopwatch";
 import Footer from "../../Components/Footer";
 import { QuestionInfo, UserInfo } from "./types";
 import { selectUser } from "features/userSlice";
@@ -17,6 +16,7 @@ import {
   selectFolder,
 } from "features/folderSlice";
 import ShowQuestion from "Components/Play/question/ShowQuestion";
+import { questionsSlice } from "features/questionsSlice";
 
 export default function PlayInterview() {
   const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
@@ -28,7 +28,6 @@ export default function PlayInterview() {
   const [orderMember, setOrderMember] = useState<Array<number>>([]);
   const [nowPackage, setNowPackage] = useState<string>("0");
   const uniqueId = useId();
-
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const folders = useSelector(selectFolder);
@@ -44,7 +43,7 @@ export default function PlayInterview() {
     folderId === ""
       ? collection(fireStore, `users/${user}/questions`)
       : collection(fireStore, `users/${user}/packages/${folderId}/questions`);
-
+  console.log(questions, folders);
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
    * 버튼을 누를 때마다 랜덤의 번호들이 생성되어 팀원들에게 부여된다.
@@ -96,7 +95,6 @@ export default function PlayInterview() {
   };
 
   const changePackage = (now) => {
-    setNowPackage(now);
     setResult([]);
     setOpen([]);
     setCorrectCnt([]);
@@ -123,6 +121,14 @@ export default function PlayInterview() {
   const getQuestions = async () => {
     const data = await getDocs(questionInfo);
     setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    dispatch(
+      questionsSlice.actions.setQuestion({
+        Questions: data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      })
+    );
   };
 
   const getUsers = async () => {
@@ -165,9 +171,7 @@ export default function PlayInterview() {
           <NoticeText>질문 분배를 해주세요😋</NoticeText>
         )}
       </ButtonContainer>
-      {open[idx]
-        ? result.map((_, i) => <ShowQuestion result={result} i={i} />)
-        : ""}
+      {open[idx] ? <ShowQuestion result={result[idx]} /> : ""}
     </UserContainer>
   ));
 
@@ -177,6 +181,11 @@ export default function PlayInterview() {
       getUsers();
       getQuestions();
       setNowPackage(nowPackage);
+      dispatch(
+        folderSlice.actions.choose({
+          id: folders[nowPackage].id,
+        })
+      );
     }
   }, [result, orderMember, nowPackage, folderId]);
 
@@ -199,6 +208,7 @@ export default function PlayInterview() {
           {Object.keys(folders).map((v, idx) => (
             <PackageBox
               onClick={() => {
+                setNowPackage(v);
                 changePackage(v);
                 dispatch(
                   folderSlice.actions.choose({

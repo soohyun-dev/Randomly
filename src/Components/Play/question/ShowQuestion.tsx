@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { CorrectBtn, QuestionBlock, QuestionText, ShowBtn } from "./style";
 
-export default function ShowQuestion({ result, i }) {
+export default function ShowQuestion({ result }) {
+  console.log(result);
   const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([]);
   const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([]);
 
   const questions = useSelector(selectQuestions);
-
+  console.log(questions);
   /**
    * 각 질문을 보이게하거나 안보이게 할 수 있다.
    *
@@ -36,14 +37,14 @@ export default function ShowQuestion({ result, i }) {
   return (
     <>
       <div>
-        {result[i].map((v: number, idx: number) =>
-          toggleQuestion[result[i][idx]] ? (
+        {result.map((v: number, idx: number) =>
+          toggleQuestion[result[idx]] ? (
             <QuestionText color={correctCnt[v]}>
               <QuestionBlock>
                 <ShowBtn
-                  color={toggleQuestion[result[i][idx]]}
+                  color={toggleQuestion[result[idx]]}
                   onClick={(e) => {
-                    toggleHandler(result[i][idx]);
+                    toggleHandler(result[idx]);
                   }}
                 >
                   질문 가리기
@@ -68,9 +69,9 @@ export default function ShowQuestion({ result, i }) {
             <QuestionText color={correctCnt[v]}>
               <QuestionBlock>
                 <ShowBtn
-                  color={toggleQuestion[result[i][idx]]}
+                  color={toggleQuestion[result[idx]]}
                   onClick={(e) => {
-                    toggleHandler(result[i][idx]);
+                    toggleHandler(result[idx]);
                   }}
                 >
                   질문 보기
