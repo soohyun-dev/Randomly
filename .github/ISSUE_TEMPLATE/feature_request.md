@@ -1,16 +1,16 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[feat]"
-labels: ''
+title: "[feat] #"
+labels: enhancement
 assignees: ''
 
 ---
 
-## 1.무엇을?
+## 1. 주요 기능
 
+## 2. 진행 사항
 
-## 2. 상세 설명
+## 3.  추가 설명
 
-
-## 3. 결과
+## 4. 참고 사항
