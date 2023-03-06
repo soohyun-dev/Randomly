@@ -105,6 +105,7 @@
 - Redux-toolkit
 - TypeScript
 - CSS in JS (Styled-Components)
+- ErrorBoundary
 - Firebase
 - CloudFlare
   <br>
@@ -129,6 +130,8 @@
 <pre>
 📦src
  ┣ 📂Components
+ ┃ ┣ 📂Loading
+ ┃ ┃ ┗ 📜Loding.tsx
  ┃ ┣ 📂Login
  ┃ ┃ ┗ 📜LoginBox.tsx
  ┃ ┣ 📂ManageInterview
@@ -143,6 +146,14 @@
  ┃ ┃ ┣ 📜Notice.tsx
  ┃ ┃ ┣ 📜NoticeList.tsx
  ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂Play
+ ┃ ┃ ┣ 📂member
+ ┃ ┃ ┃ ┣ 📜ShowMember.tsx
+ ┃ ┃ ┃ ┣ 📜style.ts
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┗ 📂question
+ ┃ ┃ ┃ ┣ 📜ShowQuestion.tsx
+ ┃ ┃ ┃ ┗ 📜style.ts
  ┃ ┣ 📂Q&A
  ┃ ┃ ┣ 📜Comment.tsx
  ┃ ┃ ┣ 📜QA.tsx
@@ -155,9 +166,17 @@
  ┃ ┣ 📜Footer.tsx
  ┃ ┗ 📜Nav.tsx
  ┣ 📂features
- ┃ ┗ 📜userSlice.js
- ┣ 📂Hooks
+ ┃ ┣ 📜folderSlice.tsx
+ ┃ ┣ 📜memberSlice.tsx
+ ┃ ┣ 📜playSlice.tsx
+ ┃ ┣ 📜questionsSlice.tsx
+ ┃ ┣ 📜themeSlice.tsx
+ ┃ ┗ 📜userSlice.jsx
+ ┣ 📂hooks
  ┣ 📂Page
+ ┃ ┣ 📂Error
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
  ┃ ┣ 📂Login
  ┃ ┃ ┗ 📜login.tsx
  ┃ ┣ 📂Manage
@@ -171,6 +190,7 @@
  ┃ ┃ ┗ 📜WriteNotice.tsx
  ┃ ┣ 📂Play
  ┃ ┃ ┣ 📜PlayInterview.tsx
+ ┃ ┃ ┣ 📜styles.ts
  ┃ ┃ ┗ 📜types.ts
  ┃ ┣ 📂Q&A
  ┃ ┃ ┣ 📜QAPage.tsx
@@ -179,12 +199,14 @@
  ┃ ┗ 📜Main.tsx
  ┣ 📂store
  ┃ ┗ 📜store.js
+ ┣ 📂styles
+ ┃ ┣ 📜GlobalStyle.tsx
+ ┃ ┗ 📜theme.ts
  ┣ 📂Utils
  ┃ ┣ 📜getTime.tsx
  ┃ ┗ 📜MakeNums.tsx
  ┣ 📜App.tsx
  ┣ 📜firebase.tsx
- ┣ 📜GlobalStyle.tsx
  ┗ 📜index.tsx
 </pre>
 

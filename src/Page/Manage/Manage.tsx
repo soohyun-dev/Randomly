@@ -18,6 +18,22 @@ import { getDateTime } from "Utils/getTime";
 import { folderSlice, selectFolder } from "features/folderSlice";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorPage from "Page/Error";
+import {
+  ManageAccessSection,
+  ManageAccessTitle,
+  ManageHeaderDiv,
+  ManageHeaderSection,
+  PackageBox,
+  PackageDate,
+  PackageDiv,
+  PackageSection,
+  PackageTitle,
+  PackageTitleDiv,
+  PackageTitleText,
+  PlusBtn,
+  Title,
+  TitleSection,
+} from "./styles";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -158,93 +174,3 @@ export default function Manage() {
     </>
   );
 }
-
-const ManageHeaderSection = styled.section`
-  text-align: center;
-`;
-
-const ManageHeaderDiv = styled.div`
-  text-align: center;
-  display: inline;
-`;
-
-const TitleSection = styled.section`
-  margin-bottom: 3em;
-  text-align: center;
-`;
-
-const Title = styled.h1`
-  font-size: 48px;
-  margin: 3em 0 2em 0;
-`;
-
-const ManageAccessSection = styled.section`
-  text-align: center;
-  margin: 5em 0;
-`;
-
-const ManageAccessTitle = styled.label`
-  margin: 0 1em;
-`;
-
-const PlusBtn = styled.button`
-  width: 10em;
-  height: 3em;
-  margin: 6em 0 3em 0;
-  border: none;
-  border-radius: 10px;
-  background-color: #f5f5f5;
-  cursor: pointer;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const PackageSection = styled.section`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const PackageTitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 5em 0;
-`;
-
-const PackageTitleText = styled.p`
-  font-size: 24px;
-`;
-
-const PackageDiv = styled.div`
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const PackageBox = styled.div`
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 15em;
-  height: 10em;
-  border: none;
-  border-radius: 10px;
-  background-color: #f5f5f5;
-  margin: 2em 1em;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-  }
-`;
-
-const PackageTitle = styled.div`
-  font-size: 20px;
-  margin: 1em 0;
-`;
-const PackageDate = styled.div`
-  color: #777;
-`;
