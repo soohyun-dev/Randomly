@@ -1,15 +1,9 @@
-import styled from "styled-components";
+import { LodingDiv } from './styles'
 
 export default function Loding() {
-  return (
-    <>
-      <LodingDiv>
-        <p>로딩중...</p>
-      </LodingDiv>
-    </>
-  );
+    return (
+        <LodingDiv>
+            <p>로딩중...</p>
+        </LodingDiv>
+    )
 }
-
-const LodingDiv = styled.div`
-  background-color: blue;
-`;

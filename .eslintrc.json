@@ -11,8 +11,21 @@
     ],
     "rules": {
         "prettier/prettier": 0,
+        "no-param-reassign": 0, // slice 재할당오류 안뜨게
+        "no-alert": "off", // alert 오류 끄기
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
+        "react/prop-types": "off",
+        "react/jsx-no-bind": [
+            "warn",
+            {
+                "ignoreDOMComponents": false,
+                "ignoreRefs": false,
+                "allowArrowFunctions": false,
+                "allowFunctions": false,
+                "allowBind": false
+            }
+        ],
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
@@ -25,6 +38,13 @@
                 "ts": "never",
                 "tsx": "never",
                 "": "never"
+            }
+        ],
+        "jsx-a11y/label-has-associated-control": [
+            // label 오류 해결
+            2,
+            {
+                "labelAttributes": ["htmlFor"]
             }
         ]
     }

@@ -1,4 +1,4 @@
-import ShowMember from 'Components/Play/member/ShowMember'
+import ShowMember from 'Components/Play/ShowMember'
 import { useEffect, useState } from 'react'
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { selectUser } from 'features/userSlice'
@@ -13,8 +13,8 @@ import ErrorPage from 'Page/Error'
 import { QuestionInfo } from './types'
 import { fireStore } from '../../firebase'
 import getQuestionNums, { MakeNums } from '../../Utils/MakeNums'
-import Footer from '../../Components/Footer'
-import Nav from '../../Components/Nav'
+import Footer from '../../Components/Footer/Footer'
+import Nav from '../../Components/Nav/Nav'
 import {
     GuideToggle,
     LinkLoginBtn,

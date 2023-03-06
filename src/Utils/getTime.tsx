@@ -5,12 +5,12 @@
  */
 
 export function getDate() {
-  const time = new Date();
-  const year = time.getFullYear();
-  const month = ("0" + (time.getMonth() + 1)).slice(-2);
-  const day = ("0" + time.getDate()).slice(-2);
+    const time = new Date()
+    const year = time.getFullYear()
+    const month = `0${time.getMonth() + 1}`.slice(-2)
+    const day = `0${time.getDate()}`.slice(-2)
 
-  return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day}`
 }
 
 /**
@@ -20,12 +20,12 @@ export function getDate() {
  * @returns hh-mm-ss
  */
 export function getTime() {
-  const time = new Date();
-  const hours = ("0" + time.getHours()).slice(-2);
-  const minutes = ("0" + time.getMinutes()).slice(-2);
-  const seconds = ("0" + time.getSeconds()).slice(-2);
+    const time = new Date()
+    const hours = `0${time.getHours()}`.slice(-2)
+    const minutes = `0${time.getMinutes()}`.slice(-2)
+    const seconds = `0${time.getSeconds()}`.slice(-2)
 
-  return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${minutes}:${seconds}`
 }
 
 /**
@@ -35,5 +35,5 @@ export function getTime() {
  * @returns yyyy-mm-dd hh-mm--ss
  */
 export function getDateTime() {
-  return getDate() + " " + getTime();
+    return `${getDate()} ${getTime()}`
 }
