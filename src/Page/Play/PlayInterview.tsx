@@ -33,6 +33,8 @@ import {
   Title,
   USER,
 } from "./styles";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorPage from "Page/Error";
 
 export default function PlayInterview() {
   const dispatch = useDispatch();
@@ -160,80 +162,85 @@ export default function PlayInterview() {
   return (
     <>
       <Nav />
-      <section style={{ textAlign: "center" }}>
-        <Title>INTERVIEW</Title>
-        <PageGuide>
-          팀원끼리 서로 랜덤의 질문을 배정받고 인터뷰 연습을 하는 공간입니다.
-        </PageGuide>
-        {user === null ? (
-          ""
-        ) : (
-          <PageGuide>인터뷰를 할 폴더를 골라주세요. </PageGuide>
-        )}
-      </section>
-      <PackageSection>
-        <PackageDiv>
-          {Object.keys(folders).map((v, idx) => (
-            <PackageBox
-              onClick={() => {
-                setNowPackage(v);
-                changePackage();
-                dispatch(
-                  folderSlice.actions.choose({
-                    choose: v,
-                    id: folders[v].id,
-                  })
-                );
-              }}
-            >
-              <PackageTitle>{folders[v].title}</PackageTitle>
-              <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
-            </PackageBox>
-          ))}
-        </PackageDiv>
-      </PackageSection>
-      <PackageTitleDiv>
-        <PackageTitleText>
-          {folders.length > 0 && folders[nowPackage].title}
-        </PackageTitleText>
-      </PackageTitleDiv>
-
-      <section style={{ textAlign: "center" }}>
-        <MainContainer>
+      <ErrorBoundary FallbackComponent={ErrorPage}>
+        <section style={{ textAlign: "center" }}>
+          <Title>INTERVIEW</Title>
+          <PageGuide>
+            팀원끼리 서로 랜덤의 질문을 배정받고 인터뷰 연습을 하는 공간입니다.
+          </PageGuide>
           {user === null ? (
-            <ManageAccessSection>
-              <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
-              <Link
-                to="/Login"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <LinkLoginBtn>로그인하러 가기 ➡️</LinkLoginBtn>
-              </Link>
-            </ManageAccessSection>
+            ""
           ) : (
-            <OrderContainer>
-              <div>
-                <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
-              </div>
-              <div>
-                <MakeQuestionNums color={bool} onClick={makeArray}>
-                  {bool ? "질문 재분배" : "질문 분배 시작"}
-                </MakeQuestionNums>
-              </div>
-              {bool ? (
-                <GuideToggle>
-                  질문 분배가 완료되었습니다. 질문을 확인해주세요.
-                </GuideToggle>
-              ) : (
-                <GuideToggle>
-                  질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을 분배해주세요!
-                </GuideToggle>
-              )}
-              <USER>{user === null ? "" : <ShowMember />}</USER>
-            </OrderContainer>
+            <PageGuide>인터뷰를 할 폴더를 골라주세요. </PageGuide>
           )}
-        </MainContainer>
-      </section>
+        </section>
+        <PackageSection>
+          <PackageDiv>
+            {Object.keys(folders).map((v, idx) => (
+              <PackageBox
+                onClick={() => {
+                  setNowPackage(v);
+                  changePackage();
+                  dispatch(
+                    folderSlice.actions.choose({
+                      choose: v,
+                      id: folders[v].id,
+                    })
+                  );
+                }}
+              >
+                <PackageTitle>{folders[v].title}</PackageTitle>
+                <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+              </PackageBox>
+            ))}
+          </PackageDiv>
+        </PackageSection>
+        <PackageTitleDiv>
+          <PackageTitleText>
+            {folders.length > 0 && folders[nowPackage].title}
+          </PackageTitleText>
+        </PackageTitleDiv>
+
+        <section style={{ textAlign: "center" }}>
+          <MainContainer>
+            {user === null ? (
+              <ManageAccessSection>
+                <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
+                <Link
+                  to="/Login"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <LinkLoginBtn>로그인하러 가기 ➡️</LinkLoginBtn>
+                </Link>
+              </ManageAccessSection>
+            ) : (
+              <OrderContainer>
+                <div>
+                  <ShuffleName onClick={shuffleName}>
+                    이름 순서 변경
+                  </ShuffleName>
+                </div>
+                <div>
+                  <MakeQuestionNums color={bool} onClick={makeArray}>
+                    {bool ? "질문 재분배" : "질문 분배 시작"}
+                  </MakeQuestionNums>
+                </div>
+                {bool ? (
+                  <GuideToggle>
+                    질문 분배가 완료되었습니다. 질문을 확인해주세요.
+                  </GuideToggle>
+                ) : (
+                  <GuideToggle>
+                    질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을
+                    분배해주세요!
+                  </GuideToggle>
+                )}
+                <USER>{user === null ? "" : <ShowMember />}</USER>
+              </OrderContainer>
+            )}
+          </MainContainer>
+        </section>
+      </ErrorBoundary>
       <Footer />
     </>
   );

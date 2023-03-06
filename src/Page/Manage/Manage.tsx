@@ -16,6 +16,8 @@ import {
 import { fireStore } from "../../firebase";
 import { getDateTime } from "Utils/getTime";
 import { folderSlice, selectFolder } from "features/folderSlice";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorPage from "Page/Error";
 
 export default function Manage() {
   const MiniTitle = styled.label<{ target?: any }>`
@@ -74,11 +76,13 @@ export default function Manage() {
   useEffect(() => {
     if (user !== null) {
       getPackages();
-      dispatch(
-        folderSlice.actions.choose({
-          id: folders[nowPackage].id,
-        })
-      );
+      if (folders.length >= 1) {
+        dispatch(
+          folderSlice.actions.choose({
+            id: folders[nowPackage].id,
+          })
+        );
+      }
     }
   }, [nowPackage]);
 
@@ -88,70 +92,81 @@ export default function Manage() {
       <TitleSection>
         <Title>MANAGE</Title>
       </TitleSection>
-      <section style={{ textAlign: "center" }}>
-        <div style={{ textAlign: "center", display: "inline" }}>
-          <MiniTitle
-            target={"question"}
-            onClick={() => {
-              changeView("question");
-            }}
-          >
-            질문 관리
-          </MiniTitle>
-          <MiniTitle>|</MiniTitle>
-          <MiniTitle
-            target={"user"}
-            onClick={() => {
-              changeView("user");
-            }}
-          >
-            참여자 관리
-          </MiniTitle>
-        </div>
-        {user !== null && (
-          <div>
-            <PlusBtn onClick={() => plusPackage()}>질문 폴더 추가</PlusBtn>
-          </div>
-        )}
-      </section>
-      <PackageSection>
-        <PackageDiv>
-          {Object.keys(folders).map((v, idx) => (
-            <PackageBox
+      <ErrorBoundary FallbackComponent={ErrorPage}>
+        <ManageHeaderSection>
+          <ManageHeaderDiv>
+            <MiniTitle
+              target={"question"}
               onClick={() => {
-                setNowPackage(v);
-                dispatch(
-                  folderSlice.actions.choose({
-                    choose: v,
-                  })
-                );
+                changeView("question");
               }}
             >
-              <PackageTitle>{folders[v].title}</PackageTitle>
-              <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
-            </PackageBox>
-          ))}
-        </PackageDiv>
-      </PackageSection>
-      <PackageTitleDiv>
-        <PackageTitleText>
-          {show && folders.length > 0 && folders[nowPackage].title}
-        </PackageTitleText>
-      </PackageTitleDiv>
-      {user !== null ? (
-        ""
-      ) : (
-        <ManageAccessSection>
-          <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
-        </ManageAccessSection>
-      )}
-      {page === "question"
-        ? user !== null && show && folders.length > 0 && <ManageQuestion />
-        : user !== null && <ManageUser />}
+              질문 관리
+            </MiniTitle>
+            <MiniTitle>|</MiniTitle>
+            <MiniTitle
+              target={"user"}
+              onClick={() => {
+                changeView("user");
+              }}
+            >
+              참여자 관리
+            </MiniTitle>
+          </ManageHeaderDiv>
+          {user !== null && (
+            <div>
+              <PlusBtn onClick={() => plusPackage()}>질문 폴더 추가</PlusBtn>
+            </div>
+          )}
+        </ManageHeaderSection>
+        <PackageSection>
+          <PackageDiv>
+            {Object.keys(folders).map((v, idx) => (
+              <PackageBox
+                onClick={() => {
+                  setNowPackage(v);
+                  dispatch(
+                    folderSlice.actions.choose({
+                      choose: v,
+                    })
+                  );
+                }}
+              >
+                <PackageTitle>{folders[v].title}</PackageTitle>
+                <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+              </PackageBox>
+            ))}
+          </PackageDiv>
+        </PackageSection>
+        <PackageTitleDiv>
+          <PackageTitleText>
+            {show && folders.length > 0 && folders[nowPackage].title}
+          </PackageTitleText>
+        </PackageTitleDiv>
+        {user !== null ? (
+          ""
+        ) : (
+          <ManageAccessSection>
+            <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
+          </ManageAccessSection>
+        )}
+        {page === "question"
+          ? user !== null && show && folders.length > 0 && <ManageQuestion />
+          : user !== null && <ManageUser />}
+      </ErrorBoundary>
       <Footer />
     </>
   );
 }
+
+const ManageHeaderSection = styled.section`
+  text-align: center;
+`;
+
+const ManageHeaderDiv = styled.div`
+  text-align: center;
+  display: inline;
+`;
 
 const TitleSection = styled.section`
   margin-bottom: 3em;

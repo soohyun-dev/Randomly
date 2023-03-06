@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { QuestionInfo } from "Page/Play/types";
 import { questionsSlice, selectQuestions } from "features/questionsSlice";
 import { chooseFolder, chooseId } from "features/folderSlice";
-import Loding from "Components/Loading/Loding";
 
 export default function ManageQuestion() {
   const [newQuestion, setNewQuestion] = useState<string>("");

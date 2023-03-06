@@ -3,8 +3,10 @@ import Memo from "Components/Memo/Memo";
 import Nav from "Components/Nav";
 import Notice from "Components/Notice/Notice";
 import QA from "Components/Q&A/QA";
+import ErrorPage from "Page/Error";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function QAPage() {
   const [nowPage, setNowPage] = useState("공지사항");
@@ -41,28 +43,28 @@ export default function QAPage() {
   return (
     <>
       <Nav />
+      <ErrorBoundary FallbackComponent={ErrorPage}>
+        <QASection>
+          <div>
+            <CatagoryDiv>
+              <CatagoryButton
+                id="공지사항"
+                onClick={(e) => {
+                  setNowPage("공지사항");
+                }}
+              >
+                공지사항
+              </CatagoryButton>
 
-      <QASection>
-        <div>
-          <CatagoryDiv>
-            <CatagoryButton
-              id="공지사항"
-              onClick={(e) => {
-                setNowPage("공지사항");
-              }}
-            >
-              공지사항
-            </CatagoryButton>
-
-            <CatagoryButton
-              id="Q&A"
-              onClick={(e) => {
-                setNowPage("Q&A");
-              }}
-            >
-              Q&A
-            </CatagoryButton>
-            {/* <CatagoryButton
+              <CatagoryButton
+                id="Q&A"
+                onClick={(e) => {
+                  setNowPage("Q&A");
+                }}
+              >
+                Q&A
+              </CatagoryButton>
+              {/* <CatagoryButton
               id="남길말"
               onClick={(e) => {
                 setNowPage("남길말");
@@ -70,10 +72,11 @@ export default function QAPage() {
             >
               남길 말
             </CatagoryButton> */}
-          </CatagoryDiv>
-          <PostListDiv>{showComponent()}</PostListDiv>
-        </div>
-      </QASection>
+            </CatagoryDiv>
+            <PostListDiv>{showComponent()}</PostListDiv>
+          </div>
+        </QASection>
+      </ErrorBoundary>
       <Footer />
     </>
   );

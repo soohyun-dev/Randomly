@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginBox() {
-  const [userData, setUserData] = useState<Object | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,7 +17,6 @@ export default function LoginBox() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((data) => {
-        setUserData(data.user);
         dispatch(
           userSlice.actions.login({
             user: data.user.displayName,
