@@ -72,12 +72,14 @@ export default function Manage() {
   };
 
   useEffect(() => {
-    getPackages();
-    dispatch(
-      folderSlice.actions.choose({
-        id: folders[nowPackage].id,
-      })
-    );
+    if (user !== null) {
+      getPackages();
+      dispatch(
+        folderSlice.actions.choose({
+          id: folders[nowPackage].id,
+        })
+      );
+    }
   }, [nowPackage]);
 
   return (
