@@ -102,7 +102,7 @@
 ## 🛠️ 사용 기술
 
 - React
-- Redux
+- Redux-toolkit
 - TypeScript
 - CSS in JS (Styled-Components)
 - Firebase

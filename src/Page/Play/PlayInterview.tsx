@@ -1,38 +1,50 @@
-import { useEffect, useId, useState } from "react";
+import Nav from "../../Components/Nav";
+import Footer from "../../Components/Footer";
+import ShowMember from "Components/Play/member/ShowMember";
+import { useEffect, useState } from "react";
 import getQuestionNums, { MakeNums } from "../../Utils/MakeNums";
 import { fireStore } from "../../firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import styled from "styled-components";
-import Nav from "../../Components/Nav";
-import Footer from "../../Components/Footer";
-import { QuestionInfo, UserInfo } from "./types";
+import { QuestionInfo } from "./types";
 import { selectUser } from "features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  folderSlice,
-  chooseFolder,
-  chooseId,
-  selectFolder,
-} from "features/folderSlice";
-import ShowQuestion from "Components/Play/question/ShowQuestion";
+import { folderSlice, chooseId, selectFolder } from "features/folderSlice";
 import { questionsSlice } from "features/questionsSlice";
+import { playSlice, selectDistribution } from "features/playSlice";
+import { memberSlice, selectMember } from "features/memberSlice";
+import {
+  GuideToggle,
+  LinkLoginBtn,
+  MainContainer,
+  MakeQuestionNums,
+  ManageAccessSection,
+  ManageAccessTitle,
+  OrderContainer,
+  PackageBox,
+  PackageDate,
+  PackageDiv,
+  PackageSection,
+  PackageTitle,
+  PackageTitleDiv,
+  PackageTitleText,
+  PageGuide,
+  ShuffleName,
+  Title,
+  USER,
+} from "./styles";
 
 export default function PlayInterview() {
-  const [open, setOpen] = useState<Array<boolean[] | boolean>>([false]);
-  const [bool, setBool] = useState<boolean>(false);
-  const [users, setUsers] = useState<UserInfo[]>([]);
-  const [questions, setQuestions] = useState<QuestionInfo[]>([]);
-  const [result, setResult] = useState<Array<Array<number>>>([]);
-  const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([]);
-  const [orderMember, setOrderMember] = useState<Array<number>>([]);
-  const [nowPackage, setNowPackage] = useState<string>("0");
-  const uniqueId = useId();
   const dispatch = useDispatch();
+  const [firstRender, setFirstRender] = useState(false);
+  const [bool, setBool] = useState<boolean>(false);
+  const [questions, setQuestions] = useState<QuestionInfo[]>([]);
+  const [nowPackage, setNowPackage] = useState<string>("0");
   const user = useSelector(selectUser);
   const folders = useSelector(selectFolder);
   const folderId = useSelector(chooseId);
-  const now = useSelector(chooseFolder);
+  const member = useSelector(selectMember);
+  const distribution = useSelector(selectDistribution);
   const packageInfo = collection(fireStore, `users/${user}/packages`);
   const userInfo =
     folderId === ""
@@ -43,7 +55,7 @@ export default function PlayInterview() {
     folderId === ""
       ? collection(fireStore, `users/${user}/questions`)
       : collection(fireStore, `users/${user}/packages/${folderId}/questions`);
-  console.log(questions, folders);
+
   /**
    * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
    * 버튼을 누를 때마다 랜덤의 번호들이 생성되어 팀원들에게 부여된다.
@@ -52,54 +64,21 @@ export default function PlayInterview() {
    */
   const makeArray = () => {
     alert("질문 분배가 완료되었습니다!");
-    setResult(getQuestionNums(users.length, Object.keys(questions).length));
-    setOpen(Array.from({ length: users.length }, () => false));
-    setCorrectCnt(
-      Array.from({ length: Object.keys(questions).length - 1 }, () => false)
+    dispatch(
+      playSlice.actions.setDistribution({
+        result: getQuestionNums(member.length, Object.keys(questions).length),
+        correctCnt: Array.from(
+          { length: Object.keys(questions).length - 1 },
+          () => false
+        ),
+        distribution: true,
+      })
     );
-    // setToggleQuestion(
-    //   Array.from({ length: Object.keys(questions).length - 1 }, () => false)
-    // );
     setBool(true);
   };
 
-  /**
-   * 버튼을 누르면 해당하는 유저의 질문 목록이 열린다.
-   * 열린상태에서 누르면 닫힌다.
-   *
-   * @param {Number} 질문을 열거나 닫을 팀원의 index
-   */
-  const openHandler = (idx: number) => {
-    if (!bool) {
-      alert("질문 분배를 해주세요!");
-    }
-    let change = [...open];
-    change[idx] = !change[idx];
-    setOpen(change);
-  };
-
-  /**
-   * 맞은 질문의 갯수를 세주는 함수.
-   *
-   * @param {Number} 맞은 갯수를 카운트할 팀원의 index
-   */
-  const checkCorrect = (member: number) => {
-    if (result.length === 0) return 0;
-    let correct = 0;
-    result[member].forEach((q) => {
-      if (correctCnt[q]) {
-        correct += 1;
-      }
-    });
-    return correct;
-  };
-
-  const changePackage = (now) => {
-    setResult([]);
-    setOpen([]);
-    setCorrectCnt([]);
-    // setToggleQuestion([]);
-    setOrderMember([]);
+  const changePackage = () => {
+    dispatch(playSlice.actions.setChangeFolder());
     setBool(false);
   };
 
@@ -132,50 +111,39 @@ export default function PlayInterview() {
   };
 
   const getUsers = async () => {
-    const data = await getDocs(userInfo);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const userData = await getDocs(userInfo);
+    dispatch(
+      memberSlice.actions.setMember({
+        members: userData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      })
+    );
   };
 
   const shuffleName = () => {
-    setOrderMember(MakeNums(Object.keys(users).length));
+    const newOrder = MakeNums(Object.keys(member).length);
+    dispatch(
+      playSlice.actions.setOrderMember({
+        orderMember: newOrder,
+      })
+    );
+
     alert("순서 변경이 완료되었습니다!");
   };
 
-  const showUsers = users.map((value: UserInfo, idx: number) => (
-    <UserContainer key={uniqueId}>
-      <NameContainer>
-        <UpperLeft>
-          <MemberTitle>팀원명 : </MemberTitle>
-          <MemberName>
-            {orderMember.length === 0
-              ? value.member
-              : users[orderMember[idx]].member}
-          </MemberName>
-        </UpperLeft>
-        <UpperMiddle></UpperMiddle>
-        <UpperRight>
-          <CorrectText> 맞은 갯수: {checkCorrect(idx)} 개</CorrectText>
-        </UpperRight>
-      </NameContainer>
-      <ButtonContainer>
-        {bool ? (
-          <OpenButton
-            color={open[idx]}
-            onClick={(e) => {
-              openHandler(idx);
-            }}
-          >
-            {open[idx] ? "질문 닫기" : "질문 열기"}
-          </OpenButton>
-        ) : (
-          <NoticeText>질문 분배를 해주세요😋</NoticeText>
-        )}
-      </ButtonContainer>
-      {open[idx] ? <ShowQuestion result={result[idx]} /> : ""}
-    </UserContainer>
-  ));
-
   useEffect(() => {
+    if (!firstRender) {
+      dispatch(
+        playSlice.actions.setDistribution({
+          result: [],
+          correctCnt: [],
+          distribution: false,
+        })
+      );
+      setFirstRender(true);
+    }
     if (user !== null) {
       getPackages();
       getUsers();
@@ -187,7 +155,7 @@ export default function PlayInterview() {
         })
       );
     }
-  }, [result, orderMember, nowPackage, folderId]);
+  }, [nowPackage, folderId, distribution, bool]);
 
   return (
     <>
@@ -209,7 +177,7 @@ export default function PlayInterview() {
             <PackageBox
               onClick={() => {
                 setNowPackage(v);
-                changePackage(v);
+                changePackage();
                 dispatch(
                   folderSlice.actions.choose({
                     choose: v,
@@ -261,7 +229,7 @@ export default function PlayInterview() {
                   질문이 분배되기 전입니다. 🔼 버튼을 눌러 질문을 분배해주세요!
                 </GuideToggle>
               )}
-              <USER>{user === null ? "" : showUsers}</USER>
+              <USER>{user === null ? "" : <ShowMember />}</USER>
             </OrderContainer>
           )}
         </MainContainer>
@@ -270,210 +238,3 @@ export default function PlayInterview() {
     </>
   );
 }
-
-const Title = styled.h1`
-  font-size: 48px;
-  margin: 3em 0 2em 0;
-`;
-
-const PageGuide = styled.p`
-  font-size: 17px;
-  padding: 1em 0;
-  //   &:hover {
-  //     font-size: 24px;
-  //     transition: 0.8s;
-  //   }
-`;
-
-const MainContainer = styled.div`
-  margin: 7em 7em;
-`;
-
-const ShuffleName = styled.button`
-  cursor: pointer;
-  width: 180px;
-  height: 50px;
-  margin-bottom: 1em;
-  color: #ffff;
-  background-color: #03a9f4;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  &:hover {
-    opacity: 80%;
-  }
-`;
-
-const OrderContainer = styled.div`
-  text-align: center;
-`;
-
-const MakeQuestionNums = styled.button<{
-  color: any;
-  onClick: any;
-}>`
-  cursor: pointer;
-  width: 180px;
-  height: 50px;
-  margin-bottom: 2em;
-  color: white;
-  background-color: ${({ color }) => (color ? "#009688" : "#448aff")};
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const GuideToggle = styled.p`
-  margin: 2em 0 5em 0;
-`;
-
-const ManageAccessSection = styled.section`
-  display: felx;
-  justify-content: center;
-  margin: 5em 0;
-`;
-
-const ManageAccessTitle = styled.label`
-  margin: 0 1em;
-  font-size: 24px;
-`;
-
-const LinkLoginBtn = styled.p`
-  height: 3em;
-  margin: 4em 0;
-  line-height: 3em;
-  background-color: #f5f5f5;
-  border: none;
-  border-radius: 10px;
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const UpperLeft = styled.div`
-  width: 20%;
-`;
-
-const UpperMiddle = styled.div`
-  width: 55%;
-`;
-
-const UpperRight = styled.div`
-  width: 25%;
-`;
-
-const USER = styled.div`
-  display: inline-block;
-`;
-
-const UserContainer = styled.div`
-  background-color: var(--containter-box);
-  width: 80em;
-  border-radius: 10px;
-`;
-
-const NameContainer = styled.div`
-  width: 100%;
-  display: flex;
-  margin: 40px 0;
-  padding: 30px 40px;
-`;
-
-const MemberTitle = styled.label`
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-const MemberName = styled.label`
-  font-size: 22px;
-  background-color: #651fff;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 10px;
-`;
-
-const CorrectText = styled.label`
-  font-size: 22px;
-  font-weight: 600;
-`;
-
-const ButtonContainer = styled.div`
-  width: 100%;
-  text-align: center;
-`;
-
-const NoticeText = styled.p`
-  margin: 2em 0;
-  padding: 3em 0;
-`;
-
-const OpenButton = styled.button<{ color: any }>`
-  cursor: pointer;
-  width: 120px;
-  height: 40px;
-  margin: 20px 0;
-  color: white;
-  background-color: ${({ color }) => (color ? "#00695c" : "#5c8aff")};
-  border: none;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: 600;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  &:hover {
-    opacity: 70%;
-  }
-`;
-
-const PackageSection = styled.section`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const PackageTitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 5em 0;
-`;
-
-const PackageTitleText = styled.p`
-  font-size: 24px;
-`;
-
-const PackageDiv = styled.div`
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const PackageBox = styled.div`
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 15em;
-  height: 10em;
-  border: none;
-  border-radius: 10px;
-  background-color: #f5f5f5;
-  margin: 2em 1em;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-  }
-`;
-
-const PackageTitle = styled.div`
-  font-size: 20px;
-  margin: 1em 0;
-`;
-const PackageDate = styled.div`
-  color: #777;
-`;

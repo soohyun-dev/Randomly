@@ -1,16 +1,16 @@
 import StopWatch from "Components/StopWatch/Stopwatch";
+import { playSlice } from "features/playSlice";
 import { selectQuestions } from "features/questionsSlice";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CorrectBtn, QuestionBlock, QuestionText, ShowBtn } from "./style";
 
 export default function ShowQuestion({ result }) {
   console.log(result);
   const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([]);
   const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([]);
-
   const questions = useSelector(selectQuestions);
-  console.log(questions);
+  const dispatch = useDispatch();
   /**
    * 각 질문을 보이게하거나 안보이게 할 수 있다.
    *
@@ -31,6 +31,11 @@ export default function ShowQuestion({ result }) {
   const correctHandler = (idx: number) => {
     let change = [...correctCnt];
     change[idx] = !change[idx];
+    dispatch(
+      playSlice.actions.setCorrectCnt({
+        correctCnt: change,
+      })
+    );
     setCorrectCnt(change);
   };
 
@@ -43,7 +48,7 @@ export default function ShowQuestion({ result }) {
               <QuestionBlock>
                 <ShowBtn
                   color={toggleQuestion[result[idx]]}
-                  onClick={(e) => {
+                  onClick={() => {
                     toggleHandler(result[idx]);
                   }}
                 >

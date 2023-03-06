@@ -29,8 +29,6 @@ export default function Nav() {
     );
   };
 
-  console.log(darkMode);
-
   return (
     <>
       <TopHeader>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Nav from "../../Components/Nav";
 import ManageQuestion from "../../Components/ManageInterview/ManageQuestion";
 import ManageUser from "../../Components/ManageInterview/MangageUser";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../Components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
@@ -14,7 +14,6 @@ import {
   query,
 } from "firebase/firestore";
 import { fireStore } from "../../firebase";
-import { ManagePackageInfo } from "./types";
 import { getDateTime } from "Utils/getTime";
 import { folderSlice, selectFolder } from "features/folderSlice";
 
@@ -33,7 +32,6 @@ export default function Manage() {
   const [show, setShow] = useState<boolean>(false);
   const [page, setPage] = useState<string>("question");
   const [nowPackage, setNowPackage] = useState("0");
-  const packages = useRef<ManagePackageInfo[]>([]);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const folders = useSelector(selectFolder);
@@ -43,10 +41,6 @@ export default function Manage() {
     const packageData = await getDocs(
       query(packageInfo, orderBy("time", "asc"))
     );
-    packages.current = packageData.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
 
     dispatch(
       folderSlice.actions.setFolder({
@@ -84,7 +78,7 @@ export default function Manage() {
         id: folders[nowPackage].id,
       })
     );
-  }, [nowPackage, packages]);
+  }, [nowPackage]);
 
   return (
     <>
@@ -120,7 +114,7 @@ export default function Manage() {
       </section>
       <PackageSection>
         <PackageDiv>
-          {Object.keys(packages.current).map((v, idx) => (
+          {Object.keys(folders).map((v, idx) => (
             <PackageBox
               onClick={() => {
                 setNowPackage(v);
@@ -131,17 +125,15 @@ export default function Manage() {
                 );
               }}
             >
-              <PackageTitle>{packages.current[v].title}</PackageTitle>
-              <PackageDate>{packages.current[v].idx.slice(0, 10)}</PackageDate>
+              <PackageTitle>{folders[v].title}</PackageTitle>
+              <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
             </PackageBox>
           ))}
         </PackageDiv>
       </PackageSection>
       <PackageTitleDiv>
         <PackageTitleText>
-          {show &&
-            packages.current.length > 0 &&
-            packages.current[nowPackage].title}
+          {show && folders.length > 0 && folders[nowPackage].title}
         </PackageTitleText>
       </PackageTitleDiv>
       {user !== null ? (
@@ -152,9 +144,7 @@ export default function Manage() {
         </ManageAccessSection>
       )}
       {page === "question"
-        ? user !== null &&
-          show &&
-          packages.current.length > 0 && <ManageQuestion />
+        ? user !== null && show && folders.length > 0 && <ManageQuestion />
         : user !== null && <ManageUser />}
       <Footer />
     </>
