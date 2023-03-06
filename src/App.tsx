@@ -1,17 +1,17 @@
-import WriteNotice from 'Page/Notice/WriteNotice/WriteNotice'
-import NoticePosting from 'Page/Notice/NoticePosting/NoticePosting'
-import QAPage from 'Page/Q&A/QAPage/QAPage'
-import QAPosting from 'Page/Q&A/QAPosting/QAPosting'
+import WriteNotice from 'Page/Notice/WriteNotice'
+import NoticePosting from 'Page/Notice/NoticePosting'
+import QAPage from 'Page/Q&A/QAPage'
+import QAPosting from 'Page/Q&A/QAPosting'
 import { Route, Routes } from 'react-router-dom'
-import WriteQA from 'Page/Q&A/WriteQA/WriteQA'
 import { useSelector } from 'react-redux'
 import { selectTheme } from 'features/themeSlice'
+import WriteQA from 'Page/Q&A/WriteQA'
+import Login from 'Page/Login'
+import Main from 'Page/Main'
+import Manage from 'Page/Manage'
+import Mypage from 'Page/MyPage'
+import PlayInterview from 'Page/PlayInterview'
 import GlobalStyle from './styles/GlobalStyle'
-import LoginPage from './Page/Login/login'
-import Main from './Page/Main/Main'
-import Manage from './Page/Manage/Manage'
-import Mypage from './Page/MyPage/Mypage'
-import PlayInterview from './Page/Play/PlayInterview'
 
 export default function App(): JSX.Element {
     const theme = useSelector(selectTheme)
@@ -23,7 +23,7 @@ export default function App(): JSX.Element {
                 <Route path="/" element={<Main />} />
                 <Route path="/PlayInterview" element={<PlayInterview />} />
                 <Route path="/Manage" element={<Manage />} />
-                <Route path="/Login" element={<LoginPage />} />
+                <Route path="/Login" element={<Login />} />
                 <Route path="/Mypage" element={<Mypage />} />
                 <Route path="/QAPage" element={<QAPage />} />
                 <Route path="/WriteNotice" element={<WriteNotice />} />

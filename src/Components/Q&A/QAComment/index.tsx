@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { fireStore } from '../../../firebase'
-import Comment from '../Comment/Comment'
+import Comment from '../Comment'
 import { QACommentInfo } from '../types'
 import { CommentSection } from './styles'
 

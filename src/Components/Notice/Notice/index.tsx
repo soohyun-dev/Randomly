@@ -5,7 +5,7 @@ import { selectUser } from 'features/userSlice'
 import { Link } from 'react-router-dom'
 import { NoticeInfo } from './types'
 import { fireStore } from '../../../firebase'
-import NoticeList from '../NoticeList/NoticeList'
+import NoticeList from '../NoticeList'
 import { PostingList, Title, WriteBtn } from './styles'
 
 export default function Notice() {

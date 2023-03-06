@@ -2,11 +2,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import Footer from '../../Components/Footer'
 import Nav from '../../Components/Nav'
 import { userSlice, selectUser } from '../../features/userSlice'
-import LoginBox from '../../Components/Login/LoginBox'
+import LoginBox from '../../Components/LoginBox'
 import { persistor } from '../..'
 import { LoginSection, LoginTitle, TitleSection, Welcome } from './styles'
 
-export default function LoginPage(): JSX.Element {
+export default function Login(): JSX.Element {
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
 

@@ -141,7 +141,7 @@ export default function PlayInterview() {
             )
             setFirstRender(true)
         }
-        if (user !== null) {
+        if (user !== null && folderId !== '') {
             getPackages()
             getUsers()
             getQuestions()
