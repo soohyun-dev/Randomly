@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { QuestionInfo } from 'Page/Play/types'
 import { questionsSlice, selectQuestions } from 'features/questionsSlice'
 import { chooseFolder, chooseId } from 'features/folderSlice'
-import QuestionTable from '../QuestionTable/QuestionTable'
+import QuestionTable from '../QuestionTable'
 import { fireStore } from '../../../firebase'
 import {
     AddBtn,

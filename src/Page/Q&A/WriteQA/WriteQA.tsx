@@ -1,5 +1,5 @@
-import Footer from 'Components/Footer/Footer'
-import Nav from 'Components/Nav/Nav'
+import Footer from 'Components/Footer'
+import Nav from 'Components/Nav'
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'

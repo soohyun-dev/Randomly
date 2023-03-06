@@ -13,8 +13,8 @@ import ErrorPage from 'Page/Error'
 import { QuestionInfo } from './types'
 import { fireStore } from '../../firebase'
 import getQuestionNums, { MakeNums } from '../../Utils/MakeNums'
-import Footer from '../../Components/Footer/Footer'
-import Nav from '../../Components/Nav/Nav'
+import Footer from '../../Components/Footer'
+import Nav from '../../Components/Nav'
 import {
     GuideToggle,
     LinkLoginBtn,

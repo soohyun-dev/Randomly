@@ -1,5 +1,5 @@
-import Footer from 'Components/Footer/Footer'
-import Nav from 'Components/Nav/Nav'
+import Footer from 'Components/Footer'
+import Nav from 'Components/Nav'
 import WriteComment from 'Components/Q&A/WriteComment/WriteComment'
 import { selectUser } from 'features/userSlice'
 import { useSelector } from 'react-redux'

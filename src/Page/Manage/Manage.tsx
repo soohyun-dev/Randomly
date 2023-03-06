@@ -6,12 +6,12 @@ import { getDateTime } from 'Utils/getTime'
 import { folderSlice, selectFolder } from 'features/folderSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
+import ManageUser from 'Components/ManageInterview/ManageUser'
+import ManageQuestion from 'Components/ManageInterview/ManageQuestion'
+import Footer from 'Components/Footer'
+import Nav from 'Components/Nav'
 import { fireStore } from '../../firebase'
 import { selectUser } from '../../features/userSlice'
-import Footer from '../../Components/Footer/Footer'
-import ManageUser from '../../Components/ManageInterview/ManageUser/MangageUser'
-import ManageQuestion from '../../Components/ManageInterview/ManageQuestion/ManageQuestion'
-import Nav from '../../Components/Nav/Nav'
 import {
     ManageAccessSection,
     ManageAccessTitle,

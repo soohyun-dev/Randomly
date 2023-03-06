@@ -1,6 +1,6 @@
-import Footer from 'Components/Footer/Footer'
+import Footer from 'Components/Footer'
 import { Fade } from 'react-awesome-reveal'
-import Nav from '../../Components/Nav/Nav'
+import Nav from '../../Components/Nav'
 import {
     ContentBox,
     ContentBoxText,

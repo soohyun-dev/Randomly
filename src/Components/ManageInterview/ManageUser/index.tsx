@@ -6,7 +6,7 @@ import { memberSlice, selectMember } from 'features/memberSlice'
 import { chooseFolder, chooseId } from 'features/folderSlice'
 import { ManageUserInfo } from '../types'
 import { fireStore } from '../../../firebase'
-import UserTable from '../UserTable/UserTable'
+import UserTable from '../UserTable'
 import { AddBtn, Table, Th, ThNoRight, UserInput, UserListContainer } from './styles'
 import { NewData } from './types'
 
