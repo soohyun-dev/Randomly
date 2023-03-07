@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Footer from '../../Components/Footer'
 import Nav from '../../Components/Nav'
-import { userSlice, selectUser } from '../../Features/userSlice'
+import { userSlice, selectUser } from '../../features/userSlice'
 import LoginBox from '../../Components/LoginBox'
 import { persistor } from '../..'
 import { LoginSection, LoginTitle, TitleSection, Welcome } from './styles'

@@ -1,6 +1,6 @@
 import StopWatch from 'Components/StopWatch'
-import { playSlice } from 'Features/playSlice'
-import { selectQuestions } from 'Features/questionsSlice'
+import { playSlice } from 'features/playSlice'
+import { selectQuestions } from 'features/questionsSlice'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CorrectBtn, QuestionBlock, QuestionText, ShowBtn } from './style'

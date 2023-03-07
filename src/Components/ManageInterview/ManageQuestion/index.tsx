@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 import { addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
-import { selectUser } from 'Features/userSlice'
+import { selectUser } from 'features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { QuestionInfo } from 'Page/PlayInterview/types'
-import { questionsSlice, selectQuestions } from 'Features/questionsSlice'
-import { chooseFolder, chooseId } from 'Features/folderSlice'
+import { questionsSlice, selectQuestions } from 'features/questionsSlice'
+import { chooseFolder, chooseId } from 'features/folderSlice'
 import QuestionTable from '../QuestionTable'
 import { fireStore } from '../../../firebase'
 import {
