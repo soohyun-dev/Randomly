@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { userSlice } from '../../features/userSlice'
+import { userSlice } from '../../Features/userSlice'
 import { auth } from '../../firebase'
 import { GoogleImg, LoginBtn, LoginContainer, LoginDiv } from './styles'
 

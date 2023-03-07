@@ -1,10 +1,10 @@
-import { selectMember } from 'features/memberSlice'
+import { selectMember } from 'Features/memberSlice'
 import {
     selectCorrectCnt,
     selectDistribution,
     selectOrderMemeber,
     selectResult,
-} from 'features/playSlice'
+} from 'Features/playSlice'
 import { useEffect, useId, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ShowQuestion from '../ShowQuestion'

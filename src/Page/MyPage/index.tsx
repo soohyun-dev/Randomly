@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { persistor } from '../..'
 import Footer from '../../Components/Footer'
 import Nav from '../../Components/Nav'
-import { selectUser, selectUserEmail } from '../../features/userSlice'
+import { selectUser, selectUserEmail } from '../../Features/userSlice'
 import {
     InfoDiv,
     InfoLabel,

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addDoc, collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { getDateTime } from 'Utils/getTime'
-import { folderSlice, selectFolder } from 'features/folderSlice'
+import { folderSlice, selectFolder } from 'Features/folderSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
 import ManageUser from 'Components/ManageInterview/ManageUser'
@@ -11,7 +11,7 @@ import ManageQuestion from 'Components/ManageInterview/ManageQuestion'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { fireStore } from '../../firebase'
-import { selectUser } from '../../features/userSlice'
+import { selectUser } from '../../Features/userSlice'
 import {
     ManageAccessSection,
     ManageAccessTitle,

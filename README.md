@@ -14,17 +14,18 @@
 
 ## 프로젝트 진행과정
 
-- [📝 진행과정 기록 1](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
-- [📝 진행과정 기록 2](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
-- [📝 진행과정 기록 3](https://bmy1320.tistory.com/entry/dd)
-- [📝 진행과정 기록 4](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230217)
-  <br>
+-   [📝 진행과정 기록 1](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
+-   [📝 진행과정 기록 2](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
+-   [📝 진행과정 기록 3](https://bmy1320.tistory.com/entry/dd)
+-   [📝 진행과정 기록 4](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230217)
+
+    <br>
 
 ## ⏰ 개발 기간
 
-- 2023년 1월 18일 ~ 🏃‍♂️
+-   2023년 1월 18일 ~ 🏃‍♂️
 
-  <br>
+    <br>
 
 ## 🎰 기능 소개
 
@@ -36,8 +37,8 @@
 
 ### 1. 질문 랜덤 분배
 
-- 면접 질문을 랜덤으로 각 팀원들에게 골고루 분배해주는 기능
-- 각 팀원은 자신에게 부여된 질문을 확인할 수 있다.
+-   면접 질문을 랜덤으로 각 팀원들에게 골고루 분배해주는 기능
+-   각 팀원은 자신에게 부여된 질문을 확인할 수 있다.
 
 <img src="https://user-images.githubusercontent.com/81623931/215723339-c5df4423-7865-4439-a9f5-dfbfb24ed1df.png" width="800" height="400"/>
 <img src="https://user-images.githubusercontent.com/81623931/215723636-c77ee672-1b01-4bc6-9a87-bd5a3ec2193c.png" width="800" height="400"/>
@@ -46,9 +47,9 @@
 
 ### 2. 질문 생성, 수정, 삭제 기능
 
-- 스터디에 활용할 질문을 질문 리스트에 등록할 수 있다.
-- 질문 리스트에 등록된 질문을 수정할 수 있다.
-- 질문 리스트에 등록된 질문을 삭제할 수 있다.
+-   스터디에 활용할 질문을 질문 리스트에 등록할 수 있다.
+-   질문 리스트에 등록된 질문을 수정할 수 있다.
+-   질문 리스트에 등록된 질문을 삭제할 수 있다.
 
 <img src="https://user-images.githubusercontent.com/81623931/215789486-34a0d541-d882-42c9-b7f1-918e1ceb5b44.png" width="800" height="400"/>
 
@@ -56,9 +57,9 @@
 
 ### 3. 참여자 생성, 수정, 삭제 기능
 
-- 스터디에 참여할 참여자를 등록할 수 있다.
-- 참여자 리스트에 등록된 참여자 이름을 수정할 수 있다.
-- 참여자 리스트에 등록된 참여자를 삭제할 수 있다.
+-   스터디에 참여할 참여자를 등록할 수 있다.
+-   참여자 리스트에 등록된 참여자 이름을 수정할 수 있다.
+-   참여자 리스트에 등록된 참여자를 삭제할 수 있다.
 
 <img src="https://user-images.githubusercontent.com/81623931/215791138-e9c0a19b-797c-445d-929c-8c174f9a9f6e.png" width="800" height="400"/>
 
@@ -66,10 +67,10 @@
 
 ### 4. 로그인, 로그아웃 기능
 
-- 본 서비스에 로그인을 할 수 있다.
-- 로그인 방법은 구글 로그인과 자체 이메일,비밀번호 로그인이다.
-- 로그인 정보는 새로고침을 해도 유지된다.
-- 로그아웃을 하면 로그인한 정보가 사라진다.
+-   본 서비스에 로그인을 할 수 있다.
+-   로그인 방법은 구글 로그인과 자체 이메일,비밀번호 로그인이다.
+-   로그인 정보는 새로고침을 해도 유지된다.
+-   로그아웃을 하면 로그인한 정보가 사라진다.
 
 <br>
 
@@ -85,35 +86,35 @@
 
 <br>
 
-- 해당 페이지에서 본 서비스의 공지사항 글을 확인할 수 있다.
-- 공지사항 글은 관리자로 지정된 유저만 글을 올리고 수정하고 삭제할 수 있다.
-  <br>
+-   해당 페이지에서 본 서비스의 공지사항 글을 확인할 수 있다.
+-   공지사항 글은 관리자로 지정된 유저만 글을 올리고 수정하고 삭제할 수 있다.
+    <br>
 
 #### Q&A
 
-- Q&A 페이지 에서는 본 서비스를 이용하는 유저가 관리자에게 질문을 남길 수 있다.
-  <br>
+-   Q&A 페이지 에서는 본 서비스를 이용하는 유저가 관리자에게 질문을 남길 수 있다.
+    <br>
 
 #### 남길 말
 
-- 본 서비스에 로그인 한 유저는 남길 말 페이지를 통해 자유로운 글을 남길 수 있다.
-  <br>
+-   본 서비스에 로그인 한 유저는 남길 말 페이지를 통해 자유로운 글을 남길 수 있다.
+    <br>
 
 ## 🛠️ 사용 기술
 
-- React
-- Redux-toolkit
-- TypeScript
-- CSS in JS (Styled-Components)
-- ErrorBoundary
-- Firebase
-- CloudFlare
-  <br>
-  <br>
+-   React
+-   Redux-toolkit
+-   TypeScript
+-   CSS in JS (Styled-Components)
+-   ErrorBoundary
+-   Firebase
+-   CloudFlare
+    <br>
+    <br>
 
 #### 🔤 Font
 
-- [Spoqa Han Sans Neo](https://spoqa.github.io/spoqa-han-sans/ko-KR/#intro)
+-   [Spoqa Han Sans Neo](https://spoqa.github.io/spoqa-han-sans/ko-KR/#intro)
 
 <br>
 
@@ -122,93 +123,6 @@
 | ![image](https://user-images.githubusercontent.com/81623931/214251396-cfc402d0-7913-4bba-8684-036007cab92d.png) | ![image](https://user-images.githubusercontent.com/81623931/216749862-25a1fcc9-95da-45e3-9354-181d62dce499.png) | ![image](https://user-images.githubusercontent.com/81623931/216770547-84dcd46b-981e-46c3-bff3-f9c3031f9463.png) | ![image](https://user-images.githubusercontent.com/81623931/214252351-43963dc8-b21b-43c1-b511-bbaf8cdbb6b9.png) |
 | Firebase                                                                                                        | CloudFlare                                                                                                      |                                                                                                                 |
 | ![image](https://user-images.githubusercontent.com/81623931/214251466-778569a2-fc98-430a-a097-c16836fd599a.png) | ![image](https://user-images.githubusercontent.com/81623931/216211689-5cb26001-f950-4ad5-86da-5db788a3e641.png) |                                                                                                                 |                                                                                                                 |
-
-<br>
-
-## 패키지 구조
-
-<pre>
-📦src
- ┣ 📂Components
- ┃ ┣ 📂Loading
- ┃ ┃ ┗ 📜Loding.tsx
- ┃ ┣ 📂Login
- ┃ ┃ ┗ 📜LoginBox.tsx
- ┃ ┣ 📂ManageInterview
- ┃ ┃ ┣ 📜ManageQuestion.tsx
- ┃ ┃ ┣ 📜MangageUser.tsx
- ┃ ┃ ┣ 📜QuestionTable.tsx
- ┃ ┃ ┣ 📜types.ts
- ┃ ┃ ┗ 📜UserTable.tsx
- ┃ ┣ 📂Memo
- ┃ ┃ ┗ 📜Memo.tsx
- ┃ ┣ 📂Notice
- ┃ ┃ ┣ 📜Notice.tsx
- ┃ ┃ ┣ 📜NoticeList.tsx
- ┃ ┃ ┗ 📜types.ts
- ┃ ┣ 📂Play
- ┃ ┃ ┣ 📂member
- ┃ ┃ ┃ ┣ 📜ShowMember.tsx
- ┃ ┃ ┃ ┣ 📜style.ts
- ┃ ┃ ┃ ┗ 📜types.ts
- ┃ ┃ ┗ 📂question
- ┃ ┃ ┃ ┣ 📜ShowQuestion.tsx
- ┃ ┃ ┃ ┗ 📜style.ts
- ┃ ┣ 📂Q&A
- ┃ ┃ ┣ 📜Comment.tsx
- ┃ ┃ ┣ 📜QA.tsx
- ┃ ┃ ┣ 📜QAComment.tsx
- ┃ ┃ ┣ 📜QAList.tsx
- ┃ ┃ ┣ 📜types.ts
- ┃ ┃ ┗ 📜WriteComment.tsx
- ┃ ┣ 📂StopWatch
- ┃ ┃ ┗ 📜Stopwatch.tsx
- ┃ ┣ 📜Footer.tsx
- ┃ ┗ 📜Nav.tsx
- ┣ 📂features
- ┃ ┣ 📜folderSlice.tsx
- ┃ ┣ 📜memberSlice.tsx
- ┃ ┣ 📜playSlice.tsx
- ┃ ┣ 📜questionsSlice.tsx
- ┃ ┣ 📜themeSlice.tsx
- ┃ ┗ 📜userSlice.jsx
- ┣ 📂hooks
- ┣ 📂Page
- ┃ ┣ 📂Error
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.ts
- ┃ ┣ 📂Login
- ┃ ┃ ┗ 📜login.tsx
- ┃ ┣ 📂Manage
- ┃ ┃ ┣ 📜Manage.tsx
- ┃ ┃ ┗ 📜types.ts
- ┃ ┣ 📂MyPage
- ┃ ┃ ┗ 📜Mypage.tsx
- ┃ ┣ 📂Notice
- ┃ ┃ ┣ 📜NoticePosting.tsx
- ┃ ┃ ┣ 📜types.ts
- ┃ ┃ ┗ 📜WriteNotice.tsx
- ┃ ┣ 📂Play
- ┃ ┃ ┣ 📜PlayInterview.tsx
- ┃ ┃ ┣ 📜styles.ts
- ┃ ┃ ┗ 📜types.ts
- ┃ ┣ 📂Q&A
- ┃ ┃ ┣ 📜QAPage.tsx
- ┃ ┃ ┣ 📜QAPosting.tsx
- ┃ ┃ ┗ 📜WriteQA.tsx
- ┃ ┗ 📜Main.tsx
- ┣ 📂store
- ┃ ┗ 📜store.js
- ┣ 📂styles
- ┃ ┣ 📜GlobalStyle.tsx
- ┃ ┗ 📜theme.ts
- ┣ 📂Utils
- ┃ ┣ 📜getTime.tsx
- ┃ ┗ 📜MakeNums.tsx
- ┣ 📜App.tsx
- ┣ 📜firebase.tsx
- ┗ 📜index.tsx
-</pre>
 
 <br>
 
@@ -223,3 +137,137 @@
 [wiki에 개발의 전반적인 기록을 담았습니다.](https://github.com/soohyun-dev/Randomly/wiki)
 
 <br>
+
+## 패키지 구조
+
+<pre>
+📦src
+ ┣ 📂Components
+ ┃ ┣ 📂Footer
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Loading
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂LoginBox
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂ManageInterview
+ ┃ ┃ ┣ 📂ManageQuestion
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜styles.ts
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┣ 📂ManageUser
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜styles.ts
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┣ 📂QuestionTable
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂UserTable
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂Memo
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Nav
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Notice
+ ┃ ┃ ┣ 📂Notice
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┗ 📂NoticeList
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Play
+ ┃ ┃ ┣ 📂ShowMember
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜style.tsx
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┗ 📂ShowQuestion
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜style.tsx
+ ┃ ┣ 📂Q&A
+ ┃ ┃ ┣ 📂Comment
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂QA
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂QAComment
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂QAList
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂WriteComment
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┗ 📂StopWatch
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┣ 📂Features
+ ┃ ┣ 📜folderSlice.tsx
+ ┃ ┣ 📜memberSlice.tsx
+ ┃ ┣ 📜playSlice.tsx
+ ┃ ┣ 📜questionsSlice.tsx
+ ┃ ┣ 📜themeSlice.tsx
+ ┃ ┗ 📜userSlice.jsx
+ ┣ 📂hooks
+ ┣ 📂Page
+ ┃ ┣ 📂Error
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📂Login
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Main
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Manage
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂MyPage
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┣ 📂Notice
+ ┃ ┃ ┣ 📂NoticePosting
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂WriteNotice
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂PlayInterview
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┗ 📂Q&A
+ ┃ ┃ ┣ 📂QAPage
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📂QAPosting
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┗ 📂WriteQA
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┃ ┗ 📜types.ts
+ ┣ 📂Store
+ ┃ ┗ 📜store.js
+ ┣ 📂Styles
+ ┃ ┣ 📜GlobalStyle.tsx
+ ┃ ┗ 📜theme.ts
+ ┣ 📂Utils
+ ┃ ┣ 📜getTime.tsx
+ ┃ ┗ 📜MakeNums.tsx
+ ┣ 📜App.tsx
+ ┣ 📜firebase.tsx
+ ┗ 📜index.tsx
+</pre>

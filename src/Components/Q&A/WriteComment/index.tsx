@@ -1,4 +1,4 @@
-import { selectUser } from 'features/userSlice'
+import { selectUser } from 'Features/userSlice'
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'

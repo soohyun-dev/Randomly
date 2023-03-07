@@ -1,9 +1,9 @@
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { selectUser } from 'features/userSlice'
+import { selectUser } from 'Features/userSlice'
 import { useSelector } from 'react-redux'
-import { chooseId } from 'features/folderSlice'
+import { chooseId } from 'Features/folderSlice'
 import { fireStore } from '../../../firebase'
 import { Btn, Td, TdNoRight, Tr, UpdateBtn, UserInput, UserTd } from './styles'
 

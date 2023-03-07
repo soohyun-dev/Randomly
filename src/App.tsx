@@ -4,14 +4,14 @@ import QAPage from 'Page/Q&A/QAPage'
 import QAPosting from 'Page/Q&A/QAPosting'
 import { Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectTheme } from 'features/themeSlice'
+import { selectTheme } from 'Features/themeSlice'
 import WriteQA from 'Page/Q&A/WriteQA'
 import Login from 'Page/Login'
 import Main from 'Page/Main'
 import Manage from 'Page/Manage'
 import Mypage from 'Page/MyPage'
 import PlayInterview from 'Page/PlayInterview'
-import GlobalStyle from './styles/GlobalStyle'
+import GlobalStyle from './Styles/GlobalStyle'
 
 export default function App(): JSX.Element {
     const theme = useSelector(selectTheme)

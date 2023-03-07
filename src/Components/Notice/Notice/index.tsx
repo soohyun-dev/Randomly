@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { collection, collectionGroup, getDocs, orderBy, query } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
-import { selectUser } from 'features/userSlice'
+import { selectUser } from 'Features/userSlice'
 import { Link } from 'react-router-dom'
 import { NoticeInfo } from './types'
 import { fireStore } from '../../../firebase'

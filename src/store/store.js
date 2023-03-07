@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import { combineReducers } from 'redux'
 import storage from 'redux-persist/lib/storage'
-import userReducer from '../features/userSlice'
-import themeReducer from '../features/themeSlice'
-import folderReducer from '../features/folderSlice'
-import questionReducer from '../features/questionsSlice'
-import memberReducer from '../features/memberSlice'
-import playReducer from '../features/playSlice'
+import userReducer from '../Features/userSlice'
+import themeReducer from '../Features/themeSlice'
+import folderReducer from '../Features/folderSlice'
+import questionReducer from '../Features/questionsSlice'
+import memberReducer from '../Features/memberSlice'
+import playReducer from '../Features/playSlice'
 
 const persistConfig = {
     key: 'root',
