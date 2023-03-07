@@ -2,7 +2,7 @@ import { selectTheme, themeSlice } from 'features/themeSlice'
 import { persistor } from 'index'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { selectUser } from '../../features/userSlice'
+import { selectUser } from 'features/userSlice'
 import { Logo, LogoText, Logout, Menu, MenuText, Option, ThemeDiv, TopHeader } from './styles'
 
 export default function Nav() {

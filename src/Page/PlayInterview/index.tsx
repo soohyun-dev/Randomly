@@ -10,11 +10,11 @@ import { playSlice, selectDistribution } from 'features/playSlice'
 import { memberSlice, selectMember } from 'features/memberSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
+import getQuestionNums, { MakeNums } from 'utils/MakeNums'
+import Footer from 'Components/Footer'
+import Nav from 'Components/Nav'
 import { QuestionInfo } from './types'
 import { fireStore } from '../../firebase'
-import getQuestionNums, { MakeNums } from '../../utils/MakeNums'
-import Footer from '../../Components/Footer'
-import Nav from '../../Components/Nav'
 import {
     GuideToggle,
     LinkLoginBtn,

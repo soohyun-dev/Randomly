@@ -1,6 +1,5 @@
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { selectUser } from 'features/userSlice'
 import { useSelector } from 'react-redux'
 import { chooseId } from 'features/folderSlice'
