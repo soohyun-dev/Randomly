@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
-import { selectUser } from 'features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { selectUser } from 'features/userSlice'
 import { memberSlice, selectMember } from 'features/memberSlice'
 import { chooseFolder, chooseId } from 'features/folderSlice'
 import { ManageUserInfo } from '../types'

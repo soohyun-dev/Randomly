@@ -117,6 +117,11 @@ export default function PlayInterview() {
                 })),
             })
         )
+        dispatch(
+            playSlice.actions.setOrderMember({
+                orderMember: Array.from({ length: member.length }, (_, idx) => idx),
+            })
+        )
     }
 
     const shuffleName = () => {

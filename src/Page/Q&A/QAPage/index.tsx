@@ -6,6 +6,7 @@ import QA from 'Components/Q&A/QA'
 import ErrorPage from 'Page/Error'
 import { useEffect, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
+
 import { CatagoryButton, CatagoryDiv, PostListDiv, QASection } from './styles'
 
 export default function QAPage() {

@@ -11,7 +11,7 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { getDateTime } from 'utils/getTime'
 import { fireStore } from '../../firebase'
-import { selectUser } from '../../features/userSlice'
+import { selectUser } from 'features/userSlice'
 import {
     ManageAccessSection,
     ManageAccessTitle,
@@ -87,6 +87,7 @@ export default function Manage() {
             if (folders.length >= 1) {
                 dispatch(
                     folderSlice.actions.choose({
+                        choose: +nowPackage,
                         id: folders[nowPackage].id,
                     })
                 )

@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
-import { selectUser } from 'features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { selectUser } from 'features/userSlice'
 import { QuestionInfo } from 'Page/PlayInterview/types'
 import { questionsSlice, selectQuestions } from 'features/questionsSlice'
 import { chooseFolder, chooseId } from 'features/folderSlice'
@@ -18,6 +18,7 @@ import {
     ThNoRight,
 } from './styles'
 import { NewData } from './types'
+import Catagory from '../Catagory'
 
 export default function ManageQuestion() {
     const [newQuestion, setNewQuestion] = useState<string>('')
@@ -100,48 +101,51 @@ export default function ManageQuestion() {
     }, [newQuestion, folderId, now])
 
     return (
-        <QuestionListContainer>
-            <div>
+        <>
+            <QuestionListContainer>
                 <div>
-                    <QuestionInput
-                        type="text"
-                        value={newQuestion}
-                        placeholder="추가할 질문을 입력해주세요."
-                        onChange={(e) => setNewQuestion(e.target.value)}
-                        onKeyDown={enterSubmit}
-                    />
-                    <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
-                    {preAddQuestion === '' ? (
-                        ''
-                    ) : (
-                        <PreAddText>
-                            이전 추가 질문 : {preAddIdx}. {preAddQuestion}
-                        </PreAddText>
-                    )}
+                    <div>
+                        <Catagory />
+                        <QuestionInput
+                            type="text"
+                            value={newQuestion}
+                            placeholder="추가할 질문을 입력해주세요."
+                            onChange={(e) => setNewQuestion(e.target.value)}
+                            onKeyDown={enterSubmit}
+                        />
+                        <AddBtn onClick={addQuestion}>질문 추가</AddBtn>
+                        {preAddQuestion === '' ? (
+                            ''
+                        ) : (
+                            <PreAddText>
+                                이전 추가 질문 : {preAddIdx}. {preAddQuestion}
+                            </PreAddText>
+                        )}
+                    </div>
+                    <div style={{ display: 'inline-block' }}>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <Th>No.</Th>
+                                    <Th>질문</Th>
+                                    <Th>수정하기</Th>
+                                    <ThNoRight>삭제하기</ThNoRight>
+                                </tr>
+                            </thead>
+                            {Object.keys(question).map((v, idx) => (
+                                <QuestionTable
+                                    question={question[+v].question}
+                                    id={question[+v].id}
+                                    idx={idx}
+                                />
+                            ))}
+                        </Table>
+                    </div>
                 </div>
-                <div style={{ display: 'inline-block' }}>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <Th>No.</Th>
-                                <Th>질문</Th>
-                                <Th>수정하기</Th>
-                                <ThNoRight>삭제하기</ThNoRight>
-                            </tr>
-                        </thead>
-                        {Object.keys(question).map((v, idx) => (
-                            <QuestionTable
-                                question={question[+v].question}
-                                id={question[+v].id}
-                                idx={idx}
-                            />
-                        ))}
-                    </Table>
-                </div>
-            </div>
-            <DelelteAllSection>
-                {/* <DeleteAllBtn onClick={deleteAll}>전체삭제</DeleteAllBtn> */}
-            </DelelteAllSection>
-        </QuestionListContainer>
+                <DelelteAllSection>
+                    {/* <DeleteAllBtn onClick={deleteAll}>전체삭제</DeleteAllBtn> */}
+                </DelelteAllSection>
+            </QuestionListContainer>
+        </>
     )
 }

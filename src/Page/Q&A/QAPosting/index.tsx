@@ -1,10 +1,11 @@
-import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
+import QAComment from 'Components/Q&A/QAComment'
 import WriteComment from 'Components/Q&A/WriteComment'
 import { selectUser } from 'features/userSlice'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import QAComment from 'Components/Q&A/QAComment'
+import Footer from '../../../Components/Footer'
+
 import {
     ContentDiv,
     DateText,

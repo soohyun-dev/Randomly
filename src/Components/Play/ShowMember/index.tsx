@@ -31,7 +31,7 @@ export default function ShowMember() {
     const distribution = useSelector(selectDistribution)
     //   useSelector(selectDistribution);
     const uniqueId = useId()
-
+    console.log(member, orderMember)
     /**
      * 버튼을 누르면 해당하는 유저의 질문 목록이 열린다.
      * 열린상태에서 누르면 닫힌다.
