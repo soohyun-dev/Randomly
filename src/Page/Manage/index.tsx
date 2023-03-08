@@ -75,6 +75,7 @@ export default function Manage() {
                 idx,
                 title: `새폴더`,
                 time: new Date(),
+                catagory: ['분류없음'],
             })
 
             await window.location.reload()
