@@ -22,7 +22,10 @@ export const questionsSlice = createSlice({
 
 export const { setQuestion } = questionsSlice.actions
 
-export const selectQuestions = (state) => state.question.Questions
+export const selectQuestions = (state) => {
+    console.log(state)
+    return state.question.Questions
+}
 export const selectCatagoryList = (state) => state.question.catagoryList
 export const selectSelectedCatagory = (state) => state.question.selectedCatagory
 

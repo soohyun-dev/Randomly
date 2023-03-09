@@ -86,6 +86,7 @@ export default function Manage() {
         if (user !== null) {
             getPackages()
             if (folders.length >= 1) {
+                console.log('지금패키지', nowPackage)
                 dispatch(
                     folderSlice.actions.choose({
                         choose: +nowPackage,

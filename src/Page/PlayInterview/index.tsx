@@ -5,7 +5,7 @@ import { selectUser } from 'features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { folderSlice, chooseId, selectFolder } from 'features/folderSlice'
-import { questionsSlice } from 'features/questionsSlice'
+import { questionsSlice, selectQuestions } from 'features/questionsSlice'
 import { playSlice, selectDistribution, selectOrderMemeber } from 'features/playSlice'
 import { memberSlice, selectMember } from 'features/memberSlice'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -35,18 +35,19 @@ import {
     Title,
     USER,
 } from './styles'
+import getEqualDistribution from 'utils/EqualDistribution'
 
 export default function PlayInterview() {
     const dispatch = useDispatch()
     const [firstRender, setFirstRender] = useState(false)
     const [bool, setBool] = useState<boolean>(false)
-    const [questions, setQuestions] = useState<QuestionInfo[]>([])
     const [nowPackage, setNowPackage] = useState<string>('0')
     const [isChecked, setIsChecked] = useState(false)
     const user = useSelector(selectUser)
     const folders = useSelector(selectFolder)
     const folderId = useSelector(chooseId)
     const member = useSelector(selectMember)
+    let questions = useSelector(selectQuestions)
     const distribution = useSelector(selectDistribution)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
     const userInfo =
@@ -66,19 +67,31 @@ export default function PlayInterview() {
      * @param {e} 질문 분배 버튼 이벤트
      */
     const makeArray = () => {
-        alert('질문 분배가 완료되었습니다!')
+        let resultArray = []
+        if (isChecked) {
+            // 카테고리별 균등 분배 선택시
+            resultArray = getEqualDistribution(member.length, questions)
+            console.log('균등결과물', resultArray)
+        } else {
+            // 카테고리별 균등 분배 선택안할시
+            resultArray = getQuestionNums(member.length, Object.keys(questions).length)
+            console.log('노균등결과물', resultArray)
+        }
+
         dispatch(
             playSlice.actions.setDistribution({
-                result: getQuestionNums(member.length, Object.keys(questions).length),
+                result: resultArray,
                 correctCnt: Array.from({ length: Object.keys(questions).length - 1 }, () => false),
                 distribution: true,
             })
         )
         setBool(true)
+        alert('질문 분배가 완료되었습니다!')
     }
 
     const changePackage = () => {
         dispatch(playSlice.actions.setChangeFolder())
+        getUsers()
         setBool(false)
     }
 
@@ -97,7 +110,6 @@ export default function PlayInterview() {
 
     const getQuestions = async () => {
         const data = await getDocs(questionInfo)
-        setQuestions(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         dispatch(
             questionsSlice.actions.setQuestion({
                 Questions: data.docs.map((doc) => ({
@@ -106,6 +118,7 @@ export default function PlayInterview() {
                 })),
             })
         )
+        questions = useSelector(selectQuestions)
     }
 
     const getUsers = async () => {
@@ -118,7 +131,7 @@ export default function PlayInterview() {
                 })),
             })
         )
-        console.log(member)
+        console.log('멤버', member)
         dispatch(
             playSlice.actions.setOrderMember({
                 orderMember: Array.from({ length: member.length }, (_, idx) => idx),
@@ -140,7 +153,6 @@ export default function PlayInterview() {
     const checkCatagory = () => {
         setIsChecked(!isChecked)
     }
-    console.log(isChecked)
 
     useEffect(() => {
         if (!firstRender) {

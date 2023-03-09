@@ -32,7 +32,8 @@ export default function Catagory() {
     const addCatagory = async () => {
         const catagoryDoc = doc(fireStore, `users/${user}/packages/${folderId}`)
         const newContent = { catagory: [...catagory, newCatagory] }
-        await updateDoc(catagoryDoc, newContent).then(setNewCatagory(''))
+        await updateDoc(catagoryDoc, newContent)
+        setNewCatagory('')
         alert('카테고리가 추가되었습니다.')
     }
 

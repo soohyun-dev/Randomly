@@ -1,12 +1,14 @@
+import { selectFolder } from 'features/folderSlice'
 import { selectMember } from 'features/memberSlice'
 import {
+    playSlice,
     selectCorrectCnt,
     selectDistribution,
     selectOrderMemeber,
     selectResult,
 } from 'features/playSlice'
 import { useEffect, useId, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ShowQuestion from '../ShowQuestion'
 import {
     ButtonContainer,
@@ -24,14 +26,19 @@ import { UserInfo } from './types'
 
 export default function ShowMember() {
     const [open, setOpen] = useState<Array<boolean[] | boolean>>([false])
+
     const member = useSelector(selectMember)
     const result = useSelector(selectResult)
-    const orderMember = useSelector(selectOrderMemeber)
     const correctCnt = useSelector(selectCorrectCnt)
     const distribution = useSelector(selectDistribution)
+    const newOrderMember = useSelector(selectOrderMemeber)
+    const [orderMember, setOrderMember] = useState(
+        Array.from({ length: member.length }, (_, idx) => idx)
+    )
     //   useSelector(selectDistribution);
     const uniqueId = useId()
-    console.log(member, orderMember)
+    console.log(member, orderMember, newOrderMember)
+
     /**
      * 버튼을 누르면 해당하는 유저의 질문 목록이 열린다.
      * 열린상태에서 누르면 닫힌다.
@@ -63,7 +70,9 @@ export default function ShowMember() {
     //     return correct;
     //   };
 
-    useEffect(() => {}, [distribution])
+    useEffect(() => {
+        setOrderMember(newOrderMember)
+    }, [member])
 
     return (
         <>
@@ -73,7 +82,7 @@ export default function ShowMember() {
                         <UpperLeft>
                             <MemberTitle>팀원명 : </MemberTitle>
                             <MemberName>
-                                {orderMember.length === 0
+                                {orderMember.length === 0 || orderMember.length !== member.length
                                     ? value.member
                                     : member[orderMember[idx]].member}
                             </MemberName>

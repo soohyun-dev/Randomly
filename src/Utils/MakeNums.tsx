@@ -4,7 +4,7 @@
  * @returns 입력된 배열 shuffle한 배열
  */
 
-const shuffleArray = (array: number[]): number[] => {
+export const shuffleArray = (array: number[]): number[] => {
     return array.sort(() => Math.random() - 0.5)
 }
 
