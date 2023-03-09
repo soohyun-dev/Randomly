@@ -6,7 +6,7 @@ import { chooseId } from 'features/folderSlice'
 import { fireStore } from '../../../firebase'
 import { Btn, QuestionInput, QustionTd, Td, TdNoRight, Tr, UpdateBtn } from './styles'
 
-export default function QuestionTable({ question, id, idx }) {
+export default function QuestionTable({ question, id, idx, catagory }) {
     const [newQuestion, setNewQuestion] = useState(question)
     const [update, setUpdate] = useState(false)
     const [updateBtnToggle, setUpdateBtnToggle] = useState(false)
@@ -46,6 +46,7 @@ export default function QuestionTable({ question, id, idx }) {
     return (
         <Tr>
             <Td>{idx + 1}</Td>
+            <Td>{catagory}</Td>
             <QustionTd>
                 {update ? (
                     <QuestionInput

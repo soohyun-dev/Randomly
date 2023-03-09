@@ -1,9 +1,11 @@
+/* eslint-disable */
+
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
 import { QuestionInfo } from 'Page/PlayInterview/types'
-import { questionsSlice, selectQuestions } from 'features/questionsSlice'
+import { questionsSlice, selectQuestions, selectSelectedCatagory } from 'features/questionsSlice'
 import { chooseFolder, chooseId } from 'features/folderSlice'
 import QuestionTable from '../QuestionTable'
 import { fireStore } from '../../../firebase'
@@ -31,6 +33,7 @@ export default function ManageQuestion() {
     const dispatch = useDispatch()
     const question = useSelector(selectQuestions)
     const now = useSelector(chooseFolder)
+    const seletedCatagory = useSelector(selectSelectedCatagory)
 
     const getQuestions = async () => {
         const questionData = await getDocs(query(questionsInfo, orderBy('time', 'asc')))
@@ -60,6 +63,7 @@ export default function ManageQuestion() {
         newData.idx = idx
         newData.question = newQuestion
         newData.time = new Date()
+        newData.catagory = seletedCatagory
         await addDoc(questionsInfo, newData)
         setPreAddQuestions(newQuestion)
         setPreAddIdx(idx + 1)
@@ -127,6 +131,7 @@ export default function ManageQuestion() {
                             <thead>
                                 <tr>
                                     <Th>No.</Th>
+                                    <Th>카테고리</Th>
                                     <Th>질문</Th>
                                     <Th>수정하기</Th>
                                     <ThNoRight>삭제하기</ThNoRight>
@@ -137,6 +142,7 @@ export default function ManageQuestion() {
                                     question={question[+v].question}
                                     id={question[+v].id}
                                     idx={idx}
+                                    catagory={question[+v].catagory}
                                 />
                             ))}
                         </Table>
