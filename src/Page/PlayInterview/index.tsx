@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { folderSlice, chooseId, selectFolder } from 'features/folderSlice'
 import { questionsSlice } from 'features/questionsSlice'
-import { playSlice, selectDistribution } from 'features/playSlice'
+import { playSlice, selectDistribution, selectOrderMemeber } from 'features/playSlice'
 import { memberSlice, selectMember } from 'features/memberSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
@@ -42,6 +42,7 @@ export default function PlayInterview() {
     const [bool, setBool] = useState<boolean>(false)
     const [questions, setQuestions] = useState<QuestionInfo[]>([])
     const [nowPackage, setNowPackage] = useState<string>('0')
+    const [isChecked, setIsChecked] = useState(false)
     const user = useSelector(selectUser)
     const folders = useSelector(selectFolder)
     const folderId = useSelector(chooseId)
@@ -117,6 +118,7 @@ export default function PlayInterview() {
                 })),
             })
         )
+        console.log(member)
         dispatch(
             playSlice.actions.setOrderMember({
                 orderMember: Array.from({ length: member.length }, (_, idx) => idx),
@@ -134,6 +136,11 @@ export default function PlayInterview() {
 
         alert('순서 변경이 완료되었습니다!')
     }
+
+    const checkCatagory = () => {
+        setIsChecked(!isChecked)
+    }
+    console.log(isChecked)
 
     useEffect(() => {
         if (!firstRender) {
@@ -219,6 +226,7 @@ export default function PlayInterview() {
                                         {bool ? '질문 재분배' : '질문 분배 시작'}
                                     </MakeQuestionNums>
                                 </div>
+
                                 {bool ? (
                                     <GuideToggle>
                                         질문 분배가 완료되었습니다. 질문을 확인해주세요.
@@ -229,6 +237,10 @@ export default function PlayInterview() {
                                         분배해주세요!
                                     </GuideToggle>
                                 )}
+                                <div>
+                                    <label>카테고리별 균등 분배</label>
+                                    <input type="checkbox" onChange={checkCatagory} />
+                                </div>
                                 <USER>{user === null ? '' : <ShowMember />}</USER>
                             </OrderContainer>
                         )}

@@ -85,14 +85,17 @@ export default function ShowMember() {
                     </NameContainer>
                     <ButtonContainer>
                         {distribution ? (
-                            <OpenButton
-                                color={open[idx]}
-                                onClick={(e) => {
-                                    openHandler(idx)
-                                }}
-                            >
-                                {open[idx] ? '질문 닫기' : '질문 열기'}
-                            </OpenButton>
+                            // (
+                            //     <OpenButton
+                            //         color={open[idx]}
+                            //         onClick={(e) => {
+                            //             openHandler(idx)
+                            //         }}
+                            //     >
+                            //         {open[idx] ? '질문 닫기' : '질문 열기'}
+                            //     </OpenButton>
+                            // )
+                            ''
                         ) : (
                             <NoticeText>질문 분배를 해주세요😋</NoticeText>
                         )}
