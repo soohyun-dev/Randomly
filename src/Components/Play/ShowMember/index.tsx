@@ -72,7 +72,8 @@ export default function ShowMember() {
 
     useEffect(() => {
         setOrderMember(newOrderMember)
-    }, [member])
+        console.log(orderMember, member)
+    }, [member, newOrderMember])
 
     return (
         <>
