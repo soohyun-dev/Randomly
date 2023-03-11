@@ -14,4 +14,5 @@ export const ContentTextArea = styled.textarea<HTMLTextAreaElement>`
     width: 800px;
     height: 1000px;
     white-space: pre-wrap;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 `

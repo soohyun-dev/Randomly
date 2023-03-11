@@ -18,7 +18,7 @@ export default function WriteNotice() {
         if (window.confirm('글작성을 완료하시겠습니까?')) {
             const newData: NewData = {}
             newData.title = title
-            newData.content = content.replaceAll('\n', '<br>')
+            newData.content = content
             newData.time = new Date()
             newData.date = getDateTime()
             await addDoc(noticeInfo, newData)

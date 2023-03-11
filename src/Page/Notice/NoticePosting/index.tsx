@@ -17,7 +17,9 @@ import {
 export default function NoticePosting() {
     const location = useLocation()
     let { title, date, content } = location.state
-
+    content.split('\n').map((v) => {
+        console.log(v)
+    })
     return (
         <>
             <Nav />
@@ -38,7 +40,9 @@ export default function NoticePosting() {
                     <DivLine />
                     <ContentDiv>
                         <div>
-                            <pre>{content.replaceAll('<br>', '\n')}</pre>
+                            {content.split('\n').map((v) => {
+                                return v === '' ? <br /> : <p>{v}</p>
+                            })}
                         </div>
                     </ContentDiv>
                     <LinkDiv>

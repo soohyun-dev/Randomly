@@ -35,8 +35,10 @@ export const WriteText = styled.label`
 `
 
 export const ContentDiv = styled.div`
-    margin: 3em 0;
+    margin: 3em 0 7em 0;
     min-height: 30em;
+    font-weight: 400;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 `
 
 export const LinkDiv = styled.div`
