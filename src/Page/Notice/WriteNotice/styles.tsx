@@ -9,3 +9,9 @@ export const Title = styled.p`
     font-size: 40px;
     font-weight: 600;
 `
+
+export const ContentTextArea = styled.textarea<HTMLTextAreaElement>`
+    width: 800px;
+    height: 1000px;
+    white-space: pre-wrap;
+`

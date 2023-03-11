@@ -8,28 +8,33 @@
 import { shuffleArray } from './MakeNums'
 
 interface Question {
-    catagory: object
+    catagory: string
 }
 
-export default function getEqualDistribution(memberLength, questions) {
-    const Catagory = {}
+export default function getEqualDistribution(
+    memberLength: number,
+    questions: Record<string, Question>
+) {
+    const Catagory: Record<string, number[]> = {}
+
     Object.keys(questions).forEach((idx) => {
-        console.log(questions[idx])
-        if (Catagory[questions[idx].catagory] === undefined) {
-            Catagory[questions[idx].catagory] = [+idx]
+        const catagory = questions[idx].catagory
+
+        if (!Catagory[catagory]) {
+            Catagory[catagory] = [+idx]
         } else {
-            Catagory[questions[idx].catagory].push(+idx)
+            Catagory[catagory].push(+idx)
         }
     })
 
-    const shuffleResult = Array.from({ length: memberLength }, () => [])
+    const shuffleResult: number[][] = Array.from({ length: memberLength }, () => [])
     let idx = 0
-    Object.keys(Catagory).forEach((title) => {
-        const result = shuffleArray(Catagory[title])
+
+    Object.values(Catagory).forEach((catagory) => {
+        const result = shuffleArray(catagory)
         result.forEach((questionNum) => {
             shuffleResult[idx].push(questionNum)
-            idx += 1
-            if (idx >= memberLength) idx = 0
+            idx = (idx + 1) % memberLength
         })
     })
 

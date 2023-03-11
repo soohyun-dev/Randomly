@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getDateTime } from 'utils/getTime'
 import { fireStore } from '../../../firebase'
-import { Title, WriteNoticeSection } from './styles'
+import { ContentTextArea, Title, WriteNoticeSection } from './styles'
 import { NewData } from './types'
 
 export default function WriteNotice() {
@@ -18,7 +18,7 @@ export default function WriteNotice() {
         if (window.confirm('글작성을 완료하시겠습니까?')) {
             const newData: NewData = {}
             newData.title = title
-            newData.content = content
+            newData.content = content.replaceAll('\n', '<br>')
             newData.time = new Date()
             newData.date = getDateTime()
             await addDoc(noticeInfo, newData)
@@ -46,10 +46,13 @@ export default function WriteNotice() {
                 </div>
                 <div>
                     <div>
-                        <label>내용</label>
-                        <input
+                        <p>내용</p>
+                        <ContentTextArea
                             value={content}
                             placeholder="내용"
+                            rows="2"
+                            cols="20"
+                            wrap="hard"
                             onChange={(e) => setContent(e.target.value)}
                         />
                     </div>
