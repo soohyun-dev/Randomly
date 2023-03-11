@@ -16,12 +16,13 @@ import {
     TopHeader,
 } from './styles'
 
-export default function Nav() {
+export default function Nav(props) {
     const [scrollPosition, setScrollPosition] = useState(0)
     const user = useSelector(selectUser)
     const darkMode = useSelector(selectTheme)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { page } = props
 
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop)
@@ -50,33 +51,44 @@ export default function Nav() {
     })
 
     return (
-        <TopHeader scroll={scrollPosition < 50 ? 'origin' : 'change'}>
+        <TopHeader scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}>
             <Logo>
                 <Link to="/" style={{ textDecoration: 'none' }}>
-                    <LogoText scroll={scrollPosition < 50 ? 'origin' : 'change'}>Randomly</LogoText>
+                    <LogoText scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}>
+                        Randomly
+                    </LogoText>
                 </Link>
             </Logo>
             <Menu>
                 <div>
-                    <LinkText to="/" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
+                    <LinkText
+                        to="/"
+                        scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                    >
                         <MenuText>HOME</MenuText>
                     </LinkText>
                 </div>
                 <div>
                     <LinkText
                         to="/PlayInterview"
-                        scroll={scrollPosition < 50 ? 'origin' : 'change'}
+                        scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
                     >
                         <MenuText>INTERVIEW</MenuText>
                     </LinkText>
                 </div>
                 <div>
-                    <LinkText to="/Manage" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
+                    <LinkText
+                        to="/Manage"
+                        scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                    >
                         <MenuText>MANAGE</MenuText>
                     </LinkText>
                 </div>
                 <div>
-                    <LinkText to="/QAPage" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
+                    <LinkText
+                        to="/QAPage"
+                        scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                    >
                         <MenuText>Q&A</MenuText>
                     </LinkText>
                 </div>

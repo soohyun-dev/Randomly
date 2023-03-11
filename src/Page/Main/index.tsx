@@ -21,7 +21,7 @@ import {
 export default function Main() {
     return (
         <>
-            <Nav />
+            <Nav page={'Main'} />
             <TitleSection>
                 <TopDiv>
                     <div>
