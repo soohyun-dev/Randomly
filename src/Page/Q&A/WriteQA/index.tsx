@@ -49,7 +49,7 @@ export default function WriteQA() {
                 </div>
                 <div>
                     <div>
-                        <label>제목</label>
+                        <label htmlFor="repo">제목</label>
                         <input
                             value={title}
                             placeholder="제목"
@@ -59,7 +59,7 @@ export default function WriteQA() {
                 </div>
                 <div>
                     <div>
-                        <label>내용</label>
+                        <label htmlFor="repo">내용</label>
                         <input
                             value={content}
                             placeholder="내용"
@@ -68,7 +68,9 @@ export default function WriteQA() {
                     </div>
                 </div>
                 <div>
-                    <button onClick={addQA}>글 작성</button>
+                    <button type="button" onClick={addQA}>
+                        글 작성
+                    </button>
                 </div>
             </WriteNoticeSection>
             <Footer />

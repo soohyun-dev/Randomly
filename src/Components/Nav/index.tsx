@@ -3,6 +3,7 @@ import { persistor } from 'index'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { selectUser } from 'features/userSlice'
+import { useEffect, useState } from 'react'
 import {
     LinkText,
     Logo,
@@ -14,7 +15,6 @@ import {
     ThemeDiv,
     TopHeader,
 } from './styles'
-import { useEffect, useState } from 'react'
 
 export default function Nav() {
     const [scrollPosition, setScrollPosition] = useState(0)
@@ -53,7 +53,7 @@ export default function Nav() {
         <TopHeader scroll={scrollPosition < 50 ? 'origin' : 'change'}>
             <Logo>
                 <Link to="/" style={{ textDecoration: 'none' }}>
-                    <LogoText>Randomly</LogoText>
+                    <LogoText scroll={scrollPosition < 50 ? 'origin' : 'change'}>Randomly</LogoText>
                 </Link>
             </Logo>
             <Menu>

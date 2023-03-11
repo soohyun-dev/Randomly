@@ -36,7 +36,7 @@ export default function WriteNotice() {
                 </div>
                 <div>
                     <div>
-                        <label>제목</label>
+                        <label htmlFor="repo">제목</label>
                         <input
                             value={title}
                             placeholder="제목"
@@ -50,9 +50,6 @@ export default function WriteNotice() {
                         <ContentTextArea
                             value={content}
                             placeholder="내용"
-                            rows="2"
-                            cols="20"
-                            wrap="hard"
                             onChange={(e) => setContent(e.target.value)}
                         />
                     </div>

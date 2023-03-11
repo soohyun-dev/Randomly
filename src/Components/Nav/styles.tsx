@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export const TopHeader = styled.header`
+interface Scroll {
+    scroll: string
+}
+
+export const TopHeader = styled.header<Scroll>`
     width: 100%;
     position: fixed;
     top: 0;
@@ -21,7 +25,7 @@ export const TopHeader = styled.header`
     }
 `
 
-export const LinkText = styled(Link)`
+export const LinkText = styled(Link)<Scroll>`
     text-decoration: none;
     color: ${(props) => (props.scroll === 'origin' ? 'white' : 'black')};
 `
@@ -30,8 +34,8 @@ export const Logo = styled.div`
     font-weight: bold;
 `
 
-export const LogoText = styled.p`
-    color: var(--logo-text);
+export const LogoText = styled.p<Scroll>`
+    color: ${(props) => (props.scroll === 'origin' ? 'white' : '#3f76ff')};
 `
 
 export const Menu = styled.div`

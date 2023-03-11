@@ -8,16 +8,17 @@ export const TitleSection = styled.section`
 export const TopDiv = styled.div`
     color: black;
     margin-bottom: 18em;
+    text-align: center;
     ::before {
         content: '';
         background: url('https://user-images.githubusercontent.com/81623931/216887726-da970003-fdb4-4c58-ac30-bd096af0b7ce.png');
         background-size: cover;
-        margin-bottom: 6.3em 
+        margin-bottom: 6.3em;
         width: 100%;
-        height: 46em;
-        opacity: 0.6;
+        height: 52em;
+        filter: brightness(20%);
         position: absolute;
-        top: -11%;
+        top: -15%;
         left: 0px;
         right: 0px;
         bottom: 0px;
@@ -26,20 +27,29 @@ export const TopDiv = styled.div`
 
 export const Title = styled.p`
     position: relative;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 600;
+    color: white;
+    margin-bottom: 0.3em;
+`
+export const TitleContent = styled(Title)`
+    font-size: 48px;
 `
 
-export const TitleContentDiv = styled.div`
-    position: relative;
-    margin: 3em 0;
-`
-
-export const TitleContent = styled.p`
-    position: relative;
-    font-size: 26px;
+export const PlusButton = styled.button`
+    margin-top: 3em;
+    width: 12em;
+    height: 4em;
+    border-radius: 25px;
     font-weight: 500;
-    color: var(--gray-text);
+    font-size: 14px;
+    border: none;
+    color: white;
+    background-color: var(--logo-text);
+    cursor: pointer;
+    &:hover {
+        opacity: 90%;
+    }
 `
 
 export const Img = styled.img`

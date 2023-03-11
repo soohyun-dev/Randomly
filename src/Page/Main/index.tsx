@@ -11,9 +11,9 @@ import {
     ImgBox,
     ImgContentBox,
     ImgContentBoxDiv,
+    PlusButton,
     Title,
     TitleContent,
-    TitleContentDiv,
     TitleSection,
     TopDiv,
 } from './styles'
@@ -25,18 +25,14 @@ export default function Main() {
             <TitleSection>
                 <TopDiv>
                     <div>
-                        <Title>Randomly란?</Title>
-                    </div>
-                    <TitleContentDiv>
-                        <Fade duration={2000} direction="left">
-                            <TitleContent>
-                                Randomly는 기술면접 스터디를 위한 도움 자료로 탄생하였습니다.
-                            </TitleContent>
-                            <TitleContent>
-                                랜덤으로 제공되는 질문 방식을 따와 만들어진 이름입니다.
-                            </TitleContent>
+                        <Fade direction="up">
+                            <Title>더 편하고, 더 효율적이게</Title>
                         </Fade>
-                    </TitleContentDiv>
+                        <Fade duration={1000} direction="up">
+                            <TitleContent>사용자의 편의를 위해 끊임없이 고민합니다.</TitleContent>
+                            <PlusButton>더 알아보기 ➡️</PlusButton>
+                        </Fade>
+                    </div>
                 </TopDiv>
                 <Fade duration={2000} direction="right">
                     <ImgContentBoxDiv>

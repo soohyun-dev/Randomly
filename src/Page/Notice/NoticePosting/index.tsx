@@ -16,7 +16,7 @@ import {
 
 export default function NoticePosting() {
     const location = useLocation()
-    let { title, date, content } = location.state
+    const { title, date, content } = location.state
 
     return (
         <>
