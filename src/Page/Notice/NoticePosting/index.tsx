@@ -17,9 +17,7 @@ import {
 export default function NoticePosting() {
     const location = useLocation()
     let { title, date, content } = location.state
-    content.split('\n').map((v) => {
-        console.log(v)
-    })
+
     return (
         <>
             <Nav />

@@ -12,10 +12,10 @@ export const TopDiv = styled.div`
         content: '';
         background: url('https://user-images.githubusercontent.com/81623931/216887726-da970003-fdb4-4c58-ac30-bd096af0b7ce.png');
         background-size: cover;
-        margin: 6.3em 0;
+        margin-bottom: 6.3em 
         width: 100%;
-        height: 44em;
-        opacity: 0.4;
+        height: 46em;
+        opacity: 0.6;
         position: absolute;
         top: -11%;
         left: 0px;

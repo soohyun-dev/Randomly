@@ -1,21 +1,29 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const TopHeader = styled.header`
+    width: 100%;
+    position: fixed;
+    top: 0;
     z-index: 1000;
-    position: relative;
     display: grid;
     grid-template-columns: 1fr 2.2fr 0.5fr 0.3fr;
     padding: 15px 15px 10px 15px;
     font-size: 28px;
-    color: black;
-    background-color: var(--navbar-box);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+    color: ${(props) => (props.scroll === 'origin' ? 'white' : 'black')};
+    background-color: ${(props) => (props.scroll === 'origin' ? '' : 'white')};
+    box-shadow: ${(props) => (props.scroll === 'origin' ? '' : '0px 4px 4px rgba(0, 0, 0, 0.06)')};
     text-align: center;
     align-items: center;
     &:visited {
         text-decoration: none;
         color: black;
     }
+`
+
+export const LinkText = styled(Link)`
+    text-decoration: none;
+    color: ${(props) => (props.scroll === 'origin' ? 'white' : 'black')};
 `
 
 export const Logo = styled.div`

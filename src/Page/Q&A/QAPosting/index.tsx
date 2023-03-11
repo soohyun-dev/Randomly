@@ -36,7 +36,9 @@ export default function QAPosting() {
                     </WriterDiv>
                     <DivLine />
                     <ContentDiv>
-                        <p>{content}</p>
+                        {content.split('\n').map((v) => {
+                            return v === '' ? <br /> : <p>{v}</p>
+                        })}
                     </ContentDiv>
                     <DivLine />
                 </PostingDiv>

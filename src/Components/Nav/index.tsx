@@ -3,13 +3,29 @@ import { persistor } from 'index'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { selectUser } from 'features/userSlice'
-import { Logo, LogoText, Logout, Menu, MenuText, Option, ThemeDiv, TopHeader } from './styles'
+import {
+    LinkText,
+    Logo,
+    LogoText,
+    Logout,
+    Menu,
+    MenuText,
+    Option,
+    ThemeDiv,
+    TopHeader,
+} from './styles'
+import { useEffect, useState } from 'react'
 
 export default function Nav() {
+    const [scrollPosition, setScrollPosition] = useState(0)
     const user = useSelector(selectUser)
     const darkMode = useSelector(selectTheme)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const updateScroll = () => {
+        setScrollPosition(window.scrollY || document.documentElement.scrollTop)
+    }
 
     const purge = async () => {
         await persistor.purge()
@@ -29,42 +45,48 @@ export default function Nav() {
         )
     }
 
+    useEffect(() => {
+        window.addEventListener('scroll', updateScroll)
+    })
+
     return (
-        <TopHeader>
+        <TopHeader scroll={scrollPosition < 50 ? 'origin' : 'change'}>
             <Logo>
-                <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-                    {/* <LogoImg src="https://user-images.githubusercontent.com/81623931/216827383-470908e4-f188-4711-b716-4677076e67c2.png" /> */}
+                <Link to="/" style={{ textDecoration: 'none' }}>
                     <LogoText>Randomly</LogoText>
                 </Link>
             </Logo>
             <Menu>
                 <div>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+                    <LinkText to="/" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
                         <MenuText>HOME</MenuText>
-                    </Link>
+                    </LinkText>
                 </div>
                 <div>
-                    <Link to="/PlayInterview" style={{ textDecoration: 'none', color: 'black' }}>
+                    <LinkText
+                        to="/PlayInterview"
+                        scroll={scrollPosition < 50 ? 'origin' : 'change'}
+                    >
                         <MenuText>INTERVIEW</MenuText>
-                    </Link>
+                    </LinkText>
                 </div>
                 <div>
-                    <Link to="/Manage" style={{ textDecoration: 'none', color: 'black' }}>
+                    <LinkText to="/Manage" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
                         <MenuText>MANAGE</MenuText>
-                    </Link>
+                    </LinkText>
                 </div>
                 <div>
-                    <Link to="/QAPage" style={{ textDecoration: 'none', color: 'black' }}>
+                    <LinkText to="/QAPage" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
                         <MenuText>Q&A</MenuText>
-                    </Link>
+                    </LinkText>
                 </div>
                 <div>
                     {user === null ? (
                         ''
                     ) : (
-                        <Link to="/Mypage" style={{ textDecoration: 'none', color: 'black' }}>
+                        <LinkText to="/Mypage" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
                             <MenuText>MYPAGE</MenuText>
-                        </Link>
+                        </LinkText>
                     )}
                 </div>
             </Menu>
