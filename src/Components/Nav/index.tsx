@@ -129,19 +129,21 @@ export default function Nav(props) {
             </Option>
             <ThemeDiv onClick={ChangeDarkMode}>
                 {darkMode ? (
-                    <img
-                        src="https://user-images.githubusercontent.com/81623931/220241975-7eb1ba2c-fa5a-4baa-9d0f-72bd3f514183.png"
-                        width="40"
-                        height="40"
-                        alt="dark"
-                    />
+                    // <img
+                    //     src="https://user-images.githubusercontent.com/81623931/220241975-7eb1ba2c-fa5a-4baa-9d0f-72bd3f514183.png"
+                    //     width="40"
+                    //     height="40"
+                    //     alt="dark"
+                    // />
+                    <p>LIGHT</p>
                 ) : (
-                    <img
-                        src="https://user-images.githubusercontent.com/81623931/220242243-82ad3074-2919-46a2-8b86-2e234511564a.png"
-                        width="40"
-                        height="40"
-                        alt="light"
-                    />
+                    // <img
+                    //     src="https://user-images.githubusercontent.com/81623931/220242243-82ad3074-2919-46a2-8b86-2e234511564a.png"
+                    //     width="40"
+                    //     height="40"
+                    //     alt="light"
+                    // />
+                    <p>DARK</p>
                 )}
             </ThemeDiv>
         </TopHeader>

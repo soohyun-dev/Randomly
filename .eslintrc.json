@@ -47,9 +47,6 @@
             {
                 "labelAttributes": ["htmlFor"]
             }
-        ],
-
-        "@typescript-eslint/explicit-module-boundary-types": "on",
-        "@typescript-eslint/no-explicit-any": "on"
+        ]
     }
 }
