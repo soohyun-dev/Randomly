@@ -23,6 +23,7 @@ export default function QAPage() {
                     items.style.backgroundColor = '#f5f5f5'
                 }
             }
+            return null
         })
     }
 
@@ -35,11 +36,13 @@ export default function QAPage() {
             case '남길말':
                 return <Memo />
             default:
+                return null
         }
     }
 
     useEffect(() => {
         changeBtnColor()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nowPage])
 
     return (

@@ -72,7 +72,7 @@ export default function ShowMember() {
 
     useEffect(() => {
         setOrderMember(newOrderMember)
-        console.log(orderMember, member)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [member, newOrderMember])
 
     return (

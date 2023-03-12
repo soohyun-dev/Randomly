@@ -13,7 +13,7 @@ import ErrorPage from 'Page/Error'
 import getQuestionNums, { MakeNums } from 'utils/MakeNums'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
-import { QuestionInfo } from './types'
+import getEqualDistribution from 'utils/EqualDistribution'
 import { fireStore } from '../../firebase'
 import {
     GuideToggle,
@@ -35,7 +35,6 @@ import {
     Title,
     USER,
 } from './styles'
-import getEqualDistribution from 'utils/EqualDistribution'
 
 export default function PlayInterview() {
     const dispatch = useDispatch()
@@ -47,7 +46,7 @@ export default function PlayInterview() {
     const folders = useSelector(selectFolder)
     const folderId = useSelector(chooseId)
     const member = useSelector(selectMember)
-    let questions = useSelector(selectQuestions)
+    const questions = useSelector(selectQuestions)
     const distribution = useSelector(selectDistribution)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
     const userInfo =
@@ -71,11 +70,9 @@ export default function PlayInterview() {
         if (isChecked) {
             // 카테고리별 균등 분배 선택시
             resultArray = getEqualDistribution(member.length, questions)
-            console.log('균등결과물', resultArray)
         } else {
             // 카테고리별 균등 분배 선택안할시
             resultArray = getQuestionNums(member.length, Object.keys(questions).length)
-            console.log('노균등결과물', resultArray)
         }
 
         dispatch(
@@ -87,12 +84,6 @@ export default function PlayInterview() {
         )
         setBool(true)
         alert('질문 분배가 완료되었습니다!')
-    }
-
-    const changePackage = () => {
-        dispatch(playSlice.actions.setChangeFolder())
-        getUsers()
-        setBool(false)
     }
 
     const getPackages = async () => {
@@ -118,7 +109,6 @@ export default function PlayInterview() {
                 })),
             })
         )
-        questions = useSelector(selectQuestions)
     }
 
     const getUsers = async () => {
@@ -137,6 +127,12 @@ export default function PlayInterview() {
                 orderMember: Array.from({ length: member.length }, (_, idx) => idx),
             })
         )
+    }
+
+    const changePackage = () => {
+        dispatch(playSlice.actions.setChangeFolder())
+        getUsers()
+        setBool(false)
     }
 
     const shuffleName = () => {
@@ -176,6 +172,7 @@ export default function PlayInterview() {
                 })
             )
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nowPackage, folderId, distribution, bool])
 
     return (
@@ -250,7 +247,7 @@ export default function PlayInterview() {
                                     </GuideToggle>
                                 )}
                                 <div>
-                                    <label>카테고리별 균등 분배</label>
+                                    <label htmlFor="repo">카테고리별 균등 분배</label>
                                     <input type="checkbox" onChange={checkCatagory} />
                                 </div>
                                 <USER>{user === null ? '' : <ShowMember />}</USER>

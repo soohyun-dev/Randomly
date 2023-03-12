@@ -1,7 +1,7 @@
 import StopWatch from 'Components/StopWatch'
 import { playSlice } from 'features/playSlice'
 import { selectQuestions } from 'features/questionsSlice'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CorrectBtn, QuestionBlock, QuestionText, ShowBtn } from './style'
 
@@ -37,8 +37,6 @@ export default function ShowQuestion({ result }) {
         )
         setCorrectCnt(change)
     }
-
-    useEffect(() => {}, [questions])
 
     return (
         <div>

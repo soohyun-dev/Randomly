@@ -34,8 +34,6 @@ export default function StopWatch() {
         return () => clearInterval(timerId.current)
     }, [isRun])
 
-    useEffect(() => {})
-
     return (
         <StopWatchContainer>
             <Timer>

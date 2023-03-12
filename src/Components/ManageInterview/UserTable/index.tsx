@@ -44,8 +44,6 @@ export default function UserTable({ member, id, idx }) {
         }
     }
 
-    useEffect(() => {}, [change])
-
     return (
         <Tr>
             <Td>{idx + 1}</Td>

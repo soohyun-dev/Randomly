@@ -34,6 +34,7 @@ export default function Notice() {
     useEffect(() => {
         getComment()
         getNotice()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show])
 
     return (
