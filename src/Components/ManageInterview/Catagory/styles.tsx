@@ -25,17 +25,34 @@ export const CatagoryButton = styled.button<Choose>`
 `
 
 export const NewCatagoryInput = styled.input`
+    padding-left: 5px;
     border: solid 0.5px gray;
-    width: 20em;
+    width: 15em;
     height: 2em;
     border-radius: 5px;
 `
 
-export const PlusCatagoryButton = styled.button`
+export const CatagoryPlusButton = styled.button`
     margin: 0 0.5em;
     border: none;
     cursor: pointer;
     &:hover {
         opacity: 0.9;
     }
+`
+
+export const CatagoryUpdateButton = styled.button`
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.9;
+    }
+`
+
+export const CatagoryDeleteButton = styled.button`
+    margin-left: 0.5em;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 `

@@ -4,7 +4,7 @@
  * @returns yyyy-mm-dd
  */
 
-export function getDate(): String {
+export function getDate(): string {
     const time = new Date()
     const year = time.getFullYear()
     const month = `0${time.getMonth() + 1}`.slice(-2)
