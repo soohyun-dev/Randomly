@@ -19,8 +19,8 @@ export default function QuestionTable({ question, id, idx, catagory }) {
      * @param {Number} 수정할 질문의 id값
      */
 
-    const updateQuestion = async (Id) => {
-        const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/questions`, Id)
+    const updateQuestion = async (id) => {
+        const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/questions`, id)
         const newContent = { question: newQuestion }
         await updateDoc(questionDoc, newContent)
         window.location.reload()
@@ -32,13 +32,8 @@ export default function QuestionTable({ question, id, idx, catagory }) {
      * @param {Number} 삭제할 질문의 id값
      */
     const checkDelete = (id) => {
-        const deleteFolderId = id
-        const deleteQuestion = async (deleteFolderId) => {
-            const questionDoc = doc(
-                fireStore,
-                `users/${user}/packages/${folderId}/questions`,
-                deleteFolderId
-            )
+        const deleteQuestion = async (id) => {
+            const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/questions`, id)
             await deleteDoc(questionDoc)
             window.location.reload()
         }

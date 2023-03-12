@@ -116,6 +116,7 @@ export default function Manage() {
                 )
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nowPackage, dispatch])
 
     return (

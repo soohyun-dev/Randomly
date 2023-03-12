@@ -18,7 +18,7 @@ export default function getEqualDistribution(
     const Catagory: Record<string, number[]> = {}
 
     Object.keys(questions).forEach((idx) => {
-        const catagory = questions[idx].catagory
+        const [catagory] = questions[idx].catagory
 
         if (!Catagory[catagory]) {
             Catagory[catagory] = [+idx]

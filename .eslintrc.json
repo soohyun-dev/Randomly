@@ -30,8 +30,8 @@
             {
                 "ignoreDOMComponents": false,
                 "ignoreRefs": false,
-                "allowArrowFunctions": false,
-                "allowFunctions": false,
+                "allowArrowFunctions": true,
+                "allowFunctions": true,
                 "allowBind": false
             }
         ],
@@ -48,6 +48,12 @@
                 "ts": "never",
                 "tsx": "never",
                 "": "never"
+            }
+        ],
+        "jsx-a11y/label-has-associated-control": [
+            2,
+            {
+                "labelAttributes": ["htmlFor"]
             }
         ]
     }
