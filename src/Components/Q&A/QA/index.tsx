@@ -25,6 +25,7 @@ export default function QA() {
 
     useEffect(() => {
         getQA()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show])
     return (
         <>

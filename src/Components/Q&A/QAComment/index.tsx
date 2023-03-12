@@ -21,6 +21,7 @@ export default function QAComment({ id }) {
 
     useEffect(() => {
         getQAComment()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show])
     return (
         <CommentSection>
