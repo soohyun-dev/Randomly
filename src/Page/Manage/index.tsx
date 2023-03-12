@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addDoc, collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore'
 import { folderSlice, selectFolder } from 'features/folderSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
@@ -10,8 +10,8 @@ import ManageQuestion from 'Components/ManageInterview/ManageQuestion'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { getDateTime } from 'utils/getTime'
-import { fireStore } from '../../firebase'
 import { selectUser } from 'features/userSlice'
+import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
     ManageAccessTitle,
@@ -24,9 +24,12 @@ import {
     PackageTitle,
     PackageTitleDiv,
     PackageTitleText,
-    PlusBtn,
+    FolderPlusButton,
     Title,
     TitleSection,
+    FolderUpdateButton,
+    FolderOrderBox,
+    FolderDeleteButton,
 } from './styles'
 
 export default function Manage() {
@@ -36,6 +39,7 @@ export default function Manage() {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const folders = useSelector(selectFolder)
+    const [updateBtn, setUpdateBtn] = useState(false)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
     const MiniTitle = styled.label<{ target?: any }>`
         padding: 0 0.5em;
@@ -49,7 +53,7 @@ export default function Manage() {
         }
     `
 
-    const getPackages = async () => {
+    const getPackages = useCallback(async () => {
         const packageData = await getDocs(query(packageInfo, orderBy('time', 'asc')))
 
         dispatch(
@@ -61,7 +65,7 @@ export default function Manage() {
             })
         )
         setShow(true)
-    }
+    }, [dispatch, packageInfo])
 
     const changeView = (value) => {
         setPage(value)
@@ -82,6 +86,23 @@ export default function Manage() {
         }
     }
 
+    const checkDelete = async (target) => {
+        const deleteFolder = async (id) => {
+            const folderDoc = doc(fireStore, `users/${user}/packages`, id)
+            await deleteDoc(folderDoc)
+            window.location.reload()
+        }
+        if (window.confirm(`${folders[target].title} 폴더를 정말 삭제합니까?`)) {
+            deleteFolder(folders[target].id)
+            alert('삭제되었습니다.')
+        }
+    }
+
+    const renderDeleteBtn = (target) => {
+        if (!updateBtn) return ''
+        return <FolderDeleteButton onClick={() => checkDelete(target)}>삭제</FolderDeleteButton>
+    }
+
     useEffect(() => {
         if (user !== null) {
             getPackages()
@@ -95,7 +116,7 @@ export default function Manage() {
                 )
             }
         }
-    }, [nowPackage])
+    }, [nowPackage, dispatch])
 
     return (
         <>
@@ -125,9 +146,18 @@ export default function Manage() {
                         </MiniTitle>
                     </ManageHeaderDiv>
                     {user !== null && (
-                        <div>
-                            <PlusBtn onClick={() => plusPackage()}>질문 폴더 추가</PlusBtn>
-                        </div>
+                        <FolderOrderBox>
+                            {updateBtn ? (
+                                ''
+                            ) : (
+                                <FolderPlusButton onClick={() => plusPackage()}>
+                                    질문 폴더 추가
+                                </FolderPlusButton>
+                            )}
+                            <FolderUpdateButton onClick={() => setUpdateBtn(!updateBtn)}>
+                                {updateBtn ? '수정 취소' : '질문 폴더 수정'}
+                            </FolderUpdateButton>
+                        </FolderOrderBox>
                     )}
                 </ManageHeaderSection>
                 <PackageSection>
@@ -145,6 +175,7 @@ export default function Manage() {
                             >
                                 <PackageTitle>{folders[v].title}</PackageTitle>
                                 <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+                                {renderDeleteBtn(v)}
                             </PackageBox>
                         ))}
                     </PackageDiv>
