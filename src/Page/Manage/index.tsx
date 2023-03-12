@@ -58,9 +58,9 @@ export default function Manage() {
 
         dispatch(
             folderSlice.actions.setFolder({
-                folders: packageData.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
+                folders: packageData.docs.map((docTarget) => ({
+                    ...docTarget.data(),
+                    id: docTarget.id,
                 })),
             })
         )
