@@ -57,11 +57,14 @@ export const Option = styled.div`
     font-size: 16px;
 `
 
-export const Logout = styled.button`
-    background-color: #ef9a9a;
+export const UserLabel = styled.label`
+    margin-right: 0.5em;
+`
+export const Logout = styled.button<Scroll>`
     padding: 0.5em 0.5em;
-    border-radius: 10px;
+    background-color: transparent;
     border: none;
+    color: ${(props) => (props.scroll === 'origin' ? 'white' : 'black')};
     cursor: pointer;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     &:hover {

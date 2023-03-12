@@ -14,6 +14,7 @@ import {
     Option,
     ThemeDiv,
     TopHeader,
+    UserLabel,
 } from './styles'
 
 export default function Nav(props) {
@@ -96,7 +97,10 @@ export default function Nav(props) {
                     {user === null ? (
                         ''
                     ) : (
-                        <LinkText to="/Mypage" scroll={scrollPosition < 50 ? 'origin' : 'change'}>
+                        <LinkText
+                            to="/Mypage"
+                            scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                        >
                             <MenuText>MYPAGE</MenuText>
                         </LinkText>
                     )}
@@ -104,11 +108,23 @@ export default function Nav(props) {
             </Menu>
             <Option>
                 {user === null ? (
-                    <Link to="/LOGIN" style={{ textDecoration: 'none', color: 'black' }}>
-                        <MenuText>Login</MenuText>
-                    </Link>
+                    <LinkText
+                        to="/LOGIN"
+                        scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                    >
+                        <MenuText>로그인</MenuText>
+                    </LinkText>
                 ) : (
-                    <Logout onClick={async () => purge()}>Logout</Logout>
+                    <div>
+                        <UserLabel>{user} 님</UserLabel>
+                        <label htmlFor="repo">|</label>
+                        <Logout
+                            scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                            onClick={purge}
+                        >
+                            로그아웃
+                        </Logout>
+                    </div>
                 )}
             </Option>
             <ThemeDiv onClick={ChangeDarkMode}>
