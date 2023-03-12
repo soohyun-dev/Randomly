@@ -47,13 +47,6 @@
                 "tsx": "never",
                 "": "never"
             }
-        ],
-        "jsx-a11y/label-has-associated-control": [
-            // label 오류 해결
-            2,
-            {
-                "labelAttributes": ["htmlFor"]
-            }
         ]
     }
 }

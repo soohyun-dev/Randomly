@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import GlobalStyle from 'styles/GlobalStyle'
-import ScrollToTop from 'utils/ScrollToTop'
+import ScrollToTop from './utils/ScrollToTop'
 import Mypage from './Page/MyPage'
 import WriteNotice from './Page/Notice/WriteNotice'
 import QAPage from './Page/Q&A/QAPage'
