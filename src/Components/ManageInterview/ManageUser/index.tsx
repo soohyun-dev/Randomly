@@ -37,8 +37,6 @@ export default function ManageUser() {
         )
     }
 
-    console.log(member)
-
     /**
      * 유저 추가
      *
@@ -64,6 +62,7 @@ export default function ManageUser() {
 
     useEffect(() => {
         getUsers()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newMember, folderId, now])
 
     return (
@@ -93,8 +92,8 @@ export default function ManageUser() {
                         </thead>
                         {Object.keys(users.current).map((v, idx) => (
                             <UserTable
-                                member={users.current[~~v].member}
-                                id={users.current[~~v].id}
+                                member={users.current[+v].member}
+                                id={users.current[+v].id}
                                 idx={idx}
                             />
                         ))}

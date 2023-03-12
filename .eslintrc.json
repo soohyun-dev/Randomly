@@ -17,6 +17,8 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "warn",
         "prettier/prettier": 0,
         "no-param-reassign": 0, // slice 재할당오류 안뜨게
         "no-alert": "off", // alert 오류 끄기
