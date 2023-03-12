@@ -1,6 +1,13 @@
 {
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint", "prettier"],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["src"] //절대경로 설정
+            }
+        }
+    },
     "extends": [
         "airbnb",
         "airbnb/hooks",
