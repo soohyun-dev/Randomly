@@ -3,7 +3,7 @@ import { playSlice } from 'features/playSlice'
 import { selectQuestions } from 'features/questionsSlice'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CorrectBtn, QuestionBlock, QuestionText, ShowBtn } from './style'
+import { CorrectBtn, QuestionBlock, QuestionCatagoryLabel, QuestionText, ShowBtn } from './style'
 
 export default function ShowQuestion({ result }) {
     const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([])
@@ -67,6 +67,7 @@ export default function ShowQuestion({ result }) {
                             </CorrectBtn>
                         </QuestionBlock>
                         <StopWatch />
+                        <QuestionCatagoryLabel>{questions[v].catagory}</QuestionCatagoryLabel>{' '}
                     </QuestionText>
                 ) : (
                     <QuestionText color={correctCnt[v]}>

@@ -51,7 +51,7 @@ export default function Catagory() {
     }
 
     const renderBtn = () => {
-        if (catagory.length >= 5) {
+        if (catagory.length >= 7) {
             return ''
         }
         if (plusBtn) {

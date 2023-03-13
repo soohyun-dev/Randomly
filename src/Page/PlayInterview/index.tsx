@@ -16,6 +16,7 @@ import Nav from 'Components/Nav'
 import getEqualDistribution from 'utils/EqualDistribution'
 import { fireStore } from '../../firebase'
 import {
+    CatagoryCheckInput,
     GuideToggle,
     LinkLoginBtn,
     MainContainer,
@@ -248,7 +249,7 @@ export default function PlayInterview() {
                                 )}
                                 <div>
                                     <label htmlFor="repo">카테고리별 균등 분배</label>
-                                    <input type="checkbox" onChange={checkCatagory} />
+                                    <CatagoryCheckInput type="checkbox" onChange={checkCatagory} />
                                 </div>
                                 <USER>{user === null ? '' : <ShowMember />}</USER>
                             </OrderContainer>

@@ -25,7 +25,7 @@ export default function StopWatch() {
     useEffect(() => {
         if (isRun) {
             timerId.current = window.setInterval(() => {
-                setMin(+(time.current / 60))
+                setMin(Math.floor(time.current / 60))
                 setSec(time.current % 60)
                 time.current += 1
             }, 1000)
