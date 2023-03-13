@@ -9,7 +9,7 @@ import ManageUser from 'Components/ManageInterview/ManageUser'
 import ManageQuestion from 'Components/ManageInterview/ManageQuestion'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
-import { getDateTime } from 'utils/getTime'
+import { getDateTime } from 'utils/GetTime'
 import { selectUser } from 'features/userSlice'
 import { fireStore } from '../../firebase'
 import {

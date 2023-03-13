@@ -2,7 +2,7 @@ import { selectUser } from 'features/userSlice'
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getDateTime } from 'utils/getTime'
+import { getDateTime } from 'utils/GetTime'
 import { fireStore } from '../../../firebase'
 import { NewData } from './types'
 
