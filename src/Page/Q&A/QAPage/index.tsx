@@ -1,13 +1,15 @@
 import Footer from 'Components/Footer'
+import Loading from 'Components/Loading'
 import Memo from 'Components/Memo'
 import Nav from 'Components/Nav'
-import Notice from 'Components/Notice/Notice'
 import QA from 'Components/Q&A/QA'
 import ErrorPage from 'Page/Error'
-import { useEffect, useState } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
+import React, { Suspense, useEffect, useState } from 'react'
 
+import { ErrorBoundary } from 'react-error-boundary'
 import { CatagoryButton, CatagoryDiv, PostListDiv, QASection } from './styles'
+
+const Notice = React.lazy(() => import('Components/Notice/Notice'))
 
 export default function QAPage() {
     const [nowPage, setNowPage] = useState('공지사항')
@@ -78,7 +80,10 @@ export default function QAPage() {
               남길 말
             </CatagoryButton> */}
                         </CatagoryDiv>
-                        <PostListDiv>{showComponent()}</PostListDiv>
+
+                        <PostListDiv>
+                            <Suspense fallback={<Loading />}>{showComponent()} </Suspense>
+                        </PostListDiv>
                     </div>
                 </QASection>
             </ErrorBoundary>

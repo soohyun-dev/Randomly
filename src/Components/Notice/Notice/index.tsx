@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { Suspense, useState, useEffect, useRef } from 'react'
 import { collection, collectionGroup, getDocs, orderBy, query } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'

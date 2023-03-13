@@ -15,7 +15,7 @@ export const TopDiv = styled.div`
         background-size: cover;
         margin-bottom: 6.3em;
         width: 100%;
-        height: 63em;
+        height: 52em;
         filter: brightness(20%);
         position: absolute;
         top: -15%;

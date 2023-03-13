@@ -1,9 +1,3 @@
-import { LodingDiv } from './styles'
+import Loading from './Loading'
 
-export default function Loding() {
-    return (
-        <LodingDiv>
-            <p>로딩중...</p>
-        </LodingDiv>
-    )
-}
+export default Loading
