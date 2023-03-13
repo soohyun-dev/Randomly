@@ -10,7 +10,7 @@
 
   <br>
   
-  [🗳️ Randomly 홈페이지](randomly.pages.dev/)
+[🗳️ Randomly 홈페이지](https://randomly.pages.dev/)
   
 </div>
 
