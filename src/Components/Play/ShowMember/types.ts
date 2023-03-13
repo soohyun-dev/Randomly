@@ -1,6 +1,6 @@
 export interface UserInfo {
-  id?: string;
-  idx?: number;
-  time?: Object;
-  member?: string;
+    id?: string
+    idx?: number
+    time?: object
+    member?: string
 }

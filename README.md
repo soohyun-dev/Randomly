@@ -4,7 +4,7 @@
     <h1>Randomly</h1>
 
 ```
-  "질문 관리 및 분배" 프로젝트
+  "질문 관리 및 분배" 개인 프로젝트
     (2023년 1월 18일 ~ 🏃‍♂️)
 ```
 
@@ -21,7 +21,12 @@
 1. [🗳️ 프로젝트 소개](#-프로젝트-소개)
 2. [🖥️ 프로젝트 화면](#-프로젝트-화면)
 3. [🛠️ 사용 기술](#-사용-기술)
-   <br><br><br>
+4. [🏃‍♂️ 프로젝트 진행과정](#-프로젝트-진행과정)
+5. [🎰 기능 소개](#-기능-소개)
+6. [📜 개발 기록](#-개발-기록)
+7. [🗂️ 프로젝트 구조](#-프로젝트-구조)
+
+    <br><br><br>
 
 # 🗳️ 프로젝트 소개
 
@@ -198,7 +203,7 @@
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![TypeScript](https://img.shields.io/badge/typescript-004088.svg?style=for-the-badge&logo=typescript&logoColor=white) ![ReduxToolkit](https://img.shields.io/badge/Redux%20Toolkit-764ABC.svg?style=for-the-badge&logo=redux&logoColor=white) ![StyledComponents](https://img.shields.io/badge/Styled%20Components-DB7093.svg?style=for-the-badge&logo=styled-components&logoColor=white)
 
-![ReactAwesomeReveal](https://img.shields.io/badge/React%20Awesome%20Reveal-3668FF.svg?style=for-the-badge&logo=react&logoColor=white) ![ReactRouterDom](https://img.shields.io/badge/React%20Router%20DOM-4A154B.svg?style=for-the-badge&logo=react&logoColor=white) ![ErrorBoundary](https://img.shields.io/badge/ErrorBoundary-237F5AB6.svg?style=for-the-badge&logo=react&logoColor=white) ![Suspense](https://img.shields.io/badge/Suspense-1A2C34.svg?style=for-the-badge&logo=react&logoColor=white)
+![ReactAwesomeReveal](https://img.shields.io/badge/React%20Awesome%20Reveal-3668FF.svg?style=for-the-badge&logo=react&logoColor=white) ![ReactRouterDom](https://img.shields.io/badge/React%20Router%20DOM-4A154B.svg?style=for-the-badge&logo=react&logoColor=white) ![ErrorBoundary](https://img.shields.io/badge/Error%20Boundary-237F5AB6.svg?style=for-the-badge&logo=react&logoColor=white) ![Suspense](https://img.shields.io/badge/Suspense-1A2C34.svg?style=for-the-badge&logo=react&logoColor=white)
 
 <br>
 
@@ -236,7 +241,7 @@
 
 <br>
 
-## 프로젝트 진행과정
+# 🏃‍♂️ 프로젝트 진행과정
 
 -   [📝 진행과정 기록 1](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
 -   [📝 진행과정 기록 2](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
@@ -245,25 +250,19 @@
 
 <br><br><br>
 
-## 🎰 기능 소개
+# 🎰 기능 소개
 
 개발 완성 및 예정 기능 목록 : [기능 목록](https://github.com/soohyun-dev/Randomly/wiki/%EB%A7%8C%EB%93%A0-%EA%B8%B0%EB%8A%A5-%EB%AA%A9%EB%A1%9D)
 
 <br><br><br>
 
-## 개발 기록
+# 📜 개발 기록
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
 
 <br><br><br>
 
-## Wiki
-
-[wiki에 개발의 전반적인 기록을 담았습니다.](https://github.com/soohyun-dev/Randomly/wiki)
-
-<br><br><br>
-
-## 🗂️ 프로젝트 구조
+# 🗂️ 프로젝트 구조
 
 <pre>
 📦src
