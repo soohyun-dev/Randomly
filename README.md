@@ -57,7 +57,7 @@
 
 ### 1️⃣ 메인
 
-![image](https://user-images.githubusercontent.com/81623931/224643522-615a379a-8e20-4634-90e0-88b81a5f6df2.png)
+![](https://i.imgur.com/UXKuSRg.gif)
 
 -   홈페이지의 초기 화면 위치입니다.
 -   서비스의 소개를 담았습니다.
@@ -180,6 +180,15 @@
 -   본 서비스는 다크모드를 지원합니다.
 -   상단 NavBar 오른쪽에 있는 `Dark` 버튼을 누르면 다크모드가 설정됩니다.
 -   `Light` 버튼을 누르면 다크모드가 해제됩니다.
+
+<br><br><br>
+
+## 6️⃣ 비동기 로딩 처리
+
+![](https://i.imgur.com/lONF9xb.gif)
+
+-   Suspense를 이용하여 비동기 로딩 처리를 구현하였습니다.
+-   동적인 로딩 과정을 사용자가 확인할 수 있어 사용자의 경험을 보다 더 향상시킵니다.
 
 <br><br><br>
 
