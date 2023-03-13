@@ -107,8 +107,10 @@
 -   TypeScript
 -   CSS in JS (Styled-Components)
 -   ErrorBoundary
+-   Suspense
 -   Firebase
 -   CloudFlare
+-   Vercel
     <br>
     <br>
 
