@@ -21,10 +21,11 @@
 1. [🗳️ 프로젝트 소개](#-프로젝트-소개)
 2. [🖥️ 프로젝트 화면](#-프로젝트-화면)
 3. [🛠️ 사용 기술](#-사용-기술)
-4. [🏃‍♂️ 프로젝트 진행과정](#-프로젝트-진행과정)
-5. [🎰 기능 소개](#-기능-소개)
-6. [📜 개발 기록](#-개발-기록)
-7. [🗂️ 프로젝트 구조](#-프로젝트-구조)
+4. [📌 컨벤션](#-컨벤션)
+5. [🏃‍♂️ 프로젝트 진행과정](#-프로젝트-진행과정)
+6. [🎰 기능 소개](#-기능-소개)
+7. [📜 개발 기록](#-개발-기록)
+8. [🗂️ 프로젝트 구조](#-프로젝트-구조)
 
     <br><br><br>
 
@@ -207,19 +208,19 @@
 
 <br>
 
-## DB & 배포
+## 🗃️ DB & 배포
 
 ![FireBase](https://img.shields.io/badge/firebase-FFCA28.svg?style=for-the-badge&logo=firebase&logoColor=white) ![CloudFlare](https://img.shields.io/badge/cloudflare-F38020.svg?style=for-the-badge&logo=cloudflare&logoColor=white) ![Vercel](https://img.shields.io/badge/vercel-000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 <br>
 
-## Test
+## 📑 Test
 
 ![Jest](https://img.shields.io/badge/jest-C21325.svg?style=for-the-badge&logo=jest&logoColor=white)
 
 <br>
 
-## Tools
+## ⚙️ Tools
 
 ![VisualStudioCode](https://img.shields.io/badge/Visual%20Studio%20code-007ACC.svg?style=for-the-badge&logo=visual-studio-Code&logoColor=white) ![GitHub](https://img.shields.io/badge/github-181717.svg?style=for-the-badge&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/git-F05032.svg?style=for-the-badge&logo=git&logoColor=white) ![Tistory](https://img.shields.io/badge/tistory-000000.svg?style=for-the-badge&logo=tistory&logoColor=white)
 
@@ -237,9 +238,63 @@
 
 -   [폰트 링크](https://spoqa.github.io/spoqa-han-sans/ko-KR/#intro)
 
-<br>
+<br><br><br>
 
-<br>
+# 📌 컨벤션
+
+<details><summary><h3>🔀 브랜치명 컨벤션</h3></summary>
+<div markdown="1">
+
+    ✔️main
+
+    - 항상 최신 정보를 유지하는 배포용 브랜치입니다.
+
+    ✔️ver-버전정보
+
+    - 버전에 따라 분류한 브랜치입니다.
+
+</details>
+    
+<details>
+<summary><h3>🔀 PR 컨벤션</h3></summary>
+<div markdown="1">
+
+    - [Feat] 제목 (제목만 봐도 무엇을 했는지 단번에 파악할 수 있게 작성)
+
+    - 상세 내용
+
+    - closes 이슈번호
+
+</details>
+
+<details>
+<summary><h3>🔀 Commit 컨벤션</h3></summary>
+<div markdown="1">
+
+-   FEAT : 새로운 기능의 추가
+-   FIX: 버그 수정
+-   DOCS: 문서 수정 (리드미 작성)
+-   STYLE: 스타일 관련 기능(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
+-   REFACTOR: 코드 리펙토링
+-   TEST: 테스트 코트, 리펙토링 테스트 코드 추가
+-   CHORE: 빌드 업무 수정, 패키지 매니저 수정(ex .gitignore 수정 같은 경우)
+
+</details>
+
+<details>
+<summary><h3>🔀 Styled-Components 컨벤션</h3></summary>
+<div markdown="1">
+
+-   div : '기능명'Box
+-   section : '기능명'Section
+-   ul : '기능명'List
+-   li : '기능명'Item
+-   p : '기능명'Paragraph
+-   span : '기능명'Span
+
+</details>
+
+<br><br><br>
 
 # 🏃‍♂️ 프로젝트 진행과정
 
@@ -268,76 +323,96 @@
 📦src
  ┣ 📂Components
  ┃ ┣ 📂Footer
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜Footer.styled.ts
+ ┃ ┃ ┣ 📜Footer.tsx
+ ┃ ┃ ┗ 📜index.ts
  ┃ ┣ 📂Loading
- ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜Loading.styled.ts
  ┃ ┃ ┗ 📜Loading.tsx
  ┃ ┣ 📂LoginBox
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜LoginBox.styled.ts
+ ┃ ┃ ┗ 📜LoginBox.tsx
  ┃ ┣ 📂ManageInterview
  ┃ ┃ ┣ 📂Catagory
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜Catagory.styled.ts
+ ┃ ┃ ┃ ┣ 📜Catagory.tsx
+ ┃ ┃ ┃ ┗ 📜index.ts
  ┃ ┃ ┣ 📂ManageQuestion
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜styles.ts
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ManageQuestion.styled.ts
+ ┃ ┃ ┃ ┣ 📜ManageQuestion.tsx
  ┃ ┃ ┃ ┗ 📜types.ts
  ┃ ┃ ┣ 📂ManageUser
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜styles.ts
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ManageUser.styled.ts
+ ┃ ┃ ┃ ┣ 📜ManageUser.tsx
  ┃ ┃ ┃ ┗ 📜types.ts
  ┃ ┃ ┣ 📂QuestionTable
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜QuestionTable.styled.ts
+ ┃ ┃ ┃ ┗ 📜QuestionTable.tsx
  ┃ ┃ ┣ 📂UserTable
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜UserTable.styled.ts
+ ┃ ┃ ┃ ┗ 📜UserTable.tsx
  ┃ ┃ ┗ 📜types.ts
  ┃ ┣ 📂Memo
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜Memo.styled.ts
+ ┃ ┃ ┗ 📜Memo.tsx
  ┃ ┣ 📂Nav
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜Nav.styled.ts
+ ┃ ┃ ┗ 📜Nav.tsx
  ┃ ┣ 📂Notice
  ┃ ┃ ┣ 📂Notice
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜Notice.styled.ts
+ ┃ ┃ ┃ ┣ 📜Notice.tsx
  ┃ ┃ ┃ ┗ 📜types.ts
  ┃ ┃ ┗ 📂NoticeList
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜NoticeList.styled.ts
+ ┃ ┃ ┃ ┗ 📜NoticeList.tsx
  ┃ ┣ 📂Play
  ┃ ┃ ┣ 📂ShowMember
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜style.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ShowMember.styled.ts
+ ┃ ┃ ┃ ┣ 📜ShowMember.tsx
  ┃ ┃ ┃ ┗ 📜types.ts
  ┃ ┃ ┗ 📂ShowQuestion
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜style.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ShowMember.styled.ts
+ ┃ ┃ ┃ ┗ 📜ShowQuestion.tsx
  ┃ ┣ 📂Q&A
  ┃ ┃ ┣ 📂Comment
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜Comment.styled.ts
+ ┃ ┃ ┃ ┣ 📜Comment.tsx
+ ┃ ┃ ┃ ┗ 📜index.ts
  ┃ ┃ ┣ 📂QA
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜QA.styled.ts
+ ┃ ┃ ┃ ┗ 📜QA.tsx
  ┃ ┃ ┣ 📂QAComment
  ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜QAComment.styled.ts
+ ┃ ┃ ┃ ┗ 📜QAComment.tsx
  ┃ ┃ ┣ 📂QAList
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜QAList.styled.ts
+ ┃ ┃ ┃ ┗ 📜QAList.tsx
  ┃ ┃ ┣ 📂WriteComment
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜types.ts
+ ┃ ┃ ┃ ┣ 📜WriteComment.styled.ts
+ ┃ ┃ ┃ ┗ 📜WriteComment.tsx
  ┃ ┃ ┗ 📜types.ts
  ┃ ┗ 📂StopWatch
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜StopWatch.styled.ts
+ ┃ ┃ ┗ 📜StopWatch.tsx
  ┣ 📂features
  ┃ ┣ 📜folderSlice.tsx
  ┃ ┣ 📜memberSlice.tsx
@@ -348,45 +423,56 @@
  ┣ 📂hooks
  ┣ 📂Page
  ┃ ┣ 📂Error
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.ts
+ ┃ ┃ ┣ 📜ErrorPage.styled.ts
+ ┃ ┃ ┣ 📜ErrorPage.tsx
+ ┃ ┃ ┗ 📜index.ts
  ┃ ┣ 📂Login
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜Login.styled.ts
+ ┃ ┃ ┗ 📜Login.tsx
  ┃ ┣ 📂Main
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜Main.styled.ts
+ ┃ ┃ ┗ 📜Main.tsx
  ┃ ┣ 📂Manage
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┣ 📜Manage.styled.ts
+ ┃ ┃ ┣ 📜Manage.tsx
  ┃ ┃ ┗ 📜types.ts
  ┃ ┣ 📂MyPage
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┣ 📜Mypage.styled.ts
+ ┃ ┃ ┗ 📜MyPage.tsx
  ┃ ┣ 📂Notice
  ┃ ┃ ┣ 📂NoticePosting
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜NoticePosting.styled.ts
+ ┃ ┃ ┃ ┗ 📜NoticePosting.tsx
  ┃ ┃ ┣ 📂WriteNotice
  ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜styles.tsx
- ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┃ ┣ 📜types.ts
+ ┃ ┃ ┃ ┣ 📜WriteNotice.styled.ts
+ ┃ ┃ ┃ ┗ 📜WriteNotice.tsx
  ┃ ┃ ┗ 📜types.ts
  ┃ ┣ 📂PlayInterview
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┣ 📜styles.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜PlayInterview.styled.ts
+ ┃ ┃ ┣ 📜PlayInterview.tsx
  ┃ ┃ ┗ 📜types.ts
  ┃ ┗ 📂Q&A
  ┃ ┃ ┣ 📂QAPage
- ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜QAPage.styled.ts
+ ┃ ┃ ┃ ┗ 📜QAPage.tsx
  ┃ ┃ ┣ 📂QAPosting
  ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┗ 📜styles.tsx
+ ┃ ┃ ┃ ┣ 📜QAPosting.styled.ts
+ ┃ ┃ ┃ ┗ 📜QAPosting.tsx
  ┃ ┃ ┗ 📂WriteQA
  ┃ ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┃ ┣ 📜styles.tsx
- ┃ ┃ ┃ ┗ 📜types.ts
+ ┃ ┃ ┃ ┣ 📜types.ts
+ ┃ ┃ ┃ ┣ 📜WriteQA.styled.ts
+ ┃ ┃ ┃ ┗ 📜WriteQA.tsx
  ┣ 📂store
  ┃ ┗ 📜index.tsx
  ┣ 📂styles
