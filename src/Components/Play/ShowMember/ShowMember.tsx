@@ -26,7 +26,6 @@ import { UserInfo } from './types'
 
 export default function ShowMember() {
     const [open, setOpen] = useState<Array<boolean[] | boolean>>([false])
-
     const member = useSelector(selectMember)
     const result = useSelector(selectResult)
     const correctCnt = useSelector(selectCorrectCnt)
@@ -37,7 +36,6 @@ export default function ShowMember() {
     )
     //   useSelector(selectDistribution);
     const uniqueId = useId()
-    console.log(member, orderMember, newOrderMember)
 
     /**
      * 버튼을 누르면 해당하는 유저의 질문 목록이 열린다.
@@ -112,7 +110,7 @@ export default function ShowMember() {
                     </ButtonContainer>
 
                     {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                    {result.length !== 0 ? <ShowQuestion {...result[idx]} /> : ''}
+                    {result.length !== 0 ? <ShowQuestion result={result[idx]} /> : ''}
                 </UserContainer>
             ))}
         </>

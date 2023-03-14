@@ -9,9 +9,9 @@ import {
     QuestionCatagoryLabel,
     QuestionText,
     ShowBtn,
-} from './ShowMember.styled'
+} from './ShowQuestion.styled'
 
-export default function ShowQuestion({ result }: { result: number[] | [] }): JSX.Element {
+export default function ShowQuestion({ result }: { result: number[] | [] }) {
     const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([])
     const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([])
     const questions = useSelector(selectQuestions)
@@ -44,6 +44,8 @@ export default function ShowQuestion({ result }: { result: number[] | [] }): JSX
         )
         setCorrectCnt(change)
     }
+
+    console.log('질문', result)
 
     return (
         <div>

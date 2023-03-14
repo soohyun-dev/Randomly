@@ -38,5 +38,6 @@ export default function getQuestionNums(member: number, question: number) {
             }
         })
     }
+
     return result
 }
