@@ -258,8 +258,8 @@ export default function PlayInterview() {
                         )}
                     </MainContainer>
                 </section>
+                <Footer />
             </ErrorBoundary>
-            <Footer />
         </>
     )
 }

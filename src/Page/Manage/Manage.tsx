@@ -122,10 +122,10 @@ export default function Manage() {
     return (
         <>
             <Nav />
-            <TitleSection>
-                <Title>MANAGE</Title>
-            </TitleSection>
             <ErrorBoundary FallbackComponent={ErrorPage}>
+                <TitleSection>
+                    <Title>MANAGE</Title>
+                </TitleSection>
                 <ManageHeaderSection>
                     <ManageHeaderDiv>
                         <MiniTitle
