@@ -26,6 +26,7 @@ export default function Plan() {
     const [date, setDate] = useState(new Date())
     const { classes } = useStyles()
 
+    console.log(date)
     return (
         <>
             <Nav />

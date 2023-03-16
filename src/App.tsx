@@ -33,7 +33,7 @@ export default function App(): JSX.Element {
                 <Route path="/WriteQA" element={<WriteQA />} />
                 <Route path="/NoticePosting/:order" element={<NoticePosting />} />
                 <Route path="/QAposting/:order" element={<QAPosting />} />
-                <Route path='/Plan' element={<Plan />} />
+                <Route path="/Plan" element={<Plan />} />
             </Routes>
         </>
     )

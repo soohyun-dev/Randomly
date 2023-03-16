@@ -11,7 +11,7 @@ export const TopHeader = styled.header<Scroll>`
     top: 0;
     z-index: 1000;
     display: grid;
-    grid-template-columns: 1fr 4fr 0.5fr 0.5fr;
+    grid-template-columns: 2fr 6fr 1fr 1fr;
     padding: 15px 15px 10px 15px;
     font-size: 28px;
     color: ${(props) => (props.scroll === 'origin' ? 'white' : 'black')};
@@ -69,13 +69,5 @@ export const Logout = styled.button<Scroll>`
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     &:hover {
         opacity: 70%;
-    }
-`
-
-export const ThemeDiv = styled.div`
-    cursor: pointer;
-    font-size: 14px;
-    &:hover {
-        opacity: 0.7;
     }
 `

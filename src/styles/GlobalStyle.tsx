@@ -1,15 +1,17 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+
   *{
     margin: 0rem;
   }
 
   body{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-    background-color: ${({ theme }) => (theme ? '#2D3436;' : 'white')};
+    background-color: ${({ theme }) => (theme ? '#2D3436' : 'white ')};
     color: ${({ theme }) => (theme ? '#bdc1c6' : 'black')};
-  }
+    }
+  
 
   button{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
@@ -24,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     --Notice-PostingBox: ${({ theme }) => (theme ? '#757575' : '#f5f5f5')};
     --QA-PostingBox: ${({ theme }) => (theme ? '#757575' : '#f5f5f5')};
   }
+
 `
 
 export default GlobalStyle
