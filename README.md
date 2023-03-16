@@ -236,11 +236,18 @@
 
 ![Spoqa Han Sans Neo](https://img.shields.io/badge/Spoqa%20Han%20Sans%20Neo-3668FF.svg?style=for-the-badge&logoColor=white)
 
--   [폰트 링크](https://spoqa.github.io/spoqa-han-sans/ko-KR/#intro)
-
 <br><br><br>
 
 # 📌 컨벤션
+
+<details><summary><h3>🔀 코드 컨벤션</h3></summary>
+<div markdown="1">
+
+    ✔️Airbnb
+
+    - Airbnb Eslint를 따릅니다.
+
+</details>
 
 <details><summary><h3>🔀 브랜치명 컨벤션</h3></summary>
 <div markdown="1">

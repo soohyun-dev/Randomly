@@ -167,11 +167,13 @@ export default function PlayInterview() {
             getUsers()
             getQuestions()
             setNowPackage(nowPackage)
-            dispatch(
-                folderSlice.actions.choose({
-                    id: folders[nowPackage].id,
-                })
-            )
+            if (folders.length > 0) {
+                dispatch(
+                    folderSlice.actions.choose({
+                        id: folders[nowPackage].id,
+                    })
+                )
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nowPackage, folderId, distribution, bool])
