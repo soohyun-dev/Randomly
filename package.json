@@ -5,6 +5,9 @@
     "dependencies": {
         "@craco/craco": "^7.0.0",
         "@emotion/react": "^11.10.5",
+        "@mantine/core": "^6.0.2",
+        "@mantine/dates": "^6.0.2",
+        "@mantine/hooks": "^6.0.2",
         "@reduxjs/toolkit": "^1.9.2",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
@@ -12,6 +15,7 @@
         "@types/node": "^18.11.18",
         "@types/react": "^18.0.27",
         "@types/react-dom": "^18.0.10",
+        "dayjs": "^1.11.7",
         "dotenv": "^16.0.3",
         "firebase": "^9.16.0",
         "immer": "^9.0.19",

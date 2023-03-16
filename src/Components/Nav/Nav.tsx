@@ -90,7 +90,7 @@ export default function Nav(props) {
                         to="/Plan"
                         scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
                     >
-                        <MenuText>Plan</MenuText>
+                        <MenuText>PLAN</MenuText>
                     </LinkText>
                 </div>
                 <div>
