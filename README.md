@@ -282,6 +282,8 @@
 <summary><h3>🔀 Commit 컨벤션</h3></summary>
 <div markdown="1">
 
+-   Gitmoji
+
 -   FEAT : 새로운 기능의 추가
 -   FIX: 버그 수정
 -   DOCS: 문서 수정 (리드미 작성)
