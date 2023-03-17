@@ -123,6 +123,7 @@ export default function PlayInterview() {
             })
         )
         console.log('멤버', member)
+
         dispatch(
             playSlice.actions.setOrderMember({
                 orderMember: Array.from({ length: member.length }, (_, idx) => idx),
@@ -231,10 +232,12 @@ export default function PlayInterview() {
                         ) : (
                             <OrderContainer>
                                 <div>
-                                    <ShuffleName onClick={shuffleName}>이름 순서 변경</ShuffleName>
+                                    <ShuffleName onClick={() => shuffleName()}>
+                                        이름 순서 변경
+                                    </ShuffleName>
                                 </div>
                                 <div>
-                                    <MakeQuestionNums color={bool} onClick={makeArray}>
+                                    <MakeQuestionNums color={bool} onClick={() => makeArray()}>
                                         {bool ? '질문 재분배' : '질문 분배 시작'}
                                     </MakeQuestionNums>
                                 </div>

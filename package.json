@@ -24,6 +24,7 @@
         "react-awesome-reveal": "^4.2.3",
         "react-dom": "^18.2.0",
         "react-error-boundary": "^3.1.4",
+        "react-query": "^3.39.3",
         "react-redux": "^8.0.5",
         "react-router-dom": "^6.8.0",
         "react-scripts": "5.0.1",
