@@ -12,6 +12,7 @@ import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
 import { getDateTime } from 'utils/GetTime'
 import { useQuery } from 'react-query'
+import { useFolder } from 'hooks/useFolder'
 import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
@@ -39,7 +40,6 @@ export default function Manage() {
     const [nowPackage, setNowPackage] = useState('0')
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
-    const folders = useSelector(selectFolder)
     const [updateBtn, setUpdateBtn] = useState(false)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
     const MiniTitle = styled.label<{ target?: any }>`
@@ -66,17 +66,10 @@ export default function Manage() {
             })
         )
         setShow(true)
-        return packageData.docs.map((docTarget) => ({
-            ...docTarget.data(),
-            id: docTarget.id,
-        }))
     }, [dispatch, packageInfo])
 
-    const { data, isLoading, error } = useQuery('packages', () => {
-        return getPackages()
-    })
-
-    console.log(data, isLoading, error)
+    const { data, isLoading, error } = useFolder()
+    const folders = data
 
     const changeView = (value: string) => {
         setPage(value)
@@ -117,7 +110,7 @@ export default function Manage() {
     useEffect(() => {
         if (user !== null) {
             getPackages()
-            if (folders.length >= 1) {
+            if (folders !== undefined && folders.length >= 1) {
                 console.log('지금패키지', nowPackage)
                 dispatch(
                     folderSlice.actions.choose({
@@ -174,22 +167,24 @@ export default function Manage() {
                 </ManageHeaderSection>
                 <PackageSection>
                     <PackageDiv>
-                        {Object.keys(folders).map((v) => (
-                            <PackageBox
-                                onClick={() => {
-                                    setNowPackage(v)
-                                    dispatch(
-                                        folderSlice.actions.choose({
-                                            choose: v,
-                                        })
-                                    )
-                                }}
-                            >
-                                <PackageTitle>{folders[v].title}</PackageTitle>
-                                <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
-                                {renderDeleteBtn(v)}
-                            </PackageBox>
-                        ))}
+                        {isLoading
+                            ? ''
+                            : Object.keys(folders).map((v) => (
+                                  <PackageBox
+                                      onClick={() => {
+                                          setNowPackage(v)
+                                          dispatch(
+                                              folderSlice.actions.choose({
+                                                  choose: v,
+                                              })
+                                          )
+                                      }}
+                                  >
+                                      <PackageTitle>{folders[v].title}</PackageTitle>
+                                      <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+                                      {renderDeleteBtn(v)}
+                                  </PackageBox>
+                              ))}
                     </PackageDiv>
                 </PackageSection>
                 <PackageTitleDiv>
