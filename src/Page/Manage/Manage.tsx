@@ -11,6 +11,7 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
 import { getDateTime } from 'utils/GetTime'
+import { useQuery } from 'react-query'
 import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
@@ -65,9 +66,19 @@ export default function Manage() {
             })
         )
         setShow(true)
+        return packageData.docs.map((docTarget) => ({
+            ...docTarget.data(),
+            id: docTarget.id,
+        }))
     }, [dispatch, packageInfo])
 
-    const changeView = (value) => {
+    const { data, isLoading, error } = useQuery('packages', () => {
+        return getPackages()
+    })
+
+    console.log(data, isLoading, error)
+
+    const changeView = (value: string) => {
         setPage(value)
     }
 
