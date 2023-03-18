@@ -21,7 +21,7 @@ export const useFolder = (nowPackage) => {
     const folderInfo = collection(fireStore, `users/${user}/packages`)
     const folder = useQuery('folders', () => getFolder(folderInfo))
 
-    if (user !== null && folder.data !== undefined) {
+    if (user !== null && folder.data !== undefined && folder.data.length >= 1) {
         dispatch(
             folderSlice.actions.choose({
                 choose: +nowPackage,
