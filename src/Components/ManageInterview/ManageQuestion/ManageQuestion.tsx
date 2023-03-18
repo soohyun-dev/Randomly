@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from 'react'
-import { addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { addDoc, collection } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
-import { QuestionInfo } from 'Page/PlayInterview/types'
-import { questionsSlice, selectQuestions, selectSelectedCatagory } from 'features/questionsSlice'
-import { chooseFolder, chooseId } from 'features/folderSlice'
+import { selectSelectedCatagory } from 'features/questionsSlice'
+import { chooseId } from 'features/folderSlice'
+import { useQuestion } from 'hooks/useQuestion'
 import QuestionTable from '../QuestionTable'
 import { fireStore } from '../../../firebase'
 import {
@@ -25,30 +25,11 @@ export default function ManageQuestion() {
     const [preAddQuestion, setPreAddQuestions] = useState<string>('')
     const [preAddIdx, setPreAddIdx] = useState<number>()
     const user = useSelector(selectUser)
-    const questions = useRef<QuestionInfo[]>([])
     const folderId = useSelector(chooseId)
-    const questionsInfo = collection(fireStore, `users/${user}/packages/${folderId}/questions`)
-    const dispatch = useDispatch()
-    const question = useSelector(selectQuestions)
-    const now = useSelector(chooseFolder)
     const seletedCatagory = useSelector(selectSelectedCatagory)
 
-    const getQuestions = async () => {
-        const questionData = await getDocs(query(questionsInfo, orderBy('time', 'asc')))
-        questions.current = questionData.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-        }))
-
-        dispatch(
-            questionsSlice.actions.setQuestion({
-                Questions: questionData.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                })),
-            })
-        )
-    }
+    const { data, isLoading, error } = useQuestion(folderId)
+    const questions = data
 
     /**
      * 질문 추가
@@ -56,7 +37,8 @@ export default function ManageQuestion() {
      */
 
     const addQuestion = async () => {
-        const idx = Object.keys(questions.current).length
+        const questionsInfo = collection(fireStore, `users/${user}/packages/${folderId}/questions`)
+        const idx = Object.keys(questions).length
         const newData: NewData = {}
         newData.idx = idx
         newData.question = newQuestion
@@ -98,11 +80,6 @@ export default function ManageQuestion() {
     //     }
     //   };
 
-    useEffect(() => {
-        getQuestions()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [newQuestion, folderId, now])
-
     return (
         <QuestionListContainer>
             <div>
@@ -135,14 +112,16 @@ export default function ManageQuestion() {
                                 <ThNoRight>삭제하기</ThNoRight>
                             </tr>
                         </thead>
-                        {Object.keys(question).map((v, idx) => (
-                            <QuestionTable
-                                question={question[+v].question}
-                                id={question[+v].id}
-                                idx={idx}
-                                catagory={question[+v].catagory}
-                            />
-                        ))}
+                        {isLoading
+                            ? ''
+                            : Object.keys(questions).map((v, idx) => (
+                                  <QuestionTable
+                                      question={questions[+v].question}
+                                      id={questions[+v].id}
+                                      idx={idx}
+                                      catagory={questions[+v].catagory}
+                                  />
+                              ))}
                     </Table>
                 </div>
             </div>

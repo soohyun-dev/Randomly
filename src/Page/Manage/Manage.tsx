@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore'
-import { folderSlice, selectFolder } from 'features/folderSlice'
+import { folderSlice } from 'features/folderSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
 import ManageUser from 'Components/ManageInterview/ManageUser'
@@ -11,7 +11,6 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
 import { getDateTime } from 'utils/GetTime'
-import { useQuery } from 'react-query'
 import { useFolder } from 'hooks/useFolder'
 import { fireStore } from '../../firebase'
 import {
@@ -54,21 +53,7 @@ export default function Manage() {
         }
     `
 
-    const getPackages = useCallback(async () => {
-        const packageData = await getDocs(query(packageInfo, orderBy('time', 'asc')))
-
-        dispatch(
-            folderSlice.actions.setFolder({
-                folders: packageData.docs.map((docTarget) => ({
-                    ...docTarget.data(),
-                    id: docTarget.id,
-                })),
-            })
-        )
-        setShow(true)
-    }, [dispatch, packageInfo])
-
-    const { data, isLoading, error } = useFolder()
+    const { data, isLoading, error } = useFolder(nowPackage)
     const folders = data
 
     const changeView = (value: string) => {
@@ -106,22 +91,6 @@ export default function Manage() {
         if (!updateBtn) return ''
         return <FolderDeleteButton onClick={() => checkDelete(target)}>삭제</FolderDeleteButton>
     }
-
-    useEffect(() => {
-        if (user !== null) {
-            getPackages()
-            if (folders !== undefined && folders.length >= 1) {
-                console.log('지금패키지', nowPackage)
-                dispatch(
-                    folderSlice.actions.choose({
-                        choose: +nowPackage,
-                        id: folders[nowPackage].id,
-                    })
-                )
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [nowPackage, dispatch])
 
     return (
         <>
@@ -173,11 +142,6 @@ export default function Manage() {
                                   <PackageBox
                                       onClick={() => {
                                           setNowPackage(v)
-                                          dispatch(
-                                              folderSlice.actions.choose({
-                                                  choose: v,
-                                              })
-                                          )
                                       }}
                                   >
                                       <PackageTitle>{folders[v].title}</PackageTitle>
@@ -200,7 +164,7 @@ export default function Manage() {
                     </ManageAccessSection>
                 )}
                 {page === 'question'
-                    ? user !== null && show && folders.length > 0 && <ManageQuestion />
+                    ? user !== null && !isLoading && folders.length > 0 && <ManageQuestion />
                     : user !== null && <ManageUser />}
             </ErrorBoundary>
             <Footer />
