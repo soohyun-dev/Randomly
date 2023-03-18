@@ -14,8 +14,10 @@ const getQuestion = async (questionsInfo) => {
     return questions
 }
 
-export const useQuestion = (folderId) => {
+const useQuestion = (folderId) => {
     const user = useSelector(selectUser)
     const questionInfo = collection(fireStore, `users/${user}/packages/${folderId}/questions`)
     return useQuery(`questions${folderId}`, () => getQuestion(questionInfo))
 }
+
+export default useQuestion

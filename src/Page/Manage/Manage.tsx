@@ -11,7 +11,8 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
 import { getDateTime } from 'utils/GetTime'
-import { useFolder } from 'hooks/useFolder'
+
+import { useFolder } from 'hooks'
 import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
@@ -34,10 +35,8 @@ import {
 } from './Manage.styled'
 
 export default function Manage() {
-    const [show, setShow] = useState<boolean>(false)
     const [page, setPage] = useState<string>('question')
     const [nowPackage, setNowPackage] = useState('0')
-    const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const [updateBtn, setUpdateBtn] = useState(false)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
@@ -153,7 +152,7 @@ export default function Manage() {
                 </PackageSection>
                 <PackageTitleDiv>
                     <PackageTitleText>
-                        {show && folders.length > 0 && folders[nowPackage].title}
+                        {folders !== undefined && folders.length > 0 && folders[nowPackage].title}
                     </PackageTitleText>
                 </PackageTitleDiv>
                 {user !== null ? (

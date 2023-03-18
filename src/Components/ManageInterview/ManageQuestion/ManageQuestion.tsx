@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
 import { selectSelectedCatagory } from 'features/questionsSlice'
 import { chooseId } from 'features/folderSlice'
-import { useQuestion } from 'hooks/useQuestion'
+
+import { useQuestion } from 'hooks'
 import QuestionTable from '../QuestionTable'
 import { fireStore } from '../../../firebase'
 import {

@@ -15,7 +15,7 @@ const getFolder = async (folderInfo) => {
     return folder
 }
 
-export const useFolder = (nowPackage) => {
+const useFolder = (nowPackage) => {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const folderInfo = collection(fireStore, `users/${user}/packages`)
@@ -37,3 +37,5 @@ export const useFolder = (nowPackage) => {
 
     return folder
 }
+
+export default useFolder

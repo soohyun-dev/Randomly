@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
 import { memberSlice, selectMember } from 'features/memberSlice'
 import { chooseFolder, chooseId } from 'features/folderSlice'
+import { useMember } from 'hooks'
 import { ManageUserInfo } from '../types'
 import { fireStore } from '../../../firebase'
 import UserTable from '../UserTable'
@@ -12,30 +13,12 @@ import { NewData } from './types'
 
 export default function ManageUser() {
     const [newMember, setNewMember] = useState<string>('')
-    const users = useRef<ManageUserInfo[]>([])
     const user = useSelector(selectUser)
-    const member = useSelector(selectMember)
-    const now = useSelector(chooseFolder)
-    const dispatch = useDispatch()
     const folderId = useSelector(chooseId)
     const userInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
 
-    const getUsers = async () => {
-        const userData = await getDocs(query(userInfo, orderBy('time', 'asc')))
-        users.current = userData.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-        }))
-
-        dispatch(
-            memberSlice.actions.setMember({
-                members: userData.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                })),
-            })
-        )
-    }
+    const { data, isLoading, error } = useMember(folderId)
+    const members = data
 
     /**
      * 유저 추가
@@ -43,7 +26,7 @@ export default function ManageUser() {
      * @param {Number}
      */
     const addUser = async () => {
-        const idx = Object.keys(users.current).length
+        const idx = Object.keys(members).length
         const newData: NewData = {}
         newData.idx = idx
         newData.member = newMember
@@ -51,7 +34,6 @@ export default function ManageUser() {
         await addDoc(userInfo, newData)
         alert('유저가 추가되었습니다.')
         setNewMember('')
-        getUsers()
     }
 
     const enterSubmit = (e) => {
@@ -59,11 +41,6 @@ export default function ManageUser() {
             addUser()
         }
     }
-
-    useEffect(() => {
-        getUsers()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [newMember, folderId, now])
 
     return (
         <UserListContainer>
@@ -90,13 +67,15 @@ export default function ManageUser() {
                                 <ThNoRight>삭제하기</ThNoRight>
                             </tr>
                         </thead>
-                        {Object.keys(users.current).map((v, idx) => (
-                            <UserTable
-                                member={users.current[+v].member}
-                                id={users.current[+v].id}
-                                idx={idx}
-                            />
-                        ))}
+                        {isLoading
+                            ? ''
+                            : Object.keys(members).map((v, idx) => (
+                                  <UserTable
+                                      member={members[+v].member}
+                                      id={members[+v].id}
+                                      idx={idx}
+                                  />
+                              ))}
                     </Table>
                 </div>
             </div>
