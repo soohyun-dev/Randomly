@@ -5,7 +5,7 @@ import { CommentSection } from './QAComment.styled'
 export default function QAComment({ id }) {
     const { data, isLoading } = useQAComment(id)
     const qaComment = data
-
+    console.log(qaComment)
     return (
         <CommentSection>
             {!isLoading &&
