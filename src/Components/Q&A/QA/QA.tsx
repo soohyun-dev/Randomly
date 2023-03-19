@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
-import useQA from 'hooks/useQA'
+import { useQA } from 'hooks'
 import QAList from '../QAList'
 import { QAListBox, Title, TitleDiv, WriteBox, WriteBtn } from './QA.styled'
 
