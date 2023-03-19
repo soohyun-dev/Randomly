@@ -29,7 +29,7 @@ export default function ManageQuestion() {
     const folderId = useSelector(chooseId)
     const seletedCatagory = useSelector(selectSelectedCatagory)
 
-    const { data, isLoading, error } = useQuestion(folderId)
+    const { data, isLoading } = useQuestion(folderId)
     const questions = data
 
     /**

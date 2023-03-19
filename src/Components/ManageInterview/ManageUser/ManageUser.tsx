@@ -17,7 +17,7 @@ export default function ManageUser() {
     const folderId = useSelector(chooseId)
     const userInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
 
-    const { data, isLoading, error } = useMember(folderId)
+    const { data, isLoading } = useMember(folderId)
     const members = data
 
     /**

@@ -52,7 +52,7 @@ export default function Manage() {
         }
     `
 
-    const { data, isLoading, error } = useFolder(nowPackage)
+    const { data, isLoading } = useFolder(nowPackage)
     const folders = data
 
     const changeView = (value: string) => {
