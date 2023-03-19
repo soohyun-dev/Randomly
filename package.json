@@ -1,76 +1,103 @@
 {
-    "name": "randomly",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@craco/craco": "^7.0.0",
-        "@emotion/react": "^11.10.5",
-        "@mantine/core": "^6.0.2",
-        "@mantine/dates": "^6.0.2",
-        "@mantine/hooks": "^6.0.2",
-        "@reduxjs/toolkit": "^1.9.2",
-        "@tabler/icons-react": "^2.10.0",
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^13.4.0",
-        "@testing-library/user-event": "^13.5.0",
-        "@types/node": "^18.11.18",
-        "@types/react": "^18.0.27",
-        "@types/react-dom": "^18.0.10",
-        "dayjs": "^1.11.7",
-        "dotenv": "^16.0.3",
-        "firebase": "^9.16.0",
-        "immer": "^9.0.19",
-        "react": "^18.2.0",
-        "react-awesome-reveal": "^4.2.3",
-        "react-dom": "^18.2.0",
-        "react-error-boundary": "^3.1.4",
-        "react-query": "^3.39.3",
-        "react-redux": "^8.0.5",
-        "react-router-dom": "^6.8.0",
-        "react-scripts": "5.0.1",
-        "redux": "^4.2.1",
-        "redux-persist": "^6.0.0",
-        "styled-components": "^5.3.6",
-        "typescript": "^4.9.5",
-        "web-vitals": "^2.1.4"
-    },
-    "scripts": {
-        "start": "craco start",
-        "build": "craco build",
-        "test": "craco test",
-        "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
+  "name": "randomly",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^7.0.0",
+    "@emotion/react": "^11.10.5",
+    "@mantine/core": "^6.0.2",
+    "@mantine/dates": "^6.0.2",
+    "@mantine/hooks": "^6.0.2",
+    "@reduxjs/toolkit": "^1.9.2",
+    "@tabler/icons-react": "^2.10.0",
+    "@testing-library/dom": "^9.0.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "firebase": "^9.16.0",
+    "immer": "^9.0.19",
+    "react": "^18.2.0",
+    "react-awesome-reveal": "^4.2.3",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^3.1.4",
+    "react-query": "^3.39.3",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.8.0",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.6",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
         ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@types/jest": "^29.4.0",
-        "@types/styled-components": "^5.1.26",
-        "craco-alias": "^3.0.1",
-        "eslint": "^8.35.0",
-        "eslint-config-airbnb": "^19.0.4",
-        "eslint-config-prettier": "^8.7.0",
-        "eslint-plugin-import": "^2.27.5",
-        "eslint-plugin-jsx-a11y": "^6.7.1",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-react": "^7.32.2",
-        "eslint-plugin-react-hooks": "^4.6.0",
-        "jest": "^29.5.0",
-        "ts-jest": "^29.0.5"
-    }
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/node-logger": "^6.5.16",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/jest": "^29.4.0",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "craco-alias": "^3.0.1",
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "jest": "^29.5.0",
+    "prop-types": "^15.8.1",
+    "ts-jest": "^29.0.5",
+    "webpack": "^5.76.2"
+  }
 }

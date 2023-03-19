@@ -40,6 +40,9 @@ export default function Manage() {
     const user = useSelector(selectUser)
     const [updateBtn, setUpdateBtn] = useState(false)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
+    const { data, isLoading } = useFolder(nowPackage)
+    const folders = data
+
     const MiniTitle = styled.label<{ target?: any }>`
         padding: 0 0.5em;
         font-size: 24px;
@@ -51,9 +54,6 @@ export default function Manage() {
             opacity: 80%;
         }
     `
-
-    const { data, isLoading } = useFolder(nowPackage)
-    const folders = data
 
     const changeView = (value: string) => {
         setPage(value)

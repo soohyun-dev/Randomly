@@ -19,7 +19,7 @@ const useFolder = (nowPackage) => {
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
     const folderInfo = collection(fireStore, `users/${user}/packages`)
-    const folder = useQuery('folders', () => getFolder(folderInfo))
+    const folder = useQuery(`${user}folders`, () => getFolder(folderInfo))
 
     if (user !== null && folder.data !== undefined && folder.data.length >= 1) {
         dispatch(
