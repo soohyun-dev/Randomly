@@ -218,14 +218,13 @@
 
 ## 📑 Test
 
-![Jest](https://img.shields.io/badge/jest-C21325.svg?style=for-the-badge&logo=jest&logoColor=white)
+![Jest](https://img.shields.io/badge/jest-C21325.svg?style=for-the-badge&logo=jest&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785.svg?style=for-the-badge&logo=Storybook&logoColor=white)
 
 <br>
 
 ## ⚙️ Tools
 
-![VisualStudioCode](https://img.shields.io/badge/Visual%20Studio%20code-007ACC.svg?style=for-the-badge&logo=visual-studio-Code&logoColor=white) ![GitHub](https://img.shields.io/badge/github-181717.svg?style=for-the-badge&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/git-F05032.svg?style=for-the-badge&logo=git&logoColor=white) ![Tistory](https://img.shields.io/badge/tistory-000000.svg?style=for-the-badge&logo=tistory&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785.svg?style=for-the-badge&logo=Storybook&logoColor=white)
-
+![VisualStudioCode](https://img.shields.io/badge/Visual%20Studio%20code-007ACC.svg?style=for-the-badge&logo=visual-studio-Code&logoColor=white) ![GitHub](https://img.shields.io/badge/github-181717.svg?style=for-the-badge&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/git-F05032.svg?style=for-the-badge&logo=git&logoColor=white) ![Tistory](https://img.shields.io/badge/tistory-000000.svg?style=for-the-badge&logo=tistory&logoColor=white)
 <br>
 
 ## 👨‍⚖️ Linters
