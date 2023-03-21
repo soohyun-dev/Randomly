@@ -11,10 +11,20 @@ interface Question {
     catagory: string
 }
 
-export default function getEqualDistribution(
-    memberLength: number,
-    questions: Record<string, Question>
-) {
+type Time = {
+    seconds: number
+    nanoseconds: number
+}
+
+type Data = {
+    question: string
+    catagory: string
+    time: Time
+    idx: number
+    id: string
+}
+
+export default function getEqualDistribution(memberLength: number, questions: Data[]) {
     const Catagory: Record<string, number[]> = {}
 
     Object.keys(questions).forEach((idx) => {

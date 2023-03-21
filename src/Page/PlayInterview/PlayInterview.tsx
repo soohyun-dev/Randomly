@@ -14,6 +14,7 @@ import getQuestionNums, { MakeNums } from 'utils/MakeNums'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import getEqualDistribution from 'utils/EqualDistribution'
+import { useFolder, useMember, useQuestion } from 'hooks'
 import { fireStore } from '../../firebase'
 import {
     CatagoryCheckInput,
@@ -37,19 +38,33 @@ import {
     USER,
 } from './PlayInterview.styled'
 
+type Time = {
+    seconds: number
+    nanoseconds: number
+}
+
+type Data = {
+    question: string
+    catagory: string
+    time: Time
+    idx: number
+    id: string
+}
+
 export default function PlayInterview() {
     const dispatch = useDispatch()
     const [firstRender, setFirstRender] = useState(false)
-    const [bool, setBool] = useState<boolean>(false)
-    const [nowPackage, setNowPackage] = useState<string>('0')
+    const [bool, setBool] = useState(false)
+    const [nowPackage, setNowPackage] = useState('0')
     const [isChecked, setIsChecked] = useState(false)
     const user = useSelector(selectUser)
-    const folders = useSelector(selectFolder)
     const folderId = useSelector(chooseId)
     const member = useSelector(selectMember)
-    const questions = useSelector(selectQuestions)
     const distribution = useSelector(selectDistribution)
-    const packageInfo = collection(fireStore, `users/${user}/packages`)
+    const { data: folders, isLoading: isFolderLoading } = useFolder(nowPackage)
+    const { data: questions }: { data: Data[] } = useQuestion(folderId)
+    console.log(JSON.stringify(questions))
+    const { data: memberData, isLoading: isMemberLoading } = useMember(folderId)
     const userInfo =
         folderId === ''
             ? collection(fireStore, `users/${user}/packages`)
@@ -87,31 +102,6 @@ export default function PlayInterview() {
         alert('질문 분배가 완료되었습니다!')
     }
 
-    const getPackages = async () => {
-        const packageData = await getDocs(query(packageInfo, orderBy('time', 'asc')))
-
-        dispatch(
-            folderSlice.actions.setFolder({
-                folders: packageData.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                })),
-            })
-        )
-    }
-
-    const getQuestions = async () => {
-        const data = await getDocs(questionInfo)
-        dispatch(
-            questionsSlice.actions.setQuestion({
-                Questions: data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                })),
-            })
-        )
-    }
-
     const getUsers = async () => {
         const userData = await getDocs(userInfo)
         dispatch(
@@ -129,12 +119,6 @@ export default function PlayInterview() {
                 orderMember: Array.from({ length: member.length }, (_, idx) => idx),
             })
         )
-    }
-
-    const changePackage = () => {
-        dispatch(playSlice.actions.setChangeFolder())
-        getUsers()
-        setBool(false)
     }
 
     const shuffleName = () => {
@@ -164,17 +148,8 @@ export default function PlayInterview() {
             setFirstRender(true)
         }
         if (user !== null && folderId !== '') {
-            getPackages()
             getUsers()
-            getQuestions()
             setNowPackage(nowPackage)
-            if (folders.length > 0) {
-                dispatch(
-                    folderSlice.actions.choose({
-                        id: folders[nowPackage].id,
-                    })
-                )
-            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nowPackage, folderId, distribution, bool])
@@ -192,28 +167,22 @@ export default function PlayInterview() {
                 </section>
                 <PackageSection>
                     <PackageDiv>
-                        {Object.keys(folders).map((v, idx) => (
-                            <PackageBox
-                                onClick={() => {
-                                    setNowPackage(v)
-                                    changePackage()
-                                    dispatch(
-                                        folderSlice.actions.choose({
-                                            choose: v,
-                                            id: folders[v].id,
-                                        })
-                                    )
-                                }}
-                            >
-                                <PackageTitle>{folders[v].title}</PackageTitle>
-                                <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
-                            </PackageBox>
-                        ))}
+                        {!isFolderLoading &&
+                            Object.keys(folders).map((v) => (
+                                <PackageBox
+                                    onClick={() => {
+                                        setNowPackage(v)
+                                    }}
+                                >
+                                    <PackageTitle>{folders[v].title}</PackageTitle>
+                                    <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+                                </PackageBox>
+                            ))}
                     </PackageDiv>
                 </PackageSection>
                 <PackageTitleDiv>
                     <PackageTitleText>
-                        {folders.length > 0 && folders[nowPackage].title}
+                        {folders !== undefined && folders.length > 0 && folders[nowPackage].title}
                     </PackageTitleText>
                 </PackageTitleDiv>
 

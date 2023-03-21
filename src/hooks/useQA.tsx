@@ -14,7 +14,7 @@ const getQA = async (QAInfo) => {
 
 const useQA = () => {
     const QAInfo = collection(fireStore, 'QA')
-    return useQuery('qa', () => getQA(QAInfo))
+    return useQuery('qa', () => getQA(QAInfo), { suspense: true })
 }
 
 export default useQA

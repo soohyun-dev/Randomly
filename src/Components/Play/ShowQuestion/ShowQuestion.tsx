@@ -1,6 +1,7 @@
 import StopWatch from 'Components/StopWatch'
+import { chooseId } from 'features/folderSlice'
 import { playSlice } from 'features/playSlice'
-import { selectQuestions } from 'features/questionsSlice'
+import { useQuestion } from 'hooks'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -14,7 +15,8 @@ import {
 export default function ShowQuestion({ result }: { result: number[] | [] }) {
     const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([])
     const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([])
-    const questions = useSelector(selectQuestions)
+    const folderId = useSelector(chooseId)
+    const { data: questions } = useQuestion(folderId)
     const dispatch = useDispatch()
 
     /**
@@ -44,8 +46,6 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
         )
         setCorrectCnt(change)
     }
-
-    console.log('질문', result)
 
     return (
         <div>

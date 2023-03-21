@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import { useEffect, useState, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore'
-import { folderSlice } from 'features/folderSlice'
+import { useState, Suspense } from 'react'
+import { useSelector } from 'react-redux'
+import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
 import ManageUser from 'Components/ManageInterview/ManageUser'
@@ -11,8 +10,8 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
 import { getDateTime } from 'utils/GetTime'
-
 import { useFolder } from 'hooks'
+import Loading from 'Components/Loading'
 import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
@@ -135,19 +134,18 @@ export default function Manage() {
                 </ManageHeaderSection>
                 <PackageSection>
                     <PackageDiv>
-                        {isLoading
-                            ? ''
-                            : Object.keys(folders).map((v) => (
-                                  <PackageBox
-                                      onClick={() => {
-                                          setNowPackage(v)
-                                      }}
-                                  >
-                                      <PackageTitle>{folders[v].title}</PackageTitle>
-                                      <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
-                                      {renderDeleteBtn(v)}
-                                  </PackageBox>
-                              ))}
+                        {!isLoading &&
+                            Object.keys(folders).map((v) => (
+                                <PackageBox
+                                    onClick={() => {
+                                        setNowPackage(v)
+                                    }}
+                                >
+                                    <PackageTitle>{folders[v].title}</PackageTitle>
+                                    <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+                                    {renderDeleteBtn(v)}
+                                </PackageBox>
+                            ))}
                     </PackageDiv>
                 </PackageSection>
                 <PackageTitleDiv>
@@ -166,6 +164,7 @@ export default function Manage() {
                     ? user !== null && !isLoading && folders.length > 0 && <ManageQuestion />
                     : user !== null && <ManageUser />}
             </ErrorBoundary>
+
             <Footer />
         </>
     )

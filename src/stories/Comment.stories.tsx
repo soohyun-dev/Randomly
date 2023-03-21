@@ -5,9 +5,6 @@ import Comment from 'Components/Q&A/Comment'
 export default {
     title: 'Comment',
     component: Comment,
-    parameters: {
-        layout: 'fullscreen',
-    },
 } as ComponentMeta<typeof Comment>
 
 const comment: ComponentStory<typeof Comment> = (args) => {
