@@ -1,13 +1,10 @@
 import ShowMember from 'Components/Play/ShowMember'
 import { useEffect, useState } from 'react'
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { selectUser } from 'features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { folderSlice, chooseId, selectFolder } from 'features/folderSlice'
-import { questionsSlice, selectQuestions } from 'features/questionsSlice'
-import { playSlice, selectDistribution, selectOrderMemeber } from 'features/playSlice'
-import { memberSlice, selectMember } from 'features/memberSlice'
+import { chooseId } from 'features/folderSlice'
+import { playSlice, selectDistribution } from 'features/playSlice'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
 import getQuestionNums, { MakeNums } from 'utils/MakeNums'
@@ -16,7 +13,6 @@ import Nav from 'Components/Nav'
 import getEqualDistribution from 'utils/EqualDistribution'
 import { useFolder, useMember, useQuestion } from 'hooks'
 import { Data } from 'types/question'
-import { fireStore } from '../../firebase'
 import {
     CatagoryCheckInput,
     GuideToggle,
@@ -47,21 +43,11 @@ export default function PlayInterview() {
     const [isChecked, setIsChecked] = useState(false)
     const user = useSelector(selectUser)
     const folderId = useSelector(chooseId)
-    const member = useSelector(selectMember)
     const distribution = useSelector(selectDistribution)
+    const [orderMember, setOrderMember] = useState([])
     const { data: folders, isLoading: isFolderLoading } = useFolder(nowPackage)
     const { data: questions }: { data: Data[] } = useQuestion(folderId)
-    console.log(JSON.stringify(questions))
-    const { data: memberData, isLoading: isMemberLoading } = useMember(folderId)
-    const userInfo =
-        folderId === ''
-            ? collection(fireStore, `users/${user}/packages`)
-            : collection(fireStore, `users/${user}/packages/${folderId}/members`)
-
-    const questionInfo =
-        folderId === ''
-            ? collection(fireStore, `users/${user}/questions`)
-            : collection(fireStore, `users/${user}/packages/${folderId}/questions`)
+    const { data: member, isLoading: isMemberLoading } = useMember(folderId)
 
     /**
      * 질문의 각 인덱스를 팀원에게 shuffle해서 분배시킨다.
@@ -90,32 +76,14 @@ export default function PlayInterview() {
         alert('질문 분배가 완료되었습니다!')
     }
 
-    const getUsers = async () => {
-        const userData = await getDocs(userInfo)
-        dispatch(
-            memberSlice.actions.setMember({
-                members: userData.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                })),
-            })
-        )
-        console.log('멤버', member)
-
-        dispatch(
-            playSlice.actions.setOrderMember({
-                orderMember: Array.from({ length: member.length }, (_, idx) => idx),
-            })
-        )
+    const changePackage = () => {
+        dispatch(playSlice.actions.setChangeFolder())
+        setBool(false)
     }
 
     const shuffleName = () => {
         const newOrder = MakeNums(Object.keys(member).length)
-        dispatch(
-            playSlice.actions.setOrderMember({
-                orderMember: newOrder,
-            })
-        )
+        setOrderMember(newOrder)
 
         alert('순서 변경이 완료되었습니다!')
     }
@@ -135,8 +103,10 @@ export default function PlayInterview() {
             )
             setFirstRender(true)
         }
+        if (!isMemberLoading) {
+            setOrderMember(Array.from({ length: Object.keys(member).length }, (_, idx) => idx))
+        }
         if (user !== null && folderId !== '') {
-            getUsers()
             setNowPackage(nowPackage)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -160,6 +130,7 @@ export default function PlayInterview() {
                                 <PackageBox
                                     onClick={() => {
                                         setNowPackage(v)
+                                        changePackage()
                                     }}
                                 >
                                     <PackageTitle>{folders[v].title}</PackageTitle>
@@ -213,7 +184,13 @@ export default function PlayInterview() {
                                     <label htmlFor="repo">카테고리별 균등 분배</label>
                                     <CatagoryCheckInput type="checkbox" onChange={checkCatagory} />
                                 </div>
-                                <USER>{user === null ? '' : <ShowMember />}</USER>
+                                <USER>
+                                    {user === null && !isFolderLoading ? (
+                                        ''
+                                    ) : (
+                                        <ShowMember orderMember={orderMember} />
+                                    )}
+                                </USER>
                             </OrderContainer>
                         )}
                     </MainContainer>

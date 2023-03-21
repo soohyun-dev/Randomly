@@ -1,14 +1,8 @@
-import { selectFolder } from 'features/folderSlice'
-import { selectMember } from 'features/memberSlice'
-import {
-    playSlice,
-    selectCorrectCnt,
-    selectDistribution,
-    selectOrderMemeber,
-    selectResult,
-} from 'features/playSlice'
-import { useEffect, useId, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { chooseId } from 'features/folderSlice'
+import { selectCorrectCnt, selectDistribution, selectResult } from 'features/playSlice'
+import { useMember } from 'hooks'
+import { useId, useState } from 'react'
+import { useSelector } from 'react-redux'
 import ShowQuestion from '../ShowQuestion'
 import {
     ButtonContainer,
@@ -16,7 +10,6 @@ import {
     MemberTitle,
     NameContainer,
     NoticeText,
-    OpenButton,
     UpperLeft,
     UpperMiddle,
     UpperRight,
@@ -24,17 +17,13 @@ import {
 } from './ShowMember.styled'
 import { UserInfo } from './types'
 
-export default function ShowMember() {
+export default function ShowMember({ orderMember }) {
     const [open, setOpen] = useState<Array<boolean[] | boolean>>([false])
-    const member = useSelector(selectMember)
+    const folderId = useSelector(chooseId)
+    const { data: member, isLoading: isMemberLoading } = useMember(folderId)
     const result = useSelector(selectResult)
     const correctCnt = useSelector(selectCorrectCnt)
     const distribution = useSelector(selectDistribution)
-    const newOrderMember = useSelector(selectOrderMemeber)
-    const [orderMember, setOrderMember] = useState(
-        Array.from({ length: member.length }, (_, idx) => idx)
-    )
-    //   useSelector(selectDistribution);
     const uniqueId = useId()
 
     /**
@@ -68,51 +57,48 @@ export default function ShowMember() {
     //     return correct;
     //   };
 
-    useEffect(() => {
-        setOrderMember(newOrderMember)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [member, newOrderMember])
-
     return (
-        <>
-            {member.map((value: UserInfo, idx: number) => (
-                <UserContainer key={uniqueId}>
-                    <NameContainer>
-                        <UpperLeft>
-                            <MemberTitle>팀원명 : </MemberTitle>
-                            <MemberName>
-                                {orderMember.length === 0 || orderMember.length !== member.length
-                                    ? value.member
-                                    : member[orderMember[idx]].member}
-                            </MemberName>
-                        </UpperLeft>
-                        <UpperMiddle />
-                        <UpperRight>
-                            {/* <CorrectText> 맞은 갯수: {checkCorrect(idx)} 개</CorrectText> */}
-                        </UpperRight>
-                    </NameContainer>
-                    <ButtonContainer>
-                        {distribution ? (
-                            // (
-                            //     <OpenButton
-                            //         color={open[idx]}
-                            //         onClick={(e) => {
-                            //             openHandler(idx)
-                            //         }}
-                            //     >
-                            //         {open[idx] ? '질문 닫기' : '질문 열기'}
-                            //     </OpenButton>
-                            // )
-                            ''
-                        ) : (
-                            <NoticeText>질문 분배를 해주세요😋</NoticeText>
-                        )}
-                    </ButtonContainer>
+        <div>
+            {!isMemberLoading &&
+                member.map((value: UserInfo, idx: number) => (
+                    <UserContainer key={uniqueId}>
+                        <NameContainer>
+                            <UpperLeft>
+                                <MemberTitle>팀원명 : </MemberTitle>
+                                <MemberName>
+                                    {orderMember.length === 0 ||
+                                    orderMember.length !== member.length
+                                        ? value.member
+                                        : member[orderMember[idx]].member}
+                                </MemberName>
+                            </UpperLeft>
+                            <UpperMiddle />
+                            <UpperRight>
+                                {/* <CorrectText> 맞은 갯수: {checkCorrect(idx)} 개</CorrectText> */}
+                            </UpperRight>
+                        </NameContainer>
+                        <ButtonContainer>
+                            {distribution ? (
+                                // (
+                                //     <OpenButton
+                                //         color={open[idx]}
+                                //         onClick={(e) => {
+                                //             openHandler(idx)
+                                //         }}
+                                //     >
+                                //         {open[idx] ? '질문 닫기' : '질문 열기'}
+                                //     </OpenButton>
+                                // )
+                                ''
+                            ) : (
+                                <NoticeText>질문 분배를 해주세요😋</NoticeText>
+                            )}
+                        </ButtonContainer>
 
-                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                    {result.length !== 0 ? <ShowQuestion result={result[idx]} /> : ''}
-                </UserContainer>
-            ))}
-        </>
+                        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                        {result.length !== 0 ? <ShowQuestion result={result[idx]} /> : ''}
+                    </UserContainer>
+                ))}
+        </div>
     )
 }

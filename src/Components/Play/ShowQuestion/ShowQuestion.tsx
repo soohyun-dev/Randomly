@@ -16,9 +16,8 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
     const [correctCnt, setCorrectCnt] = useState<Array<boolean>>([])
     const [toggleQuestion, setToggleQuestion] = useState<Array<boolean>>([])
     const folderId = useSelector(chooseId)
-    const { data: questions } = useQuestion(folderId)
+    const { data: questions, isLoading: isQuestionsLoading } = useQuestion(folderId)
     const dispatch = useDispatch()
-
     /**
      * 각 질문을 보이게하거나 안보이게 할 수 있다.
      *
@@ -49,51 +48,54 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
 
     return (
         <div>
-            {result.map((v: number, idx: number) =>
-                toggleQuestion[result[idx]] ? (
-                    <QuestionText color={correctCnt[v]}>
-                        <QuestionBlock>
-                            <ShowBtn
-                                color={toggleQuestion[result[idx]]}
-                                onClick={() => {
-                                    toggleHandler(result[idx])
-                                }}
-                            >
-                                질문 가리기
-                            </ShowBtn>
-                        </QuestionBlock>
-                        <QuestionBlock>
-                            {idx + 1}. {questions[v].question}
-                        </QuestionBlock>
-                        <QuestionBlock>
-                            <CorrectBtn
-                                color={correctCnt[v]}
-                                onClick={(e) => {
-                                    correctHandler(v)
-                                }}
-                            >
-                                {correctCnt[v] ? '취소' : '맞음'}
-                            </CorrectBtn>
-                        </QuestionBlock>
-                        <StopWatch />
-                        <QuestionCatagoryLabel>{questions[v].catagory}</QuestionCatagoryLabel>{' '}
-                    </QuestionText>
-                ) : (
-                    <QuestionText color={correctCnt[v]}>
-                        <QuestionBlock>
-                            <ShowBtn
-                                color={toggleQuestion[result[idx]]}
-                                onClick={(e) => {
-                                    toggleHandler(result[idx])
-                                }}
-                            >
-                                질문 보기
-                            </ShowBtn>
-                        </QuestionBlock>
-                        <QuestionBlock>{idx + 1}.</QuestionBlock>
-                    </QuestionText>
-                )
-            )}
+            {!isQuestionsLoading &&
+                result.map((v: number, idx: number) =>
+                    toggleQuestion[result[idx]] ? (
+                        <QuestionText color={correctCnt[v]}>
+                            <QuestionBlock>
+                                <ShowBtn
+                                    color={toggleQuestion[result[idx]]}
+                                    onClick={() => {
+                                        toggleHandler(result[idx])
+                                    }}
+                                >
+                                    질문 가리기
+                                </ShowBtn>
+                            </QuestionBlock>
+                            <QuestionBlock>
+                                {idx + 1}. {questions[v].question}
+                            </QuestionBlock>
+                            <QuestionBlock>
+                                <CorrectBtn
+                                    color={correctCnt[v]}
+                                    onClick={(e) => {
+                                        correctHandler(v)
+                                    }}
+                                >
+                                    {correctCnt[v] ? '취소' : '맞음'}
+                                </CorrectBtn>
+                            </QuestionBlock>
+                            <StopWatch />
+                            <QuestionCatagoryLabel>
+                                {questions[v].catagory}
+                            </QuestionCatagoryLabel>{' '}
+                        </QuestionText>
+                    ) : (
+                        <QuestionText color={correctCnt[v]}>
+                            <QuestionBlock>
+                                <ShowBtn
+                                    color={toggleQuestion[result[idx]]}
+                                    onClick={(e) => {
+                                        toggleHandler(result[idx])
+                                    }}
+                                >
+                                    질문 보기
+                                </ShowBtn>
+                            </QuestionBlock>
+                            <QuestionBlock>{idx + 1}.</QuestionBlock>
+                        </QuestionText>
+                    )
+                )}
         </div>
     )
 }

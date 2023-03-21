@@ -6,7 +6,6 @@ export const playSlice = createSlice({
         distribution: false,
         result: [],
         correctCnt: [],
-        orderMember: [],
     },
     reducers: {
         setResult: (state, action) => {
@@ -14,9 +13,6 @@ export const playSlice = createSlice({
         },
         setCorrectCnt: (state, action) => {
             state.correctCnt = action.payload.correctCnt
-        },
-        setOrderMember: (state, action) => {
-            state.orderMember = action.payload.orderMember
         },
         setDistribution: (state, action) => {
             state.result = action.payload.result
@@ -26,18 +22,15 @@ export const playSlice = createSlice({
         setChangeFolder: (state) => {
             state.result = []
             state.correctCnt = []
-            state.orderMember = []
             state.distribution = false
         },
     },
 })
 
-export const { setResult, setCorrectCnt, setOrderMember, setDistribution, setChangeFolder } =
-    playSlice.actions
+export const { setResult, setCorrectCnt, setDistribution, setChangeFolder } = playSlice.actions
 
 export const selectResult = (state) => state.play.result
 export const selectCorrectCnt = (state) => state.play.correctCnt
-export const selectOrderMemeber = (state) => state.play.orderMember
 export const selectDistribution = (state) => state.play.distribution
 
 export default playSlice.reducer
