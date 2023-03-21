@@ -16,8 +16,19 @@ const getQuestion = async (questionsInfo) => {
 
 const useQuestion = (folderId) => {
     const user = useSelector(selectUser)
-    const questionInfo = collection(fireStore, `users/${user}/packages/${folderId}/questions`)
-    return useQuery(`questions${folderId}`, () => getQuestion(questionInfo))
+    const queryEnabled = Boolean(user && folderId)
+    const questionInfo = queryEnabled
+        ? collection(fireStore, `users/${user}/packages/${folderId}/questions`)
+        : null
+    const question = useQuery(
+        `questions${folderId}`,
+        () => (folderId ? getQuestion(questionInfo) : []),
+        {
+            enabled: !!folderId,
+        }
+    )
+
+    return question.data !== undefined ? question : { isLoading: true, isError: false, data: [] }
 }
 
 export default useQuestion

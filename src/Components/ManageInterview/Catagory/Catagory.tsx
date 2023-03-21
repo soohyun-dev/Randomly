@@ -4,6 +4,7 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
+import { useFolder } from 'hooks'
 import {
     CatagoryBox,
     CatagoryButton,
@@ -14,10 +15,10 @@ import {
 } from './Catagory.styled'
 import { fireStore } from '../../../firebase'
 
-export default function Catagory() {
+export default function Catagory({ nowPackage }) {
     const user = useSelector(selectUser)
     const folderId = useSelector(chooseId)
-    const folders = useSelector(selectFolder)
+    const { data: folders, isLoading: isFolderLoading } = useFolder(nowPackage)
     const chooseCatagory = useSelector(selectSelectedCatagory)
     const choose = useSelector(chooseFolder)
     const dispatch = useDispatch()
@@ -106,16 +107,17 @@ export default function Catagory() {
 
     return (
         <CatagoryBox>
-            {folders[choose].catagory.map((title) => (
-                <CatagoryButton
-                    value={title}
-                    select={title === chooseCatagory ? 'choose' : 'no'}
-                    onClick={clickCatagory}
-                >
-                    {title}
-                    {title !== '분류없음' ? renderDeleteBtn(title) : ''}
-                </CatagoryButton>
-            ))}
+            {!isFolderLoading &&
+                folders[choose].catagory.map((title) => (
+                    <CatagoryButton
+                        value={title}
+                        select={title === chooseCatagory ? 'choose' : 'no'}
+                        onClick={clickCatagory}
+                    >
+                        {title}
+                        {title !== '분류없음' ? renderDeleteBtn(title) : ''}
+                    </CatagoryButton>
+                ))}
 
             {updateBtn ? '' : renderBtn()}
 

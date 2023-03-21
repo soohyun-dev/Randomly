@@ -21,7 +21,7 @@ import {
 import { NewData } from './types'
 import Catagory from '../Catagory'
 
-export default function ManageQuestion() {
+export default function ManageQuestion({ nowPackage }) {
     const [newQuestion, setNewQuestion] = useState<string>('')
     const [preAddQuestion, setPreAddQuestions] = useState<string>('')
     const [preAddIdx, setPreAddIdx] = useState<number>()
@@ -85,7 +85,7 @@ export default function ManageQuestion() {
         <QuestionListContainer>
             <div>
                 <div>
-                    <Catagory />
+                    <Catagory nowPackage={nowPackage} />
                     <QuestionInput
                         type="text"
                         value={newQuestion}

@@ -14,6 +14,28 @@ const persistConfig = {
     storage,
 }
 
+const folderMiddleware = (store) => (next) => (action) => {
+    if (action.type === 'folders/setFolder') {
+        const folders = action.payload.folders.map((folder) => {
+            return {
+                ...folder,
+                time: new Date(folder.time.seconds * 1000 + folder.time.nanoseconds / 1000000),
+            }
+        })
+
+        const newAction = {
+            ...action,
+            payload: {
+                folders,
+            },
+        }
+
+        return next(newAction)
+    }
+
+    return next(action)
+}
+
 const reducer = combineReducers({
     user: userReducer,
     theme: themeReducer,
@@ -29,6 +51,7 @@ export type RootState = ReturnType<typeof rootReducer>
 
 const store = configureStore({
     reducer: rootReducer,
+    middleware: [folderMiddleware],
 })
 
 export default store

@@ -16,8 +16,14 @@ const getMember = async (questionsInfo) => {
 
 const useMember = (folderId) => {
     const user = useSelector(selectUser)
-    const memberInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
-    return useQuery(`members${folderId}`, () => getMember(memberInfo))
+    const queryEnabled = Boolean(user && folderId)
+    const memberInfo = queryEnabled
+        ? collection(fireStore, `users/${user}/packages/${folderId}/members`)
+        : null
+    const member = useQuery(`members${folderId}`, () => (folderId ? getMember(memberInfo) : []), {
+        enabled: !!folderId,
+    })
+    return member.data !== undefined ? member : { isLoading: true, isError: false, data: [] }
 }
 
 export default useMember

@@ -51,7 +51,7 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
             {!isQuestionsLoading &&
                 result.map((v: number, idx: number) =>
                     toggleQuestion[result[idx]] ? (
-                        <QuestionText color={correctCnt[v]}>
+                        <QuestionText key={`result-${v}`} color={correctCnt[v]}>
                             <QuestionBlock>
                                 <ShowBtn
                                     color={toggleQuestion[result[idx]]}
@@ -81,7 +81,7 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
                             </QuestionCatagoryLabel>{' '}
                         </QuestionText>
                     ) : (
-                        <QuestionText color={correctCnt[v]}>
+                        <QuestionText key={`result-${v}`} color={correctCnt[v]}>
                             <QuestionBlock>
                                 <ShowBtn
                                     color={toggleQuestion[result[idx]]}

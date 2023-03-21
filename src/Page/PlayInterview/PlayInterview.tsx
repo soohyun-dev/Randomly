@@ -103,7 +103,7 @@ export default function PlayInterview() {
             )
             setFirstRender(true)
         }
-        if (!isMemberLoading) {
+        if (!isMemberLoading && user !== null) {
             setOrderMember(Array.from({ length: Object.keys(member).length }, (_, idx) => idx))
         }
         if (user !== null && folderId !== '') {
@@ -126,8 +126,9 @@ export default function PlayInterview() {
                 <PackageSection>
                     <PackageDiv>
                         {!isFolderLoading &&
-                            Object.keys(folders).map((v) => (
+                            Object.keys(folders).map((v, idx) => (
                                 <PackageBox
+                                    key={folders[v].id}
                                     onClick={() => {
                                         setNowPackage(v)
                                         changePackage()
