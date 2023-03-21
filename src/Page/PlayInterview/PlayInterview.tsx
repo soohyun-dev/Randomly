@@ -15,6 +15,7 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import getEqualDistribution from 'utils/EqualDistribution'
 import { useFolder, useMember, useQuestion } from 'hooks'
+import { Data } from 'types/question'
 import { fireStore } from '../../firebase'
 import {
     CatagoryCheckInput,
@@ -37,19 +38,6 @@ import {
     Title,
     USER,
 } from './PlayInterview.styled'
-
-type Time = {
-    seconds: number
-    nanoseconds: number
-}
-
-type Data = {
-    question: string
-    catagory: string
-    time: Time
-    idx: number
-    id: string
-}
 
 export default function PlayInterview() {
     const dispatch = useDispatch()

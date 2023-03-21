@@ -5,24 +5,8 @@
  * @returns 카테고리별로 균등 분배한 배열
  */
 
+import { Data } from 'types/question'
 import { shuffleArray } from './MakeNums'
-
-interface Question {
-    catagory: string
-}
-
-type Time = {
-    seconds: number
-    nanoseconds: number
-}
-
-type Data = {
-    question: string
-    catagory: string
-    time: Time
-    idx: number
-    id: string
-}
 
 export default function getEqualDistribution(memberLength: number, questions: Data[]) {
     const Catagory: Record<string, number[]> = {}
