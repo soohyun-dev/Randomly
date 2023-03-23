@@ -98,11 +98,6 @@ export default function Catagory({ nowPackage }) {
                 catagoryList: folders[choose].catagory,
             })
         )
-        dispatch(
-            questionsSlice.actions.setSelectedCatagory({
-                selectedCatagory: '분류없음',
-            })
-        )
     }, [folders, newCatagory, choose, dispatch, catagory])
 
     return (
