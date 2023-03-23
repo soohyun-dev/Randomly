@@ -51,6 +51,12 @@ export default function Catagory({ nowPackage }) {
         alert(`${target} 카테고리가 삭제되었습니다.`)
     }
 
+    const enterSubmit = (e) => {
+        if (e.key === 'Enter') {
+            addCatagory()
+        }
+    }
+
     const renderBtn = () => {
         if (catagory.length >= 7) {
             return ''
@@ -63,6 +69,7 @@ export default function Catagory({ nowPackage }) {
                         value={newCatagory}
                         placeholder="추가할 카테고리를 입력해주세요."
                         onChange={(e) => setNewCatagory(e.target.value)}
+                        onKeyDown={(e) => enterSubmit(e)}
                     />
                     <CatagoryPlusButton onClick={addCatagory}>추가</CatagoryPlusButton>
                     <CatagoryPlusButton onClick={() => setPlusBtn(false)}>취소</CatagoryPlusButton>
