@@ -126,7 +126,7 @@ export default function PlayInterview() {
                 <PackageSection>
                     <PackageDiv>
                         {!isFolderLoading &&
-                            Object.keys(folders).map((v, idx) => (
+                            Object.keys(folders).map((v) => (
                                 <PackageBox
                                     key={folders[v].id}
                                     onClick={() => {

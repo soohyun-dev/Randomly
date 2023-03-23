@@ -21,21 +21,20 @@ const useFolder = (nowPackage) => {
     const user = useSelector(selectUser)
     const folderInfo = collection(fireStore, `users/${user}/packages`)
     const folder = useQuery(`${user}folders`, () => getFolder(folderInfo))
-    useEffect(() => {
-        if (user !== null && folder.data !== undefined && folder.data.length >= 1) {
-            dispatch(
-                folderSlice.actions.choose({
-                    choose: +nowPackage,
-                    id: folder.data[nowPackage].id,
-                })
-            )
-            dispatch(
-                folderSlice.actions.setFolder({
-                    folders: folder.data,
-                })
-            )
-        }
-    }, [user, folder.data, nowPackage, dispatch])
+
+    if (user !== null && folder.data !== undefined && folder.data.length >= 1) {
+        dispatch(
+            folderSlice.actions.choose({
+                choose: +nowPackage,
+                id: folder.data[nowPackage].id,
+            })
+        )
+        dispatch(
+            folderSlice.actions.setFolder({
+                folders: folder.data,
+            })
+        )
+    }
 
     return folder
 }

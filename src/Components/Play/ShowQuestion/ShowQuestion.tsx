@@ -18,6 +18,7 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
     const folderId = useSelector(chooseId)
     const { data: questions, isLoading: isQuestionsLoading } = useQuestion(folderId)
     const dispatch = useDispatch()
+    console.log(questions)
     /**
      * 각 질문을 보이게하거나 안보이게 할 수 있다.
      *

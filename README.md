@@ -312,22 +312,19 @@
 
 # 🏃‍♂️ 프로젝트 진행과정
 
--   [📝 진행과정 기록 1](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
--   [📝 진행과정 기록 2](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
--   [📝 진행과정 기록 3](https://bmy1320.tistory.com/entry/dd)
--   [📝 진행과정 기록 4](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230217)
-
-<br><br><br>
-
-# 🎰 기능 소개
-
-개발 완성 및 예정 기능 목록 : [기능 목록](https://github.com/soohyun-dev/Randomly/wiki/%EB%A7%8C%EB%93%A0-%EA%B8%B0%EB%8A%A5-%EB%AA%A9%EB%A1%9D)
+-   [📝 진행과정 기록 ](https://bmy1320.tistory.com/category/%EC%84%B1%EC%9E%A5%EA%B8%B0%EB%A1%9D/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 
 <br><br><br>
 
 # 📜 개발 기록
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
+
+<br><br><br>
+
+# 🎰 기능 소개
+
+개발 완성 및 예정 기능 목록 : [기능 목록](https://github.com/soohyun-dev/Randomly/wiki/%EB%A7%8C%EB%93%A0-%EA%B8%B0%EB%8A%A5-%EB%AA%A9%EB%A1%9D)
 
 <br><br><br>
 
