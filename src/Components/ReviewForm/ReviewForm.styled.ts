@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-export const ReviewSection = styled.section`
+export const ReviewFormSection = styled.section`
     display: flex;
     justify-content: center;
 `
 
-export const ReviewTitle = styled.p`
+export const ReviewFormTitle = styled.p`
     font-size: 24px;
     font-weight: 500;
 `

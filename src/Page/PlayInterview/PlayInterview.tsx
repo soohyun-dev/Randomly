@@ -13,7 +13,7 @@ import Nav from 'Components/Nav'
 import getEqualDistribution from 'utils/EqualDistribution'
 import { useFolder, useMember, useQuestion } from 'hooks'
 import { Data } from 'types/question'
-import Review from 'Components/Review'
+import ReviewForm from 'Components/ReviewForm'
 import {
     CatagoryCheckInput,
     GuideToggle,
@@ -197,7 +197,7 @@ export default function PlayInterview() {
                         )}
                     </MainContainer>
                 </section>
-                <Review />
+                <ReviewForm />
                 <Footer />
             </ErrorBoundary>
         </>
