@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import GlobalStyle from 'styles/GlobalStyle'
 import Plan from 'Page/Plan'
-import { useEffect } from 'react'
+import Review from 'Page/Review'
 import ScrollToTop from './utils/ScrollToTop'
 import Mypage from './Page/MyPage'
 import WriteNotice from './Page/Notice/WriteNotice'
@@ -35,6 +35,7 @@ export default function App(): JSX.Element {
                 <Route path="/NoticePosting/:order" element={<NoticePosting />} />
                 <Route path="/QAposting/:order" element={<QAPosting />} />
                 <Route path="/Plan" element={<Plan />} />
+                <Route path="/Review" element={<Review />} />
             </Routes>
         </>
     )

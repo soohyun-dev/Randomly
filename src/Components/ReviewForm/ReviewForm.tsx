@@ -1,5 +1,18 @@
+import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
+import { getDateTime } from 'utils/GetTime'
+import { fireStore } from '../../firebase'
 import { ReviewFormSection, ReviewFormTitle } from './ReviewForm.styled'
+
+interface NewData {
+    idx?: number
+    memberName?: string
+    writerName?: string
+    selfIntroAdvise?: string
+    answerAdivse?: string
+    time?: Date
+    date?: string
+}
 
 export default function ReviewForm() {
     const [memberName, setMemberName] = useState('')
@@ -7,7 +20,37 @@ export default function ReviewForm() {
     const [answerAdivse, setAnswerAdivse] = useState('')
     const [writerName, setWriterName] = useState('익명')
 
+    const reviewDatabaseInfo = collection(fireStore, 'review')
+
+    /**
+     *  팀원 평가 추가
+     *
+     * @param {}
+     */
+    const addReview = async () => {
+        const newData: NewData = {}
+        let docId = ''
+        newData.memberName = memberName
+        newData.writerName = writerName
+        newData.selfIntroAdvise = selfIntroAdvise
+        newData.answerAdivse = answerAdivse
+        newData.date = getDateTime()
+        newData.time = new Date()
+
+        await addDoc(reviewDatabaseInfo, newData).then((doc) => {
+            docId = doc.id
+        })
+        alert('리뷰가 추가되었습니다.')
+        setMemberName('')
+        setSelfIntroAdvise('')
+        setAnswerAdivse('')
+        setWriterName('')
+    }
+
     const submitHandler = () => {
+        if (window.confirm('리뷰를 추가하시겠습니까?')) {
+            addReview()
+        }
         return null
     }
 

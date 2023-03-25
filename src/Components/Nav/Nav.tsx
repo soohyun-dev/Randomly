@@ -65,20 +65,28 @@ export default function Nav(props) {
                 </div>
                 <div>
                     <LinkText
+                        to="/Review"
+                        scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
+                    >
+                        <MenuText>REVIEW</MenuText>
+                    </LinkText>
+                </div>
+                <div>
+                    <LinkText
                         to="/Manage"
                         scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
                     >
                         <MenuText>MANAGE</MenuText>
                     </LinkText>
                 </div>
-                <div>
+                {/* <div>
                     <LinkText
                         to="/Plan"
                         scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
                     >
                         <MenuText>PLAN</MenuText>
                     </LinkText>
-                </div>
+                </div> */}
                 <div>
                     <LinkText
                         to="/QAPage"
