@@ -2,6 +2,7 @@ import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import ReviewPosting from 'Components/Review/ReviewPosting'
 import useReview from 'hooks/useReview'
+import { useEffect, useState } from 'react'
 import {
     ReviewContent,
     ReviewPostingListSection,
@@ -14,7 +15,24 @@ import {
 
 export default function Review() {
     const { data: reviews, isLoading: isReviewLoading } = useReview()
-    console.log(reviews)
+    const [searchWord, setSearchWord] = useState('')
+    const [searchResult, setSearchResult] = useState(reviews)
+
+    const searchHandler = () => {
+        const orderIdx = Object.keys(reviews).filter((v) => {
+            return reviews[v].memberName === searchWord
+        })
+        const result = orderIdx.map((v) => {
+            return reviews[v]
+        })
+
+        setSearchResult(result)
+    }
+
+    useEffect(() => {
+        setSearchResult(reviews)
+    }, [reviews])
+
     return (
         <>
             <Nav />
@@ -22,13 +40,17 @@ export default function Review() {
                 <ReviewContent>
                     <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
                     <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>
-                    <ReviewSearchInput placeholder="이름을 입력하세요." />
-                    <ReviewSearchButton>검색</ReviewSearchButton>
+                    <ReviewSearchInput
+                        onChange={(e) => setSearchWord(e.target.value)}
+                        value={searchWord}
+                        placeholder="이름을 입력하세요."
+                    />
+                    <ReviewSearchButton onClick={() => searchHandler()}>검색</ReviewSearchButton>
                 </ReviewContent>
             </ReviewSection>
             <ReviewPostingListSection>
                 {!isReviewLoading &&
-                    Object.keys(reviews).map((v) => (
+                    Object.keys(searchResult).map((v) => (
                         <ReviewPosting
                             id={reviews[v].idx}
                             memberName={reviews[v].memberName}
