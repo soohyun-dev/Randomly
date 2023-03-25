@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -11,6 +11,7 @@ import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
 import { getDateTime } from 'utils/GetTime'
 import { useFolder } from 'hooks'
+import Loading from 'Components/Loading'
 import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
@@ -159,11 +160,13 @@ export default function Manage() {
                         <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
                     </ManageAccessSection>
                 )}
-                {page === 'question'
-                    ? user !== null &&
-                      !isLoading &&
-                      folders.length > 0 && <ManageQuestion nowPackage={nowPackage} />
-                    : user !== null && <ManageUser />}
+                <Suspense fallback={<Loading />}>
+                    {page === 'question'
+                        ? user !== null &&
+                          !isLoading &&
+                          folders.length > 0 && <ManageQuestion nowPackage={nowPackage} />
+                        : user !== null && <ManageUser />}
+                </Suspense>
             </ErrorBoundary>
 
             <Footer />
