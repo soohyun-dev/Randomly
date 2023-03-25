@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { getDateTime } from 'utils/GetTime'
-import { fireStore } from '../../firebase'
+import { fireStore } from '../../../firebase'
 import { ReviewFormSection, ReviewFormTitle } from './ReviewForm.styled'
 
 interface NewData {
@@ -9,7 +9,7 @@ interface NewData {
     memberName?: string
     writerName?: string
     selfIntroAdvise?: string
-    answerAdivse?: string
+    answerAdvise?: string
     time?: Date
     date?: string
 }
@@ -17,7 +17,7 @@ interface NewData {
 export default function ReviewForm() {
     const [memberName, setMemberName] = useState('')
     const [selfIntroAdvise, setSelfIntroAdvise] = useState('')
-    const [answerAdivse, setAnswerAdivse] = useState('')
+    const [answerAdvise, setAnswerAdvise] = useState('')
     const [writerName, setWriterName] = useState('익명')
 
     const reviewDatabaseInfo = collection(fireStore, 'review')
@@ -33,7 +33,7 @@ export default function ReviewForm() {
         newData.memberName = memberName
         newData.writerName = writerName
         newData.selfIntroAdvise = selfIntroAdvise
-        newData.answerAdivse = answerAdivse
+        newData.answerAdvise = answerAdvise
         newData.date = getDateTime()
         newData.time = new Date()
 
@@ -43,8 +43,8 @@ export default function ReviewForm() {
         alert('리뷰가 추가되었습니다.')
         setMemberName('')
         setSelfIntroAdvise('')
-        setAnswerAdivse('')
-        setWriterName('')
+        setAnswerAdvise('')
+        setWriterName('익명')
     }
 
     const submitHandler = () => {
@@ -74,8 +74,8 @@ export default function ReviewForm() {
                 </div>
                 <div>
                     <textarea
-                        onChange={(e) => setAnswerAdivse(e.target.value)}
-                        value={answerAdivse}
+                        onChange={(e) => setAnswerAdvise(e.target.value)}
+                        value={answerAdvise}
                         placeholder="질문 답변 Confirm"
                     />
                 </div>
@@ -87,7 +87,7 @@ export default function ReviewForm() {
                     />
                 </div>
                 <div>
-                    <button onClick={() => submitHandler()}>보내기</button>
+                    <button onClick={() => submitHandler()}>평가 제출</button>
                 </div>
             </div>
         </ReviewFormSection>

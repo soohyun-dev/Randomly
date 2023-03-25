@@ -13,7 +13,7 @@ import Nav from 'Components/Nav'
 import getEqualDistribution from 'utils/EqualDistribution'
 import { useFolder, useMember, useQuestion } from 'hooks'
 import { Data } from 'types/question'
-import ReviewForm from 'Components/ReviewForm'
+import ReviewForm from 'Components/Review/ReviewForm'
 import {
     CatagoryCheckInput,
     GuideToggle,
