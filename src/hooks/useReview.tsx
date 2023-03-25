@@ -16,7 +16,7 @@ const useReview = () => {
     const reviewInfo = collection(fireStore, `review`)
     const review = useQuery(`review`, () => getReview(reviewInfo))
 
-    return review
+    return review.data !== undefined ? review : { isLoading: true, isError: false, data: [] }
 }
 
 export default useReview

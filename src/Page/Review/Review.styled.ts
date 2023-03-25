@@ -22,16 +22,16 @@ export const ReviewTitleContent = styled.p`
 
 export const ReviewSearchInput = styled.input`
     margin: 1em 0;
-    width: 20em;
-    height: 3em;
+    width: 15em;
+    height: 2em;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 20px;
     padding: 0 1em;
 `
 
 export const ReviewSearchButton = styled.button`
     width: 5em;
-    height: 3em;
+    height: 2.5em;
     margin: 0 1em;
     border-radius: 5px;
 `

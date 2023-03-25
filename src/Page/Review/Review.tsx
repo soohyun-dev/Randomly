@@ -1,8 +1,11 @@
 import Footer from 'Components/Footer'
+import Loading from 'Components/Loading'
 import Nav from 'Components/Nav'
 import ReviewPosting from 'Components/Review/ReviewPosting'
 import useReview from 'hooks/useReview'
-import { useEffect, useState } from 'react'
+import ErrorPage from 'Page/Error'
+import { Suspense, useEffect, useState } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import {
     ReviewContent,
     ReviewPostingListSection,
@@ -29,6 +32,12 @@ export default function Review() {
         setSearchResult(result)
     }
 
+    const enterSubmit = (e) => {
+        if (e.key === 'Enter') {
+            searchHandler()
+        }
+    }
+
     useEffect(() => {
         setSearchResult(reviews)
     }, [reviews])
@@ -36,31 +45,38 @@ export default function Review() {
     return (
         <>
             <Nav />
-            <ReviewSection>
-                <ReviewContent>
-                    <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
-                    <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>
-                    <ReviewSearchInput
-                        onChange={(e) => setSearchWord(e.target.value)}
-                        value={searchWord}
-                        placeholder="이름을 입력하세요."
-                    />
-                    <ReviewSearchButton onClick={() => searchHandler()}>검색</ReviewSearchButton>
-                </ReviewContent>
-            </ReviewSection>
-            <ReviewPostingListSection>
-                {!isReviewLoading &&
-                    Object.keys(searchResult).map((v) => (
-                        <ReviewPosting
-                            id={reviews[v].idx}
-                            memberName={reviews[v].memberName}
-                            selfIntroAdvise={reviews[v].selfIntroAdvise}
-                            answerAdvise={reviews[v].answerAdvise}
-                            writerName={reviews[v].writerName}
-                            date={reviews[v].date}
+            <ErrorBoundary fallback={<ErrorPage />}>
+                <ReviewSection>
+                    <ReviewContent>
+                        <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
+                        <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>
+                        <ReviewSearchInput
+                            onChange={(e) => setSearchWord(e.target.value)}
+                            value={searchWord}
+                            placeholder="이름을 입력하세요."
+                            onKeyDown={enterSubmit}
                         />
-                    ))}
-            </ReviewPostingListSection>
+                        <ReviewSearchButton onClick={() => searchHandler()}>
+                            검색
+                        </ReviewSearchButton>
+                    </ReviewContent>
+                </ReviewSection>
+                <Suspense fallback={<Loading />}>
+                    <ReviewPostingListSection>
+                        {!isReviewLoading &&
+                            Object.keys(searchResult).map((v) => (
+                                <ReviewPosting
+                                    id={searchResult[v].idx}
+                                    memberName={searchResult[v].memberName}
+                                    selfIntroAdvise={searchResult[v].selfIntroAdvise}
+                                    answerAdvise={searchResult[v].answerAdvise}
+                                    writerName={searchResult[v].writerName}
+                                    date={searchResult[v].date}
+                                />
+                            ))}
+                    </ReviewPostingListSection>
+                </Suspense>
+            </ErrorBoundary>
             <Footer />
         </>
     )
