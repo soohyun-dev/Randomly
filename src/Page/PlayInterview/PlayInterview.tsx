@@ -1,5 +1,5 @@
 import ShowMember from 'Components/Play/ShowMember'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { selectUser } from 'features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -14,6 +14,7 @@ import getEqualDistribution from 'utils/EqualDistribution'
 import { useFolder, useMember, useQuestion } from 'hooks'
 import { Data } from 'types/question'
 import ReviewForm from 'Components/Review/ReviewForm'
+import Loading from 'Components/Loading'
 import {
     CatagoryCheckInput,
     GuideToggle,
@@ -190,14 +191,20 @@ export default function PlayInterview() {
                                     {user === null && !isFolderLoading ? (
                                         ''
                                     ) : (
-                                        <ShowMember orderMember={orderMember} />
+                                        <ErrorBoundary fallback={<ErrorPage />}>
+                                            <Suspense fallback={<Loading />}>
+                                                <ShowMember orderMember={orderMember} />{' '}
+                                            </Suspense>
+                                        </ErrorBoundary>
                                     )}
                                 </USER>
                             </OrderContainer>
                         )}
                     </MainContainer>
                 </section>
+
                 <ReviewForm />
+
                 <Footer />
             </ErrorBoundary>
         </>

@@ -46,34 +46,33 @@ export default function Review() {
         <>
             <Nav />
             <ErrorBoundary fallback={<ErrorPage />}>
-                <ReviewSection>
-                    <ReviewContent>
-                        <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
-                        <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>
-                        <ReviewSearchInput
-                            onChange={(e) => setSearchWord(e.target.value)}
-                            value={searchWord}
-                            placeholder="이름을 입력하세요."
-                            onKeyDown={enterSubmit}
-                        />
-                        <ReviewSearchButton onClick={() => searchHandler()}>
-                            검색
-                        </ReviewSearchButton>
-                    </ReviewContent>
-                </ReviewSection>
                 <Suspense fallback={<Loading />}>
+                    <ReviewSection>
+                        <ReviewContent>
+                            <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
+                            <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>
+                            <ReviewSearchInput
+                                onChange={(e) => setSearchWord(e.target.value)}
+                                value={searchWord}
+                                placeholder="이름을 입력하세요."
+                                onKeyDown={enterSubmit}
+                            />
+                            <ReviewSearchButton onClick={() => searchHandler()}>
+                                검색
+                            </ReviewSearchButton>
+                        </ReviewContent>
+                    </ReviewSection>
                     <ReviewPostingListSection>
-                        {!isReviewLoading &&
-                            Object.keys(searchResult).map((v) => (
-                                <ReviewPosting
-                                    id={searchResult[v].idx}
-                                    memberName={searchResult[v].memberName}
-                                    selfIntroAdvise={searchResult[v].selfIntroAdvise}
-                                    answerAdvise={searchResult[v].answerAdvise}
-                                    writerName={searchResult[v].writerName}
-                                    date={searchResult[v].date}
-                                />
-                            ))}
+                        {Object.keys(searchResult).map((v) => (
+                            <ReviewPosting
+                                id={searchResult[v].idx}
+                                memberName={searchResult[v].memberName}
+                                selfIntroAdvise={searchResult[v].selfIntroAdvise}
+                                answerAdvise={searchResult[v].answerAdvise}
+                                writerName={searchResult[v].writerName}
+                                date={searchResult[v].date}
+                            />
+                        ))}
                     </ReviewPostingListSection>
                 </Suspense>
             </ErrorBoundary>
