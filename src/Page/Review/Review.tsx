@@ -1,6 +1,7 @@
 import Footer from 'Components/Footer'
 import Loading from 'Components/Loading'
 import Nav from 'Components/Nav'
+import ReviewDetail from 'Components/Review/ReviewDetail'
 import ReviewPosting from 'Components/Review/ReviewPosting'
 import useReview from 'hooks/useReview'
 import ErrorPage from 'Page/Error'
@@ -20,6 +21,8 @@ export default function Review() {
     const { data: reviews, isLoading: isReviewLoading } = useReview()
     const [searchWord, setSearchWord] = useState('')
     const [searchResult, setSearchResult] = useState(reviews)
+    const [modalOpen, setModalOpen] = useState(false)
+    const [showData, setShowData] = useState({})
 
     const searchHandler = () => {
         const orderIdx = Object.keys(reviews).filter((v) => {
@@ -38,9 +41,14 @@ export default function Review() {
         }
     }
 
+    const showModal = (posting) => {
+        setShowData(posting)
+        setModalOpen(true)
+    }
+
     useEffect(() => {
         setSearchResult(reviews)
-    }, [reviews])
+    }, [reviews, modalOpen])
 
     return (
         <>
@@ -65,14 +73,17 @@ export default function Review() {
                     <ReviewPostingListSection>
                         {Object.keys(searchResult).map((v) => (
                             <ReviewPosting
-                                id={searchResult[v].idx}
+                                key={searchResult[v].id}
+                                id={searchResult[v].id}
                                 memberName={searchResult[v].memberName}
                                 selfIntroAdvise={searchResult[v].selfIntroAdvise}
                                 answerAdvise={searchResult[v].answerAdvise}
                                 writerName={searchResult[v].writerName}
                                 date={searchResult[v].date}
+                                onClick={() => showModal(searchResult[v])}
                             />
                         ))}
+                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
                     </ReviewPostingListSection>
                 </Suspense>
             </ErrorBoundary>

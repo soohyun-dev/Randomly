@@ -49,3 +49,13 @@ export const WriterContainer = styled.div`
     text-align: right;
     height: 1em;
 `
+
+export const ReviewPostingButton = styled.button`
+    border: none;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+    &:hover {
+        cursor: pointer;
+        opacity: 90%;
+    }
+`

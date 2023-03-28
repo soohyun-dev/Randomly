@@ -4,6 +4,7 @@ import {
     DateParagraph,
     IntreviewerNameParagraph,
     NameContainter,
+    ReviewPostingButton,
     ReviewPostingContent,
     SelfIntroAdviseContainer,
     SelfIntroAdviseParagraph,
@@ -17,7 +18,12 @@ export default function ReviewPosting({
     answerAdvise,
     writerName,
     date,
+    onClick,
 }) {
+    const clickHandler = () => {
+        onClick()
+    }
+
     return (
         <ReviewPostingContent>
             <NameContainter>
@@ -35,6 +41,7 @@ export default function ReviewPosting({
             <WriterContainer>
                 <p>평가자: {writerName}</p>
             </WriterContainer>
+            <ReviewPostingButton onClick={() => clickHandler()}>상세보기</ReviewPostingButton>
         </ReviewPostingContent>
     )
 }
