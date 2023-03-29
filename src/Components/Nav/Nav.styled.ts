@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 
 interface Scroll {
     scroll: string
+    isModalOpen?: boolean
 }
 
 export const TopHeader = styled.header<Scroll>`
     width: 100%;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 500;
     display: grid;
     grid-template-columns: 2fr 6fr 1fr 1fr;
     padding: 15px 15px 10px 15px;
@@ -19,6 +20,7 @@ export const TopHeader = styled.header<Scroll>`
     box-shadow: ${(props) => (props.scroll === 'origin' ? '' : '0px 4px 4px rgba(0, 0, 0, 0.06)')};
     text-align: center;
     align-items: center;
+    opacity: ${({ isModalOpen }) => (isModalOpen ? '0.3' : '1')};
     &:visited {
         text-decoration: none;
         color: black;

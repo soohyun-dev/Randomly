@@ -19,7 +19,7 @@ export default function ReviewDetail({ setModalOpen, data }) {
     const reviewContainer = useRef(document.body)
     const isDetailBox = useRef(null)
     const isModalOpen = useSelector(selectIsModalOpen)
-    const [isFirstRender, setIsFirstRender] = useState(false)
+    const [isFirstRender, setIsFirstRender] = useState(true)
 
     const closeModal = () => {
         setModalOpen(false)
@@ -43,7 +43,7 @@ export default function ReviewDetail({ setModalOpen, data }) {
                 isModalOpen &&
                 reviewContainer.current.contains(target) &&
                 !isDetailBox.current.contains(target) &&
-                isFirstRender
+                !isFirstRender
             ) {
                 setModalOpen(false)
                 dispatch(
@@ -52,7 +52,7 @@ export default function ReviewDetail({ setModalOpen, data }) {
                     })
                 )
             }
-            setIsFirstRender(!isFirstRender)
+            setIsFirstRender(false)
         }
 
         window.addEventListener('click', modalCloseHandler)

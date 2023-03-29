@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ReviewAllSection = styled.section<{ props }>`
-    opacity: ${({ props }) => (props ? '30%' : '100%')};
+    z-index: -10;
 `
 
 export const ReviewSection = styled.section`
@@ -40,10 +40,11 @@ export const ReviewSearchButton = styled.button`
     border-radius: 5px;
 `
 
-export const ReviewPostingListSection = styled.section`
+export const ReviewPostingListSection = styled.section<{ props }>`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: 3em 5em;
+    opacity: ${({ props }) => (props ? '0.3' : '1')};
 `

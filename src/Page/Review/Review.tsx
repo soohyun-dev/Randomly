@@ -73,7 +73,7 @@ export default function Review() {
 
     return (
         <>
-            <Nav />
+            <Nav isModalOpen={isModalOpen} />
             <ErrorBoundary fallback={<ErrorPage />}>
                 <Suspense fallback={<Loading />}>
                     <ReviewAllSection props={isModalOpen}>
@@ -94,8 +94,7 @@ export default function Review() {
                                 </ReviewSearchButton>
                             </ReviewContent>
                         </ReviewSection>
-
-                        <ReviewPostingListSection>
+                        <ReviewPostingListSection props={isModalOpen}>
                             {Object.keys(searchResult).map((v) => (
                                 <ReviewPosting
                                     key={searchResult[v].id}
@@ -108,10 +107,8 @@ export default function Review() {
                                     onClick={() => showModal(searchResult[v])}
                                 />
                             ))}
-                            {modalOpen && (
-                                <ReviewDetail setModalOpen={setModalOpen} data={showData} />
-                            )}
                         </ReviewPostingListSection>
+                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
                     </ReviewAllSection>
                 </Suspense>
             </ErrorBoundary>
