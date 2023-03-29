@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 
+
   *{
     margin: 0rem;
   }
@@ -11,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => (theme ? '#2D3436' : 'white ')};
     color: ${({ theme }) => (theme ? '#bdc1c6' : 'black')};
     }
-  
 
   button{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';

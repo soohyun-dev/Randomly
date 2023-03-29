@@ -51,6 +51,7 @@ export const WriterContainer = styled.div`
 `
 
 export const ReviewPostingButton = styled.button`
+    display: none;
     border: none;
     border-radius: 5px;
     background-color: #e6e6e6;

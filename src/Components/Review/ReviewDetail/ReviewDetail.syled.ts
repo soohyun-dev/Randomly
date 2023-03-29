@@ -4,22 +4,15 @@ export const ReviewDetailSection = styled.section`
     padding: 0.5em 1em 0.5em 2em;
     width: 36em;
     height: 37em;
-
-    /* 최상단 위치 */
     z-index: 999;
-
-    /* 중앙 배치 */
-    /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
-    /* translate는 본인의 크기 기준으로 작동한다. */
     position: fixed;
     top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /* 모달창 디자인 */
     background-color: #e6e6e6;
     border: none;
     border-radius: 5px;
+    opacity: 100% !important;
 `
 export const ReviewDetailButton = styled.button`
     position: absolute;

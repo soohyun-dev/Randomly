@@ -1,3 +1,6 @@
+import { selectIsModalOpen, themeSlice } from 'features/themeSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from 'react'
 import {
     CloseButtonBox,
     ReviewDetailAdvise2Box,
@@ -11,14 +14,55 @@ import {
 } from './ReviewDetail.syled'
 
 export default function ReviewDetail({ setModalOpen, data }) {
+    const dispatch = useDispatch()
     const { memberName, selfIntroAdvise, answerAdvise, writerName, date } = data
+    const reviewContainer = useRef(document.body)
+    const isDetailBox = useRef(null)
+    const isModalOpen = useSelector(selectIsModalOpen)
+    const [isFirstRender, setIsFirstRender] = useState(false)
 
     const closeModal = () => {
         setModalOpen(false)
+        dispatch(
+            themeSlice.actions.setIsModalOpen({
+                isModalOpen: false,
+            })
+        )
     }
 
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+        return () => {
+            document.body.style.overflow = 'unset'
+        }
+    }, [])
+
+    useEffect(() => {
+        const modalCloseHandler = ({ target }) => {
+            if (
+                isModalOpen &&
+                reviewContainer.current.contains(target) &&
+                !isDetailBox.current.contains(target) &&
+                isFirstRender
+            ) {
+                setModalOpen(false)
+                dispatch(
+                    themeSlice.actions.setIsModalOpen({
+                        isModalOpen: false,
+                    })
+                )
+            }
+            setIsFirstRender(!isFirstRender)
+        }
+
+        window.addEventListener('click', modalCloseHandler)
+        return () => {
+            window.removeEventListener('click', modalCloseHandler)
+        }
+    }, [isFirstRender, dispatch, isModalOpen, setModalOpen])
+
     return (
-        <ReviewDetailSection>
+        <ReviewDetailSection ref={isDetailBox}>
             <CloseButtonBox>
                 <ReviewDetailCloseButton onClick={closeModal}>X</ReviewDetailCloseButton>
             </CloseButtonBox>

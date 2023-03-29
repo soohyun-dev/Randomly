@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const ReviewAllSection = styled.section<{ props }>`
+    opacity: ${({ props }) => (props ? '30%' : '100%')};
+`
+
 export const ReviewSection = styled.section`
     display: flex;
     justify-content: center;

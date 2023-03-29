@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
     AnswerAdviseContainer,
     AnswerAdviseParagraph,
@@ -25,7 +26,7 @@ export default function ReviewPosting({
     }
 
     return (
-        <ReviewPostingContent>
+        <ReviewPostingContent onClick={() => clickHandler()}>
             <NameContainter>
                 <IntreviewerNameParagraph>👨‍💻 {memberName}</IntreviewerNameParagraph>
                 <DateParagraph>{date.slice(0, 10)}</DateParagraph>
@@ -41,7 +42,7 @@ export default function ReviewPosting({
             <WriterContainer>
                 <p>평가자: {writerName}</p>
             </WriterContainer>
-            <ReviewPostingButton onClick={() => clickHandler()}>상세보기</ReviewPostingButton>
+            <ReviewPostingButton>상세보기</ReviewPostingButton>
         </ReviewPostingContent>
     )
 }
