@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 
-export const ReviewAllSection = styled.section<{ props }>`
+export const ReviewAllSection = styled.section`
     z-index: -10;
 `
 
-export const ReviewSection = styled.section`
+export const ReviewSection = styled.section<{ props }>`
     display: flex;
     justify-content: center;
     margin: 10em 0 5em 0;
+    z-index: 1;
+    opacity: ${({ props }) => (props ? '0' : '1')};
 `
 
 export const ReviewContent = styled.div`
@@ -46,5 +48,5 @@ export const ReviewPostingListSection = styled.section<{ props }>`
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: 3em 5em;
-    opacity: ${({ props }) => (props ? '0.3' : '1')};
+    opacity: ${({ props }) => (props ? '0.1' : '1')};
 `

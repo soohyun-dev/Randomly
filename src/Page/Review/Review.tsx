@@ -76,8 +76,9 @@ export default function Review() {
             <Nav isModalOpen={isModalOpen} />
             <ErrorBoundary fallback={<ErrorPage />}>
                 <Suspense fallback={<Loading />}>
-                    <ReviewAllSection props={isModalOpen}>
-                        <ReviewSection>
+                    <ReviewAllSection>
+                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
+                        <ReviewSection props={isModalOpen}>
                             <ReviewContent>
                                 <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
                                 <ReviewTitleContent>
@@ -108,7 +109,6 @@ export default function Review() {
                                 />
                             ))}
                         </ReviewPostingListSection>
-                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
                     </ReviewAllSection>
                 </Suspense>
             </ErrorBoundary>
