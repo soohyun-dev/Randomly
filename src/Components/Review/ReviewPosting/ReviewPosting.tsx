@@ -42,7 +42,6 @@ export default function ReviewPosting({
             <WriterContainer>
                 <p>평가자: {writerName}</p>
             </WriterContainer>
-            <ReviewPostingButton>상세보기</ReviewPostingButton>
         </ReviewPostingContent>
     )
 }

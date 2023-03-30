@@ -32,6 +32,7 @@ export default function ReviewDetail({ setModalOpen, data }) {
         )
     }
 
+    // 모달 창 열렸을 시, 외부 스크롤 차단
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         return () => {
