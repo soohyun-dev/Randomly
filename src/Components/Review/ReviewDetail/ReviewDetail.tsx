@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import {
     CloseButtonBox,
+    DivideLine,
     ReviewDetailAdvise2Box,
     ReviewDetailAdviseBox,
+    ReviewDetailBox,
     ReviewDetailCloseButton,
     ReviewDetailDateBox,
     ReviewDetailNameBox,
@@ -63,34 +65,37 @@ export default function ReviewDetail({ setModalOpen, data }) {
 
     return (
         <ReviewDetailSection ref={isDetailBox}>
-            <CloseButtonBox>
-                <ReviewDetailCloseButton onClick={closeModal}>X</ReviewDetailCloseButton>
-            </CloseButtonBox>
-            <ReviewDetailNameBox>
-                <p>{memberName}</p>
-            </ReviewDetailNameBox>
-            <ReviewDetailDateBox>
-                <p>{date}</p>
-            </ReviewDetailDateBox>
-            <ReviewDetailAdviseBox>
-                <ReviewDetailParagraph>자기소개에 대한 피드백</ReviewDetailParagraph>
-                <div>
-                    {selfIntroAdvise.split('\n').map((v) => {
-                        return v === '' ? <br /> : <p>{v}</p>
-                    })}
-                </div>
-            </ReviewDetailAdviseBox>
-            <ReviewDetailAdvise2Box>
-                <ReviewDetailParagraph>질문에 대한 피드백</ReviewDetailParagraph>
-                <div>
-                    {answerAdvise.split('\n').map((v) => {
-                        return v === '' ? <br /> : <p>{v}</p>
-                    })}
-                </div>
-            </ReviewDetailAdvise2Box>
-            <ReviewDetailWriterBox>
-                <p>{writerName}</p>
-            </ReviewDetailWriterBox>
+            <ReviewDetailBox>
+                <CloseButtonBox>
+                    <ReviewDetailCloseButton onClick={closeModal}>X</ReviewDetailCloseButton>
+                </CloseButtonBox>
+                <ReviewDetailNameBox>
+                    <p>To.{memberName}</p>
+                </ReviewDetailNameBox>
+                <ReviewDetailDateBox>
+                    <p>{date.slice(0, 10)}</p>
+                </ReviewDetailDateBox>
+                <ReviewDetailAdviseBox>
+                    <ReviewDetailParagraph>자기소개에 대한 피드백</ReviewDetailParagraph>
+                    <div>
+                        {selfIntroAdvise.split('\n').map((v) => {
+                            return v === '' ? <br /> : <p>{v}</p>
+                        })}
+                    </div>
+                </ReviewDetailAdviseBox>
+                <DivideLine />
+                <ReviewDetailAdvise2Box>
+                    <ReviewDetailParagraph>질문에 대한 피드백</ReviewDetailParagraph>
+                    <div>
+                        {answerAdvise.split('\n').map((v) => {
+                            return v === '' ? <br /> : <p>{v}</p>
+                        })}
+                    </div>
+                </ReviewDetailAdvise2Box>
+                <ReviewDetailWriterBox>
+                    <p>From.{writerName}</p>
+                </ReviewDetailWriterBox>
+            </ReviewDetailBox>
         </ReviewDetailSection>
     )
 }

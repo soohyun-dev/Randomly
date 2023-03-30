@@ -7,7 +7,6 @@ import { selectIsModalOpen, themeSlice } from 'features/themeSlice'
 import useReview from 'hooks/useReview'
 import ErrorPage from 'Page/Error'
 import { Suspense, useEffect, useState } from 'react'
-import { Fade } from 'react-awesome-reveal'
 import { ErrorBoundary } from 'react-error-boundary'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -77,7 +76,6 @@ export default function Review() {
             <ErrorBoundary fallback={<ErrorPage />}>
                 <Suspense fallback={<Loading />}>
                     <ReviewAllSection>
-                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
                         <ReviewSection props={isModalOpen}>
                             <ReviewContent>
                                 <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
@@ -95,6 +93,7 @@ export default function Review() {
                                 </ReviewSearchButton>
                             </ReviewContent>
                         </ReviewSection>
+                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
                         <ReviewPostingListSection props={isModalOpen}>
                             {Object.keys(searchResult).map((v) => (
                                 <ReviewPosting

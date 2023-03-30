@@ -1,9 +1,7 @@
 import styled from 'styled-components'
 
 export const ReviewDetailSection = styled.section`
-    padding: 0.5em 1em 0.5em 2em;
-    width: 44em;
-    height: 40em;
+    padding: 0.5em;
     z-index: 999;
     position: fixed;
     top: 50%;
@@ -15,6 +13,15 @@ export const ReviewDetailSection = styled.section`
     opacity: 100%;
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 `
+
+export const ReviewDetailBox = styled.div`
+    width: 44em;
+    height: 40em;
+    background-color: white;
+    padding: 0.5em 1em 0.5em 2em;
+    border-radius: 5px;
+`
+
 export const ReviewDetailButton = styled.button`
     position: absolute;
     right: 10px;
@@ -54,9 +61,14 @@ export const ReviewDetailAdviseBox = styled.div`
     height: 10em;
 `
 
+export const DivideLine = styled.hr`
+    margin-bottom: 0.5em;
+    opacity: 0.3;
+`
+
 export const ReviewDetailAdvise2Box = styled.div`
-    padding: 2em 0;
-    height: 15em;
+    padding-bottom: 2em;
+    height: 17em;
 `
 
 export const ReviewDetailWriterBox = styled.div`
