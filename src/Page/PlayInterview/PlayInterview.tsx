@@ -202,7 +202,6 @@ export default function PlayInterview() {
                         )}
                     </MainContainer>
                 </section>
-
                 <ReviewForm />
 
                 <Footer />
