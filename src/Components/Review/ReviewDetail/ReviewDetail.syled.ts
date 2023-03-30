@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const ReviewDetailSection = styled.section`
+    display: block;
     padding: 0.5em;
     z-index: 999;
     position: fixed;
@@ -56,9 +57,14 @@ export const ReviewDetailDateBox = styled.div`
     color: gray;
 `
 
+export const ReviewDetailAdvise = styled.div`
+    height: 33rem;
+    overflow-y: auto;
+`
+
 export const ReviewDetailAdviseBox = styled.div`
     padding: 2em 0;
-    height: 10em;
+    min-height: 10em;
 `
 
 export const DivideLine = styled.hr`
@@ -68,7 +74,7 @@ export const DivideLine = styled.hr`
 
 export const ReviewDetailAdvise2Box = styled.div`
     padding-bottom: 2em;
-    height: 17em;
+    min-height: 11em;
 `
 
 export const ReviewDetailWriterBox = styled.div`

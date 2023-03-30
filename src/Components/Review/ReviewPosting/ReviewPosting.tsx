@@ -33,11 +33,11 @@ export default function ReviewPosting({
             </NameContainter>
             <SelfIntroAdviseContainer>
                 <SelfIntroAdviseParagraph>자기소개에 대한 평가</SelfIntroAdviseParagraph>
-                {`${selfIntroAdvise.slice(0, 50)} ...`}
+                {`${selfIntroAdvise.slice(0, 40)} ...`}
             </SelfIntroAdviseContainer>
             <AnswerAdviseContainer>
                 <AnswerAdviseParagraph>질문 답변에 대한 평가</AnswerAdviseParagraph>
-                {`${answerAdvise.slice(0, 50)} ...`}
+                {`${answerAdvise.slice(0, 40)} ...`}
             </AnswerAdviseContainer>
             <WriterContainer>
                 <p>평가자: {writerName}</p>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import {
     CloseButtonBox,
     DivideLine,
+    ReviewDetailAdvise,
     ReviewDetailAdvise2Box,
     ReviewDetailAdviseBox,
     ReviewDetailBox,
@@ -76,23 +77,25 @@ export default function ReviewDetail({ setModalOpen, data }) {
                 <ReviewDetailDateBox>
                     <p>{date.slice(0, 10)}</p>
                 </ReviewDetailDateBox>
-                <ReviewDetailAdviseBox>
-                    <ReviewDetailParagraph>자기소개에 대한 피드백</ReviewDetailParagraph>
-                    <div>
-                        {selfIntroAdvise.split('\n').map((v) => {
-                            return v === '' ? <br /> : <p>{v}</p>
-                        })}
-                    </div>
-                </ReviewDetailAdviseBox>
-                <DivideLine />
-                <ReviewDetailAdvise2Box>
-                    <ReviewDetailParagraph>질문에 대한 피드백</ReviewDetailParagraph>
-                    <div>
-                        {answerAdvise.split('\n').map((v) => {
-                            return v === '' ? <br /> : <p>{v}</p>
-                        })}
-                    </div>
-                </ReviewDetailAdvise2Box>
+                <ReviewDetailAdvise>
+                    <ReviewDetailAdviseBox>
+                        <ReviewDetailParagraph>자기소개에 대한 피드백</ReviewDetailParagraph>
+                        <div>
+                            {selfIntroAdvise.split('\n').map((v) => {
+                                return v === '' ? <br /> : <p>{v}</p>
+                            })}
+                        </div>
+                    </ReviewDetailAdviseBox>
+                    <DivideLine />
+                    <ReviewDetailAdvise2Box>
+                        <ReviewDetailParagraph>질문에 대한 피드백</ReviewDetailParagraph>
+                        <div>
+                            {answerAdvise.split('\n').map((v) => {
+                                return v === '' ? <br /> : <p>{v}</p>
+                            })}
+                        </div>
+                    </ReviewDetailAdvise2Box>
+                </ReviewDetailAdvise>
                 <ReviewDetailWriterBox>
                     <p>From.{writerName}</p>
                 </ReviewDetailWriterBox>
