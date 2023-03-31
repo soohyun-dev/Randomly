@@ -32,7 +32,7 @@ export default function Review() {
 
     const searchHandler = () => {
         const orderIdx = Object.keys(reviews).filter((v) => {
-            return reviews[v].memberName === searchWord
+            return reviews[v].memberName.includes(searchWord)
         })
         const result = orderIdx.map((v) => {
             return reviews[v]

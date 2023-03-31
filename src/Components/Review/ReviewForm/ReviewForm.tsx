@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { getDateTime } from 'utils/GetTime'
 import { fireStore } from '../../../firebase'
 import {
+    GuideParagraph,
+    RequiredMark,
     ReviewAdviseTextArea,
     ReviewFormButton,
     ReviewFormButtonBox,
@@ -69,7 +71,9 @@ export default function ReviewForm() {
                 <ReviewFormTitle>팀원 리뷰</ReviewFormTitle>
                 <ReviewUserBox>
                     <ReviewToBox>
-                        <p>To</p>
+                        <GuideParagraph>
+                            To<RequiredMark>*</RequiredMark>
+                        </GuideParagraph>
                         <ReviewUserInput
                             onChange={(e) => setMemberName(e.target.value)}
                             value={memberName}
@@ -77,7 +81,7 @@ export default function ReviewForm() {
                         />
                     </ReviewToBox>
                     <ReviewToBox>
-                        <p>From</p>
+                        <GuideParagraph>From</GuideParagraph>
                         <ReviewUserInput
                             onChange={(e) => setWriterName(e.target.value)}
                             value={writerName}
@@ -87,7 +91,7 @@ export default function ReviewForm() {
                 </ReviewUserBox>
                 <ReviewUserBox>
                     <div>
-                        <p>자기소개 피드백</p>
+                        <GuideParagraph>자기소개 피드백</GuideParagraph>
                         <ReviewAdviseTextArea
                             onChange={(e) => setSelfIntroAdvise(e.target.value)}
                             value={selfIntroAdvise}
@@ -95,7 +99,7 @@ export default function ReviewForm() {
                         />
                     </div>
                     <div>
-                        <p>질문 답변 피드백</p>
+                        <GuideParagraph>질문 답변 피드백</GuideParagraph>
                         <ReviewAdviseTextArea
                             onChange={(e) => setAnswerAdvise(e.target.value)}
                             value={answerAdvise}
