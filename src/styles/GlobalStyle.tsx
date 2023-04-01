@@ -5,6 +5,13 @@ const GlobalStyle = createGlobalStyle`
 
   *{
     margin: 0rem;
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: #bdc1c6;
+    }
   }
 
   body{

@@ -13,6 +13,14 @@ export const ReviewDetailSection = styled.section`
     border-radius: 5px;
     opacity: 100%;
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: gray;
+    }
 `
 
 export const ReviewDetailBox = styled.div`
