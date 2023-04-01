@@ -26,7 +26,7 @@ export default function ReviewPosting({
     }
 
     const formatText = (text) => {
-        return text.length < 57 ? text : `${text.slice(0, 60)}...`
+        return text.length < 37 ? text : `${text.slice(0, 40)}...`
     }
 
     return (

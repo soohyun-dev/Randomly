@@ -24,6 +24,7 @@
         "no-alert": "off", // alert 오류 끄기
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
+        "react/jsx-props-no-spreading": "off",
         "react/prop-types": "off",
         "react/jsx-no-bind": [
             "warn",

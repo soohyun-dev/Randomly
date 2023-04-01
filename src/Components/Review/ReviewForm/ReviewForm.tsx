@@ -78,6 +78,7 @@ export default function ReviewForm() {
                             onChange={(e) => setMemberName(e.target.value)}
                             value={memberName}
                             placeholder="평가할 팀원명"
+                            maxLength={5}
                         />
                     </ReviewToBox>
                     <ReviewToBox>
@@ -86,6 +87,7 @@ export default function ReviewForm() {
                             onChange={(e) => setWriterName(e.target.value)}
                             value={writerName}
                             placeholder="평가자"
+                            maxLength={5}
                         />
                     </ReviewToBox>
                 </ReviewUserBox>
