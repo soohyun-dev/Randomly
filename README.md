@@ -19,7 +19,7 @@
 ## 🗳️ 목차
 
 1. [🗳️프로젝트 소개](#%EF%B8%8F-프로젝트-소개)
-2. [🖥️ 프로젝트 화면](#%EF%B8%8F-프로젝트-소개)
+2. [🖥️ 프로젝트 화면](#EF%B8%8F-프로젝트-화면)
 3. [🛠️ 사용 기술](#%EF%B8%8F-사용-기술)
 4. [📌 컨벤션](#-컨벤션)
 5. [🏃‍♂️ 프로젝트 진행과정](#%EF%B8%8F-프로젝트-진행과정)
@@ -345,19 +345,37 @@
 
 # 🏃‍♂️ 프로젝트 진행과정
 
--   [📝 진행과정 기록 ](https://bmy1320.tistory.com/category/%EC%84%B1%EC%9E%A5%EA%B8%B0%EB%A1%9D/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
+### [🏡 진행과정을 담은 블로그 ](https://bmy1320.tistory.com/category/%EC%84%B1%EC%9E%A5%EA%B8%B0%EB%A1%9D/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
+
+<br>
+
+-   [📝 프로젝트 시작 및 구현 과정](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly)
+
+-   [📝 프로젝트 타입스크립트 적용기](https://bmy1320.tistory.com/entry/%EA%B8%B0%EC%A1%B4-%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%A0%81%EC%9A%A9%EA%B8%B0)
+
+-   [📝 데이터 저장에 대한 고민](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230209)
+
+-   [📝 데이터 저장 방식 변경](https://bmy1320.tistory.com/entry/dd)
+
+-   [📝 주요 기능 구현 완료](https://bmy1320.tistory.com/entry/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Randomly-20230217)
+
+-   [📝 ErrorBoundary 적용기](https://bmy1320.tistory.com/entry/Randomly-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-ErrorBoundary-%EC%A0%81%EC%9A%A9)
+
+-   [📝 카테고리별 균등 분배 기능 구현](https://bmy1320.tistory.com/entry/Randomly-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC%EB%B3%84-%EA%B7%A0%EB%93%B1-%EB%B6%84%EB%B0%B0-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84)
+
+-   [📝 React-Query 적용기](https://bmy1320.tistory.com/entry/Randomly-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-React-Query-%EC%A0%81%EC%9A%A9%EA%B8%B0)
+
+-   [📝 StoryBook 적용기](https://bmy1320.tistory.com/entry/Randomly-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Storybook-%EC%A0%81%EC%9A%A9%EA%B8%B0)
+
+-   [📝 React Query로 비동기 처리하기, 상태(state) 다루기](https://bmy1320.tistory.com/entry/Randomly-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-React-Query%EB%A1%9C-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-%EC%83%81%ED%83%9Cstate-%EB%8B%A4%EB%A3%A8%EA%B8%B0)
+
+-   [📝 팀원 피드백 기능, React로 모달창 구현](https://bmy1320.tistory.com/entry/Randomly-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%8C%80%EC%9B%90-%ED%94%BC%EB%93%9C%EB%B0%B1-%EA%B8%B0%EB%8A%A5-React%EB%A1%9C-%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EA%B5%AC%ED%98%84)
 
 <br><br><br>
 
 # 📜 개발 기록
 
 [📜이슈 목록](https://github.com/soohyun-dev/Randomly/issues?q=is%3Aissue+is%3Aclosed)
-
-<br><br><br>
-
-# 🎰 기능 소개
-
-개발 완성 및 예정 기능 목록 : [기능 목록](https://github.com/soohyun-dev/Randomly/wiki/%EB%A7%8C%EB%93%A0-%EA%B8%B0%EB%8A%A5-%EB%AA%A9%EB%A1%9D)
 
 <br><br><br>
 
