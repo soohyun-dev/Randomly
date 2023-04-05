@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Suspense, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteDoc, doc } from 'firebase/firestore'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
 import ManageUser from 'Components/ManageInterview/ManageUser'
@@ -9,9 +9,10 @@ import ManageQuestion from 'Components/ManageInterview/ManageQuestion'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
-import { getDateTime } from 'utils/GetTime'
 import { useFolder } from 'hooks'
 import Loading from 'Components/Loading'
+import FolderAddModal from 'Components/ManageInterview/FolderAddModal'
+import { selectIsFolderModalOpen, themeSlice } from 'features/themeSlice'
 import { fireStore } from '../../firebase'
 import {
     ManageAccessSection,
@@ -31,19 +32,19 @@ import {
     FolderUpdateButton,
     FolderOrderBox,
     FolderDeleteButton,
-    FolderNameModalSection,
+    ManageSection,
 } from './Manage.styled'
 
 export default function Manage() {
+    const dispatch = useDispatch()
     const [page, setPage] = useState<string>('question')
     const [nowPackage, setNowPackage] = useState('0')
     const user = useSelector(selectUser)
     const [updateBtn, setUpdateBtn] = useState(false)
-    const packageInfo = collection(fireStore, `users/${user}/packages`)
     const { data, isLoading } = useFolder(nowPackage)
-    const [folderInputModal, setFolderInputModal] = useState(false)
-    const [newFolderName, setNewFolderName] = useState('새폴더')
     const folders = data
+    const isFolderModalOpen = useSelector(selectIsFolderModalOpen)
+    const [isFirstRender, setIsFirstRender] = useState(true)
 
     const MiniTitle = styled.label<{ target?: any }>`
         padding: 0 0.5em;
@@ -62,27 +63,13 @@ export default function Manage() {
     }
 
     const newFolderHandler = () => {
-        setFolderInputModal(!folderInputModal)
-        if (!folderInputModal) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = 'unset'
-        }
-    }
-
-    const plusFolder = async () => {
-        if (window.confirm('새로운 폴더를 추가하시겠습니까?')) {
-            alert('추가되었습니다!')
-            const idx = getDateTime()
-            await addDoc(packageInfo, {
-                idx,
-                title: newFolderName,
-                time: new Date(),
-                catagory: ['분류없음'],
+        console.log(isFolderModalOpen)
+        setIsFirstRender(false)
+        dispatch(
+            themeSlice.actions.setIsFolderModalOpen({
+                isFolderModalOpen: true,
             })
-
-            newFolderHandler()
-        }
+        )
     }
 
     const checkDelete = async (target) => {
@@ -102,96 +89,101 @@ export default function Manage() {
         return <FolderDeleteButton onClick={() => checkDelete(target)}>삭제</FolderDeleteButton>
     }
 
+    useEffect(() => {
+        if (isFirstRender) {
+            // 페이지 초기 접속시 isFolderModalOpen 값 초기화
+            dispatch(
+                themeSlice.actions.setIsFolderModalOpen({
+                    isFolderModalOpen: false,
+                })
+            )
+        }
+
+        setIsFirstRender(false)
+    }, [dispatch, isFirstRender])
+
     return (
         <>
-            <Nav />
+            <Nav isModalOpen={isFolderModalOpen} />
             <ErrorBoundary FallbackComponent={ErrorPage}>
-                <TitleSection>
-                    <Title>MANAGE</Title>
-                </TitleSection>
-                <ManageHeaderSection>
-                    <ManageHeaderDiv>
-                        <MiniTitle
-                            target="question"
-                            onClick={() => {
-                                changeView('question')
-                            }}
-                        >
-                            질문 관리
-                        </MiniTitle>
-                        <MiniTitle>|</MiniTitle>
-                        <MiniTitle
-                            target="user"
-                            onClick={() => {
-                                changeView('user')
-                            }}
-                        >
-                            참여자 관리
-                        </MiniTitle>
-                    </ManageHeaderDiv>
-                    {folderInputModal && (
-                        <FolderNameModalSection>
-                            <p>등록할 폴더 이름</p>
-                            <input
-                                onChange={(e) => setNewFolderName(e.target.value)}
-                                value={newFolderName}
-                            />
-                            <div>
-                                <button onClick={() => plusFolder()}>등록</button>
-                                <button onClick={() => newFolderHandler()}>취소</button>
-                            </div>
-                        </FolderNameModalSection>
+                {isFolderModalOpen && <FolderAddModal />}
+                <ManageSection props={isFolderModalOpen}>
+                    <TitleSection>
+                        <Title>MANAGE</Title>
+                    </TitleSection>
+                    <ManageHeaderSection>
+                        <ManageHeaderDiv>
+                            <MiniTitle
+                                target="question"
+                                onClick={() => {
+                                    changeView('question')
+                                }}
+                            >
+                                질문 관리
+                            </MiniTitle>
+                            <MiniTitle>|</MiniTitle>
+                            <MiniTitle
+                                target="user"
+                                onClick={() => {
+                                    changeView('user')
+                                }}
+                            >
+                                참여자 관리
+                            </MiniTitle>
+                        </ManageHeaderDiv>
+                        {user !== null && (
+                            <FolderOrderBox>
+                                {updateBtn ? (
+                                    ''
+                                ) : (
+                                    <FolderPlusButton onClick={() => newFolderHandler()}>
+                                        질문 폴더 추가
+                                    </FolderPlusButton>
+                                )}
+                                <FolderUpdateButton onClick={() => setUpdateBtn(!updateBtn)}>
+                                    {updateBtn ? '수정 취소' : '질문 폴더 수정'}
+                                </FolderUpdateButton>
+                            </FolderOrderBox>
+                        )}
+                    </ManageHeaderSection>
+                    <PackageSection>
+                        <PackageDiv>
+                            {!isLoading &&
+                                Object.keys(folders).map((v) => (
+                                    <PackageBox
+                                        onClick={() => {
+                                            setNowPackage(v)
+                                        }}
+                                    >
+                                        <PackageTitle>{folders[v].title}</PackageTitle>
+                                        <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
+                                        {renderDeleteBtn(v)}
+                                    </PackageBox>
+                                ))}
+                        </PackageDiv>
+                    </PackageSection>
+                    <PackageTitleDiv>
+                        <PackageTitleText>
+                            {folders !== undefined &&
+                                folders.length > 0 &&
+                                folders[nowPackage].title}
+                        </PackageTitleText>
+                    </PackageTitleDiv>
+                    {user !== null ? (
+                        ''
+                    ) : (
+                        <ManageAccessSection>
+                            <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
+                        </ManageAccessSection>
                     )}
-                    {user !== null && (
-                        <FolderOrderBox>
-                            {updateBtn ? (
-                                ''
-                            ) : (
-                                <FolderPlusButton onClick={() => newFolderHandler()}>
-                                    질문 폴더 추가
-                                </FolderPlusButton>
-                            )}
-                            <FolderUpdateButton onClick={() => setUpdateBtn(!updateBtn)}>
-                                {updateBtn ? '수정 취소' : '질문 폴더 수정'}
-                            </FolderUpdateButton>
-                        </FolderOrderBox>
-                    )}
-                </ManageHeaderSection>
-                <PackageSection>
-                    <PackageDiv>
-                        {!isLoading &&
-                            Object.keys(folders).map((v) => (
-                                <PackageBox
-                                    onClick={() => {
-                                        setNowPackage(v)
-                                    }}
-                                >
-                                    <PackageTitle>{folders[v].title}</PackageTitle>
-                                    <PackageDate>{folders[v].idx.slice(0, 10)}</PackageDate>
-                                    {renderDeleteBtn(v)}
-                                </PackageBox>
-                            ))}
-                    </PackageDiv>
-                </PackageSection>
-                <PackageTitleDiv>
-                    <PackageTitleText>
-                        {folders !== undefined && folders.length > 0 && folders[nowPackage].title}
-                    </PackageTitleText>
-                </PackageTitleDiv>
-                {user !== null ? (
-                    ''
-                ) : (
-                    <ManageAccessSection>
-                        <ManageAccessTitle>로그인 해주세요😋</ManageAccessTitle>
-                    </ManageAccessSection>
-                )}
-                <Suspense fallback={<Loading />}>
-                    {page === 'question'
-                        ? user !== null &&
-                          !isLoading &&
-                          folders.length > 0 && <ManageQuestion nowPackage={nowPackage} />
-                        : user !== null && <ManageUser />}
-                </Suspense>
+                    <Suspense fallback={<Loading />}>
+                        {page === 'question'
+                            ? user !== null &&
+                              !isLoading &&
+                              folders.length > 0 && <ManageQuestion nowPackage={nowPackage} />
+                            : user !== null && <ManageUser />}
+                    </Suspense>
+                </ManageSection>
             </ErrorBoundary>
 
             <Footer />

@@ -5,6 +5,7 @@ export const themeSlice = createSlice({
     initialState: {
         theme: false,
         isModalOpen: false,
+        isFolderModalOpen: false,
     },
     reducers: {
         setTheme: (state, action) => {
@@ -14,13 +15,19 @@ export const themeSlice = createSlice({
         setIsModalOpen: (state, action) => {
             state.isModalOpen = action.payload.isModalOpen
         },
+
+        setIsFolderModalOpen: (state, action) => {
+            state.isFolderModalOpen = action.payload.isFolderModalOpen
+        },
     },
 })
 
-export const { setTheme, setIsModalOpen } = themeSlice.actions
+export const { setTheme, setIsModalOpen, setIsFolderModalOpen } = themeSlice.actions
 
 export const selectTheme = (state) => state.theme.theme
 
 export const selectIsModalOpen = (state) => state.theme.isModalOpen
+
+export const selectIsFolderModalOpen = (state) => state.theme.isFolderModalOpen
 
 export default themeSlice.reducer

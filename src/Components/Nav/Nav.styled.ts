@@ -21,6 +21,7 @@ export const TopHeader = styled.header<Scroll>`
     text-align: center;
     align-items: center;
     opacity: ${({ isModalOpen }) => (isModalOpen ? '0.2' : '1')};
+    pointer-events: ${({ isModalOpen }) => (isModalOpen ? 'none' : '')};
     &:visited {
         text-decoration: none;
         color: black;
