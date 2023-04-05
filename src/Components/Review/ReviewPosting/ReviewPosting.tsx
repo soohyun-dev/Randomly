@@ -19,6 +19,7 @@ export default function ReviewPosting({
     answerAdvise,
     writerName,
     date,
+    password,
     onClick,
 }) {
     const clickHandler = () => {

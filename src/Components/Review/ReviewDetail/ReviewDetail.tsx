@@ -1,6 +1,7 @@
 import { selectIsModalOpen, themeSlice } from 'features/themeSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
+import { deleteDoc, doc } from 'firebase/firestore'
 import {
     CloseButtonBox,
     DivideLine,
@@ -15,14 +16,17 @@ import {
     ReviewDetailSection,
     ReviewDetailWriterBox,
 } from './ReviewDetail.syled'
+import { fireStore } from '../../../firebase'
 
 export default function ReviewDetail({ setModalOpen, data }) {
     const dispatch = useDispatch()
-    const { memberName, selfIntroAdvise, answerAdvise, writerName, date } = data
+    const { id, memberName, selfIntroAdvise, answerAdvise, writerName, date, password } = data
     const reviewContainer = useRef(document.body)
     const isDetailBox = useRef(null)
     const isModalOpen = useSelector(selectIsModalOpen)
     const [isFirstRender, setIsFirstRender] = useState(true)
+    const [toggleInput, setToggleInput] = useState(false)
+    const [inputPassword, setInputPassword] = useState('')
 
     const closeModal = () => {
         setModalOpen(false)
@@ -31,6 +35,26 @@ export default function ReviewDetail({ setModalOpen, data }) {
                 isModalOpen: false,
             })
         )
+    }
+
+    const modifyHandler = () => {
+        setToggleInput(!toggleInput)
+    }
+
+    const deleteHandler = () => {
+        if (password === inputPassword) {
+            const deleteReviewPosting = async (id) => {
+                const reviewDoc = doc(fireStore, 'review', id)
+                await deleteDoc(reviewDoc)
+            }
+            if (window.confirm('정말 삭제하시겠습니까?')) {
+                deleteReviewPosting(id)
+                alert('삭제되었습니다.')
+                closeModal()
+            }
+        } else {
+            alert('비밀번호가 틀렸습니다.')
+        }
     }
 
     // 모달 창 열렸을 시, 외부 스크롤 차단
@@ -69,6 +93,18 @@ export default function ReviewDetail({ setModalOpen, data }) {
         <ReviewDetailSection ref={isDetailBox}>
             <ReviewDetailBox>
                 <CloseButtonBox>
+                    {toggleInput && (
+                        <div>
+                            <input
+                                onChange={(e) => setInputPassword(e.target.value)}
+                                value={inputPassword}
+                                placeholder="등록한 게시물 비밀번호 "
+                            />
+                            <button onClick={() => deleteHandler()}>삭제</button>
+                            <button onClick={() => modifyHandler()}>취소</button>
+                        </div>
+                    )}
+                    {!toggleInput && <button onClick={() => modifyHandler()}>수정</button>}
                     <ReviewDetailCloseButton onClick={closeModal}>X</ReviewDetailCloseButton>
                 </CloseButtonBox>
                 <ReviewDetailNameBox>

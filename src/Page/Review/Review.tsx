@@ -104,6 +104,7 @@ export default function Review() {
                                     answerAdvise={searchResult[v].answerAdvise}
                                     writerName={searchResult[v].writerName}
                                     date={searchResult[v].date}
+                                    password={searchResult[v].password}
                                     onClick={() => showModal(searchResult[v])}
                                 />
                             ))}
