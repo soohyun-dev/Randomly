@@ -65,3 +65,9 @@ export const ReviewFormButton = styled.button`
         opacity: 0.7;
     }
 `
+export const ReviewFormPassWord = styled.input`
+    padding-left: 0.5em;
+    margin-right: 1.5em;
+    border: 1px solid #868e96;
+    border-radius: 5px;
+`

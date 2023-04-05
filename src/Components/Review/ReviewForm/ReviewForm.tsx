@@ -8,6 +8,7 @@ import {
     ReviewAdviseTextArea,
     ReviewFormButton,
     ReviewFormButtonBox,
+    ReviewFormPassWord,
     ReviewFormSection,
     ReviewFormTitle,
     ReviewToBox,
@@ -23,6 +24,7 @@ interface NewData {
     answerAdvise?: string
     time?: Date
     date?: string
+    password?: string
 }
 
 export default function ReviewForm() {
@@ -30,6 +32,7 @@ export default function ReviewForm() {
     const [selfIntroAdvise, setSelfIntroAdvise] = useState('')
     const [answerAdvise, setAnswerAdvise] = useState('')
     const [writerName, setWriterName] = useState('익명')
+    const [password, setPassword] = useState('')
 
     const reviewDatabaseInfo = collection(fireStore, 'review')
 
@@ -47,6 +50,7 @@ export default function ReviewForm() {
         newData.answerAdvise = answerAdvise
         newData.date = getDateTime()
         newData.time = new Date()
+        newData.password = password
 
         await addDoc(reviewDatabaseInfo, newData).then((doc) => {
             docId = doc.id
@@ -56,10 +60,13 @@ export default function ReviewForm() {
         setSelfIntroAdvise('')
         setAnswerAdvise('')
         setWriterName('익명')
+        setPassword('')
     }
 
     const submitHandler = () => {
-        if (window.confirm('리뷰를 추가하시겠습니까?')) {
+        if (password.length < 4) {
+            alert('4자리 이상의 비밀번호를 입력해주세요.')
+        } else if (window.confirm('리뷰를 추가하시겠습니까?')) {
             addReview()
         }
         return null
@@ -110,6 +117,11 @@ export default function ReviewForm() {
                     </div>
                 </ReviewUserBox>
                 <ReviewFormButtonBox>
+                    <ReviewFormPassWord
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        placeholder="4자리 이상의 비밀번호 "
+                    />
                     <ReviewFormButton onClick={() => submitHandler()}>피드백 제출</ReviewFormButton>
                 </ReviewFormButtonBox>
             </div>
