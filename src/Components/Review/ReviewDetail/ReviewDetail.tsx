@@ -15,6 +15,8 @@ import {
     ReviewDetailParagraph,
     ReviewDetailSection,
     ReviewDetailWriterBox,
+    ReviewModifyButton,
+    ReviewPasswordInput,
 } from './ReviewDetail.syled'
 import { fireStore } from '../../../firebase'
 
@@ -95,16 +97,24 @@ export default function ReviewDetail({ setModalOpen, data }) {
                 <CloseButtonBox>
                     {toggleInput && (
                         <div>
-                            <input
+                            <ReviewPasswordInput
                                 onChange={(e) => setInputPassword(e.target.value)}
                                 value={inputPassword}
                                 placeholder="등록한 게시물 비밀번호 "
                             />
-                            <button onClick={() => deleteHandler()}>삭제</button>
-                            <button onClick={() => modifyHandler()}>취소</button>
+                            <ReviewModifyButton onClick={() => deleteHandler()}>
+                                삭제
+                            </ReviewModifyButton>
+                            <ReviewModifyButton onClick={() => modifyHandler()}>
+                                취소
+                            </ReviewModifyButton>
                         </div>
                     )}
-                    {!toggleInput && <button onClick={() => modifyHandler()}>수정</button>}
+                    {!toggleInput && (
+                        <ReviewModifyButton onClick={() => modifyHandler()}>
+                            수정
+                        </ReviewModifyButton>
+                    )}
                     <ReviewDetailCloseButton onClick={closeModal}>X</ReviewDetailCloseButton>
                 </CloseButtonBox>
                 <ReviewDetailNameBox>

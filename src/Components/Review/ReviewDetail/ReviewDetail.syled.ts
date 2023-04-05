@@ -96,3 +96,15 @@ export const ReviewDetailParagraph = styled.p`
     color: gray;
     font-size: 14px;
 `
+export const ReviewModifyButton = styled.button`
+    border: none;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    cursor: pointer;
+`
+export const ReviewPasswordInput = styled.input`
+    border: 0.5px solid gray;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    padding-left: 0.5em;
+`

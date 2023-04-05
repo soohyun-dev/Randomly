@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -31,6 +31,7 @@ import {
     FolderUpdateButton,
     FolderOrderBox,
     FolderDeleteButton,
+    FolderNameModalSection,
 } from './Manage.styled'
 
 export default function Manage() {
@@ -40,6 +41,8 @@ export default function Manage() {
     const [updateBtn, setUpdateBtn] = useState(false)
     const packageInfo = collection(fireStore, `users/${user}/packages`)
     const { data, isLoading } = useFolder(nowPackage)
+    const [folderInputModal, setFolderInputModal] = useState(false)
+    const [newFolderName, setNewFolderName] = useState('새폴더')
     const folders = data
 
     const MiniTitle = styled.label<{ target?: any }>`
@@ -58,18 +61,27 @@ export default function Manage() {
         setPage(value)
     }
 
-    const plusPackage = async () => {
+    const newFolderHandler = () => {
+        setFolderInputModal(!folderInputModal)
+        if (!folderInputModal) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+    }
+
+    const plusFolder = async () => {
         if (window.confirm('새로운 폴더를 추가하시겠습니까?')) {
             alert('추가되었습니다!')
             const idx = getDateTime()
             await addDoc(packageInfo, {
                 idx,
-                title: `새폴더`,
+                title: newFolderName,
                 time: new Date(),
                 catagory: ['분류없음'],
             })
 
-            await window.location.reload()
+            newFolderHandler()
         }
     }
 
@@ -117,12 +129,25 @@ export default function Manage() {
                             참여자 관리
                         </MiniTitle>
                     </ManageHeaderDiv>
+                    {folderInputModal && (
+                        <FolderNameModalSection>
+                            <p>등록할 폴더 이름</p>
+                            <input
+                                onChange={(e) => setNewFolderName(e.target.value)}
+                                value={newFolderName}
+                            />
+                            <div>
+                                <button onClick={() => plusFolder()}>등록</button>
+                                <button onClick={() => newFolderHandler()}>취소</button>
+                            </div>
+                        </FolderNameModalSection>
+                    )}
                     {user !== null && (
                         <FolderOrderBox>
                             {updateBtn ? (
                                 ''
                             ) : (
-                                <FolderPlusButton onClick={() => plusPackage()}>
+                                <FolderPlusButton onClick={() => newFolderHandler()}>
                                     질문 폴더 추가
                                 </FolderPlusButton>
                             )}

@@ -64,7 +64,9 @@ export default function ReviewForm() {
     }
 
     const submitHandler = () => {
-        if (password.length < 4) {
+        if (memberName.length < 1) {
+            alert('평가할 팀원의 이름을 입력해주세요.')
+        } else if (password.length < 4) {
             alert('4자리 이상의 비밀번호를 입력해주세요.')
         } else if (window.confirm('리뷰를 추가하시겠습니까?')) {
             addReview()

@@ -108,3 +108,26 @@ export const PackageTitle = styled.div`
 export const PackageDate = styled.div`
     color: #777;
 `
+
+export const FolderNameModalSection = styled.section`
+    display: block;
+    padding: 0.5em;
+    z-index: 999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e6e6e6;
+    border: none;
+    border-radius: 5px;
+    opacity: 100%;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: gray;
+    }
+`
