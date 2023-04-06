@@ -52,6 +52,7 @@ export default function FolderAddModal() {
         }
     }
 
+    // 모달창 토글시 외부 스크롤 금지
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         return () => {
@@ -59,6 +60,7 @@ export default function FolderAddModal() {
         }
     }, [])
 
+    // 모달을 닫을 조건들을 계산하고 해당되면 닫는다.
     useEffect(() => {
         const modalCloseHandler = ({ target }) => {
             if (
@@ -88,7 +90,7 @@ export default function FolderAddModal() {
             <FolderModalInput
                 onChange={(e) => setNewFolderName(e.target.value)}
                 value={newFolderName}
-                maxLength={10}
+                maxLength={15}
                 onKeyDown={enterSubmit}
             />
             <div>

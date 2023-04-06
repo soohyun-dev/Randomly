@@ -2,10 +2,10 @@ import styled from 'styled-components'
 
 export const FolderNameModalSection = styled.section`
     display: block;
-    padding: 2em 3em;
+    padding: 2em 5em;
     z-index: 999;
     position: fixed;
-    top: 50%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #e6e6e6;
@@ -20,13 +20,15 @@ export const FolderNameModalSection = styled.section`
 
 export const FolderModalInput = styled.input`
     margin-top: 3em;
-    border: 0.5px solid gray;
+    padding: 0.5em;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 `
 
 export const FolderModalButton = styled.button`
     margin: 3em 0.5em 0.5em 0;
-    border: 0.5px solid gray;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    font-size: 15px;
     cursor: pointer;
 `

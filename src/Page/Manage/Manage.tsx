@@ -63,7 +63,6 @@ export default function Manage() {
     }
 
     const newFolderHandler = () => {
-        console.log(isFolderModalOpen)
         setIsFirstRender(false)
         dispatch(
             themeSlice.actions.setIsFolderModalOpen({

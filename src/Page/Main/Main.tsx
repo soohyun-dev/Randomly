@@ -28,13 +28,14 @@ export default function Main() {
                         <Fade direction="up">
                             <Title>더 편하고, 더 효율적이게</Title>
                         </Fade>
-                        <Fade duration={1000} direction="up">
+                        <Fade duration={1000} direction="up" delay={300}>
                             <TitleContent>사용자의 편의를 위해 끊임없이 고민합니다.</TitleContent>
                             <PlusButton>더 알아보기 ➡️</PlusButton>
                         </Fade>
                     </div>
                 </TopDiv>
-                <Fade duration={2000} direction="right">
+
+                <Fade duration={2000} direction="up">
                     <ImgContentBoxDiv>
                         <ImgContentBox>
                             <ImgBox>
@@ -57,7 +58,6 @@ export default function Main() {
                         </ImgContentBox>
                     </ImgContentBoxDiv>
                 </Fade>
-
                 <Fade duration={2000} direction="left">
                     <ImgContentBoxDiv>
                         <ImgContentBox>
