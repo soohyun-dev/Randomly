@@ -7,8 +7,7 @@ import { PostingList, Title, WriteBtn } from './Notice.styled'
 
 export default function Notice() {
     const user = useSelector(selectUser)
-    const { data, isLoading } = useNotice()
-    const notice = data
+    const { data: notice, isLoading } = useNotice()
 
     return (
         <>

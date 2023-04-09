@@ -193,7 +193,7 @@ export default function PlayInterview() {
                                     ) : (
                                         <ErrorBoundary fallback={<ErrorPage />}>
                                             <Suspense fallback={<Loading />}>
-                                                <ShowMember orderMember={orderMember} />{' '}
+                                                <ShowMember orderMember={orderMember} />
                                             </Suspense>
                                         </ErrorBoundary>
                                     )}

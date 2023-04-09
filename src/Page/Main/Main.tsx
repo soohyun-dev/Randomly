@@ -1,6 +1,7 @@
 import { Fade } from 'react-awesome-reveal'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
+import { useInView } from 'react-intersection-observer'
 import {
     ContentBox,
     ContentBoxText,
@@ -19,6 +20,18 @@ import {
 } from './Main.styled'
 
 export default function Main() {
+    const [ref1, inView1] = useInView({
+        threshold: 0.8,
+    })
+
+    const [ref2, inView2] = useInView({
+        threshold: 0.8,
+    })
+
+    const [ref3, inView3] = useInView({
+        threshold: 0.8,
+    })
+
     return (
         <>
             <Nav page="Main" />
@@ -34,10 +47,9 @@ export default function Main() {
                         </Fade>
                     </div>
                 </TopDiv>
-
-                <Fade duration={2000} direction="up">
+                <Fade duration={2000} direction="right">
                     <ImgContentBoxDiv>
-                        <ImgContentBox>
+                        <ImgContentBox ref={ref1}>
                             <ImgBox>
                                 <Img
                                     src="https://user-images.githubusercontent.com/81623931/216882813-8b704008-7bca-430a-b8d4-79701e771342.png"
@@ -58,6 +70,7 @@ export default function Main() {
                         </ImgContentBox>
                     </ImgContentBoxDiv>
                 </Fade>
+
                 <Fade duration={2000} direction="left">
                     <ImgContentBoxDiv>
                         <ImgContentBox>
