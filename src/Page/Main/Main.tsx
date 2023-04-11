@@ -43,7 +43,7 @@ export default function Main() {
                         </Fade>
                         <Fade duration={1000} direction="up" delay={300}>
                             <TitleContent>사용자의 편의를 위해 끊임없이 고민합니다.</TitleContent>
-                            <PlusButton>더 알아보기 ➡️</PlusButton>
+                            {/* <PlusButton>더 알아보기 ➡️</PlusButton> */}
                         </Fade>
                     </div>
                 </TopDiv>

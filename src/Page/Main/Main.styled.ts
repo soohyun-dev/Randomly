@@ -60,7 +60,7 @@ export const Img = styled.img`
 `
 
 export const ImgContentBoxDiv = styled.div`
-    margin: 4em 0;
+    margin: 7em 0;
 `
 
 export const ImgContentBox = styled.div`
