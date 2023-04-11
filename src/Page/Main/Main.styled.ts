@@ -7,7 +7,7 @@ export const TitleSection = styled.section`
 
 export const TopDiv = styled.div`
     color: black;
-    margin-bottom: 18em;
+    margin-bottom: 23em;
     text-align: center;
     ::before {
         content: '';

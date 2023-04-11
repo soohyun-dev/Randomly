@@ -51,21 +51,14 @@ export default function Main() {
                     <ImgContentBoxDiv>
                         <ImgContentBox ref={ref1}>
                             <ImgBox>
-                                <Img
-                                    src="https://user-images.githubusercontent.com/81623931/216882813-8b704008-7bca-430a-b8d4-79701e771342.png"
-                                    style={{ padding: '2em 0 3em 0' }}
-                                />
+                                <Img src="https://user-images.githubusercontent.com/81623931/231205106-919377a8-4d6a-465a-b4fc-7ef7ca3ada26.jpg" />
                             </ImgBox>
                             <ContentBox>
-                                <ContentBoxTitleLogoFirst>🛠️</ContentBoxTitleLogoFirst>
-                                <ContentBoxTitle>Technology</ContentBoxTitle>
-                                <ContentBoxText>Randomly는 기술의 장입니다.</ContentBoxText>
-                                <ContentBoxText>
-                                    기술의 향상은 개인의 역량 강화 뿐만 아니라
-                                </ContentBoxText>
-                                <ContentBoxText>
-                                    사용자에게 더 나은 서비스를 제공합니다.
-                                </ContentBoxText>
+                                <ContentBoxTitleLogoFirst>🆙</ContentBoxTitleLogoFirst>
+                                <ContentBoxTitle>Convenience</ContentBoxTitle>
+                                <ContentBoxText>사용자의 입장에서 생각합니다.</ContentBoxText>
+                                <ContentBoxText>더 편리하게 이용할 수 있도록</ContentBoxText>
+                                <ContentBoxText>끊임없이 고민합니다.</ContentBoxText>
                             </ContentBox>
                         </ImgContentBox>
                     </ImgContentBoxDiv>
