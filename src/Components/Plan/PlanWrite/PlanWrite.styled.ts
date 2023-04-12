@@ -43,7 +43,7 @@ export const PlanWriteInput = styled.input`
 `
 
 export const PlanWriteSubmitButton = styled.button`
-    margin-top: 7.5em;
+    margin-top: 4em;
     width: 100%;
     font-size: 16px;
     padding: 0.8em 0.6em;

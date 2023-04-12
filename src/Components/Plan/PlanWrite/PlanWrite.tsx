@@ -35,33 +35,82 @@ const useStyles = createStyles((theme) => ({
 
 export default function PlanWrite() {
     const user = useSelector(selectUser)
-    const [date, setDate] = useState(new Date())
+    const [selectDate, setSelectDate] = useState(new Date())
     const { classes } = useStyles()
+    const [selectHour, setSelectHour] = useState('시')
+    const [selectMinute, setSelectMinute] = useState('분')
+    const [participateNumber, setParticipateNumber] = useState('인원')
     const [formData, setFormData] = useState({
         studyName: '',
-        participateNumber: '',
+        participateNumber: '인원',
         place: '',
-        pay: '0',
+        pay: 0,
         date: new Date(),
+        uploadDate: new Date(),
+        studyTime: {
+            hour: selectHour,
+            minute: selectMinute,
+        },
     })
+
+    const cnt = Array.from({ length: 20 }, (_, i) => i + 1) // 인원
+    const hour = Array.from({ length: 24 }, (_, i) => i) // 시
+    const minute = Array.from({ length: 60 }, (_, i) => i) // 분
 
     const handleChange = (e) => {
         const { name, value } = e.target
         let filterValue = value
-        if (name === 'participateNumber' || name === 'pay') {
-            filterValue = value.replace(/[^0-9]/g, '')
+        if (name === 'pay') {
+            filterValue = Number(value.replace(/[^0-9]/g, ''))
         }
+        if (name === '인원') {
+            setParticipateNumber(value)
+        }
+
         setFormData((prevState) => ({
             ...prevState,
             [name]: filterValue,
+            date: selectDate,
         }))
     }
+
+    const dateHandler = (e) => {
+        setSelectDate(e)
+        setFormData((prevState) => ({
+            ...prevState,
+            date: e,
+        }))
+    }
+
+    const selectTimeHandler = (e) => {
+        const { name, value } = e.target
+        if (name === '시') {
+            setSelectHour(value)
+            setFormData((prevState) => ({
+                ...prevState,
+                studyTime: {
+                    hour: value,
+                    minute: selectMinute,
+                },
+            }))
+        } else if (name === '분') {
+            setSelectMinute(value)
+            setFormData((prevState) => ({
+                ...prevState,
+                studyTime: {
+                    hour: selectHour,
+                    minute: value,
+                },
+            }))
+        }
+    }
+
     const isValidData = () => {
         if (formData.studyName.length === 0) {
             alert('스터디명을 작성해주세요.')
             return false
         }
-        if (formData.participateNumber.length === 0) {
+        if (formData.participateNumber === 'participateNumber') {
             alert('참여인원을 작성해주세요.')
             return false
         }
@@ -69,29 +118,37 @@ export default function PlanWrite() {
             alert('장소를 작성해주세요.')
             return false
         }
-        if (formData.pay.length === 0) {
-            alert('참여비를 작성해주세요.')
+        if (selectHour === '시' || selectMinute === '분') {
+            alert('시간을 정확하게 선택해주세요.')
             return false
         }
-
         return true
     }
 
     const resetInput = () => {
         setFormData(() => ({
             studyName: '',
-            participateNumber: '',
+            participateNumber: '인원',
             place: '',
-            pay: '0',
+            pay: 0,
             date: new Date(),
+            uploadDate: new Date(),
+            studyTime: {
+                hour: '시',
+                minute: '분',
+            },
         }))
+        setSelectDate(new Date())
+        setParticipateNumber('인원')
+        setSelectHour('시')
+        setSelectMinute('분')
     }
 
     const submitHandler = async () => {
         if (isValidData()) {
             setFormData((prevState) => ({
                 ...prevState,
-                date,
+                uploadDate: new Date(),
             }))
 
             const studyScheduleInfo = collection(fireStore, `users/${user}/studySchedule`)
@@ -117,13 +174,18 @@ export default function PlanWrite() {
                         />
                     </div>
                     <div>
-                        <PlanWriteInput
-                            type="number"
+                        <select
+                            value={participateNumber}
                             name="participateNumber"
-                            value={formData.participateNumber}
                             onChange={handleChange}
-                            placeholder="참여인원"
-                        />
+                        >
+                            <option selected value="인원">
+                                인원
+                            </option>
+                            {cnt.map((v) => (
+                                <option value={v}>{v}명</option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <PlanWriteInput
@@ -151,9 +213,28 @@ export default function PlanWrite() {
                             placeholder="다음 스터디는 언제?"
                             classNames={classes}
                             clearable={false}
-                            onChange={setDate}
-                            value={date}
+                            name="selectDate"
+                            onChange={dateHandler}
+                            value={selectDate}
                         />
+                    </div>
+                    <div>
+                        <select value={selectHour} name="시" onChange={selectTimeHandler}>
+                            <option selected value="시">
+                                시
+                            </option>
+                            {hour.map((v) => (
+                                <option value={`${v}`}>{`0${String(v)}`.slice(-2)}시</option>
+                            ))}
+                        </select>
+                        <select value={selectMinute} name="분" onChange={selectTimeHandler}>
+                            <option selected value="분">
+                                분
+                            </option>
+                            {minute.map((v) => (
+                                <option value={`${v}`}>{`0${String(v)}`.slice(-2)}분</option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <PlanWriteSubmitButton onClick={() => submitHandler()}>

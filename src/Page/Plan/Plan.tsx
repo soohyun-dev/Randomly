@@ -5,6 +5,7 @@ import PlanWrite from 'Components/Plan/PlanWrite'
 import { useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
 import { Link } from 'react-router-dom'
+import useStudySchedule from 'hooks/useStudySchedule'
 import {
     LinkLoginBtn,
     ManageAccessSection,
@@ -18,6 +19,10 @@ import {
 
 export default function Plan() {
     const user = useSelector(selectUser)
+
+    const { data: studyScheduleData, isLoading } = useStudySchedule()
+
+    console.log(studyScheduleData)
     return (
         <>
             <Nav />
