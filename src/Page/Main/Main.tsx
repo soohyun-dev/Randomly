@@ -12,7 +12,6 @@ import {
     ImgBox,
     ImgContentBox,
     ImgContentBoxDiv,
-    PlusButton,
     Title,
     TitleContent,
     TitleSection,
