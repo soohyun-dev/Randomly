@@ -1,6 +1,10 @@
 import { createStyles, rem } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
+import { selectUser } from 'features/userSlice'
+import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { fireStore } from '../../../firebase'
 import {
     PlanDateBox,
     PlanInfoBox,
@@ -30,13 +34,15 @@ const useStyles = createStyles((theme) => ({
 }))
 
 export default function PlanWrite() {
+    const user = useSelector(selectUser)
     const [date, setDate] = useState(new Date())
     const { classes } = useStyles()
     const [formData, setFormData] = useState({
         studyName: '',
         participateNumber: '',
         place: '',
-        pay: '',
+        pay: '0',
+        date: new Date(),
     })
 
     const handleChange = (e) => {
@@ -50,9 +56,49 @@ export default function PlanWrite() {
             [name]: filterValue,
         }))
     }
+    const isValidData = () => {
+        if (formData.studyName.length === 0) {
+            alert('스터디명을 작성해주세요.')
+            return false
+        }
+        if (formData.participateNumber.length === 0) {
+            alert('참여인원을 작성해주세요.')
+            return false
+        }
+        if (formData.place.length === 0) {
+            alert('장소를 작성해주세요.')
+            return false
+        }
+        if (formData.pay.length === 0) {
+            alert('참여비를 작성해주세요.')
+            return false
+        }
 
-    const submitHandler = () => {
-        console.log(formData)
+        return true
+    }
+
+    const resetInput = () => {
+        setFormData(() => ({
+            studyName: '',
+            participateNumber: '',
+            place: '',
+            pay: '0',
+            date: new Date(),
+        }))
+    }
+
+    const submitHandler = async () => {
+        if (isValidData()) {
+            setFormData((prevState) => ({
+                ...prevState,
+                date,
+            }))
+
+            const studyScheduleInfo = collection(fireStore, `users/${user}/studySchedule`)
+            await addDoc(studyScheduleInfo, formData)
+            alert('스터디 일정이 등록되었습니다.')
+            resetInput()
+        }
     }
 
     return (
@@ -106,6 +152,7 @@ export default function PlanWrite() {
                             classNames={classes}
                             clearable={false}
                             onChange={setDate}
+                            value={date}
                         />
                     </div>
                     <div>

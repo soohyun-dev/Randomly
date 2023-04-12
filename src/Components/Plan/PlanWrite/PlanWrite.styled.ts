@@ -26,6 +26,7 @@ export const PlanWriteInputBox = styled.div`
 
 export const PlanDateBox = styled.div`
     width: 45%;
+    margin-top: 0.5rem;
 `
 
 export const PlanInfoBox = styled.div`
@@ -42,7 +43,7 @@ export const PlanWriteInput = styled.input`
 `
 
 export const PlanWriteSubmitButton = styled.button`
-    margin-top: 7em;
+    margin-top: 7.5em;
     width: 100%;
     font-size: 16px;
     padding: 0.8em 0.6em;
