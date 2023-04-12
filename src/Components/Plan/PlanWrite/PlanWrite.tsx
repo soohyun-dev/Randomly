@@ -63,7 +63,7 @@ export default function PlanWrite() {
         if (name === 'pay') {
             filterValue = Number(value.replace(/[^0-9]/g, ''))
         }
-        if (name === '인원') {
+        if (name === 'participateNumber') {
             setParticipateNumber(value)
         }
 

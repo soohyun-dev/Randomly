@@ -22,7 +22,6 @@ export default function Plan() {
 
     const { data: studyScheduleData, isLoading } = useStudySchedule()
 
-    console.log(studyScheduleData)
     return (
         <>
             <Nav />
