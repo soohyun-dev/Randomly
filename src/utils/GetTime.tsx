@@ -37,3 +37,17 @@ export function getTime() {
 export function getDateTime() {
     return `${getDate()} ${getTime()}`
 }
+
+/**
+ * 파라미터 날짜를 리턴하는 함수이다.
+ * @param {None}
+ * @returns yyyy-mm-dd
+ */
+
+export function getDateFormat(date): string {
+    const year = date.getFullYear()
+    const month = `0${date.getMonth() + 1}`.slice(-2)
+    const day = `0${date.getDate()}`.slice(-2)
+
+    return `${year}-${month}-${day}`
+}

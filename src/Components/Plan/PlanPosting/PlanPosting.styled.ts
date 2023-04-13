@@ -14,17 +14,20 @@ export const PlanPostingBox = styled.div`
     }
 `
 
-export const StudyNameBox = styled.div`
+export const PlanPostingStudyNameBox = styled.div`
     text-align: center;
+    margin-bottom: 2em;
 `
 
-export const StudyNameParagraph = styled.p`
+export const PlanPostingStudyNameParagraph = styled.p`
     font-size: 20px;
     font-weight: 500;
 `
 
+export const PlanPostingDateBox = styled.div``
+
 export const PlanPostingPlaceBox = styled.div`
-    margin: 2em 0 1em 0;
+    margin: 1em 0 1em 0;
     display: flex;
 `
 

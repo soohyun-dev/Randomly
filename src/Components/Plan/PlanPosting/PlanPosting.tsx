@@ -1,12 +1,14 @@
+import { getDateFormat } from 'utils/GetTime'
 import {
     ParticipateBox,
     PersonalCostParagraph,
     PlanPostingBox,
     PlanPostingCostBox,
+    PlanPostingDateBox,
     PlanPostingPlaceBox,
+    PlanPostingStudyNameBox,
+    PlanPostingStudyNameParagraph,
     PlanPostingTimeParagraph,
-    StudyNameBox,
-    StudyNameParagraph,
 } from './PlanPosting.styled'
 
 export default function PlanPosting({
@@ -16,13 +18,18 @@ export default function PlanPosting({
     place,
     studyName,
     studyTime,
+    date,
     uploadDate,
 }) {
+    console.log(date)
     return (
         <PlanPostingBox>
-            <StudyNameBox>
-                <StudyNameParagraph>{studyName}</StudyNameParagraph>
-            </StudyNameBox>
+            <PlanPostingStudyNameBox>
+                <PlanPostingStudyNameParagraph>{studyName}</PlanPostingStudyNameParagraph>
+            </PlanPostingStudyNameBox>
+            <PlanPostingDateBox>
+                <p>날짜: {getDateFormat(new Date(date.seconds * 1000))}</p>
+            </PlanPostingDateBox>
             <PlanPostingPlaceBox>
                 <p>장소: {place} </p>
                 <PlanPostingTimeParagraph>
