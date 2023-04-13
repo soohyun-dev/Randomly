@@ -198,7 +198,7 @@ export default function PlanWrite() {
                     <div>
                         <PlanWriteInput
                             name="pay"
-                            value={formData.pay}
+                            value={formData.pay.toLocaleString('ko-KR')}
                             onChange={handleChange}
                             placeholder="대여료"
                         />

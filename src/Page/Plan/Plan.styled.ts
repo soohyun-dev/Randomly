@@ -44,3 +44,14 @@ export const LinkLoginBtn = styled.p`
         opacity: 70%;
     }
 `
+
+export const PlanPostingSection = styled.section`
+    display: flex;
+    justify-content: center;
+`
+
+export const PlanPostingListBox = styled.div`
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+`

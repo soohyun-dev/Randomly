@@ -6,11 +6,14 @@ import { useSelector } from 'react-redux'
 import { selectUser } from 'features/userSlice'
 import { Link } from 'react-router-dom'
 import useStudySchedule from 'hooks/useStudySchedule'
+import PlanPosting from 'Components/Plan/PlanPosting'
 import {
     LinkLoginBtn,
     ManageAccessSection,
     ManageAccessTitle,
     PlanGuideParagraph,
+    PlanPostingListBox,
+    PlanPostingSection,
     PlanTitleBox,
     PlanTitleParagraph,
     PlanTitleSection,
@@ -32,6 +35,16 @@ export default function Plan() {
                         <PlanGuideParagraph>스터디 일정</PlanGuideParagraph>
                     </PlanTitleBox>
                 </PlanTitleSection>
+                <PlanPostingSection>
+                    <PlanPostingListBox>
+                        {Object.keys(studyScheduleData).map((schedule) => (
+                            <PlanPosting
+                                key={studyScheduleData[schedule].id}
+                                {...studyScheduleData[schedule]}
+                            />
+                        ))}
+                    </PlanPostingListBox>
+                </PlanPostingSection>
                 {user !== null ? (
                     <PlanWriteSection>
                         <PlanWrite />
