@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const PlanPostingBox = styled.div`
     width: 30em;
-    margin: 2em;
+    margin: 1em 0em 1em 6em;
     padding: 1em;
     border: 1px solid #f1f3f5;
     border-radius: 15px;

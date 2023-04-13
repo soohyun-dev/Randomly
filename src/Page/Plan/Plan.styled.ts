@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const PlanTitleSection = styled.section`
     margin-top: 9em;
+    margin-bottom: 2em;
     text-align: center;
 `
 
@@ -17,6 +18,7 @@ export const PlanGuideParagraph = styled.p`
 `
 
 export const PlanWriteSection = styled.section`
+    margin-top: 5em;
     display: flex;
     justify-content: center;
 `
@@ -51,7 +53,8 @@ export const PlanPostingSection = styled.section`
 `
 
 export const PlanPostingListBox = styled.div`
-    width: 80%;
+    width: 85%;
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 `

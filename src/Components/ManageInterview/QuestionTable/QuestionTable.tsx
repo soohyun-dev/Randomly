@@ -19,11 +19,10 @@ export default function QuestionTable({ question, id, idx, catagory }) {
      * @param {Number} 수정할 질문의 id값
      */
 
-    const updateQuestion = async (id) => {
-        const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/questions`, id)
+    const updateQuestion = async (updateId) => {
+        const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/questions`, updateId)
         const newContent = { question: newQuestion }
         await updateDoc(questionDoc, newContent)
-        window.location.reload()
     }
 
     /**
@@ -31,14 +30,17 @@ export default function QuestionTable({ question, id, idx, catagory }) {
      *
      * @param {Number} 삭제할 질문의 id값
      */
-    const checkDelete = (id) => {
-        const deleteQuestion = async (id) => {
-            const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/questions`, id)
+    const checkDelete = (deleteId) => {
+        const deleteQuestion = async (deleteDocId) => {
+            const questionDoc = doc(
+                fireStore,
+                `users/${user}/packages/${folderId}/questions`,
+                deleteDocId
+            )
             await deleteDoc(questionDoc)
-            window.location.reload()
         }
         if (window.confirm('정말 삭제합니까?')) {
-            deleteQuestion(id)
+            deleteQuestion(deleteId)
             alert('삭제되었습니다.')
         }
     }

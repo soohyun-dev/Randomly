@@ -75,7 +75,6 @@ export default function Manage() {
         const deleteFolder = async (id) => {
             const folderDoc = doc(fireStore, `users/${user}/packages`, id)
             await deleteDoc(folderDoc)
-            window.location.reload()
         }
         if (window.confirm(`${folders[target].title} 폴더를 정말 삭제합니까?`)) {
             deleteFolder(folders[target].id)
