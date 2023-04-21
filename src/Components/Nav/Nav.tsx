@@ -20,8 +20,7 @@ export default function Nav(props) {
     const [scrollPosition, setScrollPosition] = useState(0)
     const user = useSelector(selectUser)
     const navigate = useNavigate()
-    const { page } = props
-    const { isModalOpen } = props
+    const { page, isModalOpen } = props
 
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop)

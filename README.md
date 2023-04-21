@@ -231,6 +231,12 @@
 
 <br><br><br>
 
+## 구현 예정 사항
+
+-   스터디 일정 등록 기능
+
+<br><br><br>
+
 # 🛠️ 사용 기술
 
 ## 💻 Web Languages / Libraries

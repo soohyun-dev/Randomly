@@ -77,9 +77,6 @@ export default function ShowQuestion({ result }: { result: number[] | [] }) {
                                 </CorrectBtn>
                             </QuestionBlock>
                             <StopWatch />
-                            <QuestionCatagoryLabel>
-                                {questions[v].catagory}
-                            </QuestionCatagoryLabel>{' '}
                         </QuestionText>
                     ) : (
                         <QuestionText key={`result-${v}`} color={correctCnt[v]}>
