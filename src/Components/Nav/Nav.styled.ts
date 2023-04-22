@@ -26,6 +26,12 @@ export const TopHeader = styled.header<Scroll>`
         text-decoration: none;
         color: black;
     }
+    @media screen and (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
 `
 
 export const LinkText = styled(Link)<Scroll>`
@@ -45,6 +51,12 @@ export const Menu = styled.div`
     display: flex;
     justify-content: center;
     font-size: 16px;
+    @media screen and (max-width: 700px) {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        position
+    }
 `
 
 export const MenuText = styled.p`

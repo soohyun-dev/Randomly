@@ -21,10 +21,7 @@ export const folderSlice = createSlice({
 export const { setFolder } = folderSlice.actions
 
 export const selectFolder = (state) => state.folder.folders
-export const chooseFolder = (state) => {
-    console.log(state)
-    return state.folder.choose
-}
+export const chooseFolder = (state) => state.folder.choose
 export const chooseId = (state) => state.folder.id
 
 export default folderSlice.reducer
