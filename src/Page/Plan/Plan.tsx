@@ -12,6 +12,7 @@ import {
     ManageAccessSection,
     ManageAccessTitle,
     PlanGuideParagraph,
+    PlanGuideTextBox,
     PlanPostingListBox,
     PlanPostingSection,
     PlanTitleBox,
@@ -36,14 +37,21 @@ export default function Plan() {
                     </PlanTitleBox>
                 </PlanTitleSection>
                 <PlanPostingSection>
-                    <PlanPostingListBox>
-                        {Object.keys(studyScheduleData).map((schedule) => (
-                            <PlanPosting
-                                key={studyScheduleData[schedule].id}
-                                {...studyScheduleData[schedule]}
-                            />
-                        ))}
-                    </PlanPostingListBox>
+                    {Object.keys(studyScheduleData).length === 0 ? (
+                        <PlanGuideTextBox>
+                            <p>등록된 일정이 없어요! 스터디 일정을 등록해주세요.💁‍♂️</p>
+                            <p>⬇️⬇️</p>
+                        </PlanGuideTextBox>
+                    ) : (
+                        <PlanPostingListBox>
+                            {Object.keys(studyScheduleData).map((schedule) => (
+                                <PlanPosting
+                                    key={studyScheduleData[schedule].id}
+                                    {...studyScheduleData[schedule]}
+                                />
+                            ))}
+                        </PlanPostingListBox>
+                    )}
                 </PlanPostingSection>
                 {user !== null ? (
                     <PlanWriteSection>

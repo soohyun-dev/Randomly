@@ -52,6 +52,12 @@ export const PlanPostingSection = styled.section`
     justify-content: center;
 `
 
+export const PlanGuideTextBox = styled.div`
+    margin: 2em 0;
+    text-align: center;
+    font-size: 20px;
+`
+
 export const PlanPostingListBox = styled.div`
     width: 85%;
     display: flex;
