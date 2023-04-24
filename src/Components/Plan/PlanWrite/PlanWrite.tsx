@@ -6,8 +6,11 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { fireStore } from '../../../firebase'
 import {
-    PlanDateBox,
+    PlanDateTextPargraph,
     PlanInfoBox,
+    PlanSelect,
+    PlanTextBox,
+    PlanTextPargraph,
     PlanWriteBox,
     PlanWriteInput,
     PlanWriteInputBox,
@@ -18,9 +21,10 @@ import {
 
 const useStyles = createStyles((theme) => ({
     input: {
-        height: rem(54),
-        paddingTop: rem(18),
+        width: '17.5em',
+        height: rem(30),
         border: '2px solid #d2e3fc',
+        borderRadius: '15px',
     },
 
     label: {
@@ -165,16 +169,69 @@ export default function PlanWrite() {
             </PlanWriteTitleBox>
             <PlanWriteInputBox>
                 <PlanInfoBox>
-                    <div>
+                    <PlanTextBox>
+                        <PlanTextPargraph>스터디명</PlanTextPargraph>
                         <PlanWriteInput
                             name="studyName"
                             value={formData.studyName}
                             onChange={handleChange}
                             placeholder="스터디명"
                         />
-                    </div>
-                    <div>
-                        <select
+                    </PlanTextBox>
+                    <PlanTextBox>
+                        <PlanTextPargraph>장소</PlanTextPargraph>
+                        <PlanWriteInput
+                            name="place"
+                            value={formData.place}
+                            onChange={handleChange}
+                            placeholder="장소"
+                        />
+                    </PlanTextBox>
+                    <PlanTextBox>
+                        <PlanTextPargraph>스터디비</PlanTextPargraph>
+                        <PlanWriteInput
+                            name="pay"
+                            value={formData.pay.toLocaleString('ko-KR')}
+                            onChange={handleChange}
+                            placeholder="스터디비"
+                        />
+                    </PlanTextBox>
+                    <PlanTextBox>
+                        <PlanDateTextPargraph>스터디 날짜</PlanDateTextPargraph>
+                        <DatePickerInput
+                            mt="md"
+                            popoverProps={{ withinPortal: true }}
+                            placeholder="다음 스터디는 언제?"
+                            classNames={classes}
+                            clearable={false}
+                            name="selectDate"
+                            onChange={dateHandler}
+                            value={selectDate}
+                        />
+                    </PlanTextBox>
+                    <PlanTextBox>
+                        <PlanTextPargraph>스터디 시각</PlanTextPargraph>
+                        <PlanSelect value={selectHour} name="시" onChange={selectTimeHandler}>
+                            <option selected value="시">
+                                시
+                            </option>
+                            {hour.map((v) => (
+                                <option value={`${v}`}>{`0${String(v)}`.slice(-2)}시</option>
+                            ))}
+                        </PlanSelect>
+                        <PlanSelect value={selectMinute} name="분" onChange={selectTimeHandler}>
+                            <option selected value="분">
+                                분
+                            </option>
+                            {minute.map((v) => (
+                                <option value={`${v}`}>{`0${String(v)}`.slice(-2)}분</option>
+                            ))}
+                        </PlanSelect>
+                    </PlanTextBox>
+                    <PlanTextBox>
+                        <PlanTextPargraph>인원</PlanTextPargraph>
+
+                        <PlanSelect
                             value={participateNumber}
                             name="participateNumber"
                             onChange={handleChange}
@@ -185,63 +242,14 @@ export default function PlanWrite() {
                             {cnt.map((v) => (
                                 <option value={v}>{v}명</option>
                             ))}
-                        </select>
-                    </div>
-                    <div>
-                        <PlanWriteInput
-                            name="place"
-                            value={formData.place}
-                            onChange={handleChange}
-                            placeholder="장소"
-                        />
-                    </div>
-                    <div>
-                        <PlanWriteInput
-                            name="pay"
-                            value={formData.pay.toLocaleString('ko-KR')}
-                            onChange={handleChange}
-                            placeholder="대여료"
-                        />
-                    </div>
-                </PlanInfoBox>
-                <PlanDateBox>
-                    <div>
-                        <DatePickerInput
-                            mt="md"
-                            popoverProps={{ withinPortal: true }}
-                            label="스터디 날짜"
-                            placeholder="다음 스터디는 언제?"
-                            classNames={classes}
-                            clearable={false}
-                            name="selectDate"
-                            onChange={dateHandler}
-                            value={selectDate}
-                        />
-                    </div>
-                    <div>
-                        <select value={selectHour} name="시" onChange={selectTimeHandler}>
-                            <option selected value="시">
-                                시
-                            </option>
-                            {hour.map((v) => (
-                                <option value={`${v}`}>{`0${String(v)}`.slice(-2)}시</option>
-                            ))}
-                        </select>
-                        <select value={selectMinute} name="분" onChange={selectTimeHandler}>
-                            <option selected value="분">
-                                분
-                            </option>
-                            {minute.map((v) => (
-                                <option value={`${v}`}>{`0${String(v)}`.slice(-2)}분</option>
-                            ))}
-                        </select>
-                    </div>
+                        </PlanSelect>
+                    </PlanTextBox>
                     <div>
                         <PlanWriteSubmitButton onClick={() => submitHandler()}>
                             등록
                         </PlanWriteSubmitButton>
                     </div>
-                </PlanDateBox>
+                </PlanInfoBox>
             </PlanWriteInputBox>
         </PlanWriteBox>
     )

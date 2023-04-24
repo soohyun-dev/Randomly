@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const PlanWriteBox = styled.div`
-    width: 60%;
+    width: 40%;
     margin: 5em;
     padding: 2em;
     border: 2px solid #d2e3fc;
@@ -24,20 +24,32 @@ export const PlanWriteInputBox = styled.div`
     justify-content: center;
 `
 
-export const PlanDateBox = styled.div`
-    width: 45%;
-    margin-top: 0.5rem;
-`
-
 export const PlanInfoBox = styled.div`
-    width: 45%;
+    width: 60%;
     text-align: center;
 `
 
+export const PlanTextBox = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const PlanTextPargraph = styled.p`
+    width: 40%;
+    text-align: left;
+`
+
+export const PlanDateTextPargraph = styled.p`
+    margin-bottom: 1em;
+    padding-top: 2em;
+    width: 40%;
+    text-align: left;
+`
+
 export const PlanWriteInput = styled.input`
-    margin: 0.5em;
+    margin: 0.5em 0;
     padding: 1em;
-    width: 80%;
+    width: 20em;
     border: 2px solid #d2e3fc;
     border-radius: 15px;
 `
@@ -56,4 +68,12 @@ export const PlanWriteSubmitButton = styled.button`
     &:hover {
         opacity: 0.9;
     }
+`
+export const PlanSelect = styled.select`
+    margin: 0.5em 0.5em 0.5em 0;
+    padding: 0.5em;
+    border: 2px solid #d2e3fc;
+    width: 6em;
+    border-radius: 12px;
+    text-align: center;
 `
