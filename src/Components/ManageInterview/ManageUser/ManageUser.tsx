@@ -13,7 +13,6 @@ export default function ManageUser() {
     const [newMember, setNewMember] = useState<string>('')
     const user = useSelector(selectUser)
     const folderId = useSelector(chooseId)
-    const userInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
 
     const { data, isLoading } = useMember(folderId)
     const members = data
@@ -24,6 +23,7 @@ export default function ManageUser() {
      * @param {Number}
      */
     const addUser = async () => {
+        const userInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
         const idx = Object.keys(members).length
         const newData: NewData = {}
         newData.idx = idx
