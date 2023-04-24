@@ -21,7 +21,7 @@ import {
 
 const useStyles = createStyles((theme) => ({
     input: {
-        width: '17.5em',
+        width: '21.5em',
         height: rem(30),
         border: '2px solid #d2e3fc',
         borderRadius: '15px',
@@ -230,7 +230,6 @@ export default function PlanWrite() {
                     </PlanTextBox>
                     <PlanTextBox>
                         <PlanTextPargraph>인원</PlanTextPargraph>
-
                         <PlanSelect
                             value={participateNumber}
                             name="participateNumber"

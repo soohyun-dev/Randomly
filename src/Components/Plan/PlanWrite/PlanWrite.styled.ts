@@ -25,7 +25,7 @@ export const PlanWriteInputBox = styled.div`
 `
 
 export const PlanInfoBox = styled.div`
-    width: 60%;
+    width: 70%;
     text-align: center;
 `
 
@@ -35,14 +35,14 @@ export const PlanTextBox = styled.div`
 `
 
 export const PlanTextPargraph = styled.p`
-    width: 40%;
+    width: 30%;
     text-align: left;
 `
 
 export const PlanDateTextPargraph = styled.p`
     margin-bottom: 1em;
     padding-top: 2em;
-    width: 40%;
+    width: 30%;
     text-align: left;
 `
 
