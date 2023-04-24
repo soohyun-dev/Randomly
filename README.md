@@ -231,6 +231,12 @@
 
 <br><br><br>
 
+## 구현 예정 사항
+
+-   스터디 일정 등록 기능
+
+<br><br><br>
+
 # 🛠️ 사용 기술
 
 ## 💻 Web Languages / Libraries
@@ -399,6 +405,10 @@
  ┃ ┃ ┃ ┣ 📜Catagory.styled.ts
  ┃ ┃ ┃ ┣ 📜Catagory.tsx
  ┃ ┃ ┃ ┗ 📜index.ts
+ ┃ ┃ ┣ 📂FolderAddModal
+ ┃ ┃ ┃ ┣ 📜FolderAddModal.styled.ts
+ ┃ ┃ ┃ ┣ 📜FolderAddModal.tsx
+ ┃ ┃ ┃ ┗ 📜index.ts
  ┃ ┃ ┣ 📂ManageQuestion
  ┃ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┃ ┣ 📜ManageQuestion.styled.ts
@@ -418,6 +428,9 @@
  ┃ ┃ ┃ ┣ 📜UserTable.styled.ts
  ┃ ┃ ┃ ┗ 📜UserTable.tsx
  ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂Map
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┗ 📜KakaoMap.tsx
  ┃ ┣ 📂Memo
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜Memo.styled.ts
@@ -436,6 +449,15 @@
  ┃ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┃ ┣ 📜NoticeList.styled.ts
  ┃ ┃ ┃ ┗ 📜NoticeList.tsx
+ ┃ ┣ 📂Plan
+ ┃ ┃ ┣ 📂PlanPosting
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜PlanPosting.styled.ts
+ ┃ ┃ ┃ ┗ 📜PlanPosting.tsx
+ ┃ ┃ ┗ 📂PlanWrite
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜PlanWrite.styled.ts
+ ┃ ┃ ┃ ┗ 📜PlanWrite.tsx
  ┃ ┣ 📂Play
  ┃ ┃ ┣ 📂ShowMember
  ┃ ┃ ┃ ┣ 📜index.ts
@@ -469,6 +491,19 @@
  ┃ ┃ ┃ ┣ 📜WriteComment.styled.ts
  ┃ ┃ ┃ ┗ 📜WriteComment.tsx
  ┃ ┃ ┗ 📜types.ts
+ ┃ ┣ 📂Review
+ ┃ ┃ ┣ 📂ReviewDetail
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ReviewDetail.syled.ts
+ ┃ ┃ ┃ ┗ 📜ReviewDetail.tsx
+ ┃ ┃ ┣ 📂ReviewForm
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ReviewForm.styled.ts
+ ┃ ┃ ┃ ┗ 📜ReviewForm.tsx
+ ┃ ┃ ┗ 📂ReviewPosting
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ReviewPosting.styled.ts
+ ┃ ┃ ┃ ┗ 📜ReviewPosting.tsx
  ┃ ┗ 📂StopWatch
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜StopWatch.styled.ts
@@ -487,7 +522,9 @@
  ┃ ┣ 📜useNotice.tsx
  ┃ ┣ 📜useQA.tsx
  ┃ ┣ 📜useQAComment.tsx
- ┃ ┗ 📜useQuestion.tsx
+ ┃ ┣ 📜useQuestion.tsx
+ ┃ ┣ 📜useReview.tsx
+ ┃ ┗ 📜useStudySchedule.tsx
  ┣ 📂icons
  ┃ ┗ 📂DarkModeToggle
  ┃ ┃ ┣ 📜DarkModeToggle.tsx
@@ -533,7 +570,7 @@
  ┃ ┃ ┣ 📜PlayInterview.styled.ts
  ┃ ┃ ┣ 📜PlayInterview.tsx
  ┃ ┃ ┗ 📜types.ts
- ┃ ┗ 📂Q&A
+ ┃ ┣ 📂Q&A
  ┃ ┃ ┣ 📂QAPage
  ┃ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┃ ┣ 📜QAPage.styled.ts
@@ -547,14 +584,24 @@
  ┃ ┃ ┃ ┣ 📜types.ts
  ┃ ┃ ┃ ┣ 📜WriteQA.styled.ts
  ┃ ┃ ┃ ┗ 📜WriteQA.tsx
+ ┃ ┗ 📂Review
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜Review.styled.ts
+ ┃ ┃ ┗ 📜Review.tsx
  ┣ 📂store
  ┃ ┣ 📜index.ts
  ┃ ┗ 📜store.tsx
  ┣ 📂stories
- ┃ ┗ 📜Comment.stories.tsx
+ ┃ ┣ 📂Comment
+ ┃ ┃ ┗ 📜Comment.stories.tsx
+ ┃ ┗ 📂Review
+ ┃ ┃ ┣ 📜ReviewDetail.stories.tsx
+ ┃ ┃ ┗ 📜ReviewPosting.stories.tsx
  ┣ 📂styles
  ┃ ┣ 📜GlobalStyle.tsx
  ┃ ┗ 📜theme.ts
+ ┣ 📂types
+ ┃ ┗ 📜question.ts
  ┣ 📂utils
  ┃ ┣ 📜EqualDistribution.tsx
  ┃ ┣ 📜GetTime.tsx

@@ -13,17 +13,16 @@ export default function ManageUser() {
     const [newMember, setNewMember] = useState<string>('')
     const user = useSelector(selectUser)
     const folderId = useSelector(chooseId)
-    const userInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
 
     const { data, isLoading } = useMember(folderId)
     const members = data
-
     /**
      * 유저 추가
      *
      * @param {Number}
      */
     const addUser = async () => {
+        const userInfo = collection(fireStore, `users/${user}/packages/${folderId}/members`)
         const idx = Object.keys(members).length
         const newData: NewData = {}
         newData.idx = idx
@@ -43,18 +42,22 @@ export default function ManageUser() {
     return (
         <UserListContainer>
             <div>
-                <div>
-                    <UserInput
-                        value={newMember}
-                        type="text"
-                        placeholder="추가할 참여자를 입력해주세요."
-                        onChange={(e) => {
-                            setNewMember(e.target.value)
-                        }}
-                        onKeyDown={enterSubmit}
-                    />
-                    <AddBtn onClick={addUser}>참여자 추가</AddBtn>
-                </div>
+                {folderId === '' ? (
+                    ''
+                ) : (
+                    <div>
+                        <UserInput
+                            value={newMember}
+                            type="text"
+                            placeholder="추가할 참여자를 입력해주세요."
+                            onChange={(e) => {
+                                setNewMember(e.target.value)
+                            }}
+                            onKeyDown={enterSubmit}
+                        />
+                        <AddBtn onClick={addUser}>참여자 추가</AddBtn>
+                    </div>
+                )}
                 <div style={{ display: 'inline-block' }}>
                     <Table>
                         <thead>

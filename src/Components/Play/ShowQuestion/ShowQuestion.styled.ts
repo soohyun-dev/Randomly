@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
 export const QuestionBlock = styled.div`
-    display: inline-block;
+    height: 100%;
     line-height: 35px;
+    max-width: 28em;
 `
 
-export const QuestionText = styled.p<{ color: any }>`
+export const QuestionText = styled.div<{ color: any }>`
     font-size: 21px;
     font-weight: 600;
     margin: 40px 15px;
@@ -34,6 +35,7 @@ export const ShowBtn = styled.button<{ color: any }>`
 
 export const CorrectBtn = styled.button<{ color: any }>`
     width: 3em;
+    height: 2.2em;
     padding: 4px 0;
     margin-left: 1em;
     border-radius: 10px;

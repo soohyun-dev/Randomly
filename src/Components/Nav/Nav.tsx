@@ -20,8 +20,7 @@ export default function Nav(props) {
     const [scrollPosition, setScrollPosition] = useState(0)
     const user = useSelector(selectUser)
     const navigate = useNavigate()
-    const { page } = props
-    const { isModalOpen } = props
+    const { page, isModalOpen } = props
 
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop)
@@ -83,14 +82,14 @@ export default function Nav(props) {
                         <MenuText>MANAGE</MenuText>
                     </LinkText>
                 </div>
-                {/* <div>
+                <div>
                     <LinkText
                         to="/Plan"
                         scroll={page === 'Main' && scrollPosition < 50 ? 'origin' : 'change'}
                     >
                         <MenuText>PLAN</MenuText>
                     </LinkText>
-                </div> */}
+                </div>
                 <div>
                     <LinkText
                         to="/QAPage"

@@ -20,8 +20,8 @@ export default function UserTable({ member, id, idx }) {
      * @param {Number} 수정할 유저의 id값
      */
 
-    const updateQuestion = async (id) => {
-        const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/members`, id)
+    const updateQuestion = async (updateId) => {
+        const questionDoc = doc(fireStore, `users/${user}/packages/${folderId}/members`, updateId)
         const newContent = { member: newMember }
         await updateDoc(questionDoc, newContent)
         await getChange(!change)
@@ -32,13 +32,17 @@ export default function UserTable({ member, id, idx }) {
      *
      * @param {Number} 삭제할 유저의 id값
      */
-    const checkDelete = (id) => {
-        const deleteQuestion = async (id) => {
-            const memberDoc = doc(fireStore, `users/${user}/packages/${folderId}/members`, id)
+    const checkDelete = (deleteId) => {
+        const deleteQuestion = async (deleteDocId) => {
+            const memberDoc = doc(
+                fireStore,
+                `users/${user}/packages/${folderId}/members`,
+                deleteDocId
+            )
             await deleteDoc(memberDoc)
         }
         if (window.confirm('정말 삭제합니까?')) {
-            deleteQuestion(id)
+            deleteQuestion(deleteId)
             alert('삭제되었습니다.')
             getChange(!change)
         }

@@ -12,7 +12,6 @@ import {
     ImgBox,
     ImgContentBox,
     ImgContentBoxDiv,
-    PlusButton,
     Title,
     TitleContent,
     TitleSection,
@@ -51,7 +50,10 @@ export default function Main() {
                     <ImgContentBoxDiv>
                         <ImgContentBox ref={ref1}>
                             <ImgBox>
-                                <Img src="https://user-images.githubusercontent.com/81623931/231205106-919377a8-4d6a-465a-b4fc-7ef7ca3ada26.jpg" />
+                                <Img
+                                    src="https://user-images.githubusercontent.com/81623931/231205106-919377a8-4d6a-465a-b4fc-7ef7ca3ada26.jpg"
+                                    alt="img"
+                                />
                             </ImgBox>
                             <ContentBox>
                                 <ContentBoxTitleLogoFirst>🆙</ContentBoxTitleLogoFirst>
@@ -68,7 +70,10 @@ export default function Main() {
                     <ImgContentBoxDiv>
                         <ImgContentBox>
                             <ImgBox>
-                                <Img src="https://user-images.githubusercontent.com/81623931/216874792-4297b159-d557-4b6c-bf99-d7e75bd30564.jpg" />
+                                <Img
+                                    src="https://user-images.githubusercontent.com/81623931/216874792-4297b159-d557-4b6c-bf99-d7e75bd30564.jpg"
+                                    alt="img"
+                                />
                             </ImgBox>
                             <ContentBox>
                                 <ContentBoxTitleLogo>♾️</ContentBoxTitleLogo>
@@ -86,7 +91,10 @@ export default function Main() {
                     <ImgContentBoxDiv>
                         <ImgContentBox>
                             <ImgBox>
-                                <Img src="https://user-images.githubusercontent.com/81623931/216986610-a369f5cc-c434-4887-a432-91567d2561df.png" />
+                                <Img
+                                    src="https://user-images.githubusercontent.com/81623931/216986610-a369f5cc-c434-4887-a432-91567d2561df.png"
+                                    alt="img"
+                                />
                             </ImgBox>
                             <ContentBox>
                                 <ContentBoxTitleLogo>🌏</ContentBoxTitleLogo>

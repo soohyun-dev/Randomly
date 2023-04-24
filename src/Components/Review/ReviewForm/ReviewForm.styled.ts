@@ -36,7 +36,7 @@ export const ReviewUserInput = styled.input`
     height: 2.5em;
     margin-top: 0.5em;
     padding-left: 0.5em;
-    border: 1px solid #868e96;
+    border: 2px solid #d2e3fc;
     border-radius: 8px;
 `
 
@@ -45,7 +45,7 @@ export const ReviewAdviseTextArea = styled.textarea`
     height: 30em;
     margin: 1em 1.5em 0 0;
     padding: 0.5em;
-    border: 1px solid #868e96;
+    border: 2px solid #d2e3fc;
     border-radius: 5px;
 `
 export const ReviewFormButtonBox = styled.div`
@@ -68,6 +68,6 @@ export const ReviewFormButton = styled.button`
 export const ReviewFormPassWord = styled.input`
     padding-left: 0.5em;
     margin-right: 1.5em;
-    border: 1px solid #868e96;
+    border: 2px solid #d2e3fc;
     border-radius: 5px;
 `

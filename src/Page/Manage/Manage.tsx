@@ -1,11 +1,9 @@
 import styled from 'styled-components'
-import { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from 'Page/Error'
-import ManageUser from 'Components/ManageInterview/ManageUser'
-import ManageQuestion from 'Components/ManageInterview/ManageQuestion'
 import Footer from 'Components/Footer'
 import Nav from 'Components/Nav'
 import { selectUser } from 'features/userSlice'
@@ -34,6 +32,9 @@ import {
     FolderDeleteButton,
     ManageSection,
 } from './Manage.styled'
+
+const ManageQuestion = React.lazy(() => import('Components/ManageInterview/ManageQuestion'))
+const ManageUser = React.lazy(() => import('Components/ManageInterview/ManageUser'))
 
 export default function Manage() {
     const dispatch = useDispatch()
@@ -75,7 +76,6 @@ export default function Manage() {
         const deleteFolder = async (id) => {
             const folderDoc = doc(fireStore, `users/${user}/packages`, id)
             await deleteDoc(folderDoc)
-            window.location.reload()
         }
         if (window.confirm(`${folders[target].title} 폴더를 정말 삭제합니까?`)) {
             deleteFolder(folders[target].id)

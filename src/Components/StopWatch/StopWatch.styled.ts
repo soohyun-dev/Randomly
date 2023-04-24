@@ -19,7 +19,8 @@ export const Timer = styled.div`
 
 export const TimerBtn = styled.button<TimeInfo>`
     cursor: pointer;
-    width: 4em;
+    min-width: 4em;
+    height: 2.5em;
     margin: 0 0.2em;
     color: white;
     border: none;
