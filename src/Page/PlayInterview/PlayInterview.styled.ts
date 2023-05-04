@@ -62,7 +62,7 @@ export const GuideToggle = styled.p`
 `
 
 export const ManageAccessSection = styled.section`
-    display: felx;
+    display: flex;
     justify-content: center;
     margin: 5em 0;
 `
