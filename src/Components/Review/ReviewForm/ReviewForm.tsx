@@ -1,5 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
+import { useQueryClient } from 'react-query'
 import { getDateTime } from 'utils/GetTime'
 import { fireStore } from '../../../firebase'
 import {
@@ -33,6 +34,7 @@ export default function ReviewForm() {
     const [answerAdvise, setAnswerAdvise] = useState('')
     const [writerName, setWriterName] = useState('익명')
     const [password, setPassword] = useState('')
+    const queryClient = useQueryClient()
 
     const reviewDatabaseInfo = collection(fireStore, 'review')
 
@@ -55,6 +57,7 @@ export default function ReviewForm() {
         await addDoc(reviewDatabaseInfo, newData).then((doc) => {
             docId = doc.id
         })
+        await queryClient.invalidateQueries('review')
         alert('리뷰가 추가되었습니다.')
         setMemberName('')
         setSelfIntroAdvise('')
@@ -120,6 +123,7 @@ export default function ReviewForm() {
                 </ReviewUserBox>
                 <ReviewFormButtonBox>
                     <ReviewFormPassWord
+                        type="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         placeholder="4자리 이상의 비밀번호 "

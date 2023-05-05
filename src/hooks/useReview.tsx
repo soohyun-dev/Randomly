@@ -14,7 +14,9 @@ const getReview = async (reviewInfo) => {
 
 const useReview = () => {
     const reviewInfo = collection(fireStore, `review`)
-    const review = useQuery(`review`, () => getReview(reviewInfo))
+    const review = useQuery(`review`, () => getReview(reviewInfo), {
+        staleTime: 5 * 60 * 1000, // 5분
+    })
 
     return review.data !== undefined ? review : { isLoading: true, isError: false, data: [] }
 }
