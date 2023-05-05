@@ -1,6 +1,7 @@
 import Footer from 'Components/Footer'
 import Loading from 'Components/Loading'
 import Nav from 'Components/Nav'
+import ReviewPagination from 'Components/Pagination/ReviewPagination'
 import ReviewDetail from 'Components/Review/ReviewDetail'
 import ReviewPosting from 'Components/Review/ReviewPosting'
 import { selectIsModalOpen, themeSlice } from 'features/themeSlice'
@@ -110,6 +111,7 @@ export default function Review() {
                             ))}
                         </ReviewPostingListSection>
                     </ReviewAllSection>
+                    <ReviewPagination reviewLength={reviews.length} listSize={10} />
                 </Suspense>
             </ErrorBoundary>
             <Footer />

@@ -1,10 +1,23 @@
-import { ReviewPaginationSection } from './ReviewPagination.styled'
+import { useState } from 'react'
+import { ReviewPaginationButton, ReviewPaginationSection } from './ReviewPagination.styled'
 
-export default function ReviewPagination() {
+export default function ReviewPagination({ reviewLength, listSize }) {
+    const [chooseButton, setChooseButton] = useState(1)
+    const [pageButton, setPageButton] = useState(
+        Array.from({ length: Math.round(reviewLength / listSize) }, (_, idx) => idx + 1)
+    )
+
     return (
         <ReviewPaginationSection>
             <div>
-                <p>pagination</p>
+                {pageButton.map((page, idx) => (
+                    <ReviewPaginationButton
+                        select={chooseButton === page}
+                        onClick={() => setChooseButton(idx + 1)}
+                    >
+                        {page}
+                    </ReviewPaginationButton>
+                ))}
             </div>
         </ReviewPaginationSection>
     )
