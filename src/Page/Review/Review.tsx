@@ -74,27 +74,26 @@ export default function Review() {
     return (
         <>
             <Nav isModalOpen={isModalOpen} />
-            <ErrorBoundary fallback={<ErrorPage />}>
-                <Suspense fallback={<Loading />}>
-                    <ReviewAllSection>
-                        <ReviewSection props={isModalOpen}>
-                            <ReviewContent>
-                                <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
-                                <ReviewTitleContent>
-                                    나에 대한 평가 확인해보기
-                                </ReviewTitleContent>{' '}
-                                <ReviewSearchInput
-                                    onChange={(e) => setSearchWord(e.target.value)}
-                                    value={searchWord}
-                                    placeholder="이름을 입력하세요."
-                                    onKeyDown={enterSubmit}
-                                />
-                                <ReviewSearchButton onClick={() => searchHandler()}>
-                                    검색
-                                </ReviewSearchButton>
-                            </ReviewContent>
-                        </ReviewSection>
-                        {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
+
+            <ReviewAllSection>
+                <ReviewSection props={isModalOpen}>
+                    <ReviewContent>
+                        <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
+                        <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>{' '}
+                        <ReviewSearchInput
+                            onChange={(e) => setSearchWord(e.target.value)}
+                            value={searchWord}
+                            placeholder="이름을 입력하세요."
+                            onKeyDown={enterSubmit}
+                        />
+                        <ReviewSearchButton onClick={() => searchHandler()}>
+                            검색
+                        </ReviewSearchButton>
+                    </ReviewContent>
+                </ReviewSection>
+                {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
+                <ErrorBoundary fallback={<ErrorPage />}>
+                    <Suspense fallback={<Loading />}>
                         <ReviewPostingListSection props={isModalOpen}>
                             {Object.keys(searchResult).map((v) => (
                                 <ReviewPosting
@@ -110,10 +109,10 @@ export default function Review() {
                                 />
                             ))}
                         </ReviewPostingListSection>
-                    </ReviewAllSection>
-                    <ReviewPagination reviewLength={reviews.length} listSize={10} />
-                </Suspense>
-            </ErrorBoundary>
+                    </Suspense>
+                </ErrorBoundary>
+            </ReviewAllSection>
+            <ReviewPagination reviewLength={reviews.length} listSize={10} />
             <Footer />
         </>
     )
