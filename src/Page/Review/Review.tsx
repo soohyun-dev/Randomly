@@ -2,18 +2,16 @@ import Footer from 'Components/Footer'
 import Loading from 'Components/Loading'
 import Nav from 'Components/Nav'
 import ReviewPagination from 'Components/Pagination/ReviewPagination'
-import ReviewDetail from 'Components/Review/ReviewDetail'
-import ReviewPosting from 'Components/Review/ReviewPosting'
-import { selectIsModalOpen, themeSlice } from 'features/themeSlice'
+import ReviewPostingList from 'Components/Review/ReviewPostingList'
+import { selectIsModalOpen } from 'features/themeSlice'
 import useReview from 'hooks/useReview'
 import ErrorPage from 'Page/Error'
 import { Suspense, useEffect, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
     ReviewAllSection,
     ReviewContent,
-    ReviewPostingListSection,
     ReviewSearchButton,
     ReviewSearchInput,
     ReviewSection,
@@ -24,95 +22,46 @@ import {
 export default function Review() {
     const { data: reviews, isLoading: isReviewLoading } = useReview()
     const [searchWord, setSearchWord] = useState('')
-    const [searchResult, setSearchResult] = useState(reviews)
-    const [modalOpen, setModalOpen] = useState(false)
-    const [showData, setShowData] = useState({})
-    const [isFirstRender, setIsFirstRender] = useState(true)
-    const dispatch = useDispatch()
+    const [searchTarget, setSearchTarget] = useState('')
     const isModalOpen = useSelector(selectIsModalOpen)
 
     const searchHandler = () => {
-        const orderIdx = Object.keys(reviews).filter((v) => {
-            return reviews[v].memberName.includes(searchWord)
-        })
-        const result = orderIdx.map((v) => {
-            return reviews[v]
-        })
-
-        setSearchResult(result)
+        setSearchTarget(searchWord)
     }
 
     const enterSubmit = (e) => {
         if (e.key === 'Enter') {
             searchHandler()
+            alert('검색되었습니다.')
         }
     }
-
-    const showModal = (posting) => {
-        setShowData(posting)
-        setModalOpen(true)
-        setIsFirstRender(false)
-        dispatch(
-            themeSlice.actions.setIsModalOpen({
-                isModalOpen: true,
-            })
-        )
-    }
-
-    useEffect(() => {
-        setSearchResult(reviews)
-        if (isFirstRender) {
-            // 페이지 초기 접속시 isModalOpen 값 초기화
-            dispatch(
-                themeSlice.actions.setIsModalOpen({
-                    isModalOpen: false,
-                })
-            )
-        }
-    }, [reviews, modalOpen, dispatch, isFirstRender])
 
     return (
         <>
             <Nav isModalOpen={isModalOpen} />
-
-            <ReviewAllSection>
-                <ReviewSection props={isModalOpen}>
-                    <ReviewContent>
-                        <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
-                        <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>{' '}
-                        <ReviewSearchInput
-                            onChange={(e) => setSearchWord(e.target.value)}
-                            value={searchWord}
-                            placeholder="이름을 입력하세요."
-                            onKeyDown={enterSubmit}
-                        />
-                        <ReviewSearchButton onClick={() => searchHandler()}>
-                            검색
-                        </ReviewSearchButton>
-                    </ReviewContent>
-                </ReviewSection>
-                {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
-                <ErrorBoundary fallback={<ErrorPage />}>
-                    <Suspense fallback={<Loading />}>
-                        <ReviewPostingListSection props={isModalOpen}>
-                            {Object.keys(searchResult).map((v) => (
-                                <ReviewPosting
-                                    key={searchResult[v].id}
-                                    id={searchResult[v].id}
-                                    memberName={searchResult[v].memberName}
-                                    selfIntroAdvise={searchResult[v].selfIntroAdvise}
-                                    answerAdvise={searchResult[v].answerAdvise}
-                                    writerName={searchResult[v].writerName}
-                                    date={searchResult[v].date}
-                                    password={searchResult[v].password}
-                                    onClick={() => showModal(searchResult[v])}
-                                />
-                            ))}
-                        </ReviewPostingListSection>
-                    </Suspense>
-                </ErrorBoundary>
-            </ReviewAllSection>
-            <ReviewPagination reviewLength={reviews.length} listSize={10} />
+            <ErrorBoundary FallbackComponent={ErrorPage}>
+                <ReviewAllSection>
+                    <ReviewSection props={isModalOpen}>
+                        <ReviewContent>
+                            <ReviewTitleParagraph>이름으로 검색해보세요</ReviewTitleParagraph>
+                            <ReviewTitleContent>나에 대한 평가 확인해보기</ReviewTitleContent>{' '}
+                            <ReviewSearchInput
+                                onChange={(e) => setSearchWord(e.target.value)}
+                                value={searchWord}
+                                placeholder="이름을 입력하세요."
+                                onKeyDown={enterSubmit}
+                            />
+                            <ReviewSearchButton onClick={() => searchHandler()}>
+                                검색
+                            </ReviewSearchButton>
+                        </ReviewContent>
+                    </ReviewSection>
+                    <ReviewPostingList searchTarget={searchTarget} />
+                </ReviewAllSection>
+                {!isReviewLoading && (
+                    <ReviewPagination reviewLength={reviews.length} listSize={10} />
+                )}
+            </ErrorBoundary>
             <Footer />
         </>
     )

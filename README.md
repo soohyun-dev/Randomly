@@ -507,10 +507,14 @@
  ┃ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┃ ┣ 📜ReviewForm.styled.ts
  ┃ ┃ ┃ ┗ 📜ReviewForm.tsx
- ┃ ┃ ┗ 📂ReviewPosting
+ ┃ ┃ ┣ 📂ReviewPosting
  ┃ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┃ ┣ 📜ReviewPosting.styled.ts
  ┃ ┃ ┃ ┗ 📜ReviewPosting.tsx
+ ┃ ┃ ┗ 📂ReviewPostingList
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜ReviewPostingList.styled.ts
+ ┃ ┃ ┃ ┗ 📜ReviewPostingList.tsx
  ┃ ┗ 📂StopWatch
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜StopWatch.styled.ts
