@@ -6,11 +6,13 @@ import ReviewPostingList from 'Components/Review/ReviewPostingList'
 import { selectIsModalOpen } from 'features/themeSlice'
 import useReview from 'hooks/useReview'
 import ErrorPage from 'Page/Error'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { useSelector } from 'react-redux'
 import {
     ReviewAllSection,
+    ReviewCatagoryBox,
+    ReviewCatagorySection,
     ReviewContent,
     ReviewSearchButton,
     ReviewSearchInput,
@@ -24,6 +26,7 @@ export default function Review() {
     const [searchWord, setSearchWord] = useState('')
     const [searchTarget, setSearchTarget] = useState('')
     const isModalOpen = useSelector(selectIsModalOpen)
+    const [listSize, setListSize] = useState(8)
 
     const searchHandler = () => {
         setSearchTarget(searchWord)
@@ -56,10 +59,20 @@ export default function Review() {
                             </ReviewSearchButton>
                         </ReviewContent>
                     </ReviewSection>
-                    <ReviewPostingList searchTarget={searchTarget} />
+                    <ReviewCatagorySection>
+                        <ReviewCatagoryBox>
+                            <select onChange={(e) => setListSize(+e.target.value)}>
+                                <option value={8}>8개</option>
+                                <option value={16}>16개</option>
+                            </select>
+                        </ReviewCatagoryBox>
+                    </ReviewCatagorySection>
+                    <Suspense fallback={<Loading />}>
+                        <ReviewPostingList searchTarget={searchTarget} listSize={listSize} />
+                    </Suspense>
                 </ReviewAllSection>
                 {!isReviewLoading && (
-                    <ReviewPagination reviewLength={reviews.length} listSize={10} />
+                    <ReviewPagination reviewLength={reviews.length} listSize={listSize} />
                 )}
             </ErrorBoundary>
             <Footer />

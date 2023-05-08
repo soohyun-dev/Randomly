@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReviewDetail from '../ReviewDetail'
 import { ReviewPostingListSection } from './ReviewPostingList.styled'
 
-export default function ReviewPostingList({ searchTarget }) {
+export default function ReviewPostingList({ searchTarget, listSize }) {
     const { data: reviews, isLoading: isReviewLoading } = useReview()
     const [searchResult, setSearchResult] = useState(reviews)
     const [modalOpen, setModalOpen] = useState(false)
@@ -61,19 +61,23 @@ export default function ReviewPostingList({ searchTarget }) {
                 <Loading />
             ) : (
                 <ReviewPostingListSection props={isModalOpen}>
-                    {Object.keys(searchResult).map((v) => (
-                        <ReviewPosting
-                            key={searchResult[v].id}
-                            id={searchResult[v].id}
-                            memberName={searchResult[v].memberName}
-                            selfIntroAdvise={searchResult[v].selfIntroAdvise}
-                            answerAdvise={searchResult[v].answerAdvise}
-                            writerName={searchResult[v].writerName}
-                            date={searchResult[v].date}
-                            password={searchResult[v].password}
-                            onClick={() => showModal(searchResult[v])}
-                        />
-                    ))}
+                    {Object.keys(searchResult).map((v, idx) =>
+                        idx < listSize ? (
+                            <ReviewPosting
+                                key={searchResult[v].id}
+                                id={searchResult[v].id}
+                                memberName={searchResult[v].memberName}
+                                selfIntroAdvise={searchResult[v].selfIntroAdvise}
+                                answerAdvise={searchResult[v].answerAdvise}
+                                writerName={searchResult[v].writerName}
+                                date={searchResult[v].date}
+                                password={searchResult[v].password}
+                                onClick={() => showModal(searchResult[v])}
+                            />
+                        ) : (
+                            ''
+                        )
+                    )}
                 </ReviewPostingListSection>
             )}
         </>

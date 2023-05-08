@@ -41,12 +41,10 @@ export const ReviewSearchButton = styled.button`
     margin: 0 1em;
     border-radius: 5px;
 `
-
-export const ReviewPostingListSection = styled.section<{ props }>`
+export const ReviewCatagorySection = styled.section`
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 3em 5em;
-    opacity: ${({ props }) => (props ? '0.1' : '1')};
+    justify-content: flex-end;
+    width: 90%;
 `
+
+export const ReviewCatagoryBox = styled.div``

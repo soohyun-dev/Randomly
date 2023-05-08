@@ -7,6 +7,8 @@ import { selectUser } from 'features/userSlice'
 import { Link } from 'react-router-dom'
 import useStudySchedule from 'hooks/useStudySchedule'
 import PlanPosting from 'Components/Plan/PlanPosting'
+import { Suspense } from 'react'
+import Loading from 'Components/Loading'
 import {
     LinkLoginBtn,
     ManageAccessSection,
