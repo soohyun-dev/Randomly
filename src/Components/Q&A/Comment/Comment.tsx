@@ -1,6 +1,8 @@
 import { CommentBox, DateText, TimeBox, WriterBox } from './Comment.styled'
 
-export default function Comment({ id, commentWriter, content, date, time }) {
+export default function Comment({ props }) {
+    const { id, commentWriter, content, date, time } = props
+
     return (
         <CommentBox>
             <div>

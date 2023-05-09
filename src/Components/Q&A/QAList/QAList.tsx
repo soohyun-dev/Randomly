@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ContentBox, PostingBox, TitleBox, WriterBox, WriteText } from './QAList.styled'
 
-export default function QAList({ id, order, title, date, content, qaWriter }) {
+export default function QAList({ props, order }) {
+    const { id, title, date, content, qaWriter } = props
     return (
         <Link
             to={`/QAPosting/${order}`}

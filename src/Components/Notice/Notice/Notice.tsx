@@ -26,12 +26,7 @@ export default function Notice() {
             <PostingList>
                 {!isLoading &&
                     Object.keys(notice).map((v, idx) => (
-                        <NoticeList
-                            order={notice.length - idx}
-                            title={notice[v].title}
-                            date={notice[v].date}
-                            content={notice[v].content}
-                        />
+                        <NoticeList order={notice.length - idx} props={notice[v]} />
                     ))}
             </PostingList>
         </>

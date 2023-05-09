@@ -54,6 +54,8 @@ export default function ReviewPostingList({ searchTarget, listSize }) {
         searchHandler()
     }, [reviews, modalOpen, dispatch, isFirstRender, searchTarget])
 
+    console.log(searchResult)
+
     return (
         <>
             {modalOpen && <ReviewDetail setModalOpen={setModalOpen} data={showData} />}
@@ -65,13 +67,7 @@ export default function ReviewPostingList({ searchTarget, listSize }) {
                         idx < listSize ? (
                             <ReviewPosting
                                 key={searchResult[v].id}
-                                id={searchResult[v].id}
-                                memberName={searchResult[v].memberName}
-                                selfIntroAdvise={searchResult[v].selfIntroAdvise}
-                                answerAdvise={searchResult[v].answerAdvise}
-                                writerName={searchResult[v].writerName}
-                                date={searchResult[v].date}
-                                password={searchResult[v].password}
+                                props={searchResult[v]}
                                 onClick={() => showModal(searchResult[v])}
                             />
                         ) : (

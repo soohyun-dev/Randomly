@@ -28,14 +28,7 @@ export default function QA() {
             <QAListBox>
                 {!isLoading &&
                     Object.keys(qa).map((v, idx) => (
-                        <QAList
-                            id={qa[v].id}
-                            order={qa.length - idx}
-                            title={qa[v].title}
-                            date={qa[v].date}
-                            content={qa[v].content}
-                            qaWriter={qa[v].qaWriter}
-                        />
+                        <QAList props={qa[v]} order={qa.length - idx} />
                     ))}
             </QAListBox>
         </>

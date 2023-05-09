@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import {
     AnswerAdviseContainer,
     AnswerAdviseParagraph,
@@ -12,16 +11,8 @@ import {
     WriterContainer,
 } from './ReviewPosting.styled'
 
-export default function ReviewPosting({
-    id,
-    memberName,
-    selfIntroAdvise,
-    answerAdvise,
-    writerName,
-    date,
-    password,
-    onClick,
-}) {
+export default function ReviewPosting({ props, onClick }) {
+    const { id, memberName, selfIntroAdvise, answerAdvise, writerName, date, password } = props
     const clickHandler = () => {
         onClick()
     }
