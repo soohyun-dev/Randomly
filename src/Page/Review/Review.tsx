@@ -27,6 +27,7 @@ export default function Review() {
     const [searchTarget, setSearchTarget] = useState('')
     const isModalOpen = useSelector(selectIsModalOpen)
     const [listSize, setListSize] = useState(8)
+    const [nowPage, setNowPage] = useState(1)
 
     const searchHandler = () => {
         setSearchTarget(searchWord)
@@ -39,6 +40,9 @@ export default function Review() {
         }
     }
 
+    const nowPageHandler = (target) => {
+        setNowPage(target)
+    }
     return (
         <>
             <Nav isModalOpen={isModalOpen} />
@@ -68,11 +72,20 @@ export default function Review() {
                         </ReviewCatagoryBox>
                     </ReviewCatagorySection>
                     <Suspense fallback={<Loading />}>
-                        <ReviewPostingList searchTarget={searchTarget} listSize={listSize} />
+                        <ReviewPostingList
+                            nowPage={nowPage}
+                            searchTarget={searchTarget}
+                            listSize={listSize}
+                        />
                     </Suspense>
                 </ReviewAllSection>
                 {!isReviewLoading && (
-                    <ReviewPagination reviewLength={reviews.length} listSize={listSize} />
+                    <ReviewPagination
+                        nowPage={nowPage}
+                        nowPageHandler={nowPageHandler}
+                        reviewLength={reviews.length}
+                        listSize={listSize}
+                    />
                 )}
             </ErrorBoundary>
             <Footer />

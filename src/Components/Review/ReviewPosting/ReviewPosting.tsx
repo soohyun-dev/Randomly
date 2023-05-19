@@ -4,7 +4,6 @@ import {
     DateParagraph,
     IntreviewerNameParagraph,
     NameContainter,
-    ReviewPostingButton,
     ReviewPostingContent,
     SelfIntroAdviseContainer,
     SelfIntroAdviseParagraph,

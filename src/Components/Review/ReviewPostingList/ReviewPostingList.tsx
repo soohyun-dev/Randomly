@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReviewDetail from '../ReviewDetail'
 import { ReviewPostingListSection } from './ReviewPostingList.styled'
 
-export default function ReviewPostingList({ searchTarget, listSize }) {
+export default function ReviewPostingList({ nowPage, searchTarget, listSize }) {
     const { data: reviews, isLoading: isReviewLoading } = useReview()
     const [searchResult, setSearchResult] = useState(reviews)
     const [modalOpen, setModalOpen] = useState(false)
@@ -54,7 +54,7 @@ export default function ReviewPostingList({ searchTarget, listSize }) {
         searchHandler()
     }, [reviews, modalOpen, dispatch, isFirstRender, searchTarget])
 
-    console.log(searchResult)
+    console.log(nowPage, listSize)
 
     return (
         <>
@@ -64,7 +64,7 @@ export default function ReviewPostingList({ searchTarget, listSize }) {
             ) : (
                 <ReviewPostingListSection props={isModalOpen}>
                     {Object.keys(searchResult).map((v, idx) =>
-                        idx < listSize ? (
+                        idx < nowPage * listSize && idx >= (nowPage - 1) * listSize ? (
                             <ReviewPosting
                                 key={searchResult[v].id}
                                 props={searchResult[v]}
